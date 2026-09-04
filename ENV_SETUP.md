@@ -69,6 +69,6 @@ dot -V
 # 初始化 Sphinx 文档目录（首次使用）
 sphinx-quickstart docs
 
-# 启动本地实时热重载服务（浏览器访问 http://127.0.0.1:8000）
-sphinx-autobuild docs/source docs/build/html --host 0.0.0.0 --port 8000
+# 启动本地实时热重载服务（浏览器访问 http://127.0.0.1:8269）
+sphinx-autobuild docs/source docs/build/html --host 127.0.0.1 --port 8269
 ```

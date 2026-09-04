@@ -7,6 +7,16 @@ REM Command file for Sphinx documentation
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
+if "%SPHINXAUTOBUILD%" == "" (
+	set SPHINXAUTOBUILD=sphinx-autobuild
+)
+if "%HOST%" == "" (
+	set HOST=127.0.0.1
+)
+if "%PORT%" == "" (
+	set PORT=8269
+)
+
 set SOURCEDIR=source
 set BUILDDIR=build
 
@@ -24,12 +34,20 @@ if errorlevel 9009 (
 )
 
 if "%1" == "" goto help
+if "%1" == "livehtml" goto livehtml
+if "%1" == "server" goto livehtml
 
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
+:livehtml
+%SPHINXAUTOBUILD% %SOURCEDIR% %BUILDDIR%/html --host %HOST% --port %PORT% %SPHINXOPTS% %O%
+goto end
+
 :help
 %SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+echo.  livehtml    to start sphinx-autobuild on %HOST%:%PORT%
+echo.  server      alias for livehtml
 
 :end
 popd
