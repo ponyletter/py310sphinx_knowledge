@@ -6,8 +6,9 @@
 
 ## 1. 短视频大数据分析平台
 
-* **[蝉妈妈 (Chanmama)](https://www.chanmama.com/)**
-  * 头部达人榜单、热点视频实时监控、带货转化数据、粉丝画像结构分析。
+* **[蝉妈妈 (Chanmama)](https://www.chanmama.com/douyin/)**
+  * 抖音垂直赛道达人榜单、热点视频实时监控、带货转化数据、粉丝画像结构分析。
+  * 网址：[https://www.chanmama.com/douyin/](https://www.chanmama.com/douyin/)
 * **[飞瓜数据 (Feigua)](https://www.feigua.cn/)**
   * 深度短视频数据监控，支持分秒级完播与留存漏斗逆向分析。
 * **[新榜 (NewRank)](https://www.newrank.cn/)**

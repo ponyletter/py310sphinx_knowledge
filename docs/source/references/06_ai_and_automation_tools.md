@@ -1,25 +1,38 @@
 # AI 原生工具与内容自动化生态
 
-为课程第 3、4 阶段的“AI 编程”与“自动化脚本工作流”提供开发与提效工具栈支持。
+为技术科普、板书图解以及自动化脚本工作流提供开发与生产力工具栈支持。
 
 ---
 
-## 1. 音视频处理与自动化工具
+## 1. 语音合成、克隆 (TTS) 与转录 (ASR) 生态
 
-* **[FFmpeg 官方文档](https://ffmpeg.org/documentation.html)**
-  * 底层音视频编解码、切片、抽帧、水印批量处理的标准工具。
-* **[MoviePy Python 库](https://zulko.github.io/moviepy/)**
-  * 基于 Python 的脚本化视频自动化剪辑与合成。
-* **[Faster-Whisper](https://github.com/SYSTRAN/faster-whisper)**
-  * 高性能语音识别（ASR）引擎，用于快速提取同行短视频音频文案并生成带时间戳的字幕文件。
+### 1.1 开源本地部署工具（有显卡即用）
+* **Index-TTS (index2tts)**：拟真人声与克隆工具，本地快速推理。
+* **[GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS)**：开源少样本声音克隆神器，只需 5 秒即可复刻个人声线。
+* **[CosyVoice](https://github.com/FunAudioLLM/CosyVoice)**：阿里通义实验室开源的多语言语音生成模型。
+* **[Faster-Whisper](https://github.com/SYSTRAN/faster-whisper)**：高性能本地 ASR 语音识别引擎，快速提取文案和生成 SRT 字幕。
+* **[FunASR](https://github.com/alibaba-damo-academy/FunASR)**：中文语音转文字与时间戳标定。
+
+### 1.2 企业级云端 API 服务
+* **[火山引擎语音大模型 / 豆包语音 API](https://www.volcengine.com/product/tts)**：抖音官方同源技术，支持情感调节与超大并发。
+* **[ElevenLabs](https://elevenlabs.io/)**：国际顶级逼真人声音频生成 API。
+* **[MiniMax 开放平台](https://www.minimaxi.com/)**：高拟真表现力语音合成 API。
+* **[微软 Azure Cognitive Speech TTS](https://azure.microsoft.com/en-us/products/ai-services/text-to-speech)**：经典音色（晓晓、云希等）。
 
 ---
 
-## 2. 提示工程与知识编排工作流
+## 2. 视觉设计、图解与代码驱动视频 (Skills & Video-as-Code)
 
-* **[OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)**
-  * 官方提示工程最佳实践，提升文案生成、仿写和选题发散质量。
-* **[Anthropic Interactive Prompt Tutorial](https://github.com/anthropics/courses/tree/master/prompt_engineering_interactive_tutorial)**
-  * 深入讲解少样本（Few-shot）、思维链（CoT）与结构化输出格式控制。
-* **[Dify.ai](https://dify.ai/)**
-  * 开源 LLM 应用与知识库编排平台，支持快速搭建自用的短视频选题库与脚本助手。
+* **[稿定设计 (Gaoding)](https://www.gaoding.com/)**：小白友好的短视频封面、背景图、九宫格视觉排版工具。
+* **chatgpt-images-2-0**：代码驱动与网页生成的高清技术架构与信息图解。
+* **[Remotion](https://www.remotion.dev/)**：使用 React 纯代码编写与渲染视频。
+* **HyperFrames**：专为板书、技术图解打造的代码动效视频框架。
+* **Video-use**：自动化视频流水线脚本。
+
+---
+
+## 3. 音视频底层处理与提示工程
+
+* **[FFmpeg 官方文档](https://ffmpeg.org/documentation.html)**：底层音视频编解码与切片标准工具。
+* **[MoviePy Python 库](https://zulko.github.io/moviepy/)**：Python 脚本化剪辑工具。
+* **[OpenAI Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)**：提示工程黄金法则。
