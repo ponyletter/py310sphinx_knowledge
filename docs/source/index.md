@@ -10,8 +10,15 @@ courses/douyin_short_video/index
 ```
 
 ```{toctree}
+:maxdepth: 2
+:caption: 权威资料与参考导航
+
+references/index
+```
+
+```{toctree}
 :maxdepth: 1
 :caption: 附录与指南
 
-../../ENV_SETUP
+ENV_SETUP
 ```
