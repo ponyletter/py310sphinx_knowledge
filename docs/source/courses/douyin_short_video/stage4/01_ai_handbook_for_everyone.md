@@ -17,13 +17,13 @@
 * **去 AI 味与提示词 Skill 工作流**：
   * 使用开源提示词技能（Prompt Skills / 去 AI 味工作流），强制模型消除“总而言之”、“令人惊叹”、“宛如”、“在当今快节奏的社会中”等八股套话，转换为具有喘息感、口语短句和真实生活口吻的自然语言。
 * **专业级文生图与图解工具**：
-  * **chatgpt-images-2-0**：通过代码或 Web 界面直接生成符合特定格式的技术示意图、信息图解与配图。
+  * **chatgpt-images-2-0**：通过代码或 Web 界面直接生成符合特定格式的高清技术示意图、信息图解与配图。
   * **Midjourney / Stable Diffusion**：艺术级画面生成与风格微调。
   * **即梦 (Dreamina)**：抖音官方生图工具，契合国内审美与短视频封面比例。
 
 #### 2. 语音合成与声音克隆（TTS）
 * **开源本地可跑（有显卡即可本地部署）**：
-  * **Index-TTS (index2tts)**：高拟真音色克隆与情感表达，本地即开即用。
+  * **Index-TTS (index2tts 2.5)**：高拟真音色克隆与情感表达，支持全篇连续生成模式（`course-continuous`），杜绝分句突兀断气。
   * **GPT-SoVITS**：只需 5 秒样本即可完成高精度声音克隆，支持零样本学习。
   * **Fish Speech**：基于现代架构的高速语音合成引擎。
   * **CosyVoice**（阿里开源）：多语言与极佳的韵律控制。
@@ -39,9 +39,11 @@
   * **[MMS-300M Forced Aligner](https://huggingface.co/MahmoudAshraf/mms-300m-1130-forced-aligner)**：通过 CTC 算法实现音频与文本的毫秒级字符强对齐。配合本地 TTS（如 Index-TTS），实现**自动加图解动效、转场 SFX、Outro/Intro 与 BGM 的全自动时间轨合成**。
 
 #### 4. 代码驱动的视频渲染生态（Skills & Code Video）
-* **Remotion**：用 React + Web 技术编写视频，图解数据变动、流程图动画全自动化渲染；其自带的 **Tokens Captions** 设计支持单词级动画逐字染色与音画高度同步。
-* **HyperFrames**：现代化板书动画与技术图解渲染框架。
-* **Video-use**：批量视频切片与自动化流水线组合工具。
+* **HyperFrames (现代化板书与技术图解渲染框架)**：
+  * 专为技术科普与板书课程打造，支持声明式动画、SVG 真实笔触描边、动态镜头推进与多图同屏强调。
+* **Remotion**：
+  * 用 React + Web 技术编写视频，图解数据变动、流程图动画全自动化渲染；其自带的 **Tokens Captions** 设计支持单词级动画逐字染色与音画高度同步。
+* **Video-use 自动化流水线**：批量视频切片与自动化脚本。
 
 #### 5. AI 内容新赛道简析：AI 短剧与动态视觉
 * 近年来由 Midjourney / Stable Diffusion 生成一致性角色分镜，配合 Runway / 可灵 (Kling) / Pika 渲染短视频镜头的“AI 短剧”赛道正在迅速崛起，其背后的自动化分镜脚本与图生视频工作流，与技术图解制作在工程本质上具有极高相通性。
@@ -61,9 +63,10 @@
 ---
 
 ## 📚 权威参考来源与延伸阅读
-1. **[蝉妈妈 - 抖音行业与达人数据看板 (https://www.chanmama.com/douyin/)](https://www.chanmama.com/douyin/)**：短视频数据大盘与爆款分析。
-2. **[HuggingFace: MMS-300M Forced Aligner 强对齐模型](https://huggingface.co/MahmoudAshraf/mms-300m-1130-forced-aligner)**：CTC 词级别精确对齐技术。
-3. **[Remotion 官方 Captions 与 Tokens 文档](https://www.remotion.dev/docs/captions/)**：基于 Tokens 的精准逐字字幕染色实现。
-4. **[ElevenLabs 官方文档](https://elevenlabs.io/docs)**：全球顶级语音合成与克隆 API。
-5. **[火山引擎语音大模型与 TTS API](https://www.volcengine.com/product/tts)**：抖音官方同源语音合成服务。
-6. **[GPT-SoVITS 开源项目](https://github.com/RVC-Boss/GPT-SoVITS)**：强大的开源少样本声音克隆工具。
+1. **[开源项目：blackboard-bilingual-course-video (https://github.com/ponyletter/blackboard-bilingual-course-video)](https://github.com/ponyletter/blackboard-bilingual-course-video)**：基于 HyperFrames + IndexTTS + MMS-300M CTC 的完整生产级工程实现。
+2. **[蝉妈妈 - 抖音行业与达人数据看板 (https://www.chanmama.com/douyin/)](https://www.chanmama.com/douyin/)**：短视频数据大盘与爆款分析。
+3. **[HuggingFace: MMS-300M Forced Aligner 强对齐模型](https://huggingface.co/MahmoudAshraf/mms-300m-1130-forced-aligner)**：CTC 词级别精确对齐技术。
+4. **[Remotion 官方 Captions 与 Tokens 文档](https://www.remotion.dev/docs/captions/)**：基于 Tokens 的精准逐字字幕染色实现。
+5. **[ElevenLabs 官方文档](https://elevenlabs.io/docs)**：全球顶级语音合成与克隆 API。
+6. **[火山引擎语音大模型与 TTS API](https://www.volcengine.com/product/tts)**：抖音官方同源语音合成服务。
+7. **[GPT-SoVITS 开源项目](https://github.com/RVC-Boss/GPT-SoVITS)**：强大的开源少样本声音克隆工具。
