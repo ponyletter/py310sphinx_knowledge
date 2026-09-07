@@ -10,4 +10,5 @@
 :maxdepth: 2
 
 01_official_rules_and_skill
+02_recommended_github_repos
 ```

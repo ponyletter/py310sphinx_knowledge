@@ -12,4 +12,5 @@
 01_compliance_blacklist_clean
 02_backdoor_tester_architecture
 03_audit_application_materials
+04_audit_case_study_real_log
 ```

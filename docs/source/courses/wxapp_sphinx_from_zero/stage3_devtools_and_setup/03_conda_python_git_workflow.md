@@ -78,7 +78,7 @@ tmux new-session -s weixin_api
 ```{mermaid}
 graph LR
     Dev[微信开发者工具 本地编码] -->|Git Commit & Push| GitHub[GitHub 远程主仓库 main]
-    GitHub -->|Git Pull| Server[国内生产服务器 81.69.190.161]
+    GitHub -->|Git Pull| Server[国内生产服务器 YOUR_SERVER_IP]
     Server -->|平滑重载| Backend[FastAPI 接口秒级生效]
     Dev -->|工具内点击上传| MPAdmin[微信公众平台 提审上线]
 ```

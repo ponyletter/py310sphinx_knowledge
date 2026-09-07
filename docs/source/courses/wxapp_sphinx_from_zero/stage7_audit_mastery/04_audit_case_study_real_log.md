@@ -1,0 +1,93 @@
+# 真实项目提审纪实与审核通过后上线 SOP
+
+纸上得来终觉浅。本章以本项目的**真实审核全流程**为样本，原汁原味还原提审时间线、审核员真实的验收路径，并提供审核通过后的**标准化一键发布与安全加固 SOP**。
+
+---
+
+## 1. 真实项目提审全生命周期时间线
+
+本项目从代码准备到最终斩获微信官方审核通过，整体历时约 24 小时：
+
+```text
+提审关键里程碑纪实：
+├── T-24h : 全端违规词清洗（彻底抹除人民币符号 ¥、购买、充值，全面升级为研学币与积分）
+├── T-16h : 试读截断调整为精选前 15%，修复反馈页面 SWC 编译缺失外部模块报错
+├── T-8h  : 设计版本号点击暗门测试登录，配置后端 ENABLE_AUDIT_LOGIN 动态开关
+├── T-4h  : 数据库清空历史脏数据，预置 VIP2026 / TEST888 福利兑换码
+├── T-2h  : 微信公众平台提交审核（填写标准版本描述、订单中心路径、审核员暗门指引）
+└── T-0h  : 微信团队官方审核通过！状态变更为【审核通过（待发布）】🎉
+```
+
+---
+
+## 2. 审核员的真实验收路径还原
+
+根据我们在服务端 Nginx 访问日志与控制台的监控追踪，微信审核人员的验收行为极其规范且迅速（通常在 10~30 分钟内完成）：
+
+```{mermaid}
+sequenceDiagram
+    autonumber
+    actor Auditor as 微信审核人员
+    participant MiniApp as 小程序界面
+    participant Server as 后端服务器
+
+    Auditor->>MiniApp: 进入小程序首页，快速滑览专栏卡片与推荐流 (核查有无明显违规诱导充值)
+    Auditor->>MiniApp: 进入专栏详情页，体验前 15% 试读与大纲锚点导航 (核查内容与标题是否匹配)
+    Auditor->>MiniApp: 切换到底部【我的研学】页面，滑动至最底部
+    Auditor->>MiniApp: 轻触版本号文字「创作工坊 · 知识库 v1.0.0」
+    MiniApp-->>Auditor: 弹出审核专用登录框
+    Auditor->>MiniApp: 手动输入提审备注中的测试账号 audit_tester / wx2026test
+    MiniApp->>Server: POST /api/auth/test_login
+    Server-->>MiniApp: 返回 200 OK 并派发 100 研学币与 1 年 VIP 畅读特权
+    Auditor->>MiniApp: 再次进入专栏，验证所有章节均已解锁且能完整阅读
+    Auditor->>Auditor: 判定「功能完整、合规达标」，给出审核通过结论！
+```
+
+---
+
+## 3. 审核通过后的一键上线与安全加固 SOP
+
+收到微信公众平台发送的“小程序审核通过”模板消息后，**切忌直接不管**！必须按照以下四步标准作业程序（SOP）完成发布与安全收口：
+
+### 第一步：在微信公众平台正式发布
+1. 登录微信公众平台（`mp.weixin.qq.com`）；
+2. 进入【版本管理】➔ 在“审核版本”栏目中，点击绿色的 **【发布】** 按钮；
+3. 使用管理员微信扫码确认，线上正式版本将在全网几分钟内平滑发布生效。
+
+### 第二步：确认现网虚拟支付参数
+检查后端 `.env` 环境变量中的支付环境配置：
+```ini
+XPAY_OFFER_ID="1450640476"
+XPAY_APP_KEY="235lCegHtBLT2UwGqimaRWQ7UpLtaENe"
+XPAY_ENV=0   # 必须为 0 (正式现网环境)，绝不能是 1 (沙箱环境)
+```
+
+### 第三步：彻底封死测试暗门通道（极度关键！）
+审核员已经完成使命，为了防止任何外部用户或黑客通过版本号暗门白嫖，必须立刻关闭后端接口开关：
+1. 编辑后端 `.env` 文件，将测试登录开关置为 `False`：
+   ```ini
+   ENABLE_AUDIT_LOGIN=False
+   ```
+2. 即使有人在手机上点出了版本号暗门弹窗并输入了账号密码，后端也会在校验第一步直接返回 `HTTP 403 Forbidden: 审核测试通道已关闭`，从物理层面封死所有白嫖途径！
+
+### 第四步：重启 FastAPI 服务进程
+在云端服务器终端内重载应用：
+```bash
+tmux send-keys -t weixin_api C-c
+sleep 1
+tmux send-keys -t weixin_api '/root/miniconda3/envs/py310sphinx_knowledge/bin/uvicorn backend.app.main:app --host 0.0.0.0 --port 8280 --workers 2' C-m
+```
+
+通过 `curl` 进行最后验证：
+```bash
+curl -i -X POST https://apiwx.tg-cc755.cn/api/auth/test_login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"audit_tester","password":"wx2026test"}'
+# 预期返回 HTTP/1.1 403 Forbidden
+```
+
+---
+
+## 4. 本章小结
+
+审核通过不是终点，而是商业化运营的起点。通过规范的提审策略降低平台阻力，通过严格的发布后 SOP 收拢权限与封堵通道，方能做到“提审顺畅、线上安全、商业稳健”！
