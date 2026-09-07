@@ -7,6 +7,7 @@
 :caption: 课程分类目录
 
 courses/douyin_short_video/index
+courses/wxapp_sphinx_from_zero/index
 ```
 
 ```{toctree}
