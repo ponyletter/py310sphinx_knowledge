@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS balance_logs (
 ## 2. 每日签到领分与积分换币算法
 
 ### 2.1 每日签到逻辑
-签到是提升 DAU（日活跃用户）的杀手级功能。在 [`backend/app/database.py`](file:///root/02project/weixinpy310sphinx_knowledge/backend/app/database.py) 中：
+签到是提升 DAU（日活跃用户）的杀手级功能。在 `backend/app/database.py` 中：
 - 用户每天首次点击【签到领分】，赠送 **10 积分**；
 - 利用 SQLite `INSERT INTO checkin_logs ... ON CONFLICT DO NOTHING`，借助数据库行级排他锁，彻底防止用户利用并发脚本在同一天内多次刷取积分。
 

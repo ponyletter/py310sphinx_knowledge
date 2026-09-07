@@ -44,7 +44,7 @@ graph TD
 
 ## 3. 试读截断引擎完整实战源码
 
-以下为提取自生产环境 [`backend/app/parser.py`](file:///root/02project/weixinpy310sphinx_knowledge/backend/app/parser.py) 的核心截断引擎实现：
+以下为提取自生产环境 `backend/app/parser.py` 的核心截断引擎实现：
 
 ```python
 import os

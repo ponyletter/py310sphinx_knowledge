@@ -31,7 +31,7 @@ sequenceDiagram
 
 ## 2. 后端核心鉴权实现 (FastAPI + PyJWT)
 
-在 [`backend/app/routers/auth.py`](file:///root/02project/weixinpy310sphinx_knowledge/backend/app/routers/auth.py) 中，登录与鉴权的核心实现如下：
+在 `backend/app/routers/auth.py` 中，登录与鉴权的核心实现如下：
 
 ### 2.1 通过 code 换取 openid
 ```python
@@ -87,7 +87,7 @@ def decode_access_token(token: str) -> str:
 
 在移动端网络环境下，用户的本地 Token 可能会过期，或者管理员在后台重置了数据库导致用户 OpenID 在库中丢失（返回 404）。前端如果直接弹窗报错，用户体验极差。
 
-在 [`miniapp/utils/api.js`](file:///root/02project/weixinpy310sphinx_knowledge/miniapp/utils/api.js) 中，我们设计了**自愈式拦截重试机制**：
+在 `miniapp/utils/api.js` 中，我们设计了**自愈式拦截重试机制**：
 
 ```javascript
 const app = getApp();

@@ -6,7 +6,7 @@
 
 ## 1. 核心页面路由与工程拓扑
 
-在 [`miniapp/app.json`](file:///root/02project/weixinpy310sphinx_knowledge/miniapp/app.json) 中，我们定义了结构清晰的路由与 TabBar：
+在 `miniapp/app.json` 中，我们定义了结构清晰的路由与 TabBar：
 
 ```json
 {
@@ -37,7 +37,7 @@
 - **会员专栏特权卡片**：展示专栏副标题、核心亮点、已订阅有效天数或研学币特惠标价，点击直接跳转目录。
 
 ### 2.2 目录页：模式 A 与模式 B 的条件渲染
-在 [`miniapp/pages/catalog/catalog.wxml`](file:///root/02project/weixinpy310sphinx_knowledge/miniapp/pages/catalog/catalog.wxml) 中，根据用户是否开通专栏切换不同的头部看板：
+在 `miniapp/pages/catalog/catalog.wxml` 中，根据用户是否开通专栏切换不同的头部看板：
 - **未开通用户（模式 A）**：展示“特惠研读”、“当前余额”以及直观的“全套4大阶段实战，前2节精选试读”特性标签，底部提供一键开通大按钮；
 - **已订阅用户（模式 B）**：展示尊贵的金黄色 VIP 徽章，标注“特权有效，剩余 364 天”，给用户强烈的尊贵感与拥有感。
 
@@ -48,7 +48,7 @@
 Sphinx 导出的 HTML 包含丰富的 `<pre><code>`、`<table>`、`<blockquote>` 和图片标签，普通原生组件根本无法胜任。
 
 ### 3.1 引入自定义组件
-在 [`pages/article/article.json`](file:///root/02project/weixinpy310sphinx_knowledge/miniapp/pages/article/article.json) 中注册：
+在 `pages/article/article.json` 中注册：
 
 ```json
 {

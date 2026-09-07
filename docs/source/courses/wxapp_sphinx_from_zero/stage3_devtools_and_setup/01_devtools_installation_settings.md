@@ -17,7 +17,7 @@
 
 ```text
 项目导入目录规范：
-/root/02project/weixinpy310sphinx_knowledge/
+my_knowledge_project/
 ├── backend/          (Python 服务端，不要选这个！)
 ├── miniapp/          <--- 必须选中此目录！(包含 app.json, app.js, project.config.json)
 └── sphinx_docs/      (文档源码，不要选这个！)

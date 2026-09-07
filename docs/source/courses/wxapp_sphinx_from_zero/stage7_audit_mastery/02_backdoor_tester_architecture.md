@@ -12,13 +12,13 @@
 
 ```{mermaid}
 graph TD
-    User[用户进入个人中心底部] --> Tap[轻触底部版本号文字: 创作工坊 · 知识库 v1.0.0]
-    Tap --> Modal[唤起低调的测试登录弹窗]
-    Modal --> Input[账号密码默认完全留空 必须手动输入]
-    Input -->|输入 audit_tester / wx2026test| API[POST /api/auth/test_login]
-    API --> Switch{后端开关 ENABLE_AUDIT_LOGIN}
-    Switch -->|True (审核期间)| Grant[分配专属测试 Token: 100研学币 + 1年专栏VIP]
-    Switch -->|False (过审上线后)| Reject[直接返回 403 Forbidden 彻底断绝通道]
+    User["用户进入个人中心底部"] --> Tap["轻触底部版本号文字：创作工坊 · 知识库 v1.0.0"]
+    Tap --> Modal["唤起低调的测试登录弹窗"]
+    Modal --> Input["账号密码默认完全留空，必须手动输入"]
+    Input -->|"输入测试账号密码"| API["POST /api/auth/test_login"]
+    API --> Switch{"后端开关 ENABLE_AUDIT_LOGIN"}
+    Switch -->|"开启状态 (审核期间)"| Grant["分配专属测试 Token：100研学币 + 1年专栏VIP"]
+    Switch -->|"关闭状态 (过审上线后)"| Reject["直接返回 403 Forbidden 彻底断绝通道"]
 ```
 
 ---
@@ -26,7 +26,7 @@ graph TD
 ## 2. 前端隐蔽暗门入口设计
 
 ### 2.1 入口位置选择
-在 [`miniapp/pages/user/user.wxml`](file:///root/02project/weixinpy310sphinx_knowledge/miniapp/pages/user/user.wxml#L184-L188) 中，将点击事件绑定在最底部的版权说明文本上：
+在 `miniapp/pages/user/user.wxml` 中，将点击事件绑定在最底部的版权说明文本上：
 
 ```html
 <!-- 页面底部版本号 (视觉上是静态版权，点击触发审核暗门) -->
@@ -78,7 +78,7 @@ graph TD
 
 ## 3. 后端动态熔断开关与权限派发
 
-在 [`backend/app/routers/auth.py`](file:///root/02project/weixinpy310sphinx_knowledge/backend/app/routers/auth.py#L65-L125) 中，构建受开关控制的专用测试端点：
+在 `backend/app/routers/auth.py` 中，构建受开关控制的专用测试端点：
 
 ```python
 from app.config import settings
