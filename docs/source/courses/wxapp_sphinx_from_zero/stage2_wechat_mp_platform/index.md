@@ -13,4 +13,5 @@
 02_appid_domain_whitelist
 03_virtual_payment_and_privacy
 04_message_push_and_server_verification
+05_pre_development_readiness_checklist
 ```
