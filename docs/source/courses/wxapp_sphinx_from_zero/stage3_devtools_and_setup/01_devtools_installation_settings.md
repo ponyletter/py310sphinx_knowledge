@@ -25,7 +25,7 @@ my_knowledge_project/
 
 - **项目名称**：例如 `创作工坊知识库`；
 - **目录**：必须选中包含 `app.json` 的 **`miniapp`** 目录；若选到整个仓库根目录，工具会提示“未找到 app.json”而无法识别；
-- **AppID**：填入上一阶段在微信公众平台获取的真实 AppID（如 `wxef6c0e98e63627a8`），也可暂时选用“测试号”，但测试号无法调试虚拟支付等受保护接口。
+- **AppID**：填入上一阶段在微信公众平台获取的真实 AppID（如 `wxef6c0e98e6******`），也可暂时选用“测试号”，但测试号无法调试虚拟支付等受保护接口。
 
 ---
 
@@ -62,7 +62,7 @@ graph TD
   "miniprogramRoot": "./",
   "projectname": "创作工坊知识库",
   "description": "项目配置文件",
-  "appid": "wxef6c0e98e63627a8",
+  "appid": "wxef6c0e98e6******",
   "setting": {
     "urlCheck": false,
     "es6": true,

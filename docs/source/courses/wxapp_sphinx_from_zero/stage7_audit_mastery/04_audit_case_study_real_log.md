@@ -57,8 +57,8 @@ sequenceDiagram
 ### 第二步：确认现网虚拟支付参数
 检查后端 `.env` 环境变量中的支付环境配置：
 ```ini
-XPAY_OFFER_ID="1450640476"
-XPAY_APP_KEY="235lCegHtBLT2UwGqimaRWQ7UpLtaENe"
+XPAY_OFFER_ID="145064****"
+XPAY_APP_KEY="235lCegHtBLT****************"
 XPAY_ENV=0   # 必须为 0 (正式现网环境)，绝不能是 1 (沙箱环境)
 ```
 
