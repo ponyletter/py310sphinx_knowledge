@@ -12,4 +12,5 @@
 01_registration_and_icp_beian
 02_appid_domain_whitelist
 03_virtual_payment_and_privacy
+04_message_push_and_server_verification
 ```
