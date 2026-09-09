@@ -170,6 +170,90 @@ net::OK From server 127.0.0.1
 
 ---
 
-## 5. 本章小结
+## 5. 深坑五：Python 遗漏 `import json` 导致的附件图片静默置空幽灵 Bug
 
-这四大 Bug 几乎涵盖了微信小程序开发中最让人抓狂的几大类问题：**编译转译依赖、WXML 语法树栈失衡、基础库弹窗竞态、双线程网络层报错**。掌握了这套排雷心法，未来无论面对多么复杂的业务需求，都能从容应对、秒级定位修复。下一阶段，我们将迎来整个项目最具杀伤力的核心机密——**微信官方审核一次性通关秘籍与暗门架构设计**！
+### 5.1 案发现场与诡异现象
+在【意见反馈与留言】功能中，用户上传了 3 张截图并成功提交。然而当用户刷新“我的留言记录”时，文字内容和联系方式都完好无损，但所有图片缩略图**离奇消失，页面没有任何报错，控制台日志一片风平浪静**。
+
+### 5.2 根因深挖
+1. 在后端 `backend/app/database.py` 中，开发者编写了读取留言附件的转换逻辑：
+   ```python
+   def get_user_feedbacks(openid: str):
+       ...
+       for r in cursor.fetchall():
+           item = dict(r)
+           raw_att = item.get('attachments') or '[]'
+           try:
+               item['attachments'] = json.loads(raw_att)
+           except Exception:
+               item['attachments'] = []  # ❌ 吞没了关键异常！
+   ```
+2. 在该 `.py` 文件的头部，开发者**遗漏了 `import json`**！
+3. 当执行 `json.loads(raw_att)` 时，Python 解释器抛出了 `NameError: name 'json' is not defined`；
+4. 然而外层包裹了宽泛的 `except Exception:`，这个致命的语法异常被**完全静默吃掉**，并强行将 `item['attachments']` 赋值为空列表 `[]`！
+5. 前端收到的数据永远是 `attachments: []`，无论传多少张图，用户端都永远看不到附件！
+
+### 5.3 终极解法与防御军规
+1. **补全模块导入**：在 `database.py` 头部补上 `import json`；
+2. **拒绝盲目裸写全局异常吞噬**：
+   ```python
+   # ✅ 规范写法：只捕获预期的解析异常，并记录详细警告日志
+   try:
+       item['attachments'] = json.loads(raw_att) if isinstance(raw_att, str) else raw_att
+   except (json.JSONDecodeError, TypeError) as e:
+       logger.warning(f"解析附件数据失败: {raw_att}, error: {e}")
+       item['attachments'] = []
+   ```
+
+---
+
+## 6. 深坑六：静态上传资源路由与反向代理域名不一致导致的 404 隐患
+
+### 6.1 案发现场
+在接口修复了空列表后，前端终于拿到了图片 URL，但 `<image>` 却显示为白块或无法加载。直接在浏览器访问图片链接：
+`https://docs.tg-cc755.cn/uploads/20260910_3adecdf3.jpg` ➔ 直接返回 Cloudflare / Nginx 404 Not Found！
+
+### 6.2 根因深挖
+* 后端配置中将静态域名统一定义为了 `STATIC_BASE_URL = "https://docs.tg-cc755.cn"`；
+* 但在 Nginx 的站点反向代理中：
+  * `docs.tg-cc755.cn` 仅仅代理了 8269 端口的 Sphinx 静态网页，**根本没有配置 `/uploads/` 路径的转发路由**！
+  * 真实的 FastAPI 文件上传与访问挂载在 8280 端口，且由 `apiwx.tg-cc755.cn/uploads/` 专门代理！
+* 导致上传接口下发的图片外网链接实际上是指向了一个不存在的虚拟路由。
+
+### 6.3 终极解法
+1. **解耦配置**：引入专属的 `UPLOAD_BASE_URL = "https://apiwx.tg-cc755.cn"`，将课件静态资源与动态业务上传资源彻底物理隔离；
+2. **数据自愈迁移**：通过后端在返回接口中执行动态 replace，并将历史 SQLite 数据库中的旧路径批量替换：
+   ```sql
+   UPDATE feedback SET attachments = REPLACE(attachments, 'https://docs.tg-cc755.cn/uploads/', 'https://apiwx.tg-cc755.cn/uploads/');
+   ```
+
+---
+
+## 7. 深坑七：WXML 起始标签遗失引发的 `get tag end without start, near '</'` 逆向错位机制
+
+### 7.1 案发现场
+向页面新增一个带有客服组件的表单卡片后，编译报错直击文件末尾：
+```text
+[ WXML 文件编译错误] ./pages/feedback/feedback.wxml
+get tag end without start, near `</`
+  89 |     </block>
+  90 |   </view>
+> 91 | </view>
+     | ^
+```
+
+### 7.2 根因深挖
+很多开发者看到报错在最后一行，会误以为“末尾多敲了一个 `</view>`”，直接把第 91 行删掉，结果立刻引发更严重的父级容器塌陷。
+* **逆向错位机理**：
+  在代码替换时，表单卡片的起始包裹标签 `<view class="form-card">` 被不小心删除。
+  而底部的闭合标签 `</view>` 依然存在。
+  因为少了最前面的父级开始标签，语法解析器顺延匹配，导致最后一行原本应该闭合 `<view class="container">` 的 `</view>` 被前面的结构提前配对消耗掉，最终最后一个 `</view>` 成了“无主孤儿”。
+
+### 7.3 终极解法
+切勿盲目删减末尾的闭合标签！使用栈结构自顶向下核对开闭数量（`grep -o "<view" file | wc -l` 必须严格等于 `grep -o "</view>" file | wc -l`），在文件顶部补齐丢失的 `<view class="form-card">` 即可。
+
+---
+
+## 8. 本章小结
+
+这七大 Bug 几乎涵盖了微信小程序全栈实战中最让人抓狂的几大类问题：**编译转译依赖、WXML 语法树栈失衡、基础库弹窗竞态、双线程网络层报错、Python 异常吞噬陷阱与微服务反向代理路由断链**。掌握了这套排雷心法，未来无论面对多么复杂的业务需求，都能从容应对、秒级定位修复。下一阶段，我们将迎来整个项目最具杀伤力的核心机密——**微信官方审核一次性通关秘籍与暗门架构设计**！

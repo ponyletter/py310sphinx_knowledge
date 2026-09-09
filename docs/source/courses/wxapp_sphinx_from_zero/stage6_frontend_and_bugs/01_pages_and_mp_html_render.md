@@ -97,6 +97,40 @@ data: {
 
 代码块瞬间呈现深邃高级的深色暗黑极客风格，阅读体验直逼 Medium 与专业的技术文档站点。
 
+### 3.4 高阶进阶：LaTeX 数学符号与 Mermaid 流程图的小程序跨端渲染之道
+
+技术文档中充斥着公式与架构流程图。传统 Sphinx 在 PC Web 浏览器中依赖前端加载几兆的 MathJax 与 `mermaid.min.js` 动态计算 DOM，然而微信小程序**没有全局 DOM 树，且包体积严苛受限**。如果不做特殊适配，小程序会把 `$\rightarrow$` 直接渲染成刺眼的字面量文本，把 `graph LR` 渲染成冰冷的黑色代码块。
+
+我们设计并落地了**服务端动态清洗 + SVG 离线编译缓存架构**：
+
+#### 1. LaTeX 数学符号与箭头的 Unicode 映射降级
+在后端文章清洗逻辑（`backend/app/parser.py`）中，对 Sphinx 导出的 `<span class="math">` 进行正则提取，自动将高频数学语法映射为跨平台通用 Unicode 字符：
+```python
+math_symbols_map = {
+    r'\\rightarrow': '→',
+    r'\\to': '→',
+    r'\\Leftarrow': '⇐',
+    r'\\Rightarrow': '⇒',
+    r'\\times': '×',
+    r'\\ge(?:q)?': '≥',
+    r'\\le(?:q)?': '≤',
+    r'\\cdot': '·',
+    r'\\sim': '~'
+}
+```
+渲染结果为原生的蓝黑极客强调色字符，用户在手机端能直接看到流畅优雅的 `接口与多态 → 万能排插`，彻底告别原始转义符。
+
+#### 2. Mermaid 流程图的服务端离线 SVG 缓存技术
+针对 Sphinx 生成的 `<pre class="mermaid">`，后端自动提取其流程图源码，计算内容 MD5 哈希，并调用服务端渲染能力将其编译生成标准的矢量图形（`.svg`），缓存落盘到 `uploads/mermaid/{hash}.svg`：
+```python
+def render_or_cache_mermaid(code_text: str) -> Optional[str]:
+    code_hash = hashlib.md5(code_text.strip().encode('utf-8')).hexdigest()
+    svg_file = os.path.join(BASE_DIR, "uploads", "mermaid", f"{code_hash}.svg")
+    # 若缓存存在直接命中返回，否则调用渲染并写入本地
+    ...
+```
+在送入小程序的 HTML 中，代码块被无缝替换为带有微光投影与圆角样式的纯白底卡片 `<img src="https://apiwx.tg-cc755.cn/uploads/mermaid/{hash}.svg" />`。用户可以在小程序内任意手势缩放、双击查看大图，渲染性能达到毫秒级！
+
 ---
 
 ## 4. 本章小结
