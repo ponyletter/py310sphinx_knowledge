@@ -13,4 +13,5 @@
 02_backdoor_tester_architecture
 03_audit_application_materials
 04_audit_case_study_real_log
+05_official_rejection_rules_deep_dive
 ```
