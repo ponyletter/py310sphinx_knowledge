@@ -36,7 +36,7 @@ import sys
 
 # 1. 项目基本信息
 project = '创作学院知识库'
-copyright = '2026, 创作工坊团队'
+copyright = '2026, 数创库团队'
 author = 'mykael'
 release = 'v1.0.0'
 

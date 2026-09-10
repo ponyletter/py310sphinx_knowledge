@@ -34,7 +34,7 @@ sequenceDiagram
     Auditor->>MiniApp: 进入小程序首页，快速滑览专栏卡片与推荐流 (核查有无明显违规诱导充值)
     Auditor->>MiniApp: 进入专栏详情页，体验前 15% 试读与大纲锚点导航 (核查内容与标题是否匹配)
     Auditor->>MiniApp: 切换到底部【我的研学】页面，滑动至最底部
-    Auditor->>MiniApp: 轻触版本号文字「创作工坊 · 知识库 v1.0.0」
+    Auditor->>MiniApp: 轻触版本号文字「数创库 · 知识库 v1.0.0」
     MiniApp-->>Auditor: 弹出审核专用登录框
     Auditor->>MiniApp: 手动输入提审备注中的测试账号 audit_tester / wx2026test
     MiniApp->>Server: POST /api/auth/test_login

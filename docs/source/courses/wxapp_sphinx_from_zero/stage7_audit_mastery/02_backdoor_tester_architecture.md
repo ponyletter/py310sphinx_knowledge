@@ -12,7 +12,7 @@
 
 ```{mermaid}
 graph TD
-    User["用户进入个人中心底部"] --> Tap["轻触底部版本号文字：创作工坊 · 知识库 v1.0.0"]
+    User["用户进入个人中心底部"] --> Tap["轻触底部版本号文字：数创库 · 知识库 v1.0.0"]
     Tap --> Modal["唤起低调的测试登录弹窗"]
     Modal --> Input["账号密码默认完全留空，必须手动输入"]
     Input -->|"输入测试账号密码"| API["POST /api/auth/test_login"]
@@ -31,7 +31,7 @@ graph TD
 ```html
 <!-- 页面底部版本号 (视觉上是静态版权，点击触发审核暗门) -->
 <view class="app-version-footer" bindtap="onTapVersion">
-  <text class="version-text">创作工坊 · 知识库 v1.0.0</text>
+  <text class="version-text">数创库 · 知识库 v1.0.0</text>
 </view>
 ```
 
