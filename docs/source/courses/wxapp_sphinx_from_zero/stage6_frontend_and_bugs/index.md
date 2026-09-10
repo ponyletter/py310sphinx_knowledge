@@ -18,4 +18,5 @@
 05_canvas2d_sketch_and_native_component_bugs
 06_fastapi_multiprocess_workers_task_store_trap
 07_wechat_share_viral_loop_and_emoticon_trap
+08_wechat_xpay_automation_pitfalls_and_cheat_sheet
 ```
