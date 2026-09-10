@@ -17,4 +17,5 @@
 04_cross_border_tunnel_and_cdn_perf
 05_canvas2d_sketch_and_native_component_bugs
 06_fastapi_multiprocess_workers_task_store_trap
+07_wechat_share_viral_loop_and_emoticon_trap
 ```
