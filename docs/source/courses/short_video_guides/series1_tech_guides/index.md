@@ -15,4 +15,7 @@ wechat-rich-text-mp-html-wxparse-towxml/index
 ai-3d-spatial-intelligence-v1/index
 ai-coding-agent-management-v1/index
 ai-search-browser-knowledge-work-v1/index
+api-gateway-ingress-istio-gateway-v1/index
+api-gateway-selection-v2/index
+blender-threejs-ai-3d-window-v1/index
 ```
