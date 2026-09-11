@@ -27,4 +27,10 @@ docker-compose-kubernetes-nomad-v2/index
 mini-program-launch-4-pitfalls-v1/index
 observability-plg-stack-v1/index
 postgresql-mysql-sqlite-choice-v1/index
+rabbitmq-kafka-nats-v1/index
+redis-memcached-valkey-v1/index
+s3-r2-minio-v1/index
+sphinx-vitepress-docusaurus-material-mkdocs-wordpress-v1/index
+terraform-ansible-selection-v1/index
+vault-sops-sealed-secrets-cloud-key-management-v1/index
 ```
