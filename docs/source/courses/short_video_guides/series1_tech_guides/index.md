@@ -24,4 +24,7 @@ cicd-actions-gitlab-jenkins-v1/index
 cicd-gitops-push-pull-v1/index
 container-security-scanning-trivy-grype-snyk-v1/index
 docker-compose-kubernetes-nomad-v2/index
+mini-program-launch-4-pitfalls-v1/index
+observability-plg-stack-v1/index
+postgresql-mysql-sqlite-choice-v1/index
 ```
