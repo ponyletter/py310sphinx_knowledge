@@ -1,0 +1,117 @@
+# Caddy、Apache、Nginx，怎么选？
+
+这是一篇根据原始课程研究资料、讲解结构与发布文案整理的读者版图文。
+
+## 阅读边界
+
+本文依据原始课程的研究笔记、课程结构和发布文案整理。涉及产品、模型、版本、平台规则、价格或资格等可能变化的信息，实践前应以当前官方资料和实际环境为准。
+
+## Web 服务器：到底做什么？
+
+请求进入 · 文件返回 · 后端转发
+
+Caddy、Apache 和 Nginx 都能当 Web 服务器，但它们的设计思路和适用场景并不一样。今天我们用最直白的方式，看看它们到底该怎么选。浏览器发来请求，服务器可以直接返回 HTML、样式和图片等静态文件。
+
+如果请求需要业务计算，服务器就把它转给后端应用，这个入口角色叫反向代理。
+
+![overview](images/scene01_overview.png)
+
+图解：“overview”这张示意图用于解释“Web 服务器：到底做什么？”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+## Apache：成熟的模块化路线
+
+1995 起步 · 模块生态 · 多处理模型
+
+Apache HTTP Server 的故事始于 1995 年，开发者把 NCSA httpd 的修复和改进汇成共同版本。它后来形成成熟的模块体系，认证、重写、代理、虚拟主机和日志都能按需组合。
+
+Apache 还能选择多进程、多线程或事件处理模型，优点是灵活，代价是配置和排障更复杂。
+
+![apache history](images/scene02_apache_history.png)
+
+图解：“apache history”这张示意图用于解释“Apache：成熟的模块化路线”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+![apache modules](images/scene02_apache_modules.png)
+
+图解：“apache modules”这张示意图用于解释“Apache：成熟的模块化路线”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+## Nginx：为连接规模换一条路
+
+C10K 背景 · 事件驱动 · 负载均衡
+
+Nginx 在 2000 年代初面对的是 C10K 问题，也就是同时处理大量连接的挑战。它采用事件驱动和非阻塞思路，用较少的工作单元管理许多连接，减少等待带来的浪费。
+
+因此 Nginx 常被放在应用前面，负责静态文件、反向代理、缓存和负载均衡。
+
+![nginx history](images/scene03_nginx_history.png)
+
+图解：“nginx history”这张示意图用于解释“Nginx：为连接规模换一条路”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+![nginx proxy](images/scene03_nginx_proxy.png)
+
+图解：“nginx proxy”这张示意图用于解释“Nginx：为连接规模换一条路”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+## Caddy：把安全默认值前置
+
+Caddyfile · 自动 HTTPS · 简洁部署
+
+Caddy 从 2015 年起把现代 Web 的安全体验放到产品前台，配置也尽量贴近站点意图。Caddyfile 通常从域名开始，再写 file_server 或 reverse_proxy 这样的配置指令。
+
+更有辨识度的是自动 HTTPS：它能申请和续期证书，并把 HTTP 请求重定向到 HTTPS。
+
+![caddy config](images/scene04_caddy_config.png)
+
+图解：“caddy config”这张示意图用于解释“Caddy：把安全默认值前置”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+![caddy https](images/scene04_caddy_https.png)
+
+图解：“caddy https”这张示意图用于解释“Caddy：把安全默认值前置”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+## 三者对比：别只问谁更快
+
+优势 · 代价 · 适用边界
+
+看重成熟模块、灵活规则和既有团队经验，Apache 的长期资产很有价值。看重大量连接、静态分发和多实例代理，Nginx 的架构习惯通常更贴近目标。
+
+看重自动 HTTPS、简洁配置和快速上线，Caddy 往往能减少首次运维成本。
+
+![apache compare](images/scene05_apache_compare.png)
+
+图解：“apache compare”这张示意图用于解释“三者对比：别只问谁更快”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+![caddy compare](images/scene05_caddy_compare.png)
+
+图解：“caddy compare”这张示意图用于解释“三者对比：别只问谁更快”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+![nginx compare](images/scene05_nginx_compare.png)
+
+图解：“nginx compare”这张示意图用于解释“三者对比：别只问谁更快”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+## 最后：按场景做选择
+
+遗产 · 流量 · 上线成本，先看约束
+
+已有 Apache 模块、规则和运维经验，就先评估迁移成本，不要为了追潮流重写一切。面向大量连接、静态资源和多实例应用，可以优先评估 Nginx 的代理与负载均衡能力。
+
+新建小型站点，最在意自动 HTTPS 和少量配置，可以先试 Caddy。所以，遗产看 Apache，流量看 Nginx，上线省心看 Caddy；最后用同一套压测、日志和监控验证答案。
+
+![decision](images/scene06_decision.png)
+
+图解：“decision”这张示意图用于解释“最后：按场景做选择”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+
+## 小结
+
+把问题拆成目标、约束、证据和验证四部分，通常比直接寻找唯一答案更可靠。先用本文的框架完成一次小范围验证，再根据真实反馈调整下一步。
+
+## 参考资料
+
+以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+
+- [https://httpd.apache.org/ABOUT_APACHE（2026-09-02](https://httpd.apache.org/ABOUT_APACHE（2026-09-02)
+- [https://httpd.apache.org/docs/current/en/（2026-09-02](https://httpd.apache.org/docs/current/en/（2026-09-02)
+- [https://blog.nginx.org/blog/celebrating-20-years-of-nginx（2026-09-02](https://blog.nginx.org/blog/celebrating-20-years-of-nginx（2026-09-02)
+- [https://nginx.org/en/docs/http/load_balancing.html（2026-09-02](https://nginx.org/en/docs/http/load_balancing.html（2026-09-02)
+- [https://caddyserver.com/docs/（2026-09-02](https://caddyserver.com/docs/（2026-09-02)
+- [https://caddyserver.com/docs/automatic-https（2026-09-02](https://caddyserver.com/docs/automatic-https（2026-09-02)
+- [https://caddyserver.com/docs/caddyfile/directives/reverse_proxy（2026-09-02](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy（2026-09-02)
+- [https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server（2026-09-02](https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server（2026-09-02)
+- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Proxy_servers_and_tunneling（2026-09-02](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Proxy_servers_and_tunneling（2026-09-02)

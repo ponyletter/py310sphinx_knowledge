@@ -1,0 +1,76 @@
+# Vite 更快，老项目为何还不敢迁移？
+
+从开发反馈机制到隐形构建契约，讲清 Vite 的优势与老项目迁移的真实风险。
+
+## 阅读边界
+
+本文依据原始课程的研究笔记、课程结构和发布文案整理。涉及产品、模型、版本、平台规则、价格或资格等可能变化的信息，实践前应以当前官方资料和实际环境为准。
+原始研究记录标注的时间为：2026-08-26。
+该课程原始包被归为“仅保留源资料”；本文只根据现有文字材料整理，不把它表述为已完成的视频成片。
+原始课程结构只覆盖 2 个核心主题；为保证完整性，本文另外补入研究笔记中的迁移与验证边界。
+原始素材未提供可迁入的教学图片，因此本页保留文字版课程结构，不补造来源不明的配图。
+
+## Vite 真正改写的，是反馈路径
+
+速度优势首先发生在开发启动和改完代码之后。
+
+先纠正一个说法：Vite 并没有让 Webpack 失效，它改变的是新项目对开发反馈速度的预期。Webpack 在开发启动时，通常先从入口分析依赖图，并生成可执行的开发打包结果；项目越大，前置工作往往越重。
+
+Vite 把依赖和源码分开处理：不常变化的依赖先做预打包，业务源码则通过浏览器原生的 ESM，也就是 ES 模块，按请求即时提供。修改文件时，它利用 HMR，也就是热模块替换，只重新处理受影响的模块，所以启动和改完代码后的等待通常更短。
+
+但生产环境仍然需要打包；Vite 解决的是反馈路径，不是把所有构建工作凭空消灭。
+
+## 老项目迁移的，是一份隐形契约
+
+构建配置早已连接源码、测试、部署和线上运行。
+
+老项目真正害怕的，不是学习一份新的配置文件，而是原来的构建系统早已变成一份隐形契约。Webpack 的 loader，也就是文件转换器，可能承担旧版 JavaScript、样式、模板和特殊资源的处理。
+
+插件还可能接管环境变量、HTML 注入、产物命名、公共路径，甚至微前端的模块联邦。换到 Vite 后，源代码要遵循 ESM 语义，环境变量改为 import.meta.env，动态资源、后端模板和浏览器兼容目标也可能需要重写。
+
+只要其中一项没有被盘点，开发服务器能启动，也不代表测试、部署和线上行为已经等价。所以老项目不敢迁移，往往不是保守，而是在等一条可验证、可回滚的迁移路线。
+
+## 迁移前，先把隐形契约列出来
+
+不要把原有配置当成一份可以逐行翻译的脚本。先把每个 loader、插件和构建钩子实际承担的责任列清：它处理了什么源码或资源、在开发期还是构建期生效、产物由谁消费、失败后如何发现。
+
+然后重点核对几类高风险接口：环境变量从何处注入、公共路径和资源 URL 如何计算、后端模板如何读取构建 manifest、测试工具和浏览器兼容目标是否仍然一致。对于模块联邦、服务端渲染、多页面构建或自定义发布产物，还要把运行时共享模块和部署脚本单独作为验证项。
+
+Vite 的插件接口与 Rollup/Rolldown 生态有关联，但开发服务器和生产构建并不是同一个执行阶段。某个插件能够安装，并不等于它在原来的生命周期位置上行为相同；迁移时应以真实产物和真实页面行为为准。
+
+## 一条更稳的迁移顺序
+
+第一步是建立基线：记录当前项目的启动时间、热更新、生产构建、产物体积、关键页面和自动化测试结果。没有基线，所谓“更快”或“没有回归”都无法判断。
+
+第二步是在隔离分支或最小入口上试迁，不要一开始改动所有 loader、模板和部署配置。先让一个页面或一个独立包通过开发、测试和生产构建三条路径，再逐步扩大范围。
+
+第三步是为回滚保留出口：旧构建链在新链经过真实流量或完整验收前继续可用。迁移的目标不是尽快删掉 Webpack，而是确认新的反馈速度和维护成本确实值得交换已有的稳定性。
+
+## 别只比较“启动快不快”
+
+Vite 的优势通常首先体现在开发反馈路径；生产构建速度、产物体积和线上运行性能仍要结合实际项目测量。Webpack 也有持久化缓存、loader、插件和模块联邦等能力，深度定制项目继续使用它可能完全合理。
+
+因此更好的问题不是“谁已经过时”，而是“当前项目的主要等待和维护成本在哪里”。新项目可以优先采用更短的反馈链路；老项目则应在风险清单、验证证据和回滚方案都齐全后再迁移。
+
+## 小结
+
+把问题拆成目标、约束、证据和验证四部分，通常比直接寻找唯一答案更可靠。先用本文的框架完成一次小范围验证，再根据真实反馈调整下一步。
+
+## 参考资料
+
+以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+
+- [https://vite.dev/guide/why.html](https://vite.dev/guide/why.html)
+- [https://vite.dev/guide/dep-pre-bundling.html](https://vite.dev/guide/dep-pre-bundling.html)
+- [https://vite.dev/guide/features](https://vite.dev/guide/features)
+- [https://vite.dev/guide/api-plugin](https://vite.dev/guide/api-plugin)
+- [https://vite.dev/guide/env-and-mode](https://vite.dev/guide/env-and-mode)
+- [https://vite.dev/guide/assets](https://vite.dev/guide/assets)
+- [https://vite.dev/guide/build](https://vite.dev/guide/build)
+- [https://vite.dev/guide/backend-integration](https://vite.dev/guide/backend-integration)
+- [https://vite.dev/blog/announcing-vite8](https://vite.dev/blog/announcing-vite8)
+- [https://vite.dev/guide/migration](https://vite.dev/guide/migration)
+- [https://webpack.js.org/concepts/loaders/](https://webpack.js.org/concepts/loaders/)
+- [https://webpack.js.org/concepts/plugins/](https://webpack.js.org/concepts/plugins/)
+- [https://webpack.js.org/concepts/module-federation/](https://webpack.js.org/concepts/module-federation/)
+- [https://webpack.js.org/configuration/cache/](https://webpack.js.org/configuration/cache/)
