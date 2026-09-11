@@ -8,6 +8,7 @@
 
 courses/douyin_short_video/index
 courses/wxapp_sphinx_from_zero/index
+courses/short_video_guides/index
 ```
 
 ```{toctree}
