@@ -81,7 +81,10 @@ flowchart TD
 ### 核心架构优势
 1. **微信审核合规 100%**：小程序公众平台后台仅登记 `https://meme.tg-cc755.cn`。审核员抓包检测时，全部流量均在国内节点，无任何违规境外直连行为；
 2. **极速国内 CDN 体验**：所有的静态资源、动图直链下载、界面交互响应走国内优质 BGP 线路，首屏加载在 20ms~50ms 内完成；
-3. **Codex Device Code 无头设备码授权**：在海外服务器上使用 CLIProxyAPI 的设备码免桌面登录模式，在本地浏览器输入 8 位码即可绑定 Plus 账号，容器自动在后台持久化刷新 Token，实现企业级免运维。
+3. **Codex Device Code 与 Antigravity 无头免端口授权**：
+   - 在海外服务器上使用 CLIProxyAPI 的设备码免桌面登录模式（`-codex-device-login`），8 位码一键绑定 ChatGPT Plus；
+   - 深度集成 Google Antigravity（`-antigravity-login`），支持 **Claude 4.6 (Thinking)** 与 **Gemini 3 系列** 顶级推理模型；
+   - **免 SSH 端口隧道妙招**：本地浏览器完成 OAuth 后，只需将跳转地址栏的 `http://localhost:51121/oauth-callback?code=...` 复制并在服务器直接请求容器 IP（`172.20.0.2:51121`），即可实现 0 端口转发、0 网络隧道的秒级授权与双集群自动负载均衡！
 
 ---
 
