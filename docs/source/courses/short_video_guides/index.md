@@ -2,16 +2,14 @@
 
 本栏目把已发布或可发布的短视频课程整理为适合检索、复习和长期阅读的图文文章。每篇文章保留课程中的核心教学图，并把视频中的口语化结论扩展为可执行的判断步骤。
 
-```{toctree}
-:maxdepth: 1
-:caption: 首批课程
+---
 
-personal-developer-miniapp-monetization/index
-wechat-native-uniapp-taro-choice/index
-wechat-rich-text-mp-html-wxparse-towxml/index
-ai-3d-spatial-intelligence-v1/index
-ai-coding-agent-management-v1/index
-ai-search-browser-knowledge-work-v1/index
+## 系列架构概览
+
+```{toctree}
+:maxdepth: 2
+
+series1_developer_and_ai_decision/index
 ```
 
 ```{note}
