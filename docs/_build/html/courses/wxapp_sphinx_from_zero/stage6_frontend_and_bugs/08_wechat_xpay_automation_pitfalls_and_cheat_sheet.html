@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微信虚拟支付 2.0 (XPay) 全流程避坑、API 免 Excel 自动化上架与电商化订单闭环实战 (附错误码速查表) &mdash; 创作学院课程资料库 1.0.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=34088549"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+      <script src="../../../_static/translations.js?v=beaddf03"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" />
+    <link rel="next" title="本次生产联调复盘：虚拟支付回调、订阅消息、时区与前端故障" href="09_production_callback_timezone_and_release_retro.html" />
+    <link rel="prev" title="第 7 章：微信社交裂变分享机制与“动图直接发好友”认知陷阱深度拆解" href="07_wechat_share_viral_loop_and_emoticon_trap.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            创作学院课程资料库
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">课程分类目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../douyin_short_video/index.html">短视频与知识图解运营实战课</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../douyin_short_video/index.html#id2">阶段架构概览</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage1/index.html">第1阶段 基础：定位破局与视听规范</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage1/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage2/index.html">第2阶段 进阶：算法机理与爆款模型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage2/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage3/index.html">第3阶段 实战：起号操盘与商业转化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage3/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage4/index.html">第4阶段 扩展：AI 赋能与自动化流水线</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage4/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#id1">阶段架构概览</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html">第1阶段 商业认知、多维商业画布与标杆爆款拆解</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage2_wechat_mp_platform/index.html">第2阶段 微信公众平台保姆级全流程操作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage2_wechat_mp_platform/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage3_devtools_and_setup/index.html">第3阶段 微信开发者工具保姆级实操与环境基建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage3_devtools_and_setup/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage4_sphinx_engine/index.html">第4阶段 Sphinx 知识引擎构建与 AST 试读截断黑科技</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage4_sphinx_engine/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage5_backend_and_user/index.html">第5阶段 FastAPI 资产中台与微信最新用户体系设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage5_backend_and_user/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage7_audit_mastery/index.html">第7阶段 微信官方审核一次性通关秘籍与暗门架构设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage7_audit_mastery/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage8_references_and_skills/index.html">第8阶段 附录：权威参考导航、开源生态与 Skill 沉淀</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage8_references_and_skills/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../short_video_guides/index.html">短视频课程图文版</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html">做小程序，先别急着写代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id2">先画出产品，而不是先搭架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id3">把想法压缩成一条最小闭环</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id4">两类产品，两个验证重点</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id5">案例一：结构化内容服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id6">案例二：高频、可分享的工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#mvp">用 MVP 防止功能堆积</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id7">个人开发者的四项同时责任</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id8">结论：先验证价值，再扩大工程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id9">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html">微信原生、Uni-app、Taro选谁？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id1">先看选择全景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id2">三种路线分别在做什么</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id3">用四个维度而不是印象做比较</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id4">复用有收益，也有边界</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id5">原生能力、包体与性能必须真机验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id6">三种典型决策</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id7">最终决策顺序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id8">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html">小程序富文本怎么选？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id2">先用四个边界定义问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#rich-text">原生 <code class="docutils literal notranslate"><span class="pre">rich-text</span></code>：适合受控的基础内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#mp-html"><code class="docutils literal notranslate"><span class="pre">mp-html</span></code>：面向复杂文章的渲染能力</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#wxparse"><code class="docutils literal notranslate"><span class="pre">wxParse</span></code>：历史项目的兼容对象</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#towxml"><code class="docutils literal notranslate"><span class="pre">towxml</span></code>：转换路径与构建验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id3">安全不属于任何一个渲染组件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id4">一张决策树给出起点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id5">参考与更新说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">权威资料与参考导航</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references/index.html">权威资料与工具导航</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references/index.html#id2">导航分类</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/01_platform_official_rules.html">一手平台规则与官方指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id2">1. 抖音与字节跳动官方平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id3">2. 算法备案与透明化公开披露</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id4">3. 微信小程序官方权威审核与运营规范</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html">推荐系统与算法工程原理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id2">1. 工业级顶级技术团队博客</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id3">2. 学术顶会与论文检索</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html">数据看板与行业大盘智库</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id2">1. 短视频大数据分析平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id3">2. 宏观趋势与消费洞察平台</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html">认知心理学与视听叙事经典</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id2">1. 认知心理学与病毒传播学</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id3">2. 编剧技艺与视听语言结构</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html">合规边界与知识版权指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id2">1. 政策法规与广告边界</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id3">2. 事实核查与学术背书源头</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html">AI 原生工具与内容自动化生态</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#tts-ctc-forced-alignment">1. 语音合成、克隆 (TTS) 与精准对齐 (CTC Forced Alignment)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#skills-video-as-code">2. 视觉设计、图解与代码驱动视频 (Skills &amp; Video-as-Code)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#id2">3. 音视频底层处理与提示工程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/07_course_production_contracts.html">技术图解短视频生产工程规范与契约手册</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#narrative-matrix">1. 认知原型与叙事矩阵契约 (Narrative Matrix)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#voice-caption-contract">2. 语音与字幕对齐工程契约 (Voice &amp; Caption Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#visual-layering-contract">3. 画面视觉与分层架构契约 (Visual Layering Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#delivery-safety">4. 交付与发布安全契约 (Delivery &amp; Safety)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录与指南</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ENV_SETUP.html">环境安装指南 (Environment Setup Guide)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#linux">1. 系统底层依赖安装 (Linux)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#conda">2. Conda 虚拟环境创建与配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#a-environment-yml">方式 A：通过 <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> 一键还原环境（推荐）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#b-requirements-txt">方式 B：手动创建环境并通过 <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> 安装</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id1">3. 环境检验</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id2">4. 快速使用</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">创作学院课程资料库</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a></li>
+          <li class="breadcrumb-item"><a href="index.html">第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录</a></li>
+      <li class="breadcrumb-item active">微信虚拟支付 2.0 (XPay) 全流程避坑、API 免 Excel 自动化上架与电商化订单闭环实战 (附错误码速查表)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/courses/wxapp_sphinx_from_zero/stage6_frontend_and_bugs/08_wechat_xpay_automation_pitfalls_and_cheat_sheet.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="xpay-api-excel">
+<h1>微信虚拟支付 2.0 (XPay) 全流程避坑、API 免 Excel 自动化上架与电商化订单闭环实战 (附错误码速查表)<a class="headerlink" href="#xpay-api-excel" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p><strong>导读与实战价值</strong>：<br />
+微信虚拟支付 2.0（XPay，基于短剧/数字道具 <code class="docutils literal notranslate"><span class="pre">short_series_goods</span></code> 模式）是个人小程序与创作者唯一官方合规的真钱收银通道。然而在实际接入过程中，从微信管理后台 Excel 导入格式、价格单位换算（元 vs 分）、后台无删除按钮，到 iOS 特有的 Apple IAP 事务重入拦截、腾讯全国 Midas 节点缓存同步延迟，处处充满隐性技术陷阱。<br />
+本篇系统盘点实战中遭遇的核心报错与避坑经验，给出<strong>纯代码 API 一键自动化上架道具方案（彻底告别手工 Excel）</strong>、<strong>电商式“取消订单/继续支付”双层架构</strong>以及<strong>高频错误码速查手册 (Cheat Sheet)</strong>。</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="id1">
+<h2>核心知识点与经验摘要 (备忘速查)<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>道具价格单位陷阱 (<code class="docutils literal notranslate"><span class="pre">GOODS_PRICE_INVALID:</span> <span class="pre">-15013</span></code>)</strong>：</p>
+<ul class="simple">
+<li><p>微信管理后台 Excel 导入模板的表头单位是 <strong>“元”</strong>，若填入 <code class="docutils literal notranslate"><span class="pre">100</span></code> 会被识别为 <code class="docutils literal notranslate"><span class="pre">100.00元</span> <span class="pre">(10000分)</span></code>；</p></li>
+<li><p>代码签名的 <code class="docutils literal notranslate"><span class="pre">goodsPrice</span></code> 严格要求为 <strong>“分”</strong>（1元传 <code class="docutils literal notranslate"><span class="pre">100</span></code>）；</p></li>
+<li><p>单位不一致相差 100 倍即报此错。微信后台无删除道具功能，需覆盖修改或用 API 发布新道具。</p></li>
+</ul>
+</li>
+<li><p><strong>免 Excel 一键全自动道具发布 (Python 核心代码)</strong>：</p>
+<ul class="simple">
+<li><p>微信官方提供 <code class="docutils literal notranslate"><span class="pre">/xpay/start_upload_goods</span></code>（上传）与 <code class="docutils literal notranslate"><span class="pre">/xpay/start_publish_goods</span></code>（发布）服务端接口；</p></li>
+<li><p>携带 HMAC-SHA256 计算的 <code class="docutils literal notranslate"><span class="pre">pay_sig</span></code> 签名，脚本一键秒级推送到正式现网或沙箱，省去人工上传与 Excel 维护。</p></li>
+</ul>
+</li>
+<li><p><strong>道具创建全网同步冷却期 (<code class="docutils literal notranslate"><span class="pre">COIN_OR_PRODUCT_ID_CREATED_IN_RECENTLY</span></code>)</strong>：</p>
+<ul class="simple">
+<li><p>此报错表示：<strong>AppID、OfferID、密钥签名（paySig/signature）、道具 ID 与价格 100% 正确！</strong></p></li>
+<li><p>腾讯米大师（Midas）网关全国边缘 CDN 节点与防刷风控强制设有 15 ~ 30 分钟同步冷却，静待即可自动恢复。</p></li>
+</ul>
+</li>
+<li><p><strong>iOS 端特有报错 (<code class="docutils literal notranslate"><span class="pre">requestVirtualPayment</span> <span class="pre">fail</span> <span class="pre">ios支付时订单号重复</span></code>)</strong>：</p>
+<ul class="simple">
+<li><p><strong>根因</strong>：iOS 微信虚拟支付底层接入 Apple 支付事务队列（Transaction Queue），初次拉起收银台后，该 <code class="docutils literal notranslate"><span class="pre">outTradeNo</span></code> 被系统锁定。退出后再次拿同一单号请求，iOS 底层风控直接拦截；</p></li>
+<li><p><strong>解法</strong>：采用主流电商的 <strong>“业务主订单号 + 动态支付流水号”</strong> 双层设计。重试支付时派发唯一新单号（如 <code class="docutils literal notranslate"><span class="pre">MEME_..._R9fe5</span></code>，长度严格限制在 <span class="math notranslate nohighlight">\(\le 32\)</span> 字符），通过 Webhook 异步通知精准归集履约。</p></li>
+</ul>
+</li>
+<li><p><strong>电商化订单中心闭环设计</strong>：</p>
+<ul class="simple">
+<li><p>支持 <code class="docutils literal notranslate"><span class="pre">PENDING</span></code>（待付款）、<code class="docutils literal notranslate"><span class="pre">PAID</span></code>（已履约）、<code class="docutils literal notranslate"><span class="pre">CANCELLED</span></code>（已关闭）状态机；</p></li>
+<li><p>待付款订单提供【取消订单】（二次确认）与【继续支付】（动态流水重新拉起微信原生收银台）。</p></li>
+</ul>
+</li>
+<li><p><strong>编译与打包 (<code class="docutils literal notranslate"><span class="pre">project.private.config.json</span> <span class="pre">无依赖文件</span></code>)</strong>：</p>
+<ul class="simple">
+<li><p>本地开发工具生成的私有偏好配置文件，打包时被自动优化过滤，<strong>100% 不影响运行与审核</strong>。在 <code class="docutils literal notranslate"><span class="pre">packOptions.ignore</span></code> 和 <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> 显式忽略可静音提示。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="goods-price-invalid-15013">
+<h2>一、 虚拟支付道具价格单位陷阱与 GOODS_PRICE_INVALID (-15013)<a class="headerlink" href="#goods-price-invalid-15013" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>1.1 案发现场<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>前端调用 <code class="docutils literal notranslate"><span class="pre">wx.requestVirtualPayment</span></code> 时抛出异常：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"errMsg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"requestVirtualPayment:fail goods_price_invalid"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"errCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">-15013</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>1.2 根因分析与对比矩阵<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>微信公众平台管理后台（【虚拟支付】-&gt;【道具管理】）与底层接口对<strong>价格单位</strong>定义不同：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>渠道 / 场景</p></th>
+<th class="head text-left"><p>期望的价格单位</p></th>
+<th class="head text-left"><p>示例输入</p></th>
+<th class="head text-left"><p>微信底层折算金额</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>后台 Excel 批量导入模板</strong></p></td>
+<td class="text-left"><p><strong>元 (Yuan)</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1</span></code> / <code class="docutils literal notranslate"><span class="pre">5</span></code> / <code class="docutils literal notranslate"><span class="pre">9.9</span></code></p></td>
+<td class="text-left"><p>1.00元 / 5.00元 / 9.90元</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>代码/API 参数 (<code class="docutils literal notranslate"><span class="pre">goodsPrice</span></code>)</strong></p></td>
+<td class="text-left"><p><strong>分 (Cent)</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">100</span></code> / <code class="docutils literal notranslate"><span class="pre">500</span></code> / <code class="docutils literal notranslate"><span class="pre">990</span></code></p></td>
+<td class="text-left"><p>1.00元 / 5.00元 / 9.90元</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p><strong>⚠️ 典型踩坑路径</strong>：
+开发者按代码习惯在 Excel 里填入 <code class="docutils literal notranslate"><span class="pre">100</span></code>、<code class="docutils literal notranslate"><span class="pre">500</span></code>、<code class="docutils literal notranslate"><span class="pre">990</span></code>，微信后台导入后将其认定为 <strong>100元 (10000分)、500元 (50000分)、990元 (99000分)</strong>。
+当小程序前端按 1 元扣费传入 <code class="docutils literal notranslate"><span class="pre">goodsPrice:</span> <span class="pre">100</span></code> 时，Midas 网关校验 <code class="docutils literal notranslate"><span class="pre">100</span> <span class="pre">!=</span> <span class="pre">10000</span></code>，立即触发 <code class="docutils literal notranslate"><span class="pre">-15013:</span> <span class="pre">GOODS_PRICE_INVALID</span></code>。</p>
+</div></blockquote>
+</section>
+<section id="id4">
+<h3>1.3 后台无删除按钮的解法<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>微信公众平台后台道具一旦生成，<strong>没有提供删除选项</strong>：</p>
+<ul class="simple">
+<li><p><strong>方案 A（覆盖式修改）</strong>：在后台道具列表中直接点击【修改】，修正道具名称与价格（单位为元），提交后重新发布生效。</p></li>
+<li><p><strong>方案 B（代码发布全新前缀）</strong>：使用全新命名的 ID（如 <code class="docutils literal notranslate"><span class="pre">meme_100</span></code> 替代 <code class="docutils literal notranslate"><span class="pre">item_100</span></code>），直接通过 API 一键发布，由数据库做双前缀向下兼容。</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="excel-api">
+<h2>二、 彻底告别 Excel：代码调用官方 API 一键上传与发布道具 (附完整核心代码)<a class="headerlink" href="#excel-api" title="Link to this heading"></a></h2>
+<p>使用官方 API 替代 Excel 导入，既能实现版本控制，又能防止单位混淆。</p>
+<section id="id5">
+<h3>2.1 官方核心接口<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>批量上传/更新道具</strong>：<code class="docutils literal notranslate"><span class="pre">/xpay/start_upload_goods</span></code></p></li>
+<li><p><strong>批量发布道具至现网/沙箱</strong>：<code class="docutils literal notranslate"><span class="pre">/xpay/start_publish_goods</span></code></p></li>
+<li><p><strong>查询道具发布进度</strong>：<code class="docutils literal notranslate"><span class="pre">/xpay/query_publish_goods</span></code></p></li>
+</ol>
+</section>
+<section id="pay-sig">
+<h3>2.2 签名算法 pay_sig 计算<a class="headerlink" href="#pay-sig" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[\text{pay\_sig} = \text{HMAC-SHA256}(\text{uri} + &quot;\&amp;&quot; + \text{post\_body}, \text{AppKey})\]</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">uri</span></code>：请求的 URI 路径，例如 <code class="docutils literal notranslate"><span class="pre">/xpay/start_upload_goods</span></code>；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">post_body</span></code>：请求体 JSON 字符串（紧凑无空格，<code class="docutils literal notranslate"><span class="pre">separators=(',',</span> <span class="pre">':')</span></code>）；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AppKey</span></code>：现网（<code class="docutils literal notranslate"><span class="pre">env=0</span></code>）必须使用现网正式 AppKey。</p></li>
+</ul>
+</section>
+<section id="sync-xpay-props-py">
+<h3>2.3 完整开箱即用脚本 (<code class="docutils literal notranslate"><span class="pre">sync_xpay_props.py</span></code>)<a class="headerlink" href="#sync-xpay-props-py" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
+<span class="sd">微信小程序虚拟支付 2.0 (XPay) 服务端自动化道具上架与发布脚本</span>
+<span class="sd">路径：backend/scripts/sync_xpay_props.py</span>
+<span class="sd">"""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hmac</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># ----------------- 配置信息 -----------------</span>
+<span class="n">WX_APPID</span> <span class="o">=</span> <span class="s2">"wx86e299efa495d1f6"</span>
+<span class="n">WX_APPSECRET</span> <span class="o">=</span> <span class="s2">"your_wx_appsecret"</span>
+<span class="n">XPAY_APP_KEY</span> <span class="o">=</span> <span class="s2">"your_live_app_key"</span>   <span class="c1"># 现网正式 AppKey</span>
+<span class="n">XPAY_ENV</span> <span class="o">=</span> <span class="mi">0</span>                        <span class="c1"># 0: 现网正式, 1: 沙箱测试</span>
+<span class="c1"># --------------------------------------------</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_access_token</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=</span><span class="si">{</span><span class="n">WX_APPID</span><span class="si">}</span><span class="s2">&amp;secret=</span><span class="si">{</span><span class="n">WX_APPSECRET</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"access_token"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"获取 access_token 失败: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">token</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calc_pay_sig</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">post_body</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">appkey</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">uri</span><span class="si">}</span><span class="s2">&amp;</span><span class="si">{</span><span class="n">post_body</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">return</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">appkey</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span> <span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sync_props</span><span class="p">():</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">get_access_token</span><span class="p">()</span>
+
+    <span class="c1"># 定义标准黄金计费档位 (price 单位严格为整数“分”)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"meme_100"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"动图制作尝鲜包1元"</span><span class="p">,</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>             <span class="c1"># 100分 = 1.00元</span>
+            <span class="s2">"remark"</span><span class="p">:</span> <span class="s2">"尝鲜包20次额度"</span><span class="p">,</span>
+            <span class="s2">"item_url"</span><span class="p">:</span> <span class="s2">"https://apiwx.tg-cc755.cn/uploads/goods_icon.png"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"meme_500"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"动图制作超值包5元"</span><span class="p">,</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>             <span class="c1"># 500分 = 5.00元</span>
+            <span class="s2">"remark"</span><span class="p">:</span> <span class="s2">"超值包120次额度"</span><span class="p">,</span>
+            <span class="s2">"item_url"</span><span class="p">:</span> <span class="s2">"https://apiwx.tg-cc755.cn/uploads/goods_icon.png"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"meme_990"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"动图制作尊享包9元9"</span><span class="p">,</span>
+            <span class="s2">"price"</span><span class="p">:</span> <span class="mi">990</span><span class="p">,</span>             <span class="c1"># 990分 = 9.90元</span>
+            <span class="s2">"remark"</span><span class="p">:</span> <span class="s2">"尊享包300次额度VIP"</span><span class="p">,</span>
+            <span class="s2">"item_url"</span><span class="p">:</span> <span class="s2">"https://apiwx.tg-cc755.cn/uploads/goods_icon.png"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="c1"># 1. 批量上传/更新道具</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"📦 正在上传道具: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span><span class="si">}</span><span class="s2">分)..."</span><span class="p">)</span>
+        <span class="n">uri</span> <span class="o">=</span> <span class="s2">"/xpay/start_upload_goods"</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"upload_item"</span><span class="p">:</span> <span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="s2">"env"</span><span class="p">:</span> <span class="n">XPAY_ENV</span><span class="p">}</span>
+        <span class="n">post_body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s1">':'</span><span class="p">))</span>
+        <span class="n">pay_sig</span> <span class="o">=</span> <span class="n">calc_pay_sig</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">post_body</span><span class="p">,</span> <span class="n">XPAY_APP_KEY</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://api.weixin.qq.com/xpay/start_upload_goods?access_token=</span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&amp;pay_sig=</span><span class="si">{</span><span class="n">pay_sig</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_body</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">},</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   上传响应: </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># 2. 批量发布道具至目标环境</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"🚀 正在发布道具: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (env=</span><span class="si">{</span><span class="n">XPAY_ENV</span><span class="si">}</span><span class="s2">)..."</span><span class="p">)</span>
+        <span class="n">uri</span> <span class="o">=</span> <span class="s2">"/xpay/start_publish_goods"</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"publish_item"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"id"</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]}],</span> <span class="s2">"env"</span><span class="p">:</span> <span class="n">XPAY_ENV</span><span class="p">}</span>
+        <span class="n">post_body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s1">':'</span><span class="p">))</span>
+        <span class="n">pay_sig</span> <span class="o">=</span> <span class="n">calc_pay_sig</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">post_body</span><span class="p">,</span> <span class="n">XPAY_APP_KEY</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://api.weixin.qq.com/xpay/start_publish_goods?access_token=</span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&amp;pay_sig=</span><span class="si">{</span><span class="n">pay_sig</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">post_body</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">},</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   发布响应: </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"🎉 全部道具自动化发布完成！彻底告别 Excel 繁琐导入！"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">sync_props</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="coin-or-product-id-created-in-recently">
+<h2>三、 道具创建与更新的全网同步冷却期：COIN_OR_PRODUCT_ID_CREATED_IN_RECENTLY<a class="headerlink" href="#coin-or-product-id-created-in-recently" title="Link to this heading"></a></h2>
+<section id="id6">
+<h3>3.1 报错现象<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>刚在后台创建完道具或运行脚本发布后，立即在真机点击支付，控制台报错：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>requestVirtualPayment:fail COIN_OR_PRODUCT_ID_CREATED_IN_RECENTLY
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>3.2 为什么说这是“成功的重大信号”？<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>在微信 Midas 支付网关中，该校验处于整个链路的最末端：</p>
+<ol class="arabic simple">
+<li><p><strong>已验证 AppID 与 OfferID 真实有效</strong>；</p></li>
+<li><p><strong>已验证现网 AppKey 签发的 paySig 与用户态 signature 100% 验签通过</strong>；</p></li>
+<li><p><strong>已验证道具 ID 存在且 price 价格吻合一致</strong>。
+只有以上全部通过后，系统才会检测节点缓存时间。为了防范 CDN 边缘节点延时与刷单套现漏洞，腾讯对新上线/新调价道具实行 <strong>15 ~ 30 分钟全网同步冷却期</strong>。</p></li>
+</ol>
+</section>
+<section id="id8">
+<h3>3.3 应对策略<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p><strong>切勿重复修改代码或参数！</strong> 耐心等待 15 ~ 30 分钟后重新编译或扫码，收银台便会直接调起。</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ios-requestvirtualpayment-fail-ios">
+<h2>四、 iOS 端特有报错：requestVirtualPayment fail ios支付时订单号重复 与电商化流水号解法<a class="headerlink" href="#ios-requestvirtualpayment-fail-ios" title="Link to this heading"></a></h2>
+<section id="id9">
+<h3>4.1 案发现场<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p>用户在充值弹窗退出未付款，随后在【订单中心】点击【继续支付】，Android 手机可能正常调起，但 iPhone (iOS) 直接弹出：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>requestVirtualPayment:fail ios支付时订单号重复
+</pre></div>
+</div>
+</section>
+<section id="apple-iap">
+<h3>4.2 底层原因剖析 (Apple IAP 事务队列)<a class="headerlink" href="#apple-iap" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>iOS 上的微信虚拟支付受限于 <strong>Apple 支付事务队列（Transaction Queue）</strong>；</p></li>
+<li><p>只要在 iOS 设备上唤起过一次收银台，该 <code class="docutils literal notranslate"><span class="pre">outTradeNo</span></code> 即被系统队列标记为“处理过”；</p></li>
+<li><p>即使用户中途退出，该单号在 iOS 本地队列也留有记录；若重试时依然使用原单号，iOS 微信底层风控直接拦截。</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>4.3 解决方案：“业务主订单号 + 动态支付交易流水号” 双层设计<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                 【用户订单中心】
+           业务主订单号: MEME_1789081221_03009e (永久固定不变)
+                          │
+         ┌────────────────┴────────────────┐
+         ▼ 首次支付                       ▼ 订单中心点击【继续支付】
+   支付流水号 1:                     支付流水号 2:
+   MEME_1789081221_03009e            MEME_1789081221_03009e_Rc874
+         │                                 │
+         └────────────────┬────────────────┘
+                          ▼
+            微信异步支付成功通知 Webhook
+                          │
+                          ▼
+        精准归集到业务主订单并发放额度，状态变更为 PAID
+</pre></div>
+</div>
+<section id="id11">
+<h4>关键约束：<a class="headerlink" href="#id11" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>微信 <code class="docutils literal notranslate"><span class="pre">outTradeNo</span></code> 限制最大长度为 <strong>32 字符</strong>；</p></li>
+<li><p>主订单号（22位，如 <code class="docutils literal notranslate"><span class="pre">MEME_1789081221_03009e</span></code>） + 重试后缀 <code class="docutils literal notranslate"><span class="pre">_R</span></code> + 4位十六进制随机字符 = <strong>28 位字符</strong>，严格满足 <span class="math notranslate nohighlight">\(\le 32\)</span> 规范。</p></li>
+</ul>
+</section>
+<section id="id12">
+<h4>服务端重签核心实现：<a class="headerlink" href="#id12" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">resume_xpay_order</span><span class="p">(</span><span class="n">openid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">get_order_by_id</span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">order</span> <span class="ow">or</span> <span class="n">order</span><span class="p">[</span><span class="s1">'openid'</span><span class="p">]</span> <span class="o">!=</span> <span class="n">openid</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"订单不存在或无权操作"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">order</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">'PENDING'</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"订单状态为【</span><span class="si">{</span><span class="n">order</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span><span class="si">}</span><span class="s2">】，无法继续支付"</span><span class="p">)</span>
+
+    <span class="c1"># 1. 派发全新独立流水号 (严格 &lt;= 32字符)</span>
+    <span class="n">retry_suffix</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">pay_trade_no</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">order_id</span><span class="si">}</span><span class="s2">_R</span><span class="si">{</span><span class="n">retry_suffix</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="c1"># 2. 更新订单表最新流水记录</span>
+    <span class="n">update_order_trade_no</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="n">pay_trade_no</span><span class="p">)</span>
+
+    <span class="c1"># 3. 构造请求参数，attach 中记录原始 order_id</span>
+    <span class="n">sign_data_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"offerId"</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">XPAY_OFFER_ID</span><span class="p">,</span>
+        <span class="s2">"buyQuantity"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"env"</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">XPAY_ENV</span><span class="p">,</span>
+        <span class="s2">"currencyType"</span><span class="p">:</span> <span class="s2">"CNY"</span><span class="p">,</span>
+        <span class="s2">"productId"</span><span class="p">:</span> <span class="n">order</span><span class="p">[</span><span class="s1">'package_id'</span><span class="p">],</span>
+        <span class="s2">"goodsPrice"</span><span class="p">:</span> <span class="n">order</span><span class="p">[</span><span class="s1">'amount'</span><span class="p">],</span>
+        <span class="s2">"outTradeNo"</span><span class="p">:</span> <span class="n">pay_trade_no</span><span class="p">,</span>
+        <span class="s2">"attach"</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">"openid"</span><span class="p">:</span> <span class="n">openid</span><span class="p">,</span> <span class="s2">"order_id"</span><span class="p">:</span> <span class="n">order_id</span><span class="p">,</span> <span class="s2">"pkg_id"</span><span class="p">:</span> <span class="n">order</span><span class="p">[</span><span class="s1">'package_id'</span><span class="p">]})</span>
+    <span class="p">}</span>
+
+    <span class="n">sign_data_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">sign_data_dict</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s1">':'</span><span class="p">))</span>
+    <span class="n">pay_sig</span> <span class="o">=</span> <span class="n">calc_pay_sig</span><span class="p">(</span><span class="s2">"requestVirtualPayment"</span><span class="p">,</span> <span class="n">sign_data_str</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">XPAY_APP_KEY</span><span class="p">)</span>
+    <span class="n">signature</span> <span class="o">=</span> <span class="n">calc_signature</span><span class="p">(</span><span class="n">sign_data_str</span><span class="p">,</span> <span class="n">get_user_session_key</span><span class="p">(</span><span class="n">openid</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"order_id"</span><span class="p">:</span> <span class="n">order_id</span><span class="p">,</span>
+        <span class="s2">"trade_no"</span><span class="p">:</span> <span class="n">pay_trade_no</span><span class="p">,</span>
+        <span class="s2">"payment_params"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"signData"</span><span class="p">:</span> <span class="n">sign_data_str</span><span class="p">,</span>
+            <span class="s2">"paySig"</span><span class="p">:</span> <span class="n">pay_sig</span><span class="p">,</span>
+            <span class="s2">"signature"</span><span class="p">:</span> <span class="n">signature</span><span class="p">,</span>
+            <span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"short_series_goods"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id13">
+<h2>五、 电商化订单中心闭环设计：待付款、继续支付与取消订单<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<section id="id14">
+<h3>5.1 状态机流转<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>stateDiagram-v2
+    [*] --&gt; PENDING: 用户发起购买创建订单
+    PENDING --&gt; CANCELLED: 用户点击【取消订单】
+    PENDING --&gt; PAID: 首次支付或订单中心【继续支付】成功
+    PAID --&gt; [*]: 自动履约发货，制作额度实时到账
+    CANCELLED --&gt; [*]: 订单关闭锁定，不可再次唤起支付
+</pre></div>
+</div>
+</section>
+<section id="wxml-js">
+<h3>5.2 前端订单中心页面实现 (WXML / JS)<a class="headerlink" href="#wxml-js" title="Link to this heading"></a></h3>
+<section id="wxml">
+<h4>WXML 卡片操作栏：<a class="headerlink" href="#wxml" title="Link to this heading"></a></h4>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">view</span> <span class="na">wx:for</span><span class="o">=</span><span class="s">"{{orders}}"</span> <span class="na">wx:key</span><span class="o">=</span><span class="s">"order_id"</span> <span class="na">class</span><span class="o">=</span><span class="s">"order-card"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">view</span> <span class="na">class</span><span class="o">=</span><span class="s">"order-header"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">text</span> <span class="na">class</span><span class="o">=</span><span class="s">"pkg-name"</span><span class="p">&gt;</span>{{item.package_title}}<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">text</span> <span class="na">class</span><span class="o">=</span><span class="s">"badge {{item.status === 'PAID' ? 'badge-green' : (item.status === 'PENDING' ? 'badge-gold' : 'badge-gray')}}"</span><span class="p">&gt;</span>
+      {{item.status === 'PAID' ? '已支付·已发货' : (item.status === 'PENDING' ? '待付款' : '已取消')}}
+    <span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+
+  <span class="cm">&lt;!-- 待付款订单操作按钮组 --&gt;</span>
+  <span class="p">&lt;</span><span class="nt">view</span> <span class="na">wx:if</span><span class="o">=</span><span class="s">"{{item.status === 'PENDING'}}"</span> <span class="na">class</span><span class="o">=</span><span class="s">"order-actions"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn-cancel"</span> <span class="na">size</span><span class="o">=</span><span class="s">"mini"</span> <span class="na">bindtap</span><span class="o">=</span><span class="s">"onCancelOrder"</span> <span class="na">data-id</span><span class="o">=</span><span class="s">"{{item.order_id}}"</span><span class="p">&gt;</span>取消订单<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn-pay"</span> <span class="na">size</span><span class="o">=</span><span class="s">"mini"</span> <span class="na">bindtap</span><span class="o">=</span><span class="s">"onRepayOrder"</span> <span class="na">data-id</span><span class="o">=</span><span class="s">"{{item.order_id}}"</span><span class="p">&gt;</span>继续支付<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="js">
+<h4>JS 事件处理：<a class="headerlink" href="#js" title="Link to this heading"></a></h4>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Page</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">onCancelOrder</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">orderId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">wx</span><span class="p">.</span><span class="nx">showModal</span><span class="p">({</span>
+<span class="w">      </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">'取消订单'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="s1">'确定要取消该待付款订单吗？'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">confirmText</span><span class="o">:</span><span class="w"> </span><span class="s1">'确定取消'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">confirmColor</span><span class="o">:</span><span class="w"> </span><span class="s1">'#ef4444'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">success</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">confirm</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">app</span><span class="p">.</span><span class="nx">cancelVirtualPayment</span><span class="p">(</span><span class="nx">orderId</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fetchOrders</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nx">onRepayOrder</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">orderId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">app</span><span class="p">.</span><span class="nx">resumeVirtualPayment</span><span class="p">(</span><span class="nx">orderId</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fetchOrders</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="project-private-config-json">
+<h2>六、 编译与打包避坑：project.private.config.json 无依赖文件 处理<a class="headerlink" href="#project-private-config-json" title="Link to this heading"></a></h2>
+<section id="id15">
+<h3>6.1 现象与疑问<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<p>在开发者工具预览或上传时提示：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>project.private.config.json 无依赖文件
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>结论</strong>：<strong>100% 正常，完全不影响功能与审核</strong>。</p></li>
+<li><p><strong>原理</strong>：微信开发者工具本地自动生成的个人偏好设置文件，业务代码不会引用它，微信打包器在构建时会自动过滤剔除，避免将本地配置打进线上包。</p></li>
+</ul>
+</section>
+<section id="id16">
+<h3>6.2 静音配置<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<p>在 <code class="docutils literal notranslate"><span class="pre">project.config.json</span></code> 中增加忽略规则：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"packOptions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"ignore"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project.private.config.json"</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="cheat-sheet">
+<h2>七、 微信虚拟支付 2.0 核心错误码速查手册 (Cheat Sheet)<a class="headerlink" href="#cheat-sheet" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>错误代码 / 报错信息</p></th>
+<th class="head text-left"><p>触发原因</p></th>
+<th class="head text-left"><p>根本解决方案</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">GOODS_PRICE_INVALID</span></code> (-15013)</p></td>
+<td class="text-left"><p>道具价格严重不匹配（Excel 按“元”导入，代码按“分”签名，相差 100 倍）</p></td>
+<td class="text-left"><p>代码中严格传“分”，后台修正单位为“元”，或直接运行 API 脚本自动发布</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">COIN_OR_PRODUCT_ID_CREATED_IN_RECENTLY</span></code></p></td>
+<td class="text-left"><p>道具刚新建或刚改价，腾讯 Midas CDN 全网节点同步与防刷冷却中</p></td>
+<td class="text-left"><p><strong>参数签名已全部正确通过！</strong> 无需改代码，耐心等待 15~30 分钟即可</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ios支付时订单号重复</span></code></p></td>
+<td class="text-left"><p>iOS 端退出支付后，复用原单号再次调起 <code class="docutils literal notranslate"><span class="pre">wx.requestVirtualPayment</span></code></p></td>
+<td class="text-left"><p>采用“业务主单号 + 动态支付流水号”架构，重试时派发全新流水号（<span class="math notranslate nohighlight">\(\le 32\)</span> 字符）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">INVALID_SIGN</span></code> / 签名错误</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">paySig</span></code> 或 <code class="docutils literal notranslate"><span class="pre">signature</span></code> 算法错误，或混淆了沙箱/现网密钥</p></td>
+<td class="text-left"><p>现网环境（<code class="docutils literal notranslate"><span class="pre">env=0</span></code>）必须使用现网正式 AppKey，<code class="docutils literal notranslate"><span class="pre">signData</span></code> 字符串去除多余空格</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">USER_SESSION_KEY_INVALID</span></code></p></td>
+<td class="text-left"><p>传给用户态签名的 <code class="docutils literal notranslate"><span class="pre">session_key</span></code> 失效</p></td>
+<td class="text-left"><p>前端调用 <code class="docutils literal notranslate"><span class="pre">wx.login</span></code> 重新登录换取最新 <code class="docutils literal notranslate"><span class="pre">session_key</span></code> 并存入服务端缓存</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">OFFER_ID_INVALID</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">offerId</span></code> 填错或与申请虚拟支付的 AppID 不匹配</p></td>
+<td class="text-left"><p>登录小程序后台【虚拟支付】核对正确的 10 位纯数字 OfferID</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="07_wechat_share_viral_loop_and_emoticon_trap.html" class="btn btn-neutral float-left" title="第 7 章：微信社交裂变分享机制与“动图直接发好友”认知陷阱深度拆解" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="09_production_callback_timezone_and_release_retro.html" class="btn btn-neutral float-right" title="本次生产联调复盘：虚拟支付回调、订阅消息、时区与前端故障" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, 创作学院。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

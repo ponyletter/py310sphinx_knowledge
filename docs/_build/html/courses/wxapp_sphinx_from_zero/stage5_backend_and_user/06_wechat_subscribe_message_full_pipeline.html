@@ -1,0 +1,687 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>第 6 节：高耗时任务必配：微信小程序订阅消息选型、模板配置与异步触达全链路实战 &mdash; 创作学院课程资料库 1.0.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=34088549"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+      <script src="../../../_static/translations.js?v=beaddf03"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" />
+    <link rel="next" title="第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录" href="../stage6_frontend_and_bugs/index.html" />
+    <link rel="prev" title="第 5 节：高耗时 AI 生图防断连架构：国内合规双机网络拓扑、异步任务轮询与拟物 tqdm 进度条实战" href="05_ai_gateway_and_async_task_polling.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            创作学院课程资料库
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">课程分类目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../douyin_short_video/index.html">短视频与知识图解运营实战课</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../douyin_short_video/index.html#id2">阶段架构概览</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage1/index.html">第1阶段 基础：定位破局与视听规范</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage1/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage2/index.html">第2阶段 进阶：算法机理与爆款模型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage2/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage3/index.html">第3阶段 实战：起号操盘与商业转化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage3/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage4/index.html">第4阶段 扩展：AI 赋能与自动化流水线</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage4/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#id1">阶段架构概览</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html">第1阶段 商业认知、多维商业画布与标杆爆款拆解</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage2_wechat_mp_platform/index.html">第2阶段 微信公众平台保姆级全流程操作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage2_wechat_mp_platform/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage3_devtools_and_setup/index.html">第3阶段 微信开发者工具保姆级实操与环境基建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage3_devtools_and_setup/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage4_sphinx_engine/index.html">第4阶段 Sphinx 知识引擎构建与 AST 试读截断黑科技</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage4_sphinx_engine/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">第5阶段 FastAPI 资产中台与微信最新用户体系设计</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage6_frontend_and_bugs/index.html">第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage6_frontend_and_bugs/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage7_audit_mastery/index.html">第7阶段 微信官方审核一次性通关秘籍与暗门架构设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage7_audit_mastery/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage8_references_and_skills/index.html">第8阶段 附录：权威参考导航、开源生态与 Skill 沉淀</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage8_references_and_skills/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../short_video_guides/index.html">短视频课程图文版</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html">做小程序，先别急着写代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id2">先画出产品，而不是先搭架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id3">把想法压缩成一条最小闭环</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id4">两类产品，两个验证重点</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id5">案例一：结构化内容服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id6">案例二：高频、可分享的工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#mvp">用 MVP 防止功能堆积</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id7">个人开发者的四项同时责任</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id8">结论：先验证价值，再扩大工程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id9">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html">微信原生、Uni-app、Taro选谁？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id1">先看选择全景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id2">三种路线分别在做什么</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id3">用四个维度而不是印象做比较</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id4">复用有收益，也有边界</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id5">原生能力、包体与性能必须真机验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id6">三种典型决策</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id7">最终决策顺序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id8">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html">小程序富文本怎么选？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id2">先用四个边界定义问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#rich-text">原生 <code class="docutils literal notranslate"><span class="pre">rich-text</span></code>：适合受控的基础内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#mp-html"><code class="docutils literal notranslate"><span class="pre">mp-html</span></code>：面向复杂文章的渲染能力</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#wxparse"><code class="docutils literal notranslate"><span class="pre">wxParse</span></code>：历史项目的兼容对象</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#towxml"><code class="docutils literal notranslate"><span class="pre">towxml</span></code>：转换路径与构建验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id3">安全不属于任何一个渲染组件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id4">一张决策树给出起点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id5">参考与更新说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">权威资料与参考导航</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references/index.html">权威资料与工具导航</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references/index.html#id2">导航分类</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/01_platform_official_rules.html">一手平台规则与官方指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id2">1. 抖音与字节跳动官方平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id3">2. 算法备案与透明化公开披露</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id4">3. 微信小程序官方权威审核与运营规范</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html">推荐系统与算法工程原理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id2">1. 工业级顶级技术团队博客</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id3">2. 学术顶会与论文检索</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html">数据看板与行业大盘智库</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id2">1. 短视频大数据分析平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id3">2. 宏观趋势与消费洞察平台</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html">认知心理学与视听叙事经典</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id2">1. 认知心理学与病毒传播学</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id3">2. 编剧技艺与视听语言结构</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html">合规边界与知识版权指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id2">1. 政策法规与广告边界</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id3">2. 事实核查与学术背书源头</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html">AI 原生工具与内容自动化生态</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#tts-ctc-forced-alignment">1. 语音合成、克隆 (TTS) 与精准对齐 (CTC Forced Alignment)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#skills-video-as-code">2. 视觉设计、图解与代码驱动视频 (Skills &amp; Video-as-Code)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#id2">3. 音视频底层处理与提示工程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/07_course_production_contracts.html">技术图解短视频生产工程规范与契约手册</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#narrative-matrix">1. 认知原型与叙事矩阵契约 (Narrative Matrix)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#voice-caption-contract">2. 语音与字幕对齐工程契约 (Voice &amp; Caption Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#visual-layering-contract">3. 画面视觉与分层架构契约 (Visual Layering Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#delivery-safety">4. 交付与发布安全契约 (Delivery &amp; Safety)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录与指南</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ENV_SETUP.html">环境安装指南 (Environment Setup Guide)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#linux">1. 系统底层依赖安装 (Linux)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#conda">2. Conda 虚拟环境创建与配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#a-environment-yml">方式 A：通过 <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> 一键还原环境（推荐）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#b-requirements-txt">方式 B：手动创建环境并通过 <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> 安装</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id1">3. 环境检验</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id2">4. 快速使用</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">创作学院课程资料库</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a></li>
+          <li class="breadcrumb-item"><a href="index.html">第5阶段 FastAPI 资产中台与微信最新用户体系设计</a></li>
+      <li class="breadcrumb-item active">第 6 节：高耗时任务必配：微信小程序订阅消息选型、模板配置与异步触达全链路实战</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/courses/wxapp_sphinx_from_zero/stage5_backend_and_user/06_wechat_subscribe_message_full_pipeline.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第 6 节：高耗时任务必配：微信小程序订阅消息选型、模板配置与异步触达全链路实战<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>在 AI 生图、动图渲染或音视频转码等业务场景中，后端计算通常需要 <strong>30 秒至 1 分钟</strong>。实测数据表明：超过 70% 的用户在等待超过 15 秒后，会顺手将微信小程序切入手机后台去聊天或刷朋友圈。</p>
+<p>如果缺乏有效的<strong>离线召回机制</strong>，用户很容易将刚刚提交的任务遗忘，导致功能体验断裂、作品留存率与复访率急剧下跌。</p>
+<p><strong>微信小程序“订阅消息 (Subscribe Message)”</strong> 是微信官方提供的最权威、点击率最高（通常 &gt; 60%）、且完全合规的站外触达手段。本章将详细拆解：</p>
+<ol class="arabic simple">
+<li><p>如何在微信公众平台后台挑选并获取专属 <strong>模板 ID (Template ID)</strong>；</p></li>
+<li><p>针对 AI 生图与高耗时制作场景，推荐最合适的<strong>一次性订阅模板与关键词组合</strong>；</p></li>
+<li><p>微信订阅消息严苛的<strong>字段格式校验巨坑 (47003 / 43101)</strong> 与避坑速查表；</p></li>
+<li><p>前端手势唤起授权（<code class="docutils literal notranslate"><span class="pre">wx.requestSubscribeMessage</span></code>）与后端 Python 异步推送（<code class="docutils literal notranslate"><span class="pre">subscribeMessage.send</span></code>）的完整生产代码。</p></li>
+</ol>
+<hr class="docutils" />
+<section id="id2">
+<h2>一、全链路业务架构时序图<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>订阅消息必须严格遵循 <strong>“前端手势主动授权 ➔ 后端沉淀授权配额 ➔ 异步任务完工 ➔ 消耗配额定向下发 ➔ 微信服务通知唤醒回流”</strong> 的闭环：</p>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>sequenceDiagram
+    autonumber
+    actor User as 用户 (微信小程序)
+    participant Front as 小程序前端 (WXML/JS)
+    participant Backend as FastAPI 后端
+    participant WXServer as 微信公众平台接口 (subscribeMessage.send)
+    participant WXNotice as 微信微信聊天列表 (服务通知)
+
+    User-&gt;&gt;Front: 1. 点击【⚡ 一键制作并通知我】(用户手势触发)
+    Front-&gt;&gt;Front: 2. 调用 wx.requestSubscribeMessage(tmplIds)
+    Note over Front,User: 弹出微信官方原生授权框：&lt;br&gt;“是否允许接收制作完成通知？”
+    User-&gt;&gt;Front: 3. 点击【允许】
+    Front-&gt;&gt;Backend: 4. 发起 POST /api/generate-async (附带 openid 与 template_id)
+    Note over Backend: 保存任务并记录该用户可用通知配额 count = 1
+    
+    Note over User: 5. 用户退出小程序，去微信群聊天或锁屏
+    
+    Backend-&gt;&gt;Backend: 6. 后台执行 AI 绘图与 OpenCV 切片 (约 45 秒)
+    Note over Backend: 任务完成，合成 meme_result.gif
+    
+    Backend-&gt;&gt;WXServer: 7. 调用 subscribeMessage.send (携带参数与跳转 page 路径)
+    WXServer--&gt;&gt;Backend: 8. 返回 {"errcode": 0, "errmsg": "ok"}
+    
+    WXServer-&gt;&gt;WXNotice: 9. 微信主界面下发【服务通知】卡片提醒
+    User-&gt;&gt;WXNotice: 10. 看到“制作完成通知”，点击卡片
+    WXNotice-&gt;&gt;Front: 11. 自动唤起小程序并直达 pages/index/index?task_id=xxx
+    Front-&gt;&gt;User: 12. 立即呈现制作成品，支持保存相册与分享！
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id-template-id">
+<h2>二、微信公众平台后台获取模板 ID (Template ID) 全流程<a class="headerlink" href="#id-template-id" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>1. 获取路径<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>打开电脑浏览器，登录 <strong>微信公众平台</strong>（<a class="reference external" href="https://mp.weixin.qq.com">mp.weixin.qq.com</a>）；</p></li>
+<li><p>在左侧菜单栏依次点击：<strong>【功能】➔【订阅消息】</strong>；</p></li>
+<li><p>切换至 <strong>【公共模板库】</strong> 选项卡。</p></li>
+</ol>
+</section>
+<section id="one-time-subscription">
+<h3>2. 为什么选择“一次性订阅 (One-Time Subscription)”？<a class="headerlink" href="#one-time-subscription" title="Link to this heading"></a></h3>
+<p>在微信体系中，订阅消息分为两种类型：</p>
+<ul class="simple">
+<li><p><strong>一次性订阅（强烈推荐 · 个人与企业主体全支持）</strong>：</p>
+<ul>
+<li><p>用户在前端主动勾选并点击“允许”一次，开发者服务器就获得 <strong>1 次</strong> 向该用户下发通知的权利；</p></li>
+<li><p>下发一条消息后，该次授权立即作废（1:1 消费原则）；如果需要再次下发，需等待用户下次在小程序中再次授权；</p></li>
+<li><p><strong>门槛极低</strong>，个人开发者小程序与企业小程序均可直接免费使用，覆盖 99% 的工具与制作类业务。</p></li>
+</ul>
+</li>
+<li><p><strong>长期订阅（绝大多数开发者无法开通）</strong>：</p>
+<ul>
+<li><p>用户授权一次后，开发者可长期不限次数下发；</p></li>
+<li><p><strong>严苛限制</strong>：仅面向政务、民生医疗、公共交通、教育等极少数特定政府/国企主体开放。普通工具、商业、个人主体<strong>无法申请</strong>。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ai">
+<h2>三、高耗时 AI 制作场景最推荐的模板与关键词<a class="headerlink" href="#ai" title="Link to this heading"></a></h2>
+<p>在微信公众平台的【公共模板库】中，搜索与你的小程序**服务类目（如【工具 - 图片文字】或【工具 - 效率】）**相匹配的关键词：</p>
+<section id="id4">
+<h3>1. 首选推荐模板：《制作完成通知》（最契合 AI 生图 / 动图生成）<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>模板标题</strong>：<code class="docutils literal notranslate"><span class="pre">制作完成通知</span></code>（或搜索关键词：<code class="docutils literal notranslate"><span class="pre">制作完成</span></code>）</p></li>
+<li><p><strong>模板编号参考</strong>：<code class="docutils literal notranslate"><span class="pre">1423</span></code> 等（不同类目编号略有不同，认准标题即可）</p></li>
+<li><p><strong>关键词字段推荐勾选（选择 3~4 个核心项）</strong>：</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>字段占位符</p></th>
+<th class="head text-left"><p>字段名称</p></th>
+<th class="head text-left"><p>推荐填入内容示例</p></th>
+<th class="head text-left"><p>限制与格式规范</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">thing1.DATA</span></code></strong></p></td>
+<td class="text-left"><p>制作内容 / 作品名称</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">AI</span> <span class="pre">趣味动态表情包</span></code></p></td>
+<td class="text-left"><p>限制 20 个以内字符（严禁超长）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">phrase2.DATA</span></code></strong></p></td>
+<td class="text-left"><p>制作状态</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">制作成功</span></code></p></td>
+<td class="text-left"><p>限制 5 个以内汉字（如“处理完成”、“生成成功”）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">time3.DATA</span></code></strong></p></td>
+<td class="text-left"><p>完成时间</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2026-09-11</span> <span class="pre">02:30:15</span></code></p></td>
+<td class="text-left"><p>标准时间格式</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">thing4.DATA</span></code></strong></p></td>
+<td class="text-left"><p>温馨提示 / 备注</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">点击卡片立即查看并保存相册</span></code></p></td>
+<td class="text-left"><p>限制 20 个以内字符</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h3>2. 备选通用模板：《任务完成通知》或《生成完成通知》<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>若你的主类目下未搜到“制作完成通知”，可搜索以下通用标题：</p>
+<ul class="simple">
+<li><p><strong>《任务完成通知》</strong>：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">thing1.DATA</span></code> (任务名称)：<code class="docutils literal notranslate"><span class="pre">16帧连贯动图渲染</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phrase2.DATA</span></code> (任务状态)：<code class="docutils literal notranslate"><span class="pre">已完成</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time3.DATA</span></code> (结束时间)：<code class="docutils literal notranslate"><span class="pre">2026-09-11</span> <span class="pre">02:30:15</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thing4.DATA</span></code> (备注)：<code class="docutils literal notranslate"><span class="pre">已为您保存至表情合集</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>《处理结果通知》</strong>：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">thing1.DATA</span></code> (处理事项)：<code class="docutils literal notranslate"><span class="pre">动态表情包制作</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">phrase2.DATA</span></code> (处理状态)：<code class="docutils literal notranslate"><span class="pre">处理成功</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time3.DATA</span></code> (处理时间)：<code class="docutils literal notranslate"><span class="pre">2026-09-11</span> <span class="pre">02:30:15</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thing4.DATA</span></code> (提示说明)：<code class="docutils literal notranslate"><span class="pre">快去微信聊天发给好友吧</span></code></p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p>💡 <strong>获取模板 ID</strong>：在微信后台勾选完上述关键词并提交后，系统会为你的小程序分配一个长字符串，即为 <strong><code class="docutils literal notranslate"><span class="pre">template_id</span></code></strong>（例如：<code class="docutils literal notranslate"><span class="pre">a8F2kL90xPq_Mn7YwZb3Cd1Ef4Gh5Ij6Kl7Mn8Op9Qr</span></code>）。把它复制保存到后端配置文件或环境变量中。</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="cheat-sheet">
+<h2>四、微信订阅消息最严苛的格式强校验陷阱 (Cheat Sheet)<a class="headerlink" href="#cheat-sheet" title="Link to this heading"></a></h2>
+<p>微信对于订阅消息发送接口（<code class="docutils literal notranslate"><span class="pre">subscribeMessage.send</span></code>）的数据校验极其严格，<strong>只要有一个字段类型或长度不合规，整条消息就会被直接拒发</strong>，并抛出经典错误码！</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>字段类型前缀</p></th>
+<th class="head text-left"><p>格式定义与限制</p></th>
+<th class="head text-left"><p>典型错误做法 (100% 触发 47003 报错)</p></th>
+<th class="head text-left"><p>正确做法</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">thing</span></code></strong></p></td>
+<td class="text-left"><p>事物/文本，<strong>严格限制 20 个以内字符</strong>（1 个汉字算 1 个字符）</p></td>
+<td class="text-left"><p>❌ 传了很长的文字：“您于2026年9月制作的高精度AI动态表情包已经成功生成啦” (超过 20 字)</p></td>
+<td class="text-left"><p>✅ 精简截断：“AI动态表情包已完成” (不超过 20 字)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">phrase</span></code></strong></p></td>
+<td class="text-left"><p>汉字短语，<strong>严格限制 5 个以内汉字</strong></p></td>
+<td class="text-left"><p>❌ 传了“正在为您加急制作中” (7个汉字) 或 英文 “Success”</p></td>
+<td class="text-left"><p>✅ 传标准短词：“制作成功”、“已生成”</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">character_string</span></code></strong></p></td>
+<td class="text-left"><p>英文、数字及常用标号，<strong>严禁包含任何中文字符</strong></p></td>
+<td class="text-left"><p>❌ 传了“订单号ABC12345”</p></td>
+<td class="text-left"><p>✅ 传纯数字/字母：“ABC12345”</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">time</span></code></strong></p></td>
+<td class="text-left"><p>时间格式</p></td>
+<td class="text-left"><p>❌ 传了时间戳 <code class="docutils literal notranslate"><span class="pre">1788945600</span></code></p></td>
+<td class="text-left"><p>✅ 传标准格式字符串：<code class="docutils literal notranslate"><span class="pre">2026-09-11</span> <span class="pre">02:30:00</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">number</span></code></strong></p></td>
+<td class="text-left"><p>纯数字</p></td>
+<td class="text-left"><p>❌ 传了带单位的字符串：“100个”</p></td>
+<td class="text-left"><p>✅ 传纯数字字符串：“100”</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>五、前端开发实战：手势驱动授权调用<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="onload">
+<h3>1. 为什么不能在 <code class="docutils literal notranslate"><span class="pre">onLoad</span></code> 里自动弹窗？<a class="headerlink" href="#onload" title="Link to this heading"></a></h3>
+<p>微信基础库对用户隐私保护做了严格限制：</p>
+<ul>
+<li><p><strong>硬性铁律</strong>：<code class="docutils literal notranslate"><span class="pre">wx.requestSubscribeMessage</span></code> <strong>必须且只能由用户的手势行为（如点击按钮 <code class="docutils literal notranslate"><span class="pre">bindtap</span></code>）直接同步触发</strong>；</p></li>
+<li><p><strong>典型错误</strong>：在页面的 <code class="docutils literal notranslate"><span class="pre">onLoad</span></code>、<code class="docutils literal notranslate"><span class="pre">onShow</span></code> 生命周期里自动弹窗，或者把调用写在 <code class="docutils literal notranslate"><span class="pre">wx.request</span></code> 的异步 <code class="docutils literal notranslate"><span class="pre">then/await</span></code> 回调之后；</p></li>
+<li><p><strong>报错后果</strong>：微信客户端将直接抛出错误：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>requestSubscribeMessage:fail can only be called by user gesture
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id7">
+<h3>2. 小程序前端标准实现代码<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- WXML: 必须绑定在用户点击按钮上 --&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn-primary"</span> <span class="na">bindtap</span><span class="o">=</span><span class="s">"handleStartGenerateAndSubscribe"</span><span class="p">&gt;</span>
+  ⚡ 一键制作 (完成后微信通知我)
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Page JS: pages/index/index.js</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">TEMPLATE_ID_MEME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'a8F2kL90xPq_Mn7YwZb3Cd1Ef4Gh5Ij6Kl7Mn8Op9Qr'</span><span class="p">;</span><span class="w"> </span><span class="c1">// 替换为你后台申请的模板ID</span>
+
+<span class="nx">Page</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">isSubscribed</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">handleStartGenerateAndSubscribe</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. 在用户点击的同步上下文中，立即唤起微信原生订阅授权弹窗</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">subRes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">requestSubscription</span><span class="p">([</span><span class="nx">TEMPLATE_ID_MEME</span><span class="p">]);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">subRes</span><span class="p">[</span><span class="nx">TEMPLATE_ID_MEME</span><span class="p">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'accept'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'用户已同意接收制作完成通知'</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span><span class="w"> </span><span class="nx">isSubscribed</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">'用户拒绝或关闭了订阅通知'</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">subErr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">'订阅授权弹窗跳过或不支持:'</span><span class="p">,</span><span class="w"> </span><span class="nx">subErr</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 2. 无论用户是否同意订阅，都不阻断正常的 AI 制作任务提交</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">submitGenerateTask</span><span class="p">();</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nx">requestSubscription</span><span class="p">(</span><span class="nx">tmplIds</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">wx</span><span class="p">.</span><span class="nx">requestSubscribeMessage</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">tmplIds</span><span class="o">:</span><span class="w"> </span><span class="nx">tmplIds</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">success</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">res</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">fail</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">      </span><span class="p">});</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">submitGenerateTask</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wx</span><span class="p">.</span><span class="nx">showLoading</span><span class="p">({</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">'正在排队提交...'</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">request</span><span class="p">({</span>
+<span class="w">      </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="s1">'/api/generate-async'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">'POST'</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">template_id</span><span class="o">:</span><span class="w"> </span><span class="s1">'kiss'</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">caption</span><span class="o">:</span><span class="w"> </span><span class="s1">'爱你哟'</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">can_send_notice</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">isSubscribed</span><span class="w"> </span><span class="c1">// 告知后端是否具备通知额度</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="nx">wx</span><span class="p">.</span><span class="nx">hideLoading</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">code</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">taskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">task_id</span><span class="p">;</span>
+<span class="w">      </span><span class="nx">wx</span><span class="p">.</span><span class="nx">showToast</span><span class="p">({</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">'已进入后台制作'</span><span class="p">,</span><span class="w"> </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="s1">'success'</span><span class="w"> </span><span class="p">});</span>
+<span class="w">      </span><span class="c1">// 启动轻量轮询驱动进度条</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">startPolling</span><span class="p">(</span><span class="nx">taskId</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="fastapi">
+<h2>六、后端开发实战：FastAPI 异步完成任务后下发通知<a class="headerlink" href="#fastapi" title="Link to this heading"></a></h2>
+<p>当后端的异步工作协程（<code class="docutils literal notranslate"><span class="pre">run_pipeline_background</span></code>）完成雪碧图切片去底、生成好 <code class="docutils literal notranslate"><span class="pre">meme_result.gif</span></code> 时，调用微信官方接口下发通知。</p>
+<section id="id8">
+<h3>1. 微信订阅消息发送接口规范<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>请求方式</strong>：<code class="docutils literal notranslate"><span class="pre">POST</span></code></p></li>
+<li><p><strong>接口 URL</strong>：<code class="docutils literal notranslate"><span class="pre">https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=ACCESS_TOKEN</span></code></p></li>
+<li><p><strong>核心请求体参数</strong>：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">touser</span></code>：用户的唯一 <code class="docutils literal notranslate"><span class="pre">openid</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template_id</span></code>：微信后台申请的模板 ID</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">page</span></code>：用户在服务通知中点击卡片时打开的小程序页面路径，例如 <code class="docutils literal notranslate"><span class="pre">pages/index/index?task_id=84f2d705</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>：模板关键词键值对</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">miniprogram_state</span></code>：跳转小程序类型：<code class="docutils literal notranslate"><span class="pre">developer</span></code> (开发版)、<code class="docutils literal notranslate"><span class="pre">trial</span></code> (体验版)、<code class="docutils literal notranslate"><span class="pre">formal</span></code> (正式版，默认)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="python">
+<h3>2. 生产级 Python 下发实现<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">httpx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send_wechat_subscribe_notice</span><span class="p">(</span>
+    <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">openid</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">template_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">action_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"AI趣味表情包"</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    下发任务制作完成订阅通知</span>
+<span class="sd">    """</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=</span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="c1"># 严格对齐微信字段格式与 20 字截断安全保护</span>
+    <span class="n">clean_title</span> <span class="o">=</span> <span class="p">(</span><span class="n">action_title</span><span class="p">[:</span><span class="mi">17</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"..."</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">action_title</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">18</span> <span class="k">else</span> <span class="n">action_title</span>
+    <span class="n">now_str</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S"</span><span class="p">)</span>
+
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"touser"</span><span class="p">:</span> <span class="n">openid</span><span class="p">,</span>
+        <span class="s2">"template_id"</span><span class="p">:</span> <span class="n">template_id</span><span class="p">,</span>
+        <span class="c1"># 点击通知卡片直达小程序结果页，实现无缝回流闭环</span>
+        <span class="s2">"page"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"pages/index/index?task_id=</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"miniprogram_state"</span><span class="p">:</span> <span class="s2">"formal"</span><span class="p">,</span> <span class="c1"># 调试时可改为 trial 或 developer</span>
+        <span class="s2">"lang"</span><span class="p">:</span> <span class="s2">"zh_CN"</span><span class="p">,</span>
+        <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"thing1"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="n">clean_title</span> <span class="c1"># 必须 &lt;= 20 字符</span>
+            <span class="p">},</span>
+            <span class="s2">"phrase2"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"制作成功"</span> <span class="c1"># 必须 &lt;= 5 个汉字</span>
+            <span class="p">},</span>
+            <span class="s2">"time3"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="n">now_str</span>
+            <span class="p">},</span>
+            <span class="s2">"thing4"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"点击立即查看动图与保存"</span> <span class="c1"># 必须 &lt;= 20 字符</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"errcode"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"订阅消息发送成功: openid=</span><span class="si">{</span><span class="n">openid</span><span class="si">}</span><span class="s2">, task_id=</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">errcode</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"errcode"</span><span class="p">)</span>
+        <span class="n">errmsg</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"errmsg"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">"订阅消息发送失败: errcode=</span><span class="si">{</span><span class="n">errcode</span><span class="si">}</span><span class="s2">, errmsg=</span><span class="si">{</span><span class="n">errmsg</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2>七、订阅消息核心错误码速查表 (Cheat Sheet)<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>在实际联调中，微信最常见的报错码及解决方案如下：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>错误码 (errcode)</p></th>
+<th class="head text-left"><p>官方含义说明</p></th>
+<th class="head text-left"><p>根本原因与彻底根治方案</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">0</span></code></strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ok</span></code></p></td>
+<td class="text-left"><p>发送成功，微信将在几秒内送达用户的“服务通知”面板。</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">43101</span></code></strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">user</span> <span class="pre">refuse</span> <span class="pre">to</span> <span class="pre">accept</span> <span class="pre">the</span> <span class="pre">msg</span></code></p></td>
+<td class="text-left"><p><strong>配额已耗尽或用户未授权</strong>：<br>1. 用户在弹窗中点了“取消”；<br>2. 用户之前虽然授权过，但那次授权已经被上一次推送消耗掉了（一次性订阅 1:1 原则，未进行二次授权）；<br>3. 用户在微信设置中关闭了小程序的接收通知开关。</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">47003</span></code></strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">argument</span> <span class="pre">invalid!</span> <span class="pre">data.xxx.value</span> <span class="pre">invalid</span></code></p></td>
+<td class="text-left"><p><strong>字段格式或长度校验失败</strong>：<br>1. 极高频陷阱！<code class="docutils literal notranslate"><span class="pre">thing</span></code> 字段超过了 20 个字符；<br>2. <code class="docutils literal notranslate"><span class="pre">phrase</span></code> 字段超过了 5 个汉字，或者传入了英文；<br>3. 请务必在后端发送前加入 <code class="docutils literal notranslate"><span class="pre">value[:20]</span></code> 安全切片截断！</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">41030</span></code></strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">page</span> <span class="pre">invalid</span></code></p></td>
+<td class="text-left"><p><strong>跳转页面路径不存在</strong>：<br><code class="docutils literal notranslate"><span class="pre">page</span></code> 填写的路径在 <code class="docutils literal notranslate"><span class="pre">app.json</span></code> 的 <code class="docutils literal notranslate"><span class="pre">pages</span></code> 数组中不存在。注意路径前面<strong>不要加斜杠 <code class="docutils literal notranslate"><span class="pre">/</span></code></strong>（正确：<code class="docutils literal notranslate"><span class="pre">pages/index/index</span></code>，错误：<code class="docutils literal notranslate"><span class="pre">/pages/index/index</span></code>）。</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">40001</span></code></strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">invalid</span> <span class="pre">credential</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">access_token</span></code> 已过期或无效，需重新刷新服务端的微信凭证。</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">40037</span></code></strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">invalid</span> <span class="pre">template_id</span></code></p></td>
+<td class="text-left"><p>模板 ID 填写错误，或者该模板属于其他小程序（每个模板 ID 与特定 AppID 强绑定）。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id10">
+<h2>八、本章小结<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>高耗时业务不是性能死穴，善用订阅消息能够将“等待流失”逆转为“惊喜回流”：</p>
+<ol class="arabic simple">
+<li><p><strong>模板选型</strong>：首选【工具】类目下的 <strong>《制作完成通知》</strong> 或 <strong>《任务完成通知》</strong>，类型为 <strong>一次性订阅</strong>；</p></li>
+<li><p><strong>关键词规范</strong>：牢记 <code class="docutils literal notranslate"><span class="pre">thing</span></code> 限制 20 字、<code class="docutils literal notranslate"><span class="pre">phrase</span></code> 限制 5 个汉字的硬性红线，必须在服务端做好截断兜底；</p></li>
+<li><p><strong>交互规范</strong>：必须由用户点击手势触发 <code class="docutils literal notranslate"><span class="pre">wx.requestSubscribeMessage</span></code> 弹窗；</p></li>
+<li><p><strong>闭环回流</strong>：消息参数中的 <code class="docutils literal notranslate"><span class="pre">page</span></code> 务必带上 <code class="docutils literal notranslate"><span class="pre">task_id</span></code>，让用户一点卡片就能直接看到成果并一键存入相册！</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="05_ai_gateway_and_async_task_polling.html" class="btn btn-neutral float-left" title="第 5 节：高耗时 AI 生图防断连架构：国内合规双机网络拓扑、异步任务轮询与拟物 tqdm 进度条实战" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../stage6_frontend_and_bugs/index.html" class="btn btn-neutral float-right" title="第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, 创作学院。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

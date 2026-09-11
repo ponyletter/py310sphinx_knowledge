@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>原生 Canvas 2D 全屏手绘画板研发实录：Button 184px 挤爆屏幕与原生 TabBar 穿透重叠彻底化解 &mdash; 创作学院课程资料库 1.0.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=34088549"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+      <script src="../../../_static/translations.js?v=beaddf03"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" />
+    <link rel="next" title="FastAPI 多进程 Worker 陷阱：从 404 task_not_found 到生产级系统服务守护" href="06_fastapi_multiprocess_workers_task_store_trap.html" />
+    <link rel="prev" title="跨境双机房反代网络穿透与动图 1000 倍提速实战：从 47.8s 跨洋卡顿到 0.37ms 国内本地秒开" href="04_cross_border_tunnel_and_cdn_perf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            创作学院课程资料库
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">课程分类目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../douyin_short_video/index.html">短视频与知识图解运营实战课</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../douyin_short_video/index.html#id2">阶段架构概览</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage1/index.html">第1阶段 基础：定位破局与视听规范</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage1/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage2/index.html">第2阶段 进阶：算法机理与爆款模型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage2/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage3/index.html">第3阶段 实战：起号操盘与商业转化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage3/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage4/index.html">第4阶段 扩展：AI 赋能与自动化流水线</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage4/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#id1">阶段架构概览</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html">第1阶段 商业认知、多维商业画布与标杆爆款拆解</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage2_wechat_mp_platform/index.html">第2阶段 微信公众平台保姆级全流程操作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage2_wechat_mp_platform/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage3_devtools_and_setup/index.html">第3阶段 微信开发者工具保姆级实操与环境基建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage3_devtools_and_setup/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage4_sphinx_engine/index.html">第4阶段 Sphinx 知识引擎构建与 AST 试读截断黑科技</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage4_sphinx_engine/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage5_backend_and_user/index.html">第5阶段 FastAPI 资产中台与微信最新用户体系设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage5_backend_and_user/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage7_audit_mastery/index.html">第7阶段 微信官方审核一次性通关秘籍与暗门架构设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage7_audit_mastery/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage8_references_and_skills/index.html">第8阶段 附录：权威参考导航、开源生态与 Skill 沉淀</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage8_references_and_skills/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../short_video_guides/index.html">短视频课程图文版</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html">做小程序，先别急着写代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id2">先画出产品，而不是先搭架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id3">把想法压缩成一条最小闭环</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id4">两类产品，两个验证重点</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id5">案例一：结构化内容服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id6">案例二：高频、可分享的工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#mvp">用 MVP 防止功能堆积</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id7">个人开发者的四项同时责任</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id8">结论：先验证价值，再扩大工程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id9">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html">微信原生、Uni-app、Taro选谁？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id1">先看选择全景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id2">三种路线分别在做什么</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id3">用四个维度而不是印象做比较</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id4">复用有收益，也有边界</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id5">原生能力、包体与性能必须真机验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id6">三种典型决策</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id7">最终决策顺序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id8">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html">小程序富文本怎么选？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id2">先用四个边界定义问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#rich-text">原生 <code class="docutils literal notranslate"><span class="pre">rich-text</span></code>：适合受控的基础内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#mp-html"><code class="docutils literal notranslate"><span class="pre">mp-html</span></code>：面向复杂文章的渲染能力</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#wxparse"><code class="docutils literal notranslate"><span class="pre">wxParse</span></code>：历史项目的兼容对象</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#towxml"><code class="docutils literal notranslate"><span class="pre">towxml</span></code>：转换路径与构建验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id3">安全不属于任何一个渲染组件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id4">一张决策树给出起点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id5">参考与更新说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">权威资料与参考导航</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references/index.html">权威资料与工具导航</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references/index.html#id2">导航分类</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/01_platform_official_rules.html">一手平台规则与官方指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id2">1. 抖音与字节跳动官方平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id3">2. 算法备案与透明化公开披露</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id4">3. 微信小程序官方权威审核与运营规范</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html">推荐系统与算法工程原理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id2">1. 工业级顶级技术团队博客</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id3">2. 学术顶会与论文检索</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html">数据看板与行业大盘智库</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id2">1. 短视频大数据分析平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id3">2. 宏观趋势与消费洞察平台</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html">认知心理学与视听叙事经典</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id2">1. 认知心理学与病毒传播学</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id3">2. 编剧技艺与视听语言结构</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html">合规边界与知识版权指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id2">1. 政策法规与广告边界</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id3">2. 事实核查与学术背书源头</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html">AI 原生工具与内容自动化生态</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#tts-ctc-forced-alignment">1. 语音合成、克隆 (TTS) 与精准对齐 (CTC Forced Alignment)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#skills-video-as-code">2. 视觉设计、图解与代码驱动视频 (Skills &amp; Video-as-Code)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#id2">3. 音视频底层处理与提示工程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/07_course_production_contracts.html">技术图解短视频生产工程规范与契约手册</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#narrative-matrix">1. 认知原型与叙事矩阵契约 (Narrative Matrix)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#voice-caption-contract">2. 语音与字幕对齐工程契约 (Voice &amp; Caption Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#visual-layering-contract">3. 画面视觉与分层架构契约 (Visual Layering Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#delivery-safety">4. 交付与发布安全契约 (Delivery &amp; Safety)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录与指南</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ENV_SETUP.html">环境安装指南 (Environment Setup Guide)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#linux">1. 系统底层依赖安装 (Linux)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#conda">2. Conda 虚拟环境创建与配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#a-environment-yml">方式 A：通过 <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> 一键还原环境（推荐）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#b-requirements-txt">方式 B：手动创建环境并通过 <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> 安装</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id1">3. 环境检验</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id2">4. 快速使用</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">创作学院课程资料库</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a></li>
+          <li class="breadcrumb-item"><a href="index.html">第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录</a></li>
+      <li class="breadcrumb-item active">原生 Canvas 2D 全屏手绘画板研发实录：Button 184px 挤爆屏幕与原生 TabBar 穿透重叠彻底化解</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/courses/wxapp_sphinx_from_zero/stage6_frontend_and_bugs/05_canvas2d_sketch_and_native_component_bugs.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="canvas-2d-button-184px-tabbar">
+<h1>原生 Canvas 2D 全屏手绘画板研发实录：Button 184px 挤爆屏幕与原生 TabBar 穿透重叠彻底化解<a class="headerlink" href="#canvas-2d-button-184px-tabbar" title="Link to this heading"></a></h1>
+<p>在 AI 动图制作与表情包生成产品中，**“手绘草图 + 角色轮廓引导”**是大幅提升大模型生图一致性与可控性的核心功能。用户在手机屏幕上简单勾勒线条（如猫耳、火柴人舞动姿态、比心手势），后端即可将其作为多模态 ControlNet / 轮廓参考图输入生图流水线。</p>
+<p>然而，在小程序内实现一个体验媲美原生 App 的**“全屏沉浸式手绘画板”<strong>时，我们踩中了微信双线程架构与基础库组件样式的两大深坑：<strong>原生 Button 强制 184px 宽度挤爆屏幕</strong>，以及</strong>原生 TabBar 穿透模态层浮动覆盖**。本章深度复盘这两大缺陷的定位与优雅解法。</p>
+<hr class="docutils" />
+<section id="id1">
+<h2>1. 业务场景：从内嵌小画板到全屏沉浸式画板<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>在最初版本中，画板作为一个内嵌的小矩形框（320x220px）放在制作表单中。但实测发现：</p>
+<ul class="simple">
+<li><p>手机屏幕本身较小，内嵌画板被页面上下滑动干扰，手绘体验极其局促；</p></li>
+<li><p>用户在屏幕上划线时，经常意外触发页面的上下下拉刷新或滚动；</p></li>
+<li><p><strong>重构诉求</strong>：点击【全屏绘制】后，弹出一个完全覆盖屏幕的沉浸式白板，支持多颜色切换、笔触粗细调节、清空、关闭并自动同步至主表单。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="bug-1-style-v2-button-184px">
+<h2>2. 幽灵 Bug 1：微信 <code class="docutils literal notranslate"><span class="pre">style:</span> <span class="pre">&quot;v2&quot;</span></code> 原生 Button 184px 强制宽度挤爆屏幕<a class="headerlink" href="#bug-1-style-v2-button-184px" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>2.1 案发现场与视觉事故<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>在全屏画板顶部，我们设计了一排操作栏：左侧为标题 <code class="docutils literal notranslate"><span class="pre">✏️</span> <span class="pre">全屏手绘画板</span></code>，右侧为操作区包含两个轻量按钮——【清空】与【✕ 关闭】。</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- ❌ 初版实现代码 --&gt;</span>
+<span class="p">&lt;</span><span class="nt">view</span> <span class="na">class</span><span class="o">=</span><span class="s">"fullscreen-sketch-header"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">text</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-title"</span><span class="p">&gt;</span>✏️ 全屏手绘画板<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">view</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-header-actions"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn-xs"</span> <span class="na">bindtap</span><span class="o">=</span><span class="s">"clearFullScreenSketch"</span><span class="p">&gt;</span>清空<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">"btn-xs btn-fs-close"</span> <span class="na">bindtap</span><span class="o">=</span><span class="s">"closeFullScreenSketch"</span><span class="p">&gt;</span>✕ 关闭<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p><strong>真机与模拟器视觉严重跑偏</strong>：</p>
+<ul class="simple">
+<li><p>【清空】按钮异常硕大，霸占了屏幕右半区；</p></li>
+<li><p>紧随其后的红色【✕ 关闭】按钮被硬生生<strong>挤出了手机屏幕最右侧边缘</strong>，右侧文字被截断成半截；</p></li>
+<li><p>即便我们在 CSS 中设置了 <code class="docutils literal notranslate"><span class="pre">.btn-xs</span> <span class="pre">{</span> <span class="pre">font-size:</span> <span class="pre">22rpx;</span> <span class="pre">padding:</span> <span class="pre">8rpx</span> <span class="pre">18rpx;</span> <span class="pre">}</span></code>，按钮依然顽固地保持巨大的水平宽度！</p></li>
+</ul>
+</section>
+<section id="style-v2-user-agent">
+<h3>2.2 根因深挖：微信 <code class="docutils literal notranslate"><span class="pre">style:</span> <span class="pre">&quot;v2&quot;</span></code> 的 User-Agent 样式污染<a class="headerlink" href="#style-v2-user-agent" title="Link to this heading"></a></h3>
+<p>很多开发者误以为小程序的 <code class="docutils literal notranslate"><span class="pre">&lt;button&gt;</span></code> 和浏览器中的 <code class="docutils literal notranslate"><span class="pre">&lt;button&gt;</span></code> 一样随内容自适应。<strong>这是天大的误区！</strong></p>
+<p>打开 <code class="docutils literal notranslate"><span class="pre">app.json</span></code>，可以看到微信工程默认配置了：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">"style"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v2"</span>
+</pre></div>
+</div>
+<p>微信在启用 <code class="docutils literal notranslate"><span class="pre">v2</span></code> 样式系统时，在底层注入了以下强制样式规则：</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="c">/* 微信客户端注入的隐藏 User-Agent 样式表 */</span>
+<span class="nt">button</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">size</span><span class="o">=</span><span class="nt">mini</span><span class="o">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">184</span><span class="kt">px</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span><span class="w"> </span><span class="c">/* 👈 罪魁祸首！固定为 184px！ */</span>
+<span class="w">  </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<span class="w">  </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<span class="w">  </span><span class="k">padding-left</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">padding-right</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>屏幕标准的总宽度为 <strong>750rpx</strong>（在 iPhone 12/13/14 上相当于 375px）；</p></li>
+<li><p>两个没有声明 <code class="docutils literal notranslate"><span class="pre">size=&quot;mini&quot;</span></code> 的原生 <code class="docutils literal notranslate"><span class="pre">&lt;button&gt;</span></code> 并排，其固有计算宽度高达 <code class="docutils literal notranslate"><span class="pre">184px</span> <span class="pre">*</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">368px</span></code>（相当于 <strong>736rpx</strong>）；</p></li>
+<li><p>加上左侧标题占用的 200rpx，总宽度高达 <strong>936rpx</strong>，远远超过屏幕物理宽度，导致最后一个按钮不可避免地被排挤到屏幕外侧！</p></li>
+</ul>
+</section>
+<section id="button-view">
+<h3>2.3 终极解法：彻底淘汰原生 Button，拥抱自适应胶囊 View<a class="headerlink" href="#button-view" title="Link to this heading"></a></h3>
+<p>在不需要微信特殊授权（如获取手机号、客服消息会话）的自定义 UI 交互场景中，<strong>使用 <code class="docutils literal notranslate"><span class="pre">&lt;view&gt;</span></code> 配合 <code class="docutils literal notranslate"><span class="pre">hover-class</span></code> 替代 <code class="docutils literal notranslate"><span class="pre">&lt;button&gt;</span></code> 是小程序开发的行业最佳实践</strong>：</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- ✅ 终极重构代码：彻底摆脱 UA 样式污染 --&gt;</span>
+<span class="p">&lt;</span><span class="nt">view</span> <span class="na">class</span><span class="o">=</span><span class="s">"fullscreen-sketch-header"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">view</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-header-left"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">text</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-title"</span><span class="p">&gt;</span>✏️ 全屏手绘画板<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">text</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-badge"</span><span class="p">&gt;</span>自由涂鸦<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">view</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-header-actions"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">view</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-action-btn fs-btn-clear"</span> <span class="na">hover-class</span><span class="o">=</span><span class="s">"fs-btn-hover"</span> <span class="na">bindtap</span><span class="o">=</span><span class="s">"clearFullScreenSketch"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">text</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-btn-icon"</span><span class="p">&gt;</span>🗑️<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">text</span><span class="p">&gt;</span>清空<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">view</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-action-btn fs-btn-close"</span> <span class="na">hover-class</span><span class="o">=</span><span class="s">"fs-btn-hover"</span> <span class="na">bindtap</span><span class="o">=</span><span class="s">"closeFullScreenSketch"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">text</span> <span class="na">class</span><span class="o">=</span><span class="s">"fs-btn-icon"</span><span class="p">&gt;</span>✕<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">text</span><span class="p">&gt;</span>关闭<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>配套 CSS 规范：</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">fs-header-actions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">  </span><span class="k">gap</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="n">rpx</span><span class="p">;</span>
+<span class="w">  </span><span class="k">flex-shrink</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">fs-action-btn</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">inline-flex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">  </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">  </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="n">rpx</span><span class="p">;</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">22</span><span class="n">rpx</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="n">rpx</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="n">rpx</span><span class="p">;</span>
+<span class="w">  </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="w">  </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
+<span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">all</span><span class="w"> </span><span class="mf">0.15</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">fs-btn-clear</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#f8fafc</span><span class="p">;</span><span class="w"> </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#475569</span><span class="p">;</span><span class="w"> </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">rpx</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#e2e8f0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">.</span><span class="nc">fs-btn-close</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#fef2f2</span><span class="p">;</span><span class="w"> </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#ef4444</span><span class="p">;</span><span class="w"> </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">rpx</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#fecaca</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">.</span><span class="nc">fs-btn-hover</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">;</span><span class="w"> </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">scale</span><span class="p">(</span><span class="mf">0.96</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>效果</strong>：按钮宽度完全由文字长度精准控制，在 320px（小屏机型）到 430px（Max 机型）上均能优雅居右自适应，永不越界。</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="bug-2-fixed-tabbar">
+<h2>3. 幽灵 Bug 2：全屏 Fixed 模态层下原生 TabBar 穿透重叠<a class="headerlink" href="#bug-2-fixed-tabbar" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>3.1 案发现场与视觉事故<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>全屏画板弹出时，我们为其设置了全屏覆盖样式：</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">fullscreen-sketch-mask</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">fixed</span><span class="p">;</span>
+<span class="w">  </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">right</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">vw</span><span class="p">;</span><span class="w"> </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>
+<span class="w">  </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">9999</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>按普通 Web 前端开发的经验，<code class="docutils literal notranslate"><span class="pre">z-index:</span> <span class="pre">9999</span></code> 足以盖住视口内的一切元素。但在真机上：</p>
+<ul class="simple">
+<li><p>画板弹出了，但小程序底部的原生 TabBar 导航栏（<code class="docutils literal notranslate"><span class="pre">创意制作</span></code>、<code class="docutils literal notranslate"><span class="pre">极速二创</span></code>、<code class="docutils literal notranslate"><span class="pre">表情合集</span></code>、<code class="docutils literal notranslate"><span class="pre">个人中心</span></code>）<strong>赫然穿透垫在画板调色盘下方</strong>；</p></li>
+<li><p>用户在点击调色盘最下方的【完成手绘并应用】按钮时，经常误触底部的 Tab 切换，直接导致正在手绘的内容意外丢失！</p></li>
+</ul>
+</section>
+<section id="native-component">
+<h3>3.2 根因深挖：原生组件（Native Component）分层渲染机制<a class="headerlink" href="#native-component" title="Link to this heading"></a></h3>
+<p>微信小程序的底层渲染并非纯粹的单一浏览器 WebView，而是<strong>双线程混合渲染（Hybrid）架构</strong>：</p>
+<ul class="simple">
+<li><p>页面大部分 WXML 元素渲染在普通的 Webview 渲染层；</p></li>
+<li><p>底部 TabBar、原生输入框 <code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code>、地图 <code class="docutils literal notranslate"><span class="pre">&lt;map&gt;</span></code> 等部分核心组件是由微信 iOS / Android 原生操作系统底层控件直接渲染绘制的（Native Component）；</p></li>
+<li><p><strong>原生组件永远脱离 Webview 的 CSS 层叠上下文</strong>，无论在 CSS 里写 <code class="docutils literal notranslate"><span class="pre">z-index:</span> <span class="pre">99999</span></code> 还是 <code class="docutils literal notranslate"><span class="pre">999999</span></code>，Webview 页面层都无法遮挡处于顶层的原生系统级 TabBar！</p></li>
+</ul>
+</section>
+<section id="wx-hidetabbar">
+<h3>3.3 终极解法：页面生命周期联动 <code class="docutils literal notranslate"><span class="pre">wx.hideTabBar</span></code><a class="headerlink" href="#wx-hidetabbar" title="Link to this heading"></a></h3>
+<p>解决原生 TabBar 穿透的唯一正解是利用微信官方提供的 API，在模态层生命周期开启与销毁时精确调度：</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// pages/index/index.js</span>
+
+<span class="nx">openFullScreenSketch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 1. 弹出画板前，主动隐藏原生 TabBar，释放完整全屏空间</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wx</span><span class="p">.</span><span class="nx">hideTabBar</span><span class="p">({</span><span class="w"> </span><span class="nx">animation</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">"hideTabBar 容错:"</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span><span class="w"> </span><span class="nx">showFullScreenSketch</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// 2. 延迟 200ms 等待 DOM 挂载后初始化 Canvas 2D 上下文</span>
+<span class="w">  </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">initFullScreenCanvas</span><span class="p">();</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="mf">200</span><span class="p">);</span>
+<span class="p">},</span>
+
+<span class="nx">closeFullScreenSketch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 3. 关闭画板时，平滑还原原生 TabBar</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wx</span><span class="p">.</span><span class="nx">showTabBar</span><span class="p">({</span><span class="w"> </span><span class="nx">animation</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s2">"showTabBar 容错:"</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span><span class="w"> </span><span class="nx">showFullScreenSketch</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">});</span>
+<span class="p">},</span>
+
+<span class="nx">saveAndSyncFullScreenSketch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 4. 保存手绘产物并关闭时，同样平滑还原 TabBar</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wx</span><span class="p">.</span><span class="nx">showTabBar</span><span class="p">({</span><span class="w"> </span><span class="nx">animation</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="nx">wx</span><span class="p">.</span><span class="nx">canvasToTempFilePath</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">canvas</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">fsCanvas</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">success</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">sketchTempPath</span><span class="o">:</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">tempFilePath</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">showFullScreenSketch</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">      </span><span class="p">});</span>
+<span class="w">      </span><span class="c1">// 将手绘临时文件回填至主表单小画布预览...</span>
+<span class="w">      </span><span class="nx">wx</span><span class="p">.</span><span class="nx">showToast</span><span class="p">({</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="nx">全屏手绘已保存</span><span class="p">,</span><span class="w"> </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="nx">success</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="bug-3-wxml">
+<h2>4. 幽灵 Bug 3：WXML 模板中禁止原型链方法调用<a class="headerlink" href="#bug-3-wxml" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>4.1 案发现场<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>在界面上展示价格折算或字符串切片时，报出编译错误：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[ WXML 文件编译错误] ./pages/user/user.wxml
+Bad value with message: unexpected token `.`
+364 | &lt;view&gt;{{ (item.price / 100).toFixed(2) }}&lt;/view&gt;
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>4.2 根因与正解<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>根因</strong>：WXML 采用的是阉割版表达式解析器，不支持 JavaScript 对象的原型链方法调用（如 <code class="docutils literal notranslate"><span class="pre">.toFixed()</span></code>、<code class="docutils literal notranslate"><span class="pre">.slice()</span></code>、<code class="docutils literal notranslate"><span class="pre">.split()</span></code>、<code class="docutils literal notranslate"><span class="pre">.trim()</span></code> 等）；</p></li>
+<li><p><strong>正解</strong>：</p>
+<ol class="arabic">
+<li><p>尽量在 JS 逻辑层预先计算格式化字段，直接绑定至 <code class="docutils literal notranslate"><span class="pre">data</span></code>；</p></li>
+<li><p>若必须在模板内格式化，使用小程序的 <strong>WXS (WeiXin Script)</strong> 模块：</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">wxs</span> <span class="na">module</span><span class="o">=</span><span class="s">"tools"</span><span class="p">&gt;</span>
+  module.exports.formatPrice = function(fen) {
+    return (fen / 100).toFixed(2);
+  }
+<span class="p">&lt;/</span><span class="nt">wxs</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">view</span><span class="p">&gt;</span>{{ tools.formatPrice(item.price) }}<span class="p">&lt;/</span><span class="nt">view</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>5. 沉浸式手绘画板设计与全面屏安全区适配<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>为了让全屏画板具备商用级的精致质感，我们在样式上进行了三大细节打磨：</p>
+<ol class="arabic">
+<li><p><strong>全面屏底部安全区（Home Indicator）精准避让</strong>：
+在底部工具栏中，使用 CSS 环境变量避让 iPhone 底部黑条：</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">fullscreen-sketch-footer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="n">rpx</span><span class="w"> </span><span class="mi">28</span><span class="n">rpx</span><span class="w"> </span><span class="nb">calc</span><span class="p">(</span><span class="mi">24</span><span class="n">rpx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">env</span><span class="p">(</span><span class="n">safe</span><span class="nv">-area-inset-bottom</span><span class="p">))</span><span class="w"> </span><span class="mi">28</span><span class="n">rpx</span><span class="p">;</span>
+<span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#f8fafc</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-top</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="n">rpx</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#e2e8f0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">  </span><span class="k">flex-direction</span><span class="p">:</span><span class="w"> </span><span class="kc">column</span><span class="p">;</span>
+<span class="w">  </span><span class="k">gap</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="n">rpx</span><span class="p">;</span>
+<span class="w">  </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>高质感调色圆盘与激活态双环动效</strong>：</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">color-item</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="n">rpx</span><span class="p">;</span><span class="w"> </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="n">rpx</span><span class="p">;</span>
+<span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+<span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="n">rpx</span><span class="w"> </span><span class="mi">6</span><span class="n">rpx</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.12</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="n">rpx</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span>
+<span class="w">  </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">all</span><span class="w"> </span><span class="mf">0.15</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">color-item</span><span class="p">.</span><span class="nc">active</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">scale</span><span class="p">(</span><span class="mf">1.22</span><span class="p">);</span>
+<span class="w">  </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#4f46e5</span><span class="p">;</span>
+<span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="n">rpx</span><span class="w"> </span><span class="mh">#818cf8</span><span class="p">;</span><span class="w"> </span><span class="c">/* 外层微光环绕 */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>笔触粗细胶囊化切换器</strong>：
+提供 3px（细线轮廓）、6px（常规勾勒）、12px（大色块涂鸦），以圆角药丸形式切换，视觉清晰、触控防误触。</p></li>
+</ol>
+<p>经过上述系统重构，全屏画板彻底告别了样式崩坏与误触穿透，实现了原生级流畅的草图绘制与轮廓同步。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="04_cross_border_tunnel_and_cdn_perf.html" class="btn btn-neutral float-left" title="跨境双机房反代网络穿透与动图 1000 倍提速实战：从 47.8s 跨洋卡顿到 0.37ms 国内本地秒开" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="06_fastapi_multiprocess_workers_task_store_trap.html" class="btn btn-neutral float-right" title="FastAPI 多进程 Worker 陷阱：从 404 task_not_found 到生产级系统服务守护" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, 创作学院。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

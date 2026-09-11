@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AppID凭证获取与服务器安全域名白名单配置 &mdash; 创作学院课程资料库 1.0.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=34088549"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+      <script src="../../../_static/translations.js?v=beaddf03"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" />
+    <link rel="next" title="虚拟支付（米大师/XPay）与用户隐私保护指引配置" href="03_virtual_payment_and_privacy.html" />
+    <link rel="prev" title="小程序账号注册、类目选型与工信部 ICP 备案" href="01_registration_and_icp_beian.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            创作学院课程资料库
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">课程分类目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../douyin_short_video/index.html">短视频与知识图解运营实战课</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../douyin_short_video/index.html#id2">阶段架构概览</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage1/index.html">第1阶段 基础：定位破局与视听规范</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage1/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage2/index.html">第2阶段 进阶：算法机理与爆款模型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage2/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage3/index.html">第3阶段 实战：起号操盘与商业转化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage3/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage4/index.html">第4阶段 扩展：AI 赋能与自动化流水线</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage4/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#id1">阶段架构概览</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html">第1阶段 商业认知、多维商业画布与标杆爆款拆解</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">第2阶段 微信公众平台保姆级全流程操作</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage3_devtools_and_setup/index.html">第3阶段 微信开发者工具保姆级实操与环境基建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage3_devtools_and_setup/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage4_sphinx_engine/index.html">第4阶段 Sphinx 知识引擎构建与 AST 试读截断黑科技</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage4_sphinx_engine/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage5_backend_and_user/index.html">第5阶段 FastAPI 资产中台与微信最新用户体系设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage5_backend_and_user/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage6_frontend_and_bugs/index.html">第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage6_frontend_and_bugs/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage7_audit_mastery/index.html">第7阶段 微信官方审核一次性通关秘籍与暗门架构设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage7_audit_mastery/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage8_references_and_skills/index.html">第8阶段 附录：权威参考导航、开源生态与 Skill 沉淀</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage8_references_and_skills/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../short_video_guides/index.html">短视频课程图文版</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html">做小程序，先别急着写代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id2">先画出产品，而不是先搭架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id3">把想法压缩成一条最小闭环</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id4">两类产品，两个验证重点</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id5">案例一：结构化内容服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id6">案例二：高频、可分享的工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#mvp">用 MVP 防止功能堆积</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id7">个人开发者的四项同时责任</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id8">结论：先验证价值，再扩大工程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id9">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html">微信原生、Uni-app、Taro选谁？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id1">先看选择全景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id2">三种路线分别在做什么</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id3">用四个维度而不是印象做比较</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id4">复用有收益，也有边界</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id5">原生能力、包体与性能必须真机验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id6">三种典型决策</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id7">最终决策顺序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id8">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html">小程序富文本怎么选？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id2">先用四个边界定义问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#rich-text">原生 <code class="docutils literal notranslate"><span class="pre">rich-text</span></code>：适合受控的基础内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#mp-html"><code class="docutils literal notranslate"><span class="pre">mp-html</span></code>：面向复杂文章的渲染能力</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#wxparse"><code class="docutils literal notranslate"><span class="pre">wxParse</span></code>：历史项目的兼容对象</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#towxml"><code class="docutils literal notranslate"><span class="pre">towxml</span></code>：转换路径与构建验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id3">安全不属于任何一个渲染组件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id4">一张决策树给出起点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id5">参考与更新说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">权威资料与参考导航</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references/index.html">权威资料与工具导航</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references/index.html#id2">导航分类</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/01_platform_official_rules.html">一手平台规则与官方指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id2">1. 抖音与字节跳动官方平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id3">2. 算法备案与透明化公开披露</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id4">3. 微信小程序官方权威审核与运营规范</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html">推荐系统与算法工程原理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id2">1. 工业级顶级技术团队博客</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id3">2. 学术顶会与论文检索</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html">数据看板与行业大盘智库</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id2">1. 短视频大数据分析平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id3">2. 宏观趋势与消费洞察平台</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html">认知心理学与视听叙事经典</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id2">1. 认知心理学与病毒传播学</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id3">2. 编剧技艺与视听语言结构</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html">合规边界与知识版权指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id2">1. 政策法规与广告边界</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id3">2. 事实核查与学术背书源头</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html">AI 原生工具与内容自动化生态</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#tts-ctc-forced-alignment">1. 语音合成、克隆 (TTS) 与精准对齐 (CTC Forced Alignment)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#skills-video-as-code">2. 视觉设计、图解与代码驱动视频 (Skills &amp; Video-as-Code)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#id2">3. 音视频底层处理与提示工程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/07_course_production_contracts.html">技术图解短视频生产工程规范与契约手册</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#narrative-matrix">1. 认知原型与叙事矩阵契约 (Narrative Matrix)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#voice-caption-contract">2. 语音与字幕对齐工程契约 (Voice &amp; Caption Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#visual-layering-contract">3. 画面视觉与分层架构契约 (Visual Layering Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#delivery-safety">4. 交付与发布安全契约 (Delivery &amp; Safety)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录与指南</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ENV_SETUP.html">环境安装指南 (Environment Setup Guide)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#linux">1. 系统底层依赖安装 (Linux)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#conda">2. Conda 虚拟环境创建与配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#a-environment-yml">方式 A：通过 <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> 一键还原环境（推荐）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#b-requirements-txt">方式 B：手动创建环境并通过 <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> 安装</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id1">3. 环境检验</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id2">4. 快速使用</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">创作学院课程资料库</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a></li>
+          <li class="breadcrumb-item"><a href="index.html">第2阶段 微信公众平台保姆级全流程操作</a></li>
+      <li class="breadcrumb-item active">AppID凭证获取与服务器安全域名白名单配置</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/courses/wxapp_sphinx_from_zero/stage2_wechat_mp_platform/02_appid_domain_whitelist.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="appid">
+<h1>AppID凭证获取与服务器安全域名白名单配置<a class="headerlink" href="#appid" title="Link to this heading"></a></h1>
+<p>小程序运行在微信的封闭安全沙箱中。为了防止恶意脚本外发数据，微信强制实行**“网络请求域名白名单校验机制”**。未经后台报备的域名，小程序客户端将直接拒绝连接。本章详细讲解核心凭证获取与域名合规配置。</p>
+<hr class="docutils" />
+<section id="appid-appsecret">
+<h2>1. 获取核心凭据：AppID 与 AppSecret<a class="headerlink" href="#appid-appsecret" title="Link to this heading"></a></h2>
+<p>登录微信公众平台（<code class="docutils literal notranslate"><span class="pre">mp.weixin.qq.com</span></code>），左侧菜单栏点击【开发】➔【开发管理】➔【开发设置】：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>开发者凭据区：
+├── AppID (小程序ID)     : wxef6c0e98e6****** (公开可见，客户端配置用)
+└── AppSecret (小程序密钥) : 8f7**************************** (绝密！仅存服务端)
+</pre></div>
+</div>
+<section id="id1">
+<h3>1.1 安全使用铁律<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>AppID</strong>：可以存放在前端工程的 <code class="docutils literal notranslate"><span class="pre">project.config.json</span></code> 中，公开发布；</p></li>
+<li><p><strong>AppSecret</strong>：<strong>绝对不可硬编码在前端小程序代码内！</strong></p>
+<ul>
+<li><p>AppSecret 是换取用户 OpenID 与 SessionKey 的最高权限密码，一旦泄漏，攻击者可在任何机器上伪造你小程序的用户凭据。</p></li>
+<li><p>必须妥善保存在后端服务器的 <code class="docutils literal notranslate"><span class="pre">.env</span></code> 环境变量或受保护的数据库中；</p></li>
+<li><p>建议开启【IP 白名单】保护，仅允许你的后端服务器公网 IP 调用微信接口。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>2. 配置服务器合法域名白名单<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>在【开发设置】➔【服务器域名】板块中，点击“修改”：</p>
+<pre  class="mermaid">
+        graph LR
+    MiniApp[微信小程序客户端] --&gt;|wx.request| Req[request 合法域名: https://apiwx.tg-cc755.cn]
+    MiniApp --&gt;|wx.uploadFile| Up[uploadFile 合法域名: https://apiwx.tg-cc755.cn]
+    MiniApp --&gt;|wx.downloadFile| Down[downloadFile 合法域名: https://docs.tg-cc755.cn]
+    </pre><section id="id3">
+<h3>2.1 域名填报规范与限制<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>域名类别</p></th>
+<th class="head text-left"><p>作用范围</p></th>
+<th class="head text-left"><p>本项目配置示例</p></th>
+<th class="head text-left"><p>填报规则与避坑指南</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>request 合法域名</strong></p></td>
+<td class="text-left"><p>支撑 <code class="docutils literal notranslate"><span class="pre">wx.request</span></code> 发起的数据请求（登录、资料、订单）</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://apiwx.tg-cc755.cn</span></code></p></td>
+<td class="text-left"><p>① <strong>协议必须是 HTTPS</strong>，不支持 HTTP；<br>② <strong>不能写 IP 地址</strong>（例如 <code class="docutils literal notranslate"><span class="pre">http://123.56.xx.xx:8280</span></code> 会直接报错）；<br>③ <strong>不能带端口号</strong>（只能默认 443 端口）；<br>④ 域名必须具有工信部 ICP 备案号。</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>uploadFile 合法域名</strong></p></td>
+<td class="text-left"><p>用户上传头像、留言反馈附件</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://apiwx.tg-cc755.cn</span></code></p></td>
+<td class="text-left"><p>通常与 API 接口域名保持一致。</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>downloadFile 合法域名</strong></p></td>
+<td class="text-left"><p>下载 Sphinx 静态构建资源、文件</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://docs.tg-cc755.cn</span></code></p></td>
+<td class="text-left"><p>若有 CDN 加速或独立文档域名，须填入此处。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="https-nginx">
+<h2>3. HTTPS 证书要求与 Nginx 反向代理配合<a class="headerlink" href="#https-nginx" title="Link to this heading"></a></h2>
+<p>微信底层的网络探测器对 SSL/TLS 证书标准要求极高：</p>
+<ol class="arabic simple">
+<li><p><strong>协议支持</strong>：必须支持 TLS 1.2 或 TLS 1.3；</p></li>
+<li><p><strong>完整证书链</strong>：不能仅配置叶子证书，必须包含中间 CA 证书链（Fullchain）；</p></li>
+<li><p><strong>安全加密套件</strong>：禁用已废弃的不安全加密套件（如 RC4、MD5）。</p></li>
+</ol>
+<section id="nginx">
+<h3>Nginx 反向代理标准配置模板<a class="headerlink" href="#nginx" title="Link to this heading"></a></h3>
+<p>针对国内云服务器部署 FastAPI 服务的典型 Nginx 配置如下：</p>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">apiwx.tg-cc755.cn</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># 强制将所有 HTTP 流量 301 重定向至安全 HTTPS</span>
+<span class="w">    </span><span class="kn">return</span><span class="w"> </span><span class="mi">301</span><span class="w"> </span><span class="s">https://</span><span class="nv">$host$request_uri</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="s">ssl</span><span class="w"> </span><span class="s">http2</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">apiwx.tg-cc755.cn</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># SSL 证书文件（由 Certbot/Let's Encrypt 自动颁发或腾讯云申请）</span>
+<span class="w">    </span><span class="kn">ssl_certificate</span><span class="w"> </span><span class="s">/etc/letsencrypt/live/apiwx.tg-cc755.cn/fullchain.pem</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_certificate_key</span><span class="w"> </span><span class="s">/etc/letsencrypt/live/apiwx.tg-cc755.cn/privkey.pem</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">ssl_protocols</span><span class="w"> </span><span class="s">TLSv1.2</span><span class="w"> </span><span class="s">TLSv1.3</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_ciphers</span><span class="w"> </span><span class="s">HIGH:!aNULL:!MD5</span><span class="p">;</span>
+<span class="w">    </span><span class="kn">ssl_prefer_server_ciphers</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># 反向代理转发至本地 FastAPI 异步服务端口（如 8280）</span>
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://127.0.0.1:8280</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">Host</span><span class="w"> </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Real-IP</span><span class="w"> </span><span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-For</span><span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w"> </span><span class="s">X-Forwarded-Proto</span><span class="w"> </span><span class="nv">$scheme</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>4. 本章小结<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>安全域名是小程序与外界交互的生命线。确保域名经过 ICP 备案、配置完整的 SSL 证书链并报备至微信公众平台后台，你的开发版和体验版才能在真机上正常发起网络请求。下一章我们将攻克虚拟支付与隐私协议设置两大核心难点。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="01_registration_and_icp_beian.html" class="btn btn-neutral float-left" title="小程序账号注册、类目选型与工信部 ICP 备案" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="03_virtual_payment_and_privacy.html" class="btn btn-neutral float-right" title="虚拟支付（米大师/XPay）与用户隐私保护指引配置" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, 创作学院。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

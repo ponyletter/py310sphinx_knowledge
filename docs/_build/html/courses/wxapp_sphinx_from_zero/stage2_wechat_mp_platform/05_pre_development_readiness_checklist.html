@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微信小程序开发前置核心参数审查清单与道具批量配置指南 &mdash; 创作学院课程资料库 1.0.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=34088549"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+      <script src="../../../_static/translations.js?v=beaddf03"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../search.html" />
+    <link rel="next" title="第3阶段 微信开发者工具保姆级实操与环境基建" href="../stage3_devtools_and_setup/index.html" />
+    <link rel="prev" title="微信公众平台消息推送配置与服务端 Token 握手校验实战" href="04_message_push_and_server_verification.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            创作学院课程资料库
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">课程分类目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../douyin_short_video/index.html">短视频与知识图解运营实战课</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../douyin_short_video/index.html#id2">阶段架构概览</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage1/index.html">第1阶段 基础：定位破局与视听规范</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage1/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage2/index.html">第2阶段 进阶：算法机理与爆款模型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage2/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage3/index.html">第3阶段 实战：起号操盘与商业转化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage3/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../douyin_short_video/stage4/index.html">第4阶段 扩展：AI 赋能与自动化流水线</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../douyin_short_video/stage4/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#id1">阶段架构概览</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html">第1阶段 商业认知、多维商业画布与标杆爆款拆解</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage1_commercial_and_benchmarks/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">第2阶段 微信公众平台保姆级全流程操作</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage3_devtools_and_setup/index.html">第3阶段 微信开发者工具保姆级实操与环境基建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage3_devtools_and_setup/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage4_sphinx_engine/index.html">第4阶段 Sphinx 知识引擎构建与 AST 试读截断黑科技</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage4_sphinx_engine/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage5_backend_and_user/index.html">第5阶段 FastAPI 资产中台与微信最新用户体系设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage5_backend_and_user/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage6_frontend_and_bugs/index.html">第6阶段 微信小程序原生前端开发、跨境网络提速与全栈排错血泪实录</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage6_frontend_and_bugs/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage7_audit_mastery/index.html">第7阶段 微信官方审核一次性通关秘籍与暗门架构设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage7_audit_mastery/index.html#id2">阶段核心课程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../stage8_references_and_skills/index.html">第8阶段 附录：权威参考导航、开源生态与 Skill 沉淀</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../stage8_references_and_skills/index.html#id1">阶段核心课程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../short_video_guides/index.html">短视频课程图文版</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html">做小程序，先别急着写代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id2">先画出产品，而不是先搭架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id3">把想法压缩成一条最小闭环</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id4">两类产品，两个验证重点</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id5">案例一：结构化内容服务</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id6">案例二：高频、可分享的工具</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#mvp">用 MVP 防止功能堆积</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id7">个人开发者的四项同时责任</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id8">结论：先验证价值，再扩大工程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/personal-developer-miniapp-monetization/index.html#id9">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html">微信原生、Uni-app、Taro选谁？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id1">先看选择全景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id2">三种路线分别在做什么</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id3">用四个维度而不是印象做比较</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id4">复用有收益，也有边界</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id5">原生能力、包体与性能必须真机验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id6">三种典型决策</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id7">最终决策顺序</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-native-uniapp-taro-choice/index.html#id8">参考与更新说明</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html">小程序富文本怎么选？</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id2">先用四个边界定义问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#rich-text">原生 <code class="docutils literal notranslate"><span class="pre">rich-text</span></code>：适合受控的基础内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#mp-html"><code class="docutils literal notranslate"><span class="pre">mp-html</span></code>：面向复杂文章的渲染能力</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#wxparse"><code class="docutils literal notranslate"><span class="pre">wxParse</span></code>：历史项目的兼容对象</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#towxml"><code class="docutils literal notranslate"><span class="pre">towxml</span></code>：转换路径与构建验证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id3">安全不属于任何一个渲染组件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id4">一张决策树给出起点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../short_video_guides/wechat-rich-text-mp-html-wxparse-towxml/index.html#id5">参考与更新说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">权威资料与参考导航</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references/index.html">权威资料与工具导航</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references/index.html#id2">导航分类</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/01_platform_official_rules.html">一手平台规则与官方指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id2">1. 抖音与字节跳动官方平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id3">2. 算法备案与透明化公开披露</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/01_platform_official_rules.html#id4">3. 微信小程序官方权威审核与运营规范</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html">推荐系统与算法工程原理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id2">1. 工业级顶级技术团队博客</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/02_recsys_algorithm_engineering.html#id3">2. 学术顶会与论文检索</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html">数据看板与行业大盘智库</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id2">1. 短视频大数据分析平台</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/03_data_analytics_platforms.html#id3">2. 宏观趋势与消费洞察平台</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html">认知心理学与视听叙事经典</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id2">1. 认知心理学与病毒传播学</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/04_psychology_and_storytelling.html#id3">2. 编剧技艺与视听语言结构</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html">合规边界与知识版权指南</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id2">1. 政策法规与广告边界</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/05_compliance_and_copyright.html#id3">2. 事实核查与学术背书源头</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html">AI 原生工具与内容自动化生态</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#tts-ctc-forced-alignment">1. 语音合成、克隆 (TTS) 与精准对齐 (CTC Forced Alignment)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#skills-video-as-code">2. 视觉设计、图解与代码驱动视频 (Skills &amp; Video-as-Code)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/06_ai_and_automation_tools.html#id2">3. 音视频底层处理与提示工程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../references/07_course_production_contracts.html">技术图解短视频生产工程规范与契约手册</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#narrative-matrix">1. 认知原型与叙事矩阵契约 (Narrative Matrix)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#voice-caption-contract">2. 语音与字幕对齐工程契约 (Voice &amp; Caption Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#visual-layering-contract">3. 画面视觉与分层架构契约 (Visual Layering Contract)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../references/07_course_production_contracts.html#delivery-safety">4. 交付与发布安全契约 (Delivery &amp; Safety)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录与指南</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ENV_SETUP.html">环境安装指南 (Environment Setup Guide)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#linux">1. 系统底层依赖安装 (Linux)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#conda">2. Conda 虚拟环境创建与配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#a-environment-yml">方式 A：通过 <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> 一键还原环境（推荐）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ENV_SETUP.html#b-requirements-txt">方式 B：手动创建环境并通过 <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> 安装</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id1">3. 环境检验</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ENV_SETUP.html#id2">4. 快速使用</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">创作学院课程资料库</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">微信小程序商业全栈开发实战：从0到1构建知识付费、AI表情包与高收益变现矩阵</a></li>
+          <li class="breadcrumb-item"><a href="index.html">第2阶段 微信公众平台保姆级全流程操作</a></li>
+      <li class="breadcrumb-item active">微信小程序开发前置核心参数审查清单与道具批量配置指南</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/courses/wxapp_sphinx_from_zero/stage2_wechat_mp_platform/05_pre_development_readiness_checklist.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>微信小程序开发前置核心参数审查清单与道具批量配置指南<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>在正式动笔写第一行代码或执行部署之前，<strong>前置审查各项平台资质、密匙凭证与业务配置的完整性</strong>，是决定项目能否一次性联调成功并顺利过审的关键。如果某项配置存在隐患（例如商户号与业务 ID 混淆、域名未加白名单、道具名称含有特殊符号），后期往往会导致晦涩的运行时报错（如 <code class="docutils literal notranslate"><span class="pre">-15001</span></code>、<code class="docutils literal notranslate"><span class="pre">OFFER_ID_INVALID</span></code>），排查成本极高。</p>
+<p>本章系统梳理项目开发前必须核验的**“全要素审查自检表”<strong>、</strong>“道具与代币配置规范”<strong>，并提供</strong>“批量导入 Excel 标准模板下载”**。</p>
+<blockquote>
+<div><p><strong>本次生产复盘校准（必须先读）</strong>：消息推送 URL <code class="docutils literal notranslate"><span class="pre">https://meme.tg-cc755.cn/api/wechat/msg_push</span></code> 只有在后端已经启动、<code class="docutils literal notranslate"><span class="pre">/health</span></code> 可从公网访问、GET Token 握手通过后，才能在微信后台保存。Token 填服务端 <code class="docutils literal notranslate"><span class="pre">.env</span></code> 的 <code class="docutils literal notranslate"><span class="pre">WX_MSG_TOKEN</span></code>，不是 <code class="docutils literal notranslate"><span class="pre">XPAY_CALLBACK_TOKEN</span></code>；EncodingAESKey 使用微信后台生成的 43 位值。选择 JSON/明文模式并不代表可以跳过 GET 握手和支付通知幂等校验。微信后台的数据格式变更在本项目实测约 5 分钟生效，期间保持后端在线。</p>
+</div></blockquote>
+<hr class="docutils" />
+<section id="readiness-checklist">
+<h2>1. 项目开发前置参数完备性审查表 (Readiness Checklist)<a class="headerlink" href="#readiness-checklist" title="Link to this heading"></a></h2>
+<p>在配置后端环境变量（如 <code class="docutils literal notranslate"><span class="pre">.env</span></code>）或前端 <code class="docutils literal notranslate"><span class="pre">app.js</span></code> 之前，请逐项核对并确保以下参数已经就绪：</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>参数类别</p></th>
+<th class="head text-left"><p>参数字段名</p></th>
+<th class="head text-left"><p>获取路径 / 所在后台位置</p></th>
+<th class="head text-left"><p>规范要求与示例</p></th>
+<th class="head text-left"><p>常见踩坑与审查要点</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>小程序基础</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">WX_APPID</span></code></p></td>
+<td class="text-left"><p>微信公众平台 ➔ 【开发管理】 ➔ 【开发设置】</p></td>
+<td class="text-left"><p>以 <code class="docutils literal notranslate"><span class="pre">wx</span></code> 开头的 18 位字符，如 <code class="docutils literal notranslate"><span class="pre">wxef6c0e98e6******</span></code></p></td>
+<td class="text-left"><p>严禁使用临时测试号或空字符串，必须为已完成类目审批的正式小程序</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>小程序基础</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">WX_APPSECRET</span></code></p></td>
+<td class="text-left"><p>微信公众平台 ➔ 【开发管理】 ➔ 【开发设置】</p></td>
+<td class="text-left"><p>32 位十六进制密钥，如 <code class="docutils literal notranslate"><span class="pre">ea9f94cec***********************</span></code></p></td>
+<td class="text-left"><p>重置 AppSecret 后必须立即同步更新服务端配置，否则 <code class="docutils literal notranslate"><span class="pre">code2session</span></code> 登录失效</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>虚拟支付 2.0</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">XPAY_OFFER_ID</span></code></p></td>
+<td class="text-left"><p>微信公众平台 ➔ 【虚拟支付】 ➔ 【基本配置】</p></td>
+<td class="text-left"><p>10 位数字，如 <code class="docutils literal notranslate"><span class="pre">145064****</span></code></p></td>
+<td class="text-left"><p><strong>切勿填成微信支付商户号！</strong> 填错必报 <code class="docutils literal notranslate"><span class="pre">OFFER_ID_INVALID</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>虚拟支付 2.0</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">XPAY_APP_KEY</span></code></p></td>
+<td class="text-left"><p>微信公众平台 ➔ 【虚拟支付】 ➔ 【基本配置】</p></td>
+<td class="text-left"><p>32 位现网支付密钥，如 <code class="docutils literal notranslate"><span class="pre">235lCegHtBLT****************</span></code></p></td>
+<td class="text-left"><p>用于支付签名 <code class="docutils literal notranslate"><span class="pre">paySig</span></code> 计算。需妥善保管，严禁下发到前端小程序代码中</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>虚拟支付 2.0</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">XPAY_ENV</span></code></p></td>
+<td class="text-left"><p>开发者自行控制的环境开关</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">0</span></code>：现网正式环境<br><code class="docutils literal notranslate"><span class="pre">1</span></code>：沙箱测试环境</p></td>
+<td class="text-left"><p><strong>提交平台审核与正式发布上线必须设为 <code class="docutils literal notranslate"><span class="pre">0</span></code></strong>；若为 <code class="docutils literal notranslate"><span class="pre">1</span></code>，非白名单审核员验收必报账号未授权</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>微信支付结算</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">WX_MCH_ID</span></code></p></td>
+<td class="text-left"><p>微信支付商户平台 / 虚拟支付绑定的商户号</p></td>
+<td class="text-left"><p>10 位商户号，如 <code class="docutils literal notranslate"><span class="pre">175029****</span></code></p></td>
+<td class="text-left"><p>必须在公众平台【微信支付 ➔ 商户号管理】中确认授权关联，状态必须为“已关联”</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>在线客服</strong></p></td>
+<td class="text-left"><p>客服人员微信号</p></td>
+<td class="text-left"><p>微信公众平台 ➔ 【功能】 ➔ 【客服】</p></td>
+<td class="text-left"><p>管理员个人微信号，如 <code class="docutils literal notranslate"><span class="pre">wx_kefu_******</span></code></p></td>
+<td class="text-left"><p>必须在手机微信中扫码接受邀请绑定；手机端打开官方【客服助手】小程序随时待命接待</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>服务器与域名</strong></p></td>
+<td class="text-left"><p>API / 资源域名</p></td>
+<td class="text-left"><p>腾讯云/阿里云/自建服务器</p></td>
+<td class="text-left"><p>必须具备工信部 ICP 备案，且部署有效 SSL 证书（HTTPS）</p></td>
+<td class="text-left"><p>必须在微信公众平台【开发管理 ➔ 开发设置 ➔ 服务器域名】配置 <code class="docutils literal notranslate"><span class="pre">request</span></code>、<code class="docutils literal notranslate"><span class="pre">uploadFile</span></code> 白名单</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>消息推送 (生产必需)</strong></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">WX_MSG_TOKEN</span></code> / <code class="docutils literal notranslate"><span class="pre">WX_MSG_AES_KEY</span></code></p></td>
+<td class="text-left"><p>微信公众平台 ➔ 【开发管理】 ➔ 【开发设置 ➔ 消息推送】</p></td>
+<td class="text-left"><p>Token（自定义字符串）、EncodingAESKey（43位）</p></td>
+<td class="text-left"><p>用于接收发货通知、平台允许的用户消息/事件；必须先启动后端再保存 URL</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>隐私指引</strong></p></td>
+<td class="text-left"><p>用户隐私保护指引</p></td>
+<td class="text-left"><p>微信公众平台 ➔ 【设置】 ➔ 【服务内容声明】</p></td>
+<td class="text-left"><p>声明昵称头像、剪贴板、存储等接口</p></td>
+<td class="text-left"><p>必须处于**“已生效”**状态，否则相关 API 会被微信基础库直接拦截静默失败</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>2. 虚拟支付道具配置核心规范<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>在微信公众平台【虚拟支付 ➔ 道具管理】中录入道具时，必须严格遵守以下规则：</p>
+<section id="id">
+<h3>2.1 道具 ID 与定价规则<a class="headerlink" href="#id" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>价格单位先看入口</strong>：服务端 API 的 <code class="docutils literal notranslate"><span class="pre">goodsPrice</span></code> 约定为整数“分”（1 元传 <code class="docutils literal notranslate"><span class="pre">100</span></code>），但 Excel 模板可能按“元”或“分”提供，必须以当前微信后台下载模板的表头说明为准；不要把元模板中的 <code class="docutils literal notranslate"><span class="pre">1</span></code> 改成 <code class="docutils literal notranslate"><span class="pre">100</span></code> 后直接上传；</p></li>
+<li><p><strong>ID 命名推荐</strong>：推荐采用价格档位通用命名法，如 <code class="docutils literal notranslate"><span class="pre">item_{金额分}</span></code>：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">item_100</span></code>：1.00 元（100 分）—— <strong>必须预置，便于真机全链路 1 元实测与测试账号验收</strong>；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">item_990</span></code>：9.90 元（990 分）—— 体验课 / 优惠专栏；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">item_1990</span></code>：19.90 元（1990 分）—— 主流标准技术专栏通用档位；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">item_2990</span></code>：29.90 元（2990 分）—— 进阶进阶项目专栏；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">item_4990</span></code>：49.90 元（4990 分）—— 体系化大课；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">item_9900</span></code>：99.00 元（9900 分）—— 全站年度 VIP 通票。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id3">
+<h3>2.2 道具名称三大禁忌<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>❌ <strong>严禁包含英文句点 <code class="docutils literal notranslate"><span class="pre">.</span></code></strong>：例如 <code class="docutils literal notranslate"><span class="pre">9.9元专栏</span></code> 会被微信接口直接驳回报错：<code class="docutils literal notranslate"><span class="pre">道具名称包含不允许的特殊字符（仅支持中英文、数字及</span> <span class="pre">-_*·）</span></code>。</p></li>
+<li><p>✅ <strong>正确写法</strong>：必须使用中文描述或汉字代替点号，如 <code class="docutils literal notranslate"><span class="pre">数创研学包9元9</span></code> 或 <code class="docutils literal notranslate"><span class="pre">数创研学包9点9元</span></code>。</p></li>
+<li><p>✅ <strong>道具图片</strong>：建议尺寸为正方形 <code class="docutils literal notranslate"><span class="pre">200x200</span></code> 像素（PNG 格式），外链必须为稳定的 HTTPS 绝对地址。</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="excel">
+<h2>3. 批量添加道具 Excel 模板下载与直传方案<a class="headerlink" href="#excel" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>3.1 批量导入 Excel 模板下载<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>微信后台支持上传 Excel 文件批量创建道具。我们为你准备好了严格符合微信官方最新规范的 <strong>标准版批量导入 Excel 模板</strong>（已修复点号字符合规问题，预置 1 元至 99 元六大标准研学档位）：</p>
+<ul class="simple">
+<li><p>📥 <strong>官方服务端 CDN 在线直链下载</strong>：
+<a class="reference external" href="https://apiwx.tg-cc755.cn/uploads/xpay_goods_batch_template.xlsx">点击直接下载 xpay_goods_batch_template.xlsx</a></p></li>
+<li><p>📥 <strong>静态文档工程内直接下载</strong>：
+<a class="reference download internal" download="" href="../../../_downloads/42b11f8c3d70be16b91ead894b3d6af0/xpay_goods_batch_template.xlsx"><span class="xref download myst">下载工程静态资源模板</span></a></p></li>
+</ul>
+<section id="id5">
+<h4>Excel 文件内容结构对照：<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>道具id</p></th>
+<th class="head text-left"><p>道具名称</p></th>
+<th class="head text-left"><p>道具图片</p></th>
+<th class="head text-left"><p>道具价格</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">item_100</span></code></p></td>
+<td class="text-left"><p>数创研学包1元</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://apiwx.tg-cc755.cn/api/assets/goods_icon.png</span></code></p></td>
+<td class="text-left"><p>100</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">item_990</span></code></p></td>
+<td class="text-left"><p>数创研学包9元9</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://apiwx.tg-cc755.cn/api/assets/goods_icon.png</span></code></p></td>
+<td class="text-left"><p>990</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">item_1990</span></code></p></td>
+<td class="text-left"><p>数创研学包19元9</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://apiwx.tg-cc755.cn/api/assets/goods_icon.png</span></code></p></td>
+<td class="text-left"><p>1990</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">item_2990</span></code></p></td>
+<td class="text-left"><p>数创研学包29元9</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://apiwx.tg-cc755.cn/api/assets/goods_icon.png</span></code></p></td>
+<td class="text-left"><p>2990</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">item_4990</span></code></p></td>
+<td class="text-left"><p>数创研学包49元9</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://apiwx.tg-cc755.cn/api/assets/goods_icon.png</span></code></p></td>
+<td class="text-left"><p>4990</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">item_9900</span></code></p></td>
+<td class="text-left"><p>数创研学包99元</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">https://apiwx.tg-cc755.cn/api/assets/goods_icon.png</span></code></p></td>
+<td class="text-left"><p>9900</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p>[!IMPORTANT]
+导入完成后，务必在微信公众平台的【道具管理】列表中点击**【发布】**，只有状态显示为“已发布”的道具，现网收银台才能成功完成拉取与扣费！</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="excel-api">
+<h3>3.2 进阶技能：Excel 无法删除时的服务端 API 直传与覆盖方案<a class="headerlink" href="#excel-api" title="Link to this heading"></a></h3>
+<p>很多开发者在微信后台误传了格式错误的 Excel 后，发现后台<strong>没有提供一键清空或删除按钮</strong>而手足无措。
+此时无需等待人工客服，可以直接在服务器端调用微信虚拟支付官方接口 <code class="docutils literal notranslate"><span class="pre">/xpay/start_upload_goods</span></code>，通过一段轻量 Python 脚本将正确的道具集直接覆盖写入：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">upload_xpay_goods</span><span class="p">(</span><span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://api.weixin.qq.com/xpay/start_upload_goods?access_token=</span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"upload_type"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"goods_list"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">"product_id"</span><span class="p">:</span> <span class="s2">"item_100"</span><span class="p">,</span> <span class="s2">"price"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"数创研学包1元"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">"product_id"</span><span class="p">:</span> <span class="s2">"item_990"</span><span class="p">,</span> <span class="s2">"price"</span><span class="p">:</span> <span class="mi">990</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"数创研学包9元9"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">"product_id"</span><span class="p">:</span> <span class="s2">"item_1990"</span><span class="p">,</span> <span class="s2">"price"</span><span class="p">:</span> <span class="mi">1990</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"数创研学包19元9"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">"product_id"</span><span class="p">:</span> <span class="s2">"item_2990"</span><span class="p">,</span> <span class="s2">"price"</span><span class="p">:</span> <span class="mi">2990</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"数创研学包29元9"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">"product_id"</span><span class="p">:</span> <span class="s2">"item_4990"</span><span class="p">,</span> <span class="s2">"price"</span><span class="p">:</span> <span class="mi">4990</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"数创研学包49元9"</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">"product_id"</span><span class="p">:</span> <span class="s2">"item_9900"</span><span class="p">,</span> <span class="s2">"price"</span><span class="p">:</span> <span class="mi">9900</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"数创研学包99元"</span><span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"微信官方响应:"</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+<span class="c1"># 成功返回: {"errcode": 0, "errmsg": "OK"}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>4. 代币体系配置与充值直购双轨模型<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p>在【虚拟支付 ➔ 基本配置 ➔ 代币配置】中：</p>
+<ul class="simple">
+<li><p><strong>代币名称</strong>：推荐设为“研学币”或“知识币”，契合知识付费心智；</p></li>
+<li><p><strong>换算比例</strong>：设置固定的 <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">元</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">代币</span></code>（即 100 分 = 1 研学币），直观易懂；</p></li>
+<li><p><strong>双轨制架构设计</strong>：</p>
+<ul>
+<li><p><strong>研学币充足时</strong>：优先触发代币划扣（纯前端交互，零手续费，极速解锁）；</p></li>
+<li><p><strong>研学币不足时</strong>：直接通过 <code class="docutils literal notranslate"><span class="pre">mode:</span> <span class="pre">&quot;short_series_goods&quot;</span></code> 拉起官方微信收银台，实现“缺多少补多少”或“直购专栏”，大幅降低流失率。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2>5. 本章小结<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p>完成上述<strong>十大前置参数的交叉审查</strong>，并确保道具配置合规与模板正确导入，你就已经清除了 99% 的平台级隐形地雷。接下来，我们将正式进入全栈编码与系统架构实战阶段！</p>
+</section>
+<section id="id8">
+<h2>6. 上线前最后一次交叉核对<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>当前知识库后端历史实现的商品 ID 形如 <code class="docutils literal notranslate"><span class="pre">item_{amount}</span></code>，仓库中的部分 Excel 使用 <code class="docutils literal notranslate"><span class="pre">goods_100</span></code>，AI 表情包服务可能使用 <code class="docutils literal notranslate"><span class="pre">meme_100</span></code>。这些值按字符串精确匹配，不能互换；价格也必须核对“元模板”与“分模板”，否则会出现 <code class="docutils literal notranslate"><span class="pre">GOODS_PRICE_INVALID</span> <span class="pre">(-15013)</span></code>。建议保留 1 元测试档位，先验证 <code class="docutils literal notranslate"><span class="pre">PENDING</span> <span class="pre">→</span> <span class="pre">PAID</span></code>、额度到账和重复通知幂等，再发布正式档位。</p>
+<p>订单中心页面 <code class="docutils literal notranslate"><span class="pre">pages/order/order</span></code>、订单查询 API <code class="docutils literal notranslate"><span class="pre">/api/user/orders</span></code> 与回调 URL 不是同一个东西。数据库可以保存 UTC，API 统一转换为 <code class="docutils literal notranslate"><span class="pre">Asia/Shanghai</span></code>（UTC+8）后展示，前端不得再次加 8 小时。订阅消息属于离线提醒能力，模板 ID 需在【功能 → 订阅消息】获取并由用户手势授权，不能替代支付发货回调。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="04_message_push_and_server_verification.html" class="btn btn-neutral float-left" title="微信公众平台消息推送配置与服务端 Token 握手校验实战" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../stage3_devtools_and_setup/index.html" class="btn btn-neutral float-right" title="第3阶段 微信开发者工具保姆级实操与环境基建" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, 创作学院。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
