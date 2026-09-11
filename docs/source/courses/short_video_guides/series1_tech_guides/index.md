@@ -33,4 +33,6 @@ s3-r2-minio-v1/index
 sphinx-vitepress-docusaurus-material-mkdocs-wordpress-v1/index
 terraform-ansible-selection-v1/index
 vault-sops-sealed-secrets-cloud-key-management-v1/index
+vllm-ollama-tgi-zh-v2/index
+wechat-miniapp-virtual-payment-person-v1/index
 ```
