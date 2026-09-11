@@ -18,4 +18,7 @@ ai-search-browser-knowledge-work-v1/index
 api-gateway-ingress-istio-gateway-v1/index
 api-gateway-selection-v2/index
 blender-threejs-ai-3d-window-v1/index
+chatbot-rpa-browser-computer-use-v1/index
+chatgpt-images-2-5-kongzhihuashi-v1/index
+cicd-actions-gitlab-jenkins-v1/index
 ```
