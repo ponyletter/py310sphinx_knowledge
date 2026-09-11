@@ -2,6 +2,8 @@
 
 在微信虚拟支付 2.0 闭环中，**发货信息不能完全依赖前端的小程序回调**（因为用户支付完成后可能会立即滑掉微信或断网，导致前端 success 回调丢失）。因此，微信官方强制采用**服务端异步消息推送（Webhook）**机制来保障资金与订单交付安全。
 
+> **生产顺序非常重要**：先启动后端并确认公网 `/health`，再在微信后台保存消息推送 URL。否则微信发送 GET 握手时服务端尚未监听，后台会直接报“Token 校验失败”。消息推送配置传播在本项目实测约 5 分钟；配置期间保持服务在线。
+
 在微信公众平台【开发管理】->【消息推送】中，开发者必须完成服务器 URL、Token 与加解密配置。本章为你全面解密这套体系的配置规则与服务端实现。
 
 ---
@@ -65,7 +67,7 @@ sequenceDiagram
 在 FastAPI 中，我们需要在同一个路由下，同时支持 GET（握手校验）和 POST（接收推送），并自动兼顾 JSON 和 XML 双格式：
 
 ```python
-from fastapi import APIRouter, Request, Query, Response
+from fastapi import APIRouter, Request, Query, Response, HTTPException
 from fastapi.responses import PlainTextResponse
 from typing import Optional
 import json
@@ -94,8 +96,8 @@ def wechat_server_verify(
         if sha1_str == signature:
             return PlainTextResponse(echostr)
 
-    # 兜底返回 echostr 确保握手成功
-    return PlainTextResponse(echostr)
+    # 生产环境拒绝错误签名，不能为了“保存成功”而无条件返回 echostr
+    raise HTTPException(status_code=403, detail="invalid signature")
 
 # 2. 接收发货推送端点 (POST)
 @router.post("/wechat/msg_push")
