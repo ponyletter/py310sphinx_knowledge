@@ -21,4 +21,7 @@ blender-threejs-ai-3d-window-v1/index
 chatbot-rpa-browser-computer-use-v1/index
 chatgpt-images-2-5-kongzhihuashi-v1/index
 cicd-actions-gitlab-jenkins-v1/index
+cicd-gitops-push-pull-v1/index
+container-security-scanning-trivy-grype-snyk-v1/index
+docker-compose-kubernetes-nomad-v2/index
 ```
