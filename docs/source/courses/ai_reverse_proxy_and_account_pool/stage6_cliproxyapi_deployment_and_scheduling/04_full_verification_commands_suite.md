@@ -6,14 +6,14 @@
 
 ## 快速冒烟测试命令集（Terminal / cURL）
 
-请在 VPS 终端执行以下命令进行分层测试（请将 `sk-meme-cliproxy-secret-2026` 替换为你实际配置的 API Key）。
+请在 VPS 终端执行以下命令进行分层测试（请将 `sk-prod-cliproxy-secret-2026` 替换为你实际配置的 API Key）。
 
 ### 1. 模型资产清单嗅探（GET /v1/models）
 验证网关是否成功解析挂载的凭据文件，并确认当前账号池所支持的全部模型标识：
 
 ```bash
 curl -s http://127.0.0.1:8317/v1/models \
-  -H "Authorization: Bearer sk-meme-cliproxy-secret-2026" | jq .
+  -H "Authorization: Bearer sk-prod-cliproxy-secret-2026" | jq .
 ```
 
 **预期输出示例**：
@@ -51,7 +51,7 @@ curl -s http://127.0.0.1:8317/v1/models \
 ```bash
 curl -X POST http://127.0.0.1:8317/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer sk-meme-cliproxy-secret-2026" \
+  -H "Authorization: Bearer sk-prod-cliproxy-secret-2026" \
   -d '{
     "model": "gpt-4o",
     "messages": [
@@ -74,7 +74,7 @@ curl -X POST http://127.0.0.1:8317/v1/chat/completions \
 ```bash
 curl -N -X POST http://127.0.0.1:8317/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer sk-meme-cliproxy-secret-2026" \
+  -H "Authorization: Bearer sk-prod-cliproxy-secret-2026" \
   -d '{
     "model": "gpt-4o",
     "stream": true,
@@ -101,7 +101,7 @@ data: [DONE]
 ```bash
 curl -X POST http://127.0.0.1:8317/v1/images/generations \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer sk-meme-cliproxy-secret-2026" \
+  -H "Authorization: Bearer sk-prod-cliproxy-secret-2026" \
   -d '{
     "model": "gpt-image-2",
     "prompt": "一只戴着墨镜坐在笔记本电脑前写代码的小猫，赛博朋克扁平插画风",
@@ -117,7 +117,7 @@ curl -X POST http://127.0.0.1:8317/v1/images/generations \
 
 ```bash
 curl -Iv https://api.yourdomain.com/v1/models \
-  -H "Authorization: Bearer sk-meme-cliproxy-secret-2026"
+  -H "Authorization: Bearer sk-prod-cliproxy-secret-2026"
 ```
 
 ---
@@ -139,7 +139,7 @@ import requests
 import json
 
 BASE_URL = "http://127.0.0.1:8317/v1"
-API_KEY = "sk-meme-cliproxy-secret-2026"
+API_KEY = "sk-prod-cliproxy-secret-2026"
 HEADERS = {
     "Authorization": f"Bearer {API_KEY}",
     "Content-Type": "application/json"

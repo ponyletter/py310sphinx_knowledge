@@ -51,7 +51,7 @@ flowchart TD
 export OPENAI_BASE_URL="https://api.yourdomain.com/v1"
 
 # 2. 注入在 config.yaml 中配置的授权密钥
-export OPENAI_API_KEY="sk-meme-cliproxy-secret-2026"
+export OPENAI_API_KEY="sk-prod-cliproxy-secret-2026"
 
 # 3. (可选) 指定默认基座模型
 export AGY_DEFAULT_MODEL="gpt-4o"
@@ -75,7 +75,7 @@ vim ~/.gemini/antigravity-cli/config.json
 ```json
 {
   "api_endpoint": "https://api.yourdomain.com/v1",
-  "api_key": "sk-meme-cliproxy-secret-2026",
+  "api_key": "sk-prod-cliproxy-secret-2026",
   "default_model": "gpt-4o",
   "streaming": true,
   "request_timeout_seconds": 600,

@@ -34,7 +34,7 @@ auth-dir: "/root/.cli-proxy-api"
 
 # 5. 客户端访问令牌鉴权池 (支持配置多个 Token 分配给不同下游应用)
 api-keys:
-  - "sk-meme-cliproxy-secret-2026"
+  - "sk-prod-cliproxy-secret-2026"
   - "sk-agy-developer-key-9988"
 
 # 6. 运行日志与调试模式
@@ -79,25 +79,25 @@ gpt-image-2-base-model: "gpt-5.5"
 
 ### 3. `api-keys`（多客户端接入鉴权池）
 - 该列表定义了哪些 Bearer Token 能够合法调用本反代服务。
-- 当微信小程序后台、AGY 客户端发起请求时，请求头必须包含：
+- 当国内后端、终端应用或 AGY 客户端发起请求时，请求头必须包含：
   ```http
-  Authorization: Bearer sk-meme-cliproxy-secret-2026
+  Authorization: Bearer sk-prod-cliproxy-secret-2026
   ```
 - 若客户端未传该头或密钥不匹配，网关将直接返回 `401 Unauthorized`，杜绝未授权白嫖。
-- 支持针对不同部门或应用分发不同的 Token（如一个给微信小程序，一个给本地 Cursor/AGY），便于日志审计。
+- 支持针对不同部门或下游业务分发不同的 Token（如一个给国内业务中枢，一个给本地 Cursor/AGY），便于日志审计。
 
 ### 4. `routing.strategy`（账号调度模式）
 网关支持两种核心调度策略：
 1. **`fill-first`（单号跑满策略）**：
    - 优先使用优先级最高或列表靠前的第一顺位账号；
    - 只有当该账号遭遇官方速率限制（HTTP 429 Too Many Requests）或账号失效（HTTP 401）时，才自动将请求切换至下一个可用备用账号；
-   - **优势**：充分压榨单个 Plus 账号在 3 小时内的额度上限，避免过早分散消耗备用号的冷却时间；
+   - **优势**：充分压榨单个 Plus 账号在 3~5 小时内的额度上限，避免过早分散消耗备用号的冷却时间；
 2. **`round-robin`（负载均衡轮询策略）**：
    - 请求按顺序依次分发给凭据池中的所有可用账号（A -> B -> C -> A）；
    - **优势**：极大平摊并发请求压力，显著降低单一账号被官方风控探测为“高频异常使用”的风险，推荐在多 Plus 账号并发池中使用。
 
 ### 5. `gpt-image-2-base-model`（多模态绘图引擎映射）
-- 在微信小程序表情包生成或设计工坊场景中，客户端经常会请求 `gpt-image-2` 模型。
+- 在各类生图应用或下游客户端场景中，客户端经常会请求 `gpt-image-2` 模型。
 - CLIProxyAPI 通过该配置项，将图像提示词重定向交由高智力基座模型（如 `gpt-5.5` 或 `gpt-4o`）进行提示词扩写、结构化推理和最终图像生成渲染，实现卓越的生图效果。
 
 ---
