@@ -1,94 +1,90 @@
-# CI/CD怎么选？三条流水线
+# CI/CD 怎么选？GitHub Actions、GitLab CI 与 Jenkins 深度选型
 
-CI/CD 的核心不是工具名称，而是让一次代码提交经过测试、构建、镜像、部署和回滚的可审查流程。GitHub Actions、GitLab CI/CD 与 Jenkins 的区别，主要来自代码托管位置、团队控制面和自建运维能力。
+> 对应短视频主题：CI/CD 怎么选？三条流水线  
+> 资料核验与更新：2026-09-12
 
-```{figure} images/scene01_img01_cicd_overview.png
-:alt: 从提交代码到测试构建部署和反馈的 CI CD 总览
-:width: 100%
+CI/CD 的核心不是争论哪款工具更流行，而是让每一次代码变更都能经过自动化编译、测试验证、容器镜像构建、环境部署与快速回滚的可审查闭环。GitHub Actions、GitLab CI/CD 与 Jenkins 的根本分歧，来自代码托管形态、团队运维控制力与私有化定制深度。
 
-流水线把提交、验证、交付和反馈连成可重复过程。
-```
+## 阅读边界
 
-```{figure} images/scene02_img01_pipeline_flow.png
-:alt: CI CD 执行代码拉取、测试、构建镜像和部署的流程
-:width: 100%
+本文依据原始课程的研究笔记、课程结构和发布文案整理。涉及产品、模型、版本、平台规则、价格或资格等可能变化的信息，实践前应以当前官方资料和实际环境为准。
 
-每一步都应有明确输入、输出和失败处理，不能只追求自动触发。
-```
+## CI/CD 核心流水线与交付链路
 
-```{figure} images/scene02_img02_tag_registry_rollback.png
-:alt: 镜像标签、Registry 与回滚版本管理
-:width: 100%
+持续集成负责保障代码质量与构建制品；持续交付负责把经过验证的不可变制品安全发布到目标环境。一套健壮的流水线必须包含清晰的触发事件、独立的构建环境、可靠的制品库（Registry）以及在出现故障时能一键回退的历史版本保护机制。
 
-可追溯的标签和 Registry 让部署版本可定位、可回滚。
-```
+![从提交代码到测试构建部署和反馈的 CI CD 总览](images/scene01_img01_cicd_overview.png)
 
-```{figure} images/scene02_img03_ssh_cloud_k8s_deploy.png
-:alt: 流水线经 SSH 云平台或 Kubernetes 部署应用
-:width: 100%
+图解：CI/CD 持续交付总览：从代码提交、自动化测试、构建打包到生产部署与反馈。
 
-部署目标不同，凭据、权限和失败恢复策略也不同。
-```
+![CI CD 执行代码拉取、测试、构建镜像和部署的流程](images/scene02_img01_pipeline_flow.png)
 
-```{figure} images/scene03_img01_github_actions.png
-:alt: GitHub Actions 与 GitHub 仓库事件集成
-:width: 100%
+图解：核心流水线阶段：明确定义输入约束、阶段依赖、单元测试与失败阻断策略。
 
-代码主要在 GitHub 时，Actions 的事件与仓库集成通常最直接。
-```
+![镜像标签、Registry 与回滚版本管理](images/scene02_img02_tag_registry_rollback.png)
 
-```{figure} images/scene03_img02_gitlab_cicd.png
-:alt: GitLab CI CD 与 GitLab 项目、Runner 和流水线集成
-:width: 100%
+图解：不可变制品管理：语义化版本标签、镜像仓库准入与秒级回滚保障。
 
-团队已使用 GitLab 时，GitLab CI/CD 可把代码、审查、Runner 和发布流程放在同一平台。
-```
+![流水线经 SSH 云平台或 Kubernetes 部署应用](images/scene02_img03_ssh_cloud_k8s_deploy.png)
 
-```{figure} images/scene04_img01_jenkins_architecture.png
-:alt: Jenkins 控制器、Agent 和插件构成的自建流水线架构
-:width: 100%
+图解：多样化部署通道：支持 SSH 传统虚机、云厂商发布 API 与 Kubernetes 集群接入。
 
-Jenkins 提供高度自定义能力，也要求团队维护控制器、Agent、插件和安全更新。
-```
+## 代码托管原生派：GitHub Actions 与 GitLab CI
 
-```{figure} images/scene04_img02_jenkins_private_custom.png
-:alt: Jenkins 适合私有环境和深度定制集成的场景
-:width: 100%
+如果代码已经托管在 GitHub 或 GitLab 上，原生集成的流水线通常能大幅减少网络穿透与认证配置成本。GitHub Actions 拥有庞大的开源社区生态与丰富的市场插件；GitLab CI/CD 则贯彻了完整的 DevOps 一体化平台哲学，通过一套统一的权限体系管理代码仓库、流水线与容器镜像库。
 
-私有网络、特殊工具链或深度定制需求明确时，再评估 Jenkins 的运维投入是否值得。
-```
+![GitHub Actions 与 GitHub 仓库事件集成](images/scene03_img01_github_actions.png)
 
-```{figure} images/scene05_img01_three_way_matrix.png
-:alt: GitHub Actions、GitLab CI CD 与 Jenkins 的选择矩阵
-:width: 100%
+图解：GitHub Actions 原生集成：利用丰沛的开源 Action 市场与代码仓库事件无缝联动。
 
-先按代码托管、控制权、集成与维护成本比较三条路线。
-```
+![GitLab CI CD 与 GitLab 项目、Runner 和流水线集成](images/scene03_img02_gitlab_cicd.png)
 
-```{figure} images/scene06_img01_runner_resources.png
-:alt: Runner 或执行器的资源隔离和任务容量管理
-:width: 100%
+图解：GitLab CI/CD 一体化架构：单应用管理代码分支、Runner 编排与环境部署门禁。
 
-执行器资源、并发和隔离直接决定流水线稳定性与成本。
-```
+## 自建私有化标杆：Jenkins 控制器与复杂定制
 
-```{figure} images/scene06_img02_production_guardrails.png
-:alt: 生产部署需要审批、环境分层和回滚护栏
-:width: 100%
+Jenkins 依然是内部私有云、异构遗留系统与高合规要求场景下的中流砥柱。其主从（Controller/Agent）分布式调度架构能够横跨 Windows、Linux、嵌入式设备等多架构物理机器，数千款插件几乎能与企业内任何遗留工具深度打通，但相应的插件升级与维护成本也最为沉重。
 
-生产发布应设置环境分层、审批、健康检查和回滚，而不是让每次提交直接覆盖线上。
-```
+![Jenkins 控制器、Agent 和插件构成的自建流水线架构](images/scene04_img01_jenkins_architecture.png)
 
-```{figure} images/scene06_img03_secrets_scope.png
-:alt: CI CD 凭据按环境和任务最小范围授权
-:width: 100%
+图解：Jenkins 主从分布式架构：Controller 统一调度、海量 Agent 分布式并发与插件生态。
 
-密钥必须按最小权限、环境和任务范围管理，避免日志和第三方步骤泄露。
-```
+![Jenkins 适合私有环境和深度定制集成的场景](images/scene04_img02_jenkins_private_custom.png)
 
-```{figure} images/scene07_img01_selection_tree.png
-:alt: CI CD 三条流水线的最终选择树
-:width: 100%
+图解：私有化异构集成：适合企业内部隔离内网、物理机集群与定制编译硬件环境。
 
-GitHub 项目优先验证 Actions，GitLab 项目优先验证 GitLab CI/CD；只有强自建与定制需求才投入 Jenkins。
-```
+## 三维对比矩阵与生产发布护栏
+
+选型时不仅要看功能列表，更要评估执行器（Runner/Agent）的资源隔离度、敏感凭据的安全作用域，以及生产部署时的审批卡点。生产环境发布必须配备环境隔离策略与人工双人核验机制，杜绝开发测试凭据越权访问生产集群。
+
+![GitHub Actions、GitLab CI CD 与 Jenkins 的选择矩阵](images/scene05_img01_three_way_matrix.png)
+
+图解：三大流水线特性对比：托管形态、学习成本、生态丰富度与运维负担全景透视。
+
+![Runner 或执行器的资源隔离和任务容量管理](images/scene06_img01_runner_resources.png)
+
+图解：Runner 资源管理：容器隔离、并发队列容量管控与自托管执行器扩展。
+
+![生产部署需要审批、环境分层和回滚护栏](images/scene06_img02_production_guardrails.png)
+
+图解：生产安全护栏：基于环境分层的审批流程、金丝雀观测与自动化健康探针。
+
+![CI CD 凭据按环境和任务最小范围授权](images/scene06_img03_secrets_scope.png)
+
+图解：凭据最小权限：严格区分开发、预发布与生产密钥，禁止全局明文透传。
+
+![CI CD 三条流水线的最终选择树](images/scene07_img01_selection_tree.png)
+
+图解：CI/CD 选型决策树：按代码宿主、内网合规与专用硬件需求做决定。
+
+## 小结
+
+代码托管在 SaaS 首选 GitHub Actions；自建企业内网代码站首选 GitLab CI；复杂异构硬件和深度私有化系统首选 Jenkins。无论工具如何，环境隔离与凭据权限永远是流水线的第一道防线。
+
+## 参考资料
+
+以下链接来自官方权威技术文档与行业规范；动态规则请以其当前页面为准。
+
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [GitLab CI/CD Documentation](https://docs.gitlab.com/ee/ci/)
+- [Jenkins User Documentation](https://www.jenkins.io/doc/)

@@ -1,9 +1,14 @@
 # Prometheus 三件套：怎么查？
 
 > 对应短视频主题：Prometheus 三件套：怎么查？  
-> 更新于：2026-09-12
+> 资料核验与更新：2026-09-12
 
 网站变慢时，最容易陷入的误区是直接猜原因：是不是数据库慢了、是不是某个服务报错、是不是流量突然变大。更可靠的顺序是先用**指标**确认异常的范围和形状，再用**日志**补足发生了什么，最后用**链路追踪**定位一次请求具体慢在哪里。Prometheus、Grafana、Loki 这套组合常被称作 PLG Stack；本篇把它们放进一条可以执行的排障路径中理解。
+
+
+## 阅读边界
+
+本文依据原始课程的研究笔记、课程结构和发布文案整理。涉及产品、模型、版本、平台规则、价格或资格等可能变化的信息，实践前应以当前官方资料和实际环境为准。
 
 ## 先分清：三种信息分别回答什么
 
@@ -138,7 +143,7 @@ OpenTelemetry 提供接收、处理和导出的统一采集与传输流水线。
 
 Prometheus 三件套不是把三个产品装齐，而是一条清晰的判断路径：**Prometheus 看趋势，Loki 查上下文，Tempo 找慢点，Grafana 统一查询、展示和告警；OpenTelemetry 让多种信号更容易接入和导出。** 先确认异常范围，再读取事实，最后定位根因，才是比“凭经验猜故障”更可重复的排障方式。
 
-## 参考
+## 参考资料
 
 - [Prometheus Overview](https://prometheus.io/docs/introduction/overview/)
 - [Prometheus Instrumentation](https://prometheus.io/docs/practices/instrumentation/)

@@ -1,5 +1,9 @@
 # 面向对象与 GoF 设计模式
 
+> 对应短视频主题：面向对象与 GoF 设计模式  
+> 资料核验与更新：2026-09-12
+
+
 用一个变化驱动的视角，串起 GoF 的 5 个创建型、7 个结构型和 11 个行为型模式，再看它们如何在真实系统中组合与复用。
 
 ## 阅读边界
@@ -18,7 +22,7 @@ GoF 是四位作者总结的二十三种经典设计模式，可以把它当成�
 
 ![gof map](images/scene01_img01_gof_map.png)
 
-图解：Cognitive change: 从“23 个名字”变成一个按变化组织的地图。 Purpose: 课程钩子与总框架。 Review: text_review, number_review, fact_review.
+图解：GoF 23 种经典设计模式全景地图：按创建型、结构型与行为型三种变化维度组织分类。
 
 ## 创建型模式：把对象产生方式隔离出来
 
@@ -30,11 +34,11 @@ GoF 是四位作者总结的二十三种经典设计模式，可以把它当成�
 
 ![factory](images/scene02_img01_factory.png)
 
-图解：Cognitive change: 创建对象从调用方移到专门的创建边界。 Purpose: Factory Method / Abstract Factory. Review: text_review, fact_review.
+图解：工厂方法与抽象工厂：将对象实例化逻辑从调用方解耦，收敛到统一的创建边界。
 
 ![builder prototype singleton](images/scene02_img02_builder_prototype_singleton.png)
 
-图解：Cognitive change: 创建型模式的另外三种变化：步骤、复制、唯一访问。 Purpose: Builder / Prototype / Singleton. Review: text_review, fact_review.
+图解：建造者、原型与单例模式：分别应对分步装配、对象复制与全局唯一访问三种需求。
 
 ## 结构型模式：把对象接成可替换的形状
 
@@ -46,15 +50,15 @@ GoF 是四位作者总结的二十三种经典设计模式，可以把它当成�
 
 ![adapter bridge](images/scene03_img01_adapter_bridge.png)
 
-图解：Cognitive change: 结构型先处理接口不兼容与两个维度同时变化。 Purpose: Adapter and Bridge. Review: text_review, fact_review.
+图解：适配器与桥接模式：适配器转换不兼容接口，桥接模式使抽象与实现独立演化。
 
 ![composite decorator](images/scene03_img02_composite_decorator.png)
 
-图解：Cognitive change: 同一接口下分别表达树形组合与可叠加职责。 Purpose: Composite and Decorator. Review: text_review, fact_review.
+图解：组合与装饰器模式：在统一接口下分别支持树形整体—部分层次与动态职责叠加。
 
 ![facade flyweight proxy](images/scene03_img03_facade_flyweight_proxy.png)
 
-图解：Cognitive change: 结构型还可以隐藏复杂子系统、共享状态、控制访问。 Purpose: Facade / Flyweight / Proxy. Review: text_review, fact_review.
+图解：外观、享元与代理模式：分别用于收敛子系统入口、共享细粒度对象与控制目标访问。
 
 ## 行为型模式：重新分配请求与算法的职责
 
@@ -66,15 +70,15 @@ GoF 是四位作者总结的二十三种经典设计模式，可以把它当成�
 
 ![behavior flow a](images/scene04_img01_behavior_flow_a.png)
 
-图解：Cognitive change: 行为型把“谁处理、何时通知、如何遍历”变成显式协作。 Purpose: Chain, Command, Iterator, Observer, Mediator. Review: text_review, fact_review.
+图解：责任链、命令、迭代器、观察者与中介者：显式化对象间的消息分发、请求封装与事件通知协作。
 
 ![behavior flow b](images/scene04_img02_behavior_flow_b.png)
 
-图解：Cognitive change: 行为型另一组处理状态、历史、算法骨架和对象结构访问。 Purpose: Memento / State / Strategy / Template Method / Visitor / Interpreter. Review: text_review, fact_review.
+图解：备忘录、状态、策略、模板方法与访问者：优雅处理对象状态机、算法替换与外部数据访问。
 
 ![behavior key](images/scene04_img03_behavior_key.png)
 
-图解：Cognitive change: 将 11 个行为型模式归入三个可复用问题。 Purpose: compression and recall. Review: text_review, number_review.
+图解：行为型模式核心归纳：按通信解耦、状态流转与算法隔离三大维度收敛选型。
 
 ## 真实系统里，模式的价值来自组合边界
 
@@ -86,11 +90,11 @@ GoF 是四位作者总结的二十三种经典设计模式，可以把它当成�
 
 ![composition case](images/scene05_img01_composition_case.png)
 
-图解：Cognitive change: 真实系统里模式通过组合处理多个独立变化。 Purpose: order/document case. Review: text_review, fact_review.
+图解：真实业务案例组合：协同工厂、策略与装饰器模式应对电商订单流程的多维变化。
 
 ![composition case b](images/scene05_img02_composition_case_b.png)
 
-图解：Cognitive change: 组合模式的收益必须对应具体的复用边界与测试边界。 Purpose: verify reuse rather than abstraction theater. Review: text_review, fact_review.
+图解：模式组合的边界与代价：权衡过度抽象带来的心智复杂度，保持测试与维护边界清晰。
 
 ## 选模式之前，先回答四个变化问题
 
@@ -102,7 +106,7 @@ GoF 是四位作者总结的二十三种经典设计模式，可以把它当成�
 
 ![summary](images/scene06_img01_summary.png)
 
-图解：Cognitive change: 从背模式名回到变化、边界、复用与成本的选型口诀。 Purpose: independent closing scene. Review: text_review, number_review, fact_review.
+图解：设计模式选型总结：从死记硬背 23 个模式名字，回归业务变化、隔离边界与协作成本。
 
 ## 小结
 

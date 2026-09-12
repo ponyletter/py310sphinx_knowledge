@@ -1,6 +1,6 @@
 # Ingress、网关、Istio怎么选？
 
-> 更新于：2026-09-12
+> 资料核验与更新：2026-09-12
 
 三者都可能处在外部请求进入服务的路径上，但不在同一层：Ingress 是 Kubernetes 的 HTTP/HTTPS 路由规则；API 网关是在代理之上执行认证、限流和 API 策略的运行层；Istio Ingress Gateway 是服务网格边缘、把请求带入网格的入口代理。
 
@@ -10,6 +10,11 @@
 
 先区分规则、API 策略层和服务网格边缘入口，才能避免把三者当作同一种产品。
 ```
+
+
+## 阅读边界
+
+本文依据原始课程的研究笔记、课程结构和发布文案整理。涉及产品、模型、版本、平台规则、价格或资格等可能变化的信息，实践前应以当前官方资料和实际环境为准。
 
 ## Ingress：规则不是执行者
 
@@ -124,7 +129,12 @@ Gateway API 通过角色分离改善多团队协作与可移植性。
 先判断是简单入口、API 策略、网格入口还是长期标准化协作，再选择实现。
 ```
 
-## 参考
+
+## 小结
+
+把问题拆成目标、约束、证据和验证四部分，通常比直接寻找唯一答案更可靠。先用本文梳理的选型维度与边界原则完成一次小范围工程验证，再根据真实系统反馈调整下一步决策。
+
+## 参考资料
 
 - [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 - [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)

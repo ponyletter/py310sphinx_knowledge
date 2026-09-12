@@ -1,5 +1,9 @@
 # XML 与 JSON：数据交换格式的历史与现状
 
+> 对应短视频主题：XML 与 JSON：数据交换格式的历史与现状  
+> 资料核验与更新：2026-09-12
+
+
 用白板图解 XML、JSON、YAML 与 Protobuf 的历史动因、核心机制和当代工程边界。
 
 ## 阅读边界
@@ -17,7 +21,7 @@ XML、JSON、YAML 和 Protobuf，分别把这组矛盾中的不同约束推到�
 
 ![hook](images/scene01_img01_hook.png)
 
-图解：An educational hand-drawn whiteboard infographic, clean solid pure white background, sketchy black marker doodle outlines, pastel yellow, sky blue, mint green and soft purple highlighter accents, friendly textbook illustration aesthetic. Output exactly 1840x800, 2.35:1 ultra-widescreen. Draw one large central data packet crossing a bridge between a human notebook and a server, with four directional forces around it labeled in accurate simplified Chinese: “人类可读”, “机器稳定”, “体积效率”, “长期演进”. Along the bridge, place four large accurate labels “XML”, “JSON”, “YAML”, “Protobuf” as four different signposts, connected by clean arrows to the central title “数据交换格式”. Make the composition dense and panoramic, with no reserved title or subtitle band, no people, no logos, no watermark, no dark background, no random text, no cropped objects.
+图解：数据交换格式演进长卷：从早期标记语言到现代微服务高性能协议的发展脉络。
 
 ## XML：把文档结构带上 Web
 
@@ -29,11 +33,11 @@ XML 的故事可以从 SGML 和 Web 时代的文档互操作需求讲起。1998 
 
 ![xml origin](images/scene02_img01_xml_origin.png)
 
-图解：Hand-drawn whiteboard history panorama on a pure white background, black marker outlines with restrained pastel yellow and sky blue highlights. Output exactly 1840x800, 2.35:1. Show a left-to-right bridge timeline labeled exactly “SGML” → “W3C” → “XML 1.0” → “Web”, with the year “1998” clearly beside XML 1.0. Add two chalk callouts “可扩展” and “可互操作”. Draw the old document scroll on the left transforming into a clean tree-shaped web document on the right; no portraits, no logos, no dark background, no extra history claims, no tiny text, no watermark.
+图解：SGML 到 XML 的诞生：解决跨异构平台与不同语言系统之间的数据通用交换标准。
 
 ![xml tree](images/scene02_img02_xml_tree.png)
 
-图解：Clean whiteboard educational diagram, pure white opaque background, black hand-drawn marker lines, pastel yellow highlight for the root and mint green for valid nesting. Output exactly 1840x800, 2.35:1 ultra-widescreen. Fill the panorama with a large XML document tree titled exactly “XML 文档树”; show readable code lines “”, “”, “”, “” beside a branching tree. Label two branches accurately “元素” and “属性”, add “嵌套结构”, and connect the tree to three small ecosystem labels “命名空间”, “XSD”, and “SOAP/WSDL” without implying every XML document uses all three. Keep code large and legible, no blackboard frame, no people, no logo, no invented XML logo, no cropped brackets, no random text.
+图解：XML 树状节点与属性结构：命名空间、严格 Schema 校验与高自解释性设计。
 
 ## JSON：轻量文本，不等于完整语义
 
@@ -45,11 +49,11 @@ XML 的故事可以从 SGML 和 Web 时代的文档互操作需求讲起。1998 
 
 ![xml markup cost](images/scene03_img01_xml_markup_cost.png)
 
-图解：A single comparison card in a clean whiteboard hand-drawn textbook style, pure white background, black marker outline, pastel yellow and sky blue accents. Output exactly 1080x1350, 4:5 portrait. Large header “XML”, beneath it a readable code window with “” and “Lin”, arrows pointing to labels “显式标签”, “元素”, “属性”, and a bottom note “可读但较长”. Make the card full and substantial with large typography, no people, no logos, no dark background, no watermark, no clipped angle brackets or malformed code.
+图解：XML 的冗余标签代价：标签开销大、解析复杂及在前端浏览器环境下的处理成本。
 
 ![json lightweight](images/scene03_img02_json_lightweight.png)
 
-图解：A matching right-side comparison card, pure white background, sketchy black marker outlines, pastel mint green and sky blue highlights. Output exactly 1080x1350, 4:5 portrait. Large header “JSON”, show a clean readable object code block “{\"id\":7,\"name\":\"Lin\"}” with arrows to labels “对象”, “数组”, “轻量文本”. Add a clear yellow boundary stamp “语法≠业务语义” and a small validation layer labeled “JSON Schema”, showing that schema can add constraints while JSON syntax alone does not define application meaning. No people, no logos, no dark background, no random text, no malformed quotation marks.
+图解：JSON 的轻量化革命：基于键值对象与数组的极简映射，与 Web 运行时天然契合。
 
 ## YAML：让结构化数据更适合人来维护
 
@@ -61,15 +65,15 @@ YAML 把重点从机器最短表示，转向人类能否快速阅读、编辑和
 
 ![yaml config](images/scene04_img01_yaml_config.png)
 
-图解：Educational hand-drawn whiteboard card, pure white background, black marker lines, pastel yellow and mint green accents. Output exactly 900x1200, 3:4 portrait. Show a large YAML configuration page titled “YAML”, with clear lines “server:”, two-space indentation, “port: 8080”, and a small arrow note “缩进表达结构”. Add two contextual tags “Kubernetes” and “CI/CD” as examples of configuration ecosystems, not as logos or claims that YAML belongs only to them. Make the configuration look easy for a human to scan and edit, with no people, no logos, no dark background, no extra punctuation, no clipped lines, no watermark.
+图解：YAML 的人类友好设计：依靠缩进表达层次、极简视觉噪声，成为云原生配置标准。
 
 ![yaml json subset](images/scene04_img02_yaml_json_subset.png)
 
-图解：Clean whiteboard set diagram on a pure white background, black hand-drawn outlines and pastel sky blue/yellow accents. Output exactly 900x1200, 3:4 portrait. Draw a large outer rounded region labeled “YAML 1.2” containing a clearly smaller inner region labeled “JSON”, with the exact relation text “JSON ⊂ YAML 1.2”. Add two precise notes “兼容语法” and “不是同一个语言体验”. Keep the set relation visually unambiguous, no people, no logos, no dark background, no random text, no cropped symbols.
+图解：YAML 与 JSON 的超集关系：在 JSON 数据模型基础上扩展出更具可读性的配置语法。
 
 ![yaml edge](images/scene04_img03_yaml_edge.png)
 
-图解：Hand-drawn whiteboard caution card, solid pure white background, black marker outlines, restrained pastel yellow warning highlights and soft purple for schema. Output exactly 900x1200, 3:4 portrait. Show a tidy indented YAML tree with large callouts “缩进”, “隐式类型”, “schema/标签”, “注释”, and “锚点/别名”, joined by clean arrows to a bottom rule “先约定再解析”. Add the header “YAML 边界” and a tiny note “版本与 schema 会影响解析”. Do not show the unqualified claim “NO 变 false”. Friendly textbook look, no alarmist imagery, no people, no logos, no dark background, no tiny text, no watermark.
+图解：YAML 的设计陷阱与安全边界：缩进敏感、隐式类型歧义与反序列化安全风险。
 
 ## Protobuf：用 schema换取线上效率
 
@@ -81,11 +85,11 @@ YAML 把重点从机器最短表示，转向人类能否快速阅读、编辑和
 
 ![proto schema codegen](images/scene05_img01_proto_schema_codegen.png)
 
-图解：Whiteboard comparison card, pure white background, sketchy black marker outlines, pastel purple and sky blue accents. Output exactly 1080x1350, 4:5 portrait. Draw a clear pipeline from a schema sheet labeled “.proto” containing “message User” to a compiler box labeled “protoc”, then to three generated code sheets labeled “Java”, “Go”, “Python”. Add the large header “Protobuf” and the notes “生成代码” and “多语言”. No people, no logos, no dark background, no random source code, no cropped arrows, no watermark.
+图解：Protocol Buffers 强契约机制：通过 IDL 契约文件结合代码生成器保障跨语言一致性。
 
 ![proto wire evolution](images/scene05_img02_proto_wire_evolution.png)
 
-图解：Matching hand-drawn whiteboard card, solid pure white background, black marker outlines, mint green for compatible evolution and pastel yellow for field numbers. Output exactly 1080x1350, 4:5 portrait. Show a schema column with exact labels “1:name” and “2:id” feeding into compact byte blocks, then a new field “3:email” entering with a green check and the note “向后兼容”. Add a small service-to-service arrow labeled “gRPC” and a readable caution “依赖 .proto”; header “字段编号 / 紧凑二进制”. Do not state any universal percentage or benchmark. No people, no logos, no dark background, no malformed numbers, no watermark.
+图解：Protobuf 二进制压缩编码与字段向前兼容机制：Varint 编码与极致吞吐性能。
 
 ## 今天的现状：四条路线并存
 
@@ -97,15 +101,15 @@ YAML 把重点从机器最短表示，转向人类能否快速阅读、编辑和
 
 ![document api config](images/scene06_img01_document_api_config.png)
 
-图解：Panoramic hand-drawn whiteboard sequence, pure white background, black marker outlines, one muted accent per semantic role. Output exactly 1840x800, 2.35:1. Draw four connected workstations in one left-to-right flow: a document exchange scroll labeled “文档交换 / XML”, a browser and API envelope labeled “Web API / JSON”, a human-edited configuration file labeled “配置维护 / YAML”, and two servers exchanging compact packets labeled “服务间传输 / Protobuf”. Use arrows to show coexistence, not replacement. No people, no brand logos, no dark background, no random ranking, no cropped labels.
+图解：三大核心应用场景划分：面向文档用 XML、面向通用 API 用 JSON、面向服务配置用 YAML。
 
 ![constraint axis](images/scene06_img02_constraint_axis.png)
 
-图解：Clean whiteboard continuum-axis infographic, pure white opaque background, black marker axis and fine arrows, pastel yellow, sky blue, mint green and soft purple semantic accents. Output exactly 1840x800, 2.35:1. Draw a large horizontal axis with four accurate endpoint labels “人类可读”, “Web 交换”, “强 schema”, “高吞吐”; place four large named nodes “XML”, “JSON”, “YAML”, “Protobuf” at meaningful distinct positions with short notes. Make it clear this is a constraint map, not a quality ranking. No people, no logos, no dark background, no tiny text, no watermark.
+图解：数据格式权衡光谱：在人类可读性（易调试）与机器传输效率（极致吞吐）间权衡。
 
 ![coexistence map](images/scene06_img03_coexistence_map.png)
 
-图解：Panoramic final synthesis before the closing card, clean pure white background, black hand-drawn lines, restrained four pastel accents. Output exactly 1840x800, 2.35:1. Place a central node “数据交换” with four non-overlapping paths to “XML”, “JSON”, “YAML”, and “Protobuf”; each path ends at a different context symbol: document, browser API, configuration file, server packet. Add the large exact statement “不是线性淘汰” and a smaller exact statement “按边界共存”. No people, no logos, no dark background, no arbitrary performance numbers, no watermark.
+图解：现代微服务架构中的格式协同：外部暴露 JSON、内网微服务使用 Protobuf、部署编排使用 YAML。
 
 ## 选格式先问四件事
 
@@ -117,7 +121,7 @@ YAML 把重点从机器最短表示，转向人类能否快速阅读、编辑和
 
 ![takeaway](images/scene07_img01_takeaway.png)
 
-图解：Independent closing whiteboard panorama, clean solid pure white background, black sketchy marker outlines, pastel yellow highlight for the final rule and four restrained semantic accents. Output exactly 1840x800, 2.35:1 ultra-widescreen. Large central title “选格式先问四件事”, arranged as four clean question branches: “谁来读？”, “怎么传？”, “要不要 schema？”, “如何演进？”. Under them place four concise mappings “文档→XML”, “Web→JSON”, “配置→YAML”, “服务间→Protobuf”, plus a smaller optional extension “AI 结构化输出→JSON + JSON Schema”. End with the exact takeaway “格式不是潮流，是约束的答案”. Full, readable panoramic composition, no people, no logos, no dark background, no random text, no watermark, no cropped arrows.
+图解：数据交换格式选型总结：按场景边界、读写频率、带宽要求与契约严格度进行科学选型。
 
 ## 小结
 

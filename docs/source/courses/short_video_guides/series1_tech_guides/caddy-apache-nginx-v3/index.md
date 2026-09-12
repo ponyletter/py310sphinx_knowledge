@@ -1,5 +1,9 @@
 # Caddy、Apache、Nginx，怎么选？
 
+> 对应短视频主题：Caddy、Apache、Nginx，怎么选？  
+> 资料核验与更新：2026-09-12
+
+
 这是一篇根据原始课程研究资料、讲解结构与发布文案整理的读者版图文。
 
 ## 阅读边界
@@ -16,7 +20,7 @@ Caddy、Apache 和 Nginx 都能当 Web 服务器，但它们的设计思路和�
 
 ![overview](images/scene01_overview.png)
 
-图解：“overview”这张示意图用于解释“Web 服务器：到底做什么？”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Web 服务器核心职责：连接处理、静态资源交付、反向代理与 TLS 终结。
 
 ## Apache：成熟的模块化路线
 
@@ -28,11 +32,11 @@ Apache 还能选择多进程、多线程或事件处理模型，优点是灵活�
 
 ![apache history](images/scene02_apache_history.png)
 
-图解：“apache history”这张示意图用于解释“Apache：成熟的模块化路线”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Apache HTTP Server 演进史：进程/线程并发模型与稳定可靠的企业级积淀。
 
 ![apache modules](images/scene02_apache_modules.png)
 
-图解：“apache modules”这张示意图用于解释“Apache：成熟的模块化路线”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Apache 模块化架构：丰富的多处理模块（MPM）与动态功能扩展机制。
 
 ## Nginx：为连接规模换一条路
 
@@ -44,11 +48,11 @@ Nginx 在 2000 年代初面对的是 C10K 问题，也就是同时处理大量�
 
 ![nginx history](images/scene03_nginx_history.png)
 
-图解：“nginx history”这张示意图用于解释“Nginx：为连接规模换一条路”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Nginx 的诞生与破局：事件驱动非阻塞架构应对 C10K 高并发连接挑战。
 
 ![nginx proxy](images/scene03_nginx_proxy.png)
 
-图解：“nginx proxy”这张示意图用于解释“Nginx：为连接规模换一条路”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Nginx 反向代理与负载均衡拓扑：统一网关路由、动静分离与后端解耦。
 
 ## Caddy：把安全默认值前置
 
@@ -60,11 +64,11 @@ Caddy 从 2015 年起把现代 Web 的安全体验放到产品前台，配置也
 
 ![caddy config](images/scene04_caddy_config.png)
 
-图解：“caddy config”这张示意图用于解释“Caddy：把安全默认值前置”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Caddy 极简配置（Caddyfile）：声明式语法与自动化默认最佳实践。
 
 ![caddy https](images/scene04_caddy_https.png)
 
-图解：“caddy https”这张示意图用于解释“Caddy：把安全默认值前置”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Caddy 自动 HTTPS 证书管理：集成 ACME 协议与自动化申请、续期与挂载。
 
 ## 三者对比：别只问谁更快
 
@@ -76,15 +80,15 @@ Caddy 从 2015 年起把现代 Web 的安全体验放到产品前台，配置也
 
 ![apache compare](images/scene05_apache_compare.png)
 
-图解：“apache compare”这张示意图用于解释“三者对比：别只问谁更快”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Apache 适用定位：依赖 .htaccess 灵活目录配置与传统老旧应用托管。
 
 ![caddy compare](images/scene05_caddy_compare.png)
 
-图解：“caddy compare”这张示意图用于解释“三者对比：别只问谁更快”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Caddy 适用定位：个人项目、现代微服务与追求免维护 HTTPS 的敏捷场景。
 
 ![nginx compare](images/scene05_nginx_compare.png)
 
-图解：“nginx compare”这张示意图用于解释“三者对比：别只问谁更快”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Nginx 适用定位：高并发流量入口、核心反向代理与成熟生产级网关集群。
 
 ## 最后：按场景做选择
 
@@ -96,7 +100,7 @@ Caddy 从 2015 年起把现代 Web 的安全体验放到产品前台，配置也
 
 ![decision](images/scene06_decision.png)
 
-图解：“decision”这张示意图用于解释“最后：按场景做选择”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：Web 服务器选型决策路径：按并发规模、运维复杂度与自动化需求做决定。
 
 ## 小结
 

@@ -1,5 +1,9 @@
 # Cloudflare怎么接？免费够用吗？
 
+> 对应短视频主题：Cloudflare怎么接？免费够用吗？  
+> 资料核验与更新：2026-09-12
+
+
 用一条请求链路讲清 Cloudflare 的 DNS、反向代理、CDN、TLS、DDoS 与 WAF，再比较 Free、Pro、Business 的适用边界，并演示网站接入的关键步骤。方案与价格以官方页面为准。
 
 ## 阅读边界

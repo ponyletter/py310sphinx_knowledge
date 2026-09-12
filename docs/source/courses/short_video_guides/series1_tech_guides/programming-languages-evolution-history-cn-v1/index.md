@@ -1,5 +1,9 @@
 # 编程语言，为什么越变越多？
 
+> 对应短视频主题：编程语言，为什么越变越多？  
+> 资料核验与更新：2026-09-12
+
+
 从机器指令、FORTRAN 和 C，到 Java、Python、JavaScript 与 Rust：这条线讲清语言为何不是一代替一代，而是在不同约束下持续分化。
 
 ## 阅读边界
@@ -14,7 +18,7 @@
 
 ![abstraction ladder v2](images/scene01_img01_abstraction_ladder-v2.png)
 
-图解：```text
+图解：人机抽象阶梯全景：从底层物理硬件到高级抽象意图的七十年演进之路。
 
 ## 从打孔汇编到C语言结构化革命
 
@@ -26,15 +30,15 @@
 
 ![machine assembly pain](images/scene02_img01_machine_assembly_pain.png)
 
-图解：```text
+图解：早期机器语言与汇编语言：直接面向寄存器与打孔纸带，开发与维护成本极其高昂。
 
 ![c structured revolution](images/scene02_img02_c_structured_revolution.png)
 
-图解：```text
+图解：C 语言结构化革命：通过编译器实现跨硬件移植，确立现代系统级软件的基石。
 
 ![c legacy summary](images/scene02_img03_c_legacy_summary.png)
 
-图解：```text
+图解：手动内存管理的困境：指针悬挂与内存泄漏催生了软件危机与工程化反思。
 
 ## 软件危机破局：面向对象与虚拟机生态
 
@@ -46,19 +50,19 @@ C++ 封装、Java 跨平台与脚本语言的敏捷生产力爆发
 
 ![cpp oop encapsulation](images/scene03_img01_cpp_oop_encapsulation.png)
 
-图解：```text
+图解：C++ 面向对象革命：用类、封装、继承与多态构筑大型工程代码协作边界。
 
 ![java jvm write once](images/scene03_img02_java_jvm_write_once.png)
 
-图解：```text
+图解：Java 虚拟机（JVM）时代：字节码技术与自动垃圾回收实现“一次编写，随处运行”。
 
 ![scripting python js](images/scene03_img03_scripting_python_js.png)
 
-图解：```text
+图解：脚本语言爆发时代：Python 与 JavaScript 凭借极简语法推动 Web 与数据科学繁荣。
 
 ![language spectrum map](images/scene03_img04_language_spectrum_map.png)
 
-图解：```text
+图解：编程语言光谱：在运行性能（底层控制）与开发效率（高度抽象）之间的经典权衡。
 
 ## 经典语言的性能—效率光谱
 
@@ -68,19 +72,19 @@ C++ 封装、Java 跨平台与脚本语言的敏捷生产力爆发
 
 ![go concurrency csp](images/scene04_img01_go_concurrency_csp.png)
 
-图解：```text
+图解：Go 语言现代并发革新：轻量级协程（Goroutine）与 CSP 通道通信简化高并发编程。
 
 ![rust ownership safety](images/scene04_img02_rust_ownership_safety.png)
 
-图解：```text
+图解：Rust 内存安全突破：所有权与借用检查机制，在无垃圾回收开销下达成内存绝对安全。
 
 ![types multi paradigm](images/scene04_img03_types_multi_paradigm.png)
 
-图解：```text
+图解：TypeScript 与现代多范式融合：强类型系统赋能动态脚本语言，提升大规模工程稳定性。
 
 ![modern matrix summary](images/scene04_img04_modern_matrix_summary.png)
 
-图解：```text
+图解：现代主流语言能力矩阵：跨平台、高并发、内存安全与开发效率综合对比。
 
 ## 算力拐点：高并发与内存安全新纪元
 
@@ -106,7 +110,7 @@ TypeScript 等现代语言披上强类型装甲，融合函数式与声明式，
 
 ![programming languages summary](images/scene07_img01_programming_languages_summary.png)
 
-图解：```text
+图解：编程语言演进总结：语言演变不是一代替换一代，而是在特定约束与场景下不断分化繁荣。
 
 ## 小结
 

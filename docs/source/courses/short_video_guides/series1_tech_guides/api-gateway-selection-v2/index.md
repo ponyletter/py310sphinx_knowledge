@@ -1,6 +1,6 @@
 # 八类网关怎么选？
 
-> 更新于：2026-09-12
+> 资料核验与更新：2026-09-12
 
 Traefik、HAProxy、Envoy、Kong、APISIX、Spring Cloud Gateway、Gravitee、YesApi Pro 都可能出现在请求入口附近，但解决的问题不同。选型先看自己需要的是稳定转发、云原生入口、API 策略、接口产品化，还是接口开发协作。
 
@@ -17,6 +17,11 @@ Traefik、HAProxy、Envoy、Kong、APISIX、Spring Cloud Gateway、Gravitee、Ye
 
 HAProxy 偏稳定转发，Traefik 与 Envoy偏云原生入口和服务代理，Kong、APISIX、Spring Cloud Gateway偏 API 策略，Gravitee 与 YesApi Pro 偏管理或协作。
 ```
+
+
+## 阅读边界
+
+本文依据原始课程的研究笔记、课程结构和发布文案整理。涉及产品、模型、版本、平台规则、价格或资格等可能变化的信息，实践前应以当前官方资料和实际环境为准。
 
 ## 一次请求经历什么
 
@@ -107,7 +112,12 @@ Java 与 Spring 团队希望在熟悉的运行时内扩展路由和过滤器时�
 需求越简单，越不要为了完整治理平台引入不必要的复杂度。
 ```
 
-## 参考
+
+## 小结
+
+把问题拆成目标、约束、证据和验证四部分，通常比直接寻找唯一答案更可靠。先用本文梳理的选型维度与边界原则完成一次小范围工程验证，再根据真实系统反馈调整下一步决策。
+
+## 参考资料
 
 - [Traefik Gateway API](https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/gateway-api/)
 - [HAProxy Documentation](https://www.haproxy.com/documentation/)

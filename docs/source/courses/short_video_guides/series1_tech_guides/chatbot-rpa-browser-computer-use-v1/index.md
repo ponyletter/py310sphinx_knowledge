@@ -1,5 +1,9 @@
 # 四类自动化工具怎么选
 
+> 对应短视频主题：四类自动化工具怎么选  
+> 资料核验与更新：2026-09-12
+
+
 自动化工具不应按“谁更聪明”比较，而应看观察方式、执行范围和安全边界：聊天机器人回答与协助，RPA 执行稳定规则流程，浏览器智能体处理网页任务，Computer Use 则面向跨应用的电脑操作。
 
 ```{figure} images/scene01_img01_overview.png
@@ -15,6 +19,11 @@
 
 能力范围越大，观察、验证、权限控制和故障恢复也越重要。
 ```
+
+
+## 阅读边界
+
+本文依据原始课程的研究笔记、课程结构和发布文案整理。涉及产品、模型、版本、平台规则、价格或资格等可能变化的信息，实践前应以当前官方资料和实际环境为准。
 
 ## 四种工具的适用边界
 
@@ -98,3 +107,17 @@ Computer Use 扩大到跨应用界面操作，也相应扩大了误操作和敏�
 
 固定流程用 RPA，网页任务用受限浏览器智能体，跨应用操作才评估 Computer Use；始终保留验证和人工边界。
 ```
+
+
+## 小结
+
+把问题拆成目标、约束、证据和验证四部分，通常比直接寻找唯一答案更可靠。先用本文梳理的选型维度与边界原则完成一次小范围工程验证，再根据真实系统反馈调整下一步决策。
+
+## 参考资料
+
+以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+
+- [Anthropic Computer Use API Documentation](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use)
+- [Playwright Browser Automation](https://playwright.dev/)
+- [Microsoft Power Automate RPA Architecture](https://learn.microsoft.com/en-us/power-automate/)
+- [OpenAI Operator / Browser Tooling](https://platform.openai.com/docs/guides/tools)

@@ -1,5 +1,9 @@
 # UML：类图和时序图怎么用？
 
+> 对应短视频主题：UML：类图和时序图怎么用？  
+> 资料核验与更新：2026-09-12
+
+
 代码越写越多，团队却说不清系统里有什么、怎么连接、先后怎么发生？这个视频从搬家清单、蛋糕模具和点外卖出发，讲清 UML、对象与类，以及类图和时序图分别解决什么问题。
 
 ## 阅读边界
@@ -16,7 +20,7 @@ UML（统一建模语言）能把系统画成一张大家看得懂的地图；�
 
 ![blueprint hook](images/scene01_img01_blueprint_hook.png)
 
-图解：“blueprint hook”这张示意图用于解释“UML 怎么用：类图和时序图”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：UML 软件设计蓝图总览：统一建模语言在复杂软件工程中充当沟通与设计的标准化桥梁。
 
 ## 为什么出现：结束各画各的地图
 
@@ -28,11 +32,11 @@ UML（统一建模语言）能把系统画成一张大家看得懂的地图；�
 
 ![method wars](images/scene02_img01_method_wars.png)
 
-图解：“method wars”这张示意图用于解释“为什么出现：结束各画各的地图”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：20 世纪 90 年代的方法学之争：各学派符号林立导致跨团队沟通成本急剧上升。
 
 ![unification timeline](images/scene02_img02_unification_timeline.png)
 
-图解：“unification timeline”这张示意图用于解释“为什么出现：结束各画各的地图”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：三剑客与 UML 标准诞生：Booch、Rumbaugh 与 Jacobson 联合统一面向对象符号体系。
 
 ## 从生活物品到模型：对象、类型、关系
 
@@ -44,15 +48,15 @@ UML（统一建模语言）能把系统画成一张大家看得懂的地图；�
 
 ![object classifier](images/scene03_img01_object_classifier.png)
 
-图解：“object classifier”这张示意图用于解释“从生活物品到模型：对象、类型、关系”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：类与对象概念模型：抽象类别（Classifier）与运行期具体实例（Instance）的关系映射。
 
 ![elements relations](images/scene03_img02_elements_relations.png)
 
-图解：“elements relations”这张示意图用于解释“从生活物品到模型：对象、类型、关系”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：UML 核心元素与关系模型：事物、关系与图的组织结构。
 
 ![model views](images/scene03_img03_model_views.png)
 
-图解：“model views”这张示意图用于解释“从生活物品到模型：对象、类型、关系”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：模型与视图多视角观察：从不同角度观察同一套底层软件模型架构。
 
 ## 类图：回答系统有什么
 
@@ -64,11 +68,11 @@ UML（统一建模语言）能把系统画成一张大家看得懂的地图；�
 
 ![class box](images/scene04_img01_class_box.png)
 
-图解：“class box”这张示意图用于解释“类图：回答系统有什么”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：类图标准结构盒：类名、属性列表与方法操作的三层标准表示。
 
 ![class relations](images/scene04_img02_class_relations.png)
 
-图解：“class relations”这张示意图用于解释“类图：回答系统有什么”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：类之间的主要关系符号：关联、聚合、组合、泛化（继承）与依赖的标准表述。
 
 ## 时序图：回答事情怎么发生
 
@@ -80,11 +84,11 @@ UML（统一建模语言）能把系统画成一张大家看得懂的地图；�
 
 ![lifelines messages](images/scene05_img01_lifelines_messages.png)
 
-图解：“lifelines messages”这张示意图用于解释“时序图：回答事情怎么发生”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：时序图核心要素：生命线（Lifeline）、激活条与对象间时间维度上的同步/异步消息传递。
 
 ![sequence control](images/scene05_img02_sequence_control.png)
 
-图解：“sequence control”这张示意图用于解释“时序图：回答事情怎么发生”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：时序图分支与循环控制：利用条件组合片段（alt、loop）表达动态复杂业务流。
 
 ## 同一模型，换一个观察角度
 
@@ -96,15 +100,15 @@ UML 管的是表达方式，不管你采用敏捷迭代、系统工程，还是�
 
 ![uml taxonomy](images/scene06_img01_uml_taxonomy.png)
 
-图解：“uml taxonomy”这张示意图用于解释“同一模型，换一个观察角度”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：UML 14 种图谱分类体系：静态结构图（类图、组件图等）与动态行为图（时序图、状态图等）。
 
 ![same model slices](images/scene06_img02_same_model_slices.png)
 
-图解：“same model slices”这张示意图用于解释“同一模型，换一个观察角度”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：同一系统的多维模型切片：结构图表达静态骨架，行为图刻画动态协作。
 
 ![method independent](images/scene06_img03_method_independent.png)
 
-图解：“method independent”这张示意图用于解释“同一模型，换一个观察角度”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：方法学中立性：UML 作为通用符号标准，可用于敏捷迭代、领域驱动设计与传统开发。
 
 ## 三句口诀：有什么、怎么连、怎么动
 
@@ -116,7 +120,7 @@ UML 管的是表达方式，不管你采用敏捷迭代、系统工程，还是�
 
 ![takeaway](images/scene07_img01_takeaway.png)
 
-图解：“takeaway”这张示意图用于解释“三句口诀：有什么、怎么连、怎么动”的关键关系；阅读时可结合本节的步骤、边界与结论逐项核对。
+图解：UML 实用口诀与总结：理清有什么（类图）、怎么连（关系）、怎么动（时序图），避免过度形式化。
 
 ## 小结
 

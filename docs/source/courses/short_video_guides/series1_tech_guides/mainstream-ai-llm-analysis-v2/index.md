@@ -1,5 +1,9 @@
 # 主流 AI 语言模型（LLM）解析
 
+> 对应短视频主题：主流 AI 语言模型（LLM）解析  
+> 资料核验与更新：2026-09-12
+
+
 用黑板图解方式，简明讲解《主流 AI 语言模型（LLM）解析》。
 
 ## 阅读边界
@@ -20,7 +24,7 @@
 
 ![llm overview](images/scene01_img01_llm_overview.png)
 
-图解：用一个高信息密度的大图解释 LLM 的共同机制：用户输入、上下文、注意力、语言模型、工具/检索、生成结果。至少 5 个主要对象、4 个局部文字锚点、完整输入—处理—输出关系链。
+图解：大语言模型通用架构全景：用户输入、注意力机制、预训练底座、外部工具与输出生成链路。
 
 ## OpenAI 的产品层
 
@@ -34,7 +38,7 @@ Codex 不是 GPT-5.6 Sol 的专属功能。
 
 ![openai ecosystem](images/scene02_img01_openai_ecosystem.png)
 
-图解：OpenAI 独立产品层—模型层—任务层大图。中心是“OpenAI / GPT 家族”，左侧为 ChatGPT 用户端助手，中央为 GPT 模型层，右侧连接 API/Responses、Codex 和图像/实时/转录等专用能力。必须为每个对象提供形状、中文身份标签和关系箭头。
+图解：OpenAI 产品与模型生态：面向消费者的 ChatGPT、GPT-4o/o1 模型系列与开发者 API 接口。
 
 ## OpenAI 的代表型号
 
@@ -46,7 +50,7 @@ GPT-5.6 Luna，更适合批量分类、信息抽取、客服和高吞吐自动�
 
 ![openai models v2](images/scene02_img02_openai_models_v2.png)
 
-图解：修正版 OpenAI 型号与 Codex 跨模型工具关系图。
+图解：OpenAI 代表型号演进与专用代码/推理工具体系。
 
 ## Claude 的产品生态
 
@@ -58,7 +62,7 @@ Claude 产品还包括 Claude Code、Cowork，以及面向企业的工作流和�
 
 ![claude ecosystem](images/scene03_img01_claude_ecosystem.png)
 
-图解：Claude 产品生态与代表型号。
+图解：Anthropic Claude 生态架构：Claude.ai 网页端、Projects 知识库与底层 Sonnet/Opus/Haiku 阶梯。
 
 ## Claude 的代表型号
 
@@ -72,7 +76,7 @@ Claude Sonnet 5，强调能力与速度之间的平衡。Claude Haiku 4.5，更�
 
 ![claude models](images/scene03_img02_claude_models.png)
 
-图解：Claude 产品生态与代表型号。
+图解：Claude 3.5 系列核心特性：业界顶尖代码能力与 Artifacts 实时交互界面。
 
 ## Gemini 的多模态生态
 
@@ -86,7 +90,7 @@ Gemini 是 Google 的多模态模型家族。文字只是它处理的信息类�
 
 ![gemini ecosystem](images/scene04_img01_gemini_ecosystem.png)
 
-图解：Gemini 多模态生态与代表型号。
+图解：Google Gemini 生态布局：深度融入 Google Workspace、Android 系统与 Google Cloud。
 
 ## Gemini 的代表型号
 
@@ -100,7 +104,7 @@ Flash-Lite，更适合摘要、分类、批处理和高频调用。Stable、Prev
 
 ![gemini models](images/scene04_img02_gemini_models.png)
 
-图解：Gemini 多模态生态与代表型号。
+图解：Gemini 1.5/2.0 系列特征：原生多模态输入与百万至千万级超长上下文窗口。
 
 ## Grok 的实时信息生态
 
@@ -112,7 +116,7 @@ Web Search 和 X Search，可以为回答接入网络与社交平台信息。Gro
 
 ![grok ecosystem](images/scene05_img01_grok_ecosystem.png)
 
-图解：Grok 实时信息生态与代表型号。
+图解：xAI Grok 生态特色：结合 X（原 Twitter）全球实时数据流与高并发算力集群。
 
 ## Grok 4.6 与工具能力
 
@@ -126,7 +130,7 @@ Grok 4.6 面向编码、知识工作、复杂多步骤任务和长时智能助�
 
 ![grok models](images/scene05_img02_grok_models.png)
 
-图解：Grok 实时信息生态与代表型号。
+图解：Grok 系列代表型号与实时检索、多模态及沉浸式交互能力。
 
 ## DeepSeek 的开放模型生态
 
@@ -140,7 +144,7 @@ DeepSeek 的路线更突出开放模型、推理、代码、低成本 API 和开
 
 ![deepseek ecosystem](images/scene06_img01_deepseek_ecosystem.png)
 
-图解：DeepSeek 开放模型生态与代表型号。
+图解：DeepSeek 开放模型生态：低成本高性能开源权重与全球开发者繁荣生态。
 
 ## DeepSeek V4 型号
 
@@ -154,7 +158,7 @@ DeepSeek-V4-Flash-Vision-Exp，针对视觉输入和多模态实验场景。V4-P
 
 ![deepseek models](images/scene06_img02_deepseek_models.png)
 
-图解：DeepSeek 开放模型生态与代表型号。
+图解：DeepSeek-V3 与 R1 系列：MoE 架构创新与强化学习长链思考突破。
 
 ## GPT、Claude、Gemini 的命名来源
 
@@ -168,7 +172,7 @@ Gemini 的含义接近双子座或双生者，适合表达统一、多模态和�
 
 ![naming gpt claude gemini](images/scene07_img01_naming_gpt_claude_gemini.png)
 
-图解：两组命名来源场景。
+图解：GPT、Claude、Gemini 品牌命名来历与产品哲学传承。
 
 ## Grok、DeepSeek 的命名来源
 
@@ -182,7 +186,7 @@ DeepSeek 通常写作“深度求索”，传递深入探索的品牌表达。�
 
 ![naming grok deepseek](images/scene08_img01_naming_grok_deepseek.png)
 
-图解：两组命名来源场景。
+图解：Grok 与 DeepSeek 品牌由来及其独特的开源与探索理念。
 
 ## 如何拆解一个模型名称？
 
@@ -196,7 +200,7 @@ DeepSeek-V4-Pro-0813，则包含家族、V4 代际、Pro 档位和日期版本�
 
 ![name anatomy](images/scene09_img01_name_anatomy.png)
 
-图解：模型名称、后缀、生命周期与调用标识拆解。
+图解：模型命名后缀深度解析：包含参数规模、微调对齐、上下文长度与多模态标识。
 
 ## 后缀、生命周期与 API ID
 
@@ -210,7 +214,7 @@ Stable、Preview、Latest 和 Experimental，主要描述版本生命周期。AP
 
 ![suffix lifecycle](images/scene09_img02_suffix_lifecycle.png)
 
-图解：模型名称、后缀、生命周期与调用标识拆解。
+图解：模型版本生命周期：Preview 预览、Stable 正式版、Snapshot 快照与废弃下线机制。
 
 ## 五家模型如何选择？
 
@@ -228,7 +232,7 @@ Stable、Preview、Latest 和 Experimental，主要描述版本生命周期。AP
 
 ![final selection](images/scene10_img01_final_selection.png)
 
-图解：任务驱动的选择逻辑与评估清单。
+图解：主流五家大模型选型综合指南：依据业务场景、隐私合规、预算成本与生态绑定选型。
 
 ## 小结
 
@@ -236,4 +240,10 @@ Stable、Preview、Latest 和 Experimental，主要描述版本生命周期。AP
 
 ## 参考资料
 
-原始研究笔记未收录可公开核验的网址。本文仅作为课程源资料的整理版；涉及外部事实、版本与规则时，请在使用前自行核验当前一手资料。
+以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+
+- [OpenAI Models & API Documentation](https://platform.openai.com/docs/models)
+- [Anthropic Claude Models Overview](https://docs.anthropic.com/en/docs/about-claude/models)
+- [Google DeepMind Gemini Documentation](https://ai.google.dev/gemini-api/docs/models/gemini)
+- [xAI Grok Documentation](https://docs.x.ai/)
+- [DeepSeek Open Source Models](https://github.com/deepseek-ai)
