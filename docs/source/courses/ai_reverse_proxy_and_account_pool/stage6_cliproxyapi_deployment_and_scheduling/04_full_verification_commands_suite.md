@@ -122,6 +122,20 @@ curl -Iv https://api.yourdomain.com/v1/models \
 
 ---
 
+### 6. Web 可视化管理后台与接口状态验证
+验证管理控制面板静态资源与底层 Management API 状态：
+
+```bash
+# 1. 验证后台前端页面可访问性 (返回 HTTP 200)
+curl -s -I https://cpa.yourdomain.com/management.html
+
+# 2. 验证管理接口鉴权通信 (携带 X-Management-Key)
+curl -s -i https://cpa.yourdomain.com/v0/management/status \
+  -H "X-Management-Key: YourManagementSecretKey"
+```
+
+---
+
 ## 自动化回归测试脚本（Python）
 
 为方便后续批量检测账号池可用率、首字响应延迟（Time-To-First-Token, TTFT）与各模型支持状态，建议在运维机部署如下 Python 脚本：
