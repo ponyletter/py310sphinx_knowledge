@@ -100,13 +100,21 @@ Beautiful Soup 专门帮助你在 HTML 里定位和提取内容。
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/Web_crawler](https://en.wikipedia.org/wiki/Web_crawler)
-- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview)
-- [https://docs.python.org/3.13/library/urllib.request.html](https://docs.python.org/3.13/library/urllib.request.html)
-- [https://requests.readthedocs.io/en/latest/user/quickstart/](https://requests.readthedocs.io/en/latest/user/quickstart/)
-- [https://beautiful-soup-4.readthedocs.io/en/latest/](https://beautiful-soup-4.readthedocs.io/en/latest/)
-- [https://docs.scrapy.org/en/latest/topics/architecture.html](https://docs.scrapy.org/en/latest/topics/architecture.html)
-- [https://www.selenium.dev/documentation/webdriver/](https://www.selenium.dev/documentation/webdriver/)
-- [https://datatracker.ietf.org/doc/html/rfc9309](https://datatracker.ietf.org/doc/html/rfc9309)
+- [【维基百科】网络爬虫（Web Crawler）工作原理与技术分类](https://en.wikipedia.org/wiki/Web_crawler)  
+  *说明：网络机器人、搜索引擎抓取与自动化数据提取的基础架构与伦理标准。*
+- [【MDN 权威教程】HTTP 协议总览与请求/响应报文解析](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview)  
+  *说明：从底层彻底理解 URL、HTTP 请求头（User-Agent、Cookie）、状态码与内容编码。*
+- [【Python 官方文档】urllib.request 标准网络请求库规范](https://docs.python.org/3/library/urllib.request.html)  
+  *说明：Python 内置的轻量网络请求标准模块，开箱即用但缺乏高级易用会话管理。*
+- [【Requests 官方文档】Requests: 让 HTTP 服务于人类的快速入门](https://requests.readthedocs.io/en/latest/user/quickstart/)  
+  *说明：Python 生态使用最广的同步 HTTP 客户端，优雅简洁的 API 设计典范。*
+- [【Beautiful Soup 官方手册】Beautiful Soup 4 容错 HTML/XML 解析库](https://beautiful-soup-4.readthedocs.io/en/latest/)  
+  *说明：基于 DOM 树的直观节点导航、CSS 选择器与高容错脏 HTML 数据提取。*
+- [【Scrapy 官方文档】Scrapy 工业级异步抓取框架架构剖析](https://docs.scrapy.org/en/latest/topics/architecture.html)  
+  *说明：集成 Twisted 异步非阻塞引擎、下载器中间件与 Item Pipeline 的分布式爬虫框架。*
+- [【Selenium 官方指南】Selenium WebDriver 浏览器自动化与动态渲染](https://www.selenium.dev/documentation/webdriver/)  
+  *说明：真实驱动 Chromium/Firefox 浏览器，应对 SPA 复杂 JavaScript 动态渲染与前端交互。*
+- [【IETF RFC 9309】Robots 排除协议正式标准规范（Robots.txt）](https://datatracker.ietf.org/doc/html/rfc9309)  
+  *说明：互联网工程任务组权威标准，规范爬虫访问频次限制与抓取道德法律边界。*

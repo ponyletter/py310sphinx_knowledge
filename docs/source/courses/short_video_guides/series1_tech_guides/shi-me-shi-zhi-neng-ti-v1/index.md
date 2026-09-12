@@ -129,8 +129,11 @@
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/)
-- [https://www.anthropic.com/engineering/building-effective-agents](https://www.anthropic.com/engineering/building-effective-agents)
-- [https://cloud.google.com/discover/what-are-ai-agents?hl=en](https://cloud.google.com/discover/what-are-ai-agents?hl=en)
+- [【OpenAI 官方白皮书】构建高可靠 AI 智能体实用工程指南](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/)  
+  *说明：阐明 Agent 与普通聊天的本质分界：有明确目标、能使用工具、具备规划与纠错闭环。*
+- [【Anthropic 官方研究】构建高效智能体（Building Effective Agents）](https://www.anthropic.com/engineering/building-effective-agents)  
+  *说明：系统提炼增强型 LLM、路由工作流、编排与自治智能体的工程架构分类。*
+- [【Google Cloud 概念指南】什么是 AI 智能体？架构、类型与落地用例](https://cloud.google.com/discover/what-are-ai-agents)  
+  *说明：Google 官方对智能体在感知、短期/长期记忆与现实世界行动能力的系统阐述。*

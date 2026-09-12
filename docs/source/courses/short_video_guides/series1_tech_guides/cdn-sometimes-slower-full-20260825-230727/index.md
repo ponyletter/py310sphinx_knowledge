@@ -74,18 +74,19 @@ MISS 表示边缘没有现成副本，请求还要回到源站再取一次。BYP
 
 ![缓存规则、路径、源站与指标构成的优化闭环](images/scene06_cdn_tuning_loop.png)
 
-
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/Content_delivery_network](https://en.wikipedia.org/wiki/Content_delivery_network)
-- [https://www.rfc-editor.org/rfc/rfc9111.html](https://www.rfc-editor.org/rfc/rfc9111.html)
-- [https://www.rfc-editor.org/rfc/rfc9211.html](https://www.rfc-editor.org/rfc/rfc9211.html)
-- [https://www.rfc-editor.org/rfc/rfc3568.html](https://www.rfc-editor.org/rfc/rfc3568.html)
-- [https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ConfiguringCaching.html](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ConfiguringCaching.html)
-- [https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cache-hit-ratio.html](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cache-hit-ratio.html)
-- [https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-the-cache-key.html](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-the-cache-key.html)
-- [https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/programming-cloudwatch-metrics.html](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/programming-cloudwatch-metrics.html)
-- [https://developers.cloudflare.com/cache/concepts/cache-responses/](https://developers.cloudflare.com/cache/concepts/cache-responses/)
-- [https://developers.cloudflare.com/cache/concepts/cache-control/](https://developers.cloudflare.com/cache/concepts/cache-control/)
+- [【维基百科】内容分发网络（CDN）架构与原理](https://en.wikipedia.org/wiki/Content_delivery_network)  
+  *说明：系统介绍 CDN 边缘节点、源站代理架构与全球分布式缓存核心概念。*
+- [【IETF RFC 9111】HTTP 缓存协议标准规范（HTTP Caching）](https://www.rfc-editor.org/rfc/rfc9111.html)  
+  *说明：互联网工程任务组权威 RFC 规范，系统定义 HTTP/1.1 与 HTTP/2 的通用缓存与再验证机制。*
+- [【IETF RFC 9211】目标状态与缓存定向响应头（Cache-Status）](https://www.rfc-editor.org/rfc/rfc9211.html)  
+  *说明：定义边缘节点向客户端传递缓存命中、未命中与过期状态的标准 HTTP 响应头规范。*
+- [【官方文档】AWS CloudFront 缓存行为与配置调优指南](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ConfiguringCaching.html)  
+  *说明：AWS 官方深度教程，指导如何按路径配置缓存策略、压缩传输与回源超时优化。*
+- [【官方文档】AWS CloudFront 缓存键（Cache Key）深度拆解](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-the-cache-key.html)  
+  *说明：解析查询参数、请求头与 Cookie 如何导致缓存键碎片化并拉低命中率。*
+- [【官方文档】Cloudflare 边缘缓存行为与 Cache-Control 指令](https://developers.cloudflare.com/cache/concepts/cache-control/)  
+  *说明：Cloudflare 官方手册，详细解读边缘节点对各类 HTTP 缓存头的处理规则。*

@@ -79,8 +79,11 @@
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与行业规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [OpenAI DALL·E 3 / Images Documentation](https://platform.openai.com/docs/guides/images)
-- [Stable Diffusion Inpainting Best Practices](https://huggingface.co/docs/diffusers/using-diffusers/inpaint)
-- [W3C Design Token Community Group](https://www.w3.org/community/design-tokens/)
+- [【官方资料】OpenAI DALL·E 3 / Images Documentation](https://platform.openai.com/docs/guides/images)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Stable Diffusion Inpainting Best Practices](https://huggingface.co/docs/diffusers/using-diffusers/inpaint)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】W3C Design Token Community Group](https://www.w3.org/community/design-tokens/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

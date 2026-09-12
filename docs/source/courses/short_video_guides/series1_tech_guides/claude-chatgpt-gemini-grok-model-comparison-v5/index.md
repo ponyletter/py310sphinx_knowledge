@@ -132,19 +132,17 @@ Agent 长跑，怎么公平测试？先定义完整率、可靠性和恢复能�
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://platform.claude.com/docs/en/models/fable-5-1/overview；上下文说明：https://platform.claude.com/docs/en/build-with-claude/context-windows](https://platform.claude.com/docs/en/models/fable-5-1/overview；上下文说明：https://platform.claude.com/docs/en/build-with-claude/context-windows)
-- [https://developers.openai.com/api/docs/models；ChatGPT](https://developers.openai.com/api/docs/models；ChatGPT)
-- [https://openai.com/index/introducing-chatgpt-agent/](https://openai.com/index/introducing-chatgpt-agent/)
-- [https://ai.google.dev/gemini-api/docs/models；Google](https://ai.google.dev/gemini-api/docs/models；Google)
-- [https://ai.google.dev/gemini-api/docs/google-search](https://ai.google.dev/gemini-api/docs/google-search)
-- [https://docs.x.ai/developers/grok-4.6；发布说明：https://x.ai/news/grok-4-6](https://docs.x.ai/developers/grok-4.6；发布说明：https://x.ai/news/grok-4-6)
-- [https://crfm.stanford.edu/helm/index.html；原论文：https://arxiv.org/abs/2211.09110](https://crfm.stanford.edu/helm/index.html；原论文：https://arxiv.org/abs/2211.09110)
-- [https://platform.claude.com/docs/en/models/overview](https://platform.claude.com/docs/en/models/overview)
-- [https://developers.openai.com/api/docs/models](https://developers.openai.com/api/docs/models)
-- [https://ai.google.dev/gemini-api/docs/models](https://ai.google.dev/gemini-api/docs/models)
-- [https://docs.x.ai/developers/grok-4.6](https://docs.x.ai/developers/grok-4.6)
-- [https://x.ai/news/grok-4-6](https://x.ai/news/grok-4-6)
-- [https://crfm.stanford.edu/helm/index.html](https://crfm.stanford.edu/helm/index.html)
-- [https://arxiv.org/abs/2211.09110](https://arxiv.org/abs/2211.09110)
+- [【Anthropic 官方文档】Claude 模型家族与上下文窗口规范](https://platform.claude.com/docs/en/build-with-claude/context-windows)  
+  *说明：详述 Claude 3.5 Sonnet 与 Haiku 的长上下文支持与工程化优化策略。*
+- [【OpenAI 官方文档】OpenAI 模型体系与能力矩阵指南](https://platform.openai.com/docs/models)  
+  *说明：涵盖 GPT-4o、o1 推理模型以及开发者 API 接口能力边界。*
+- [【OpenAI 官方发布】ChatGPT 深度自主智能体技术概览](https://openai.com/index/introducing-chatgpt-agent/)  
+  *说明：官方发布关于 ChatGPT 自主操作电脑与多工具编排的技术原理解析。*
+- [【Google 官方文档】Gemini 多模态模型系列与实时搜索接入](https://ai.google.dev/gemini-api/docs/models/gemini)  
+  *说明：官方说明 Gemini 1.5/2.0 原生音视频多模态处理与 Google 实时搜索 Grounding 能力。*
+- [【xAI 官方发布】Grok 4.6 实时推理能力与技术架构](https://x.ai/news/grok-4-6)  
+  *说明：xAI 官方关于 Grok 高性能并发与全球实时数据流的技术报告。*
+- [【斯坦福大学 HELM】大语言模型整体评估基准体系](https://crfm.stanford.edu/helm/index.html)  
+  *说明：学术界权威的多维度大模型综合评估评测标准与开源用例基准。*

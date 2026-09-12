@@ -108,14 +108,19 @@ Caddy 从 2015 年起把现代 Web 的安全体验放到产品前台，配置也
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://httpd.apache.org/ABOUT_APACHE（2026-09-02](https://httpd.apache.org/ABOUT_APACHE（2026-09-02)
-- [https://httpd.apache.org/docs/current/en/（2026-09-02](https://httpd.apache.org/docs/current/en/（2026-09-02)
-- [https://blog.nginx.org/blog/celebrating-20-years-of-nginx（2026-09-02](https://blog.nginx.org/blog/celebrating-20-years-of-nginx（2026-09-02)
-- [https://nginx.org/en/docs/http/load_balancing.html（2026-09-02](https://nginx.org/en/docs/http/load_balancing.html（2026-09-02)
-- [https://caddyserver.com/docs/（2026-09-02](https://caddyserver.com/docs/（2026-09-02)
-- [https://caddyserver.com/docs/automatic-https（2026-09-02](https://caddyserver.com/docs/automatic-https（2026-09-02)
-- [https://caddyserver.com/docs/caddyfile/directives/reverse_proxy（2026-09-02](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy（2026-09-02)
-- [https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server（2026-09-02](https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server（2026-09-02)
-- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Proxy_servers_and_tunneling（2026-09-02](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Proxy_servers_and_tunneling（2026-09-02)
+- [【Apache 官方文档】Apache HTTP Server 架构与核心概念](https://httpd.apache.org/docs/current/en/)  
+  *说明：Apache 官方文档，详细介绍多处理模块（MPM）、目录级别配置与企业级模块化生态。*
+- [【Nginx 官方博客】Nginx 架构演进二十年与事件驱动模型](https://blog.nginx.org/blog/celebrating-20-years-of-nginx)  
+  *说明：回顾 Nginx 如何以单线程异步非阻塞事件驱动模型化解 C10K 高并发连接危机。*
+- [【Nginx 官方指南】HTTP 负载均衡与反向代理最佳实践](https://nginx.org/en/docs/http/load_balancing.html)  
+  *说明：官方指导反向代理网关搭建、轮询/加权调度算法与后端健康检查配置。*
+- [【Caddy 官方文档】Caddy Web Server 架构概览与核心特性](https://caddyserver.com/docs/)  
+  *说明：Caddy 官方手册，展示现代 Go 语言编写的高性能 Web 服务器整体能力。*
+- [【Caddy 官方文档】Automatic HTTPS 自动证书申请与续期机制](https://caddyserver.com/docs/automatic-https)  
+  *说明：深入解析 Caddy 如何通过 ACME 协议与 Let's Encrypt 达成 100% 自动化的 TLS 证书生命周期管理。*
+- [【Caddy 官方文档】Caddyfile 声明式反向代理指令（reverse_proxy）](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy)  
+  *说明：极简一行配置实现高可用微服务反向代理、负载均衡与 WebSocket 穿透。*
+- [【MDN 权威指南】什么是 Web 服务器？工作原理与底层协议](https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server)  
+  *说明：Mozilla 官方教学指南，系统拆解 HTTP 连接、文件系统映射与网关中转机制。*

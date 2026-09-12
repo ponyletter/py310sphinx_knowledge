@@ -79,8 +79,11 @@ NATS 最初以纯粹的发布订阅网络架构问世，单二进制文件仅几
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [RabbitMQ Official Documentation](https://www.rabbitmq.com/documentation.html)
-- [Apache Kafka Core Concepts](https://kafka.apache.org/documentation/)
-- [NATS by Example & Docs](https://docs.nats.io/)
+- [【官方资料】RabbitMQ Official Documentation](https://www.rabbitmq.com/documentation.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Apache Kafka Core Concepts](https://kafka.apache.org/documentation/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】NATS by Example & Docs](https://docs.nats.io/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

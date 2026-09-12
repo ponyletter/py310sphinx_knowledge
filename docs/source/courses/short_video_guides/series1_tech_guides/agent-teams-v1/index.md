@@ -114,12 +114,17 @@
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://openai.github.io/openai-agents-python/multi_agent/](https://openai.github.io/openai-agents-python/multi_agent/)
-- [https://openai.github.io/openai-agents-python/agents/；https://openai.github.io/openai-agents-python/handoffs/](https://openai.github.io/openai-agents-python/agents/；https://openai.github.io/openai-agents-python/handoffs/)
-- [https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/teams.html](https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/teams.html)
-- [https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/headless.md](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/headless.md)
-- [https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/cli-reference.md](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/cli-reference.md)
-- [https://github.com/google-gemini/gemini-cli/blob/main/docs/core/subagents.md](https://github.com/google-gemini/gemini-cli/blob/main/docs/core/subagents.md)
-- [https://www.cheasy.de/tmux.pdf](https://www.cheasy.de/tmux.pdf)
+- [【OpenAI 官方文档】Agents SDK 多智能体协同（Multi-Agent）架构](https://openai.github.io/openai-agents-python/multi_agent/)  
+  *说明：介绍 Agent Handoff 模式、多角色交接与状态隔离机制。*
+- [【OpenAI 官方文档】Agents SDK 智能体定义与任务委派规范](https://openai.github.io/openai-agents-python/handoffs/)  
+  *说明：详述主智能体如何通过函数调用将任务委派给具备专有上下文的子智能体。*
+- [【微软 AutoGen 教程】AutoGen 团队架构与多 Agent 协作实战](https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/tutorial/teams.html)  
+  *说明：微软 AutoGen 关于多智能体协同、轮询发言与群聊验收的标准实践指南。*
+- [【Google Gemini 官方指南】Gemini CLI 无头模式（Headless）运行规范](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/headless.md)  
+  *说明：展示如何在命令行与后台脚本中自动化驱动大模型执行任务并返回结构化数据。*
+- [【Google Gemini 官方指南】Subagents 子智能体体系设计](https://github.com/google-gemini/gemini-cli/blob/main/docs/core/subagents.md)  
+  *说明：Google Gemini CLI 关于主进程派发独立隔离子智能体的实现规范。*
+- [【技术参考手册】tmux 终端复用器快捷指令与分屏实战](https://www.cheasy.de/tmux.pdf)  
+  *说明：终端会话保持、多面板并行运行与分布式命令行监控参考手册。*

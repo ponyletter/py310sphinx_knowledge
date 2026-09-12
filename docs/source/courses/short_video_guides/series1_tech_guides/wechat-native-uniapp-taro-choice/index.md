@@ -167,9 +167,13 @@ React 团队重视组件与业务复用：优先评估 Taro。
 
 ## 参考资料
 
-- [微信小程序框架文档](https://developers.weixin.qq.com/miniprogram/dev/framework/)
-- [微信小程序分包加载](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages.html)
-- [Uni-app 文档](https://uniapp.dcloud.net.cn/tutorial/index.html)
-- [Taro 跨平台开发文档](https://docs.taro.zone/docs/envs/)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-本文的课程研究日期为 2026-09-08。框架能力与平台限制会迭代，实施前请以当前官方文档、开发者工具与项目真机测试结果为准。
+- [【官方资料】微信小程序框架文档](https://developers.weixin.qq.com/miniprogram/dev/framework/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】微信小程序分包加载](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Uni-app 文档](https://uniapp.dcloud.net.cn/tutorial/index.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Taro 跨平台开发文档](https://docs.taro.zone/docs/envs/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

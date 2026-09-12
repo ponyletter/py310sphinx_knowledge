@@ -157,8 +157,11 @@ MVP 不是半成品，而是一条完整但足够短的验证路径。
 
 ## 参考资料
 
-- [微信小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/index.html)
-- [微信支付：小程序支付开发指引](https://pay.wechatpay.cn/doc/v3/merchant/4012791911)
-- [微信支付：小程序支付接入准备](https://pay.wechatpay.cn/doc/v3/merchant/4015459512)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-本文不提供收益、转化率、费率或审核通过率承诺。支付、隐私和平台规则具有时效性，实施前应以当前官方规则为准。
+- [【官方资料】微信小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/index.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】微信支付：小程序支付开发指引](https://pay.wechatpay.cn/doc/v3/merchant/4012791911)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】微信支付：小程序支付接入准备](https://pay.wechatpay.cn/doc/v3/merchant/4015459512)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

@@ -112,11 +112,13 @@
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/History_of_computing](https://en.wikipedia.org/wiki/History_of_computing)
-- [https://www.computerhistory.org/timeline/computers/](https://www.computerhistory.org/timeline/computers/)
-- [https://computerhistory.org/blog/the-neverending-quest-for-firsts/](https://computerhistory.org/blog/the-neverending-quest-for-firsts/)
-- [https://collection.sciencemuseumgroup.org.uk/documents/aa110000065](https://collection.sciencemuseumgroup.org.uk/documents/aa110000065)
-- [https://computerhistory.org/wp-content/uploads/2020/01/core-2016.pdf](https://computerhistory.org/wp-content/uploads/2020/01/core-2016.pdf)
-- [https://www.seas.upenn.edu/about/history/eniac/](https://www.seas.upenn.edu/about/history/eniac/)
+- [【维基百科】计算机科学与计算机器发展史](https://en.wikipedia.org/wiki/History_of_computing)  
+  *说明：从古代机械算盘、近代差分机到电子计算机的七十年跨越全景。*
+- [【计算机历史博物馆】计算历史里程碑时间线](https://www.computerhistory.org/timeline/computers/)  
+  *说明：全球最大的计算机历史博物馆官方展陈资料与权威历史档案。*
+- [【科学博物馆档案】查尔斯·巴贝奇分析机手稿与设计原稿](https://collection.sciencemuseumgroup.org.uk/documents/aa110000065)  
+  *说明：英国科学博物馆保存的世界上首部通用可编程机械计算机设计图纸与说明。*
+- [【宾夕法尼亚大学档案】ENIAC 首台通用电子计算机历史回顾](https://www.seas.upenn.edu/about/history/eniac/)  
+  *说明：1946 年世界首台通用电子数字计算机的工程设计、真空管运用与重新连线限制。*

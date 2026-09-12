@@ -82,18 +82,17 @@ K8s 是复杂度投资，不是技术等级考试。
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/Docker_(software](https://en.wikipedia.org/wiki/Docker_(software)
-- [https://en.wikipedia.org/wiki/Kubernetes](https://en.wikipedia.org/wiki/Kubernetes)
-- [https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)
-- [https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/)
-- [https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/)
-- [https://docs.docker.com/compose/how-tos/production/](https://docs.docker.com/compose/how-tos/production/)
-- [https://docs.docker.com/engine/swarm/key-concepts/](https://docs.docker.com/engine/swarm/key-concepts/)
-- [https://kubernetes.io/docs/concepts/overview/](https://kubernetes.io/docs/concepts/overview/)
-- [https://kubernetes.io/docs/concepts/overview/working-with-objects/](https://kubernetes.io/docs/concepts/overview/working-with-objects/)
-- [https://kubernetes.io/docs/concepts/architecture/controller/](https://kubernetes.io/docs/concepts/architecture/controller/)
-- [https://kubernetes.io/docs/concepts/architecture/](https://kubernetes.io/docs/concepts/architecture/)
-- [https://kubernetes.io/docs/setup/production-environment/](https://kubernetes.io/docs/setup/production-environment/)
-- [https://kubernetes.io/blog/2022/02/17/dockershim-faq/](https://kubernetes.io/blog/2022/02/17/dockershim-faq/)
+- [【维基百科】Docker 容器技术原理与历史](https://en.wikipedia.org/wiki/Docker_(software))  
+  *说明：基于 Linux 内核 cgroups 与 namespaces 实现应用打包与进程隔离的开创性工具。*
+- [【维基百科】Kubernetes 容器编排平台架构](https://en.wikipedia.org/wiki/Kubernetes)  
+  *说明：源于 Google Borg 系统的生产级开源容器集群自动化部署与扩缩容平台。*
+- [【Docker 官方指南】什么是容器与镜像？基础概念手册](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)  
+  *说明：官方解析只读镜像分层、联合文件系统与运行期容器实例的本质差异。*
+- [【Docker 官方指南】Docker Compose 生产多容器服务编排](https://docs.docker.com/compose/how-tos/production/)  
+  *说明：单主机环境下声明式服务拓扑编排、环境变量注入与网络隔离实践。*
+- [【Kubernetes 官方概念】Kubernetes 控制器架构与协调循环](https://kubernetes.io/docs/concepts/architecture/controller/)  
+  *说明：Kubernetes 官方核心机制：控制器如何持续将系统实际状态拉回期望状态。*
+- [【Kubernetes 官方博客】弃用 Dockershim 深度答疑（CRI 标准化）](https://kubernetes.io/blog/2022/02/17/dockershim-faq/)  
+  *说明：澄清 K8s 移除 Dockershim 的真相：拥抱轻量标准化容器运行时 containerd，与 Docker 镜像完全兼容。*

@@ -82,14 +82,15 @@ Next.js 官方明确提醒，它的后端能力并不是完整后端替代。路
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/Next.js](https://en.wikipedia.org/wiki/Next.js)
-- [https://en.wikipedia.org/wiki/Backend_for_frontend](https://en.wikipedia.org/wiki/Backend_for_frontend)
-- [https://nextjs.org/docs](https://nextjs.org/docs)
-- [https://nextjs.org/docs/app](https://nextjs.org/docs/app)
-- [https://nextjs.org/docs/app/getting-started/server-and-client-components](https://nextjs.org/docs/app/getting-started/server-and-client-components)
-- [https://nextjs.org/docs/app/guides/backend-for-frontend](https://nextjs.org/docs/app/guides/backend-for-frontend)
-- [https://nextjs.org/docs/app/guides/authentication](https://nextjs.org/docs/app/guides/authentication)
-- [https://nextjs.org/docs/app/guides/production-checklist](https://nextjs.org/docs/app/guides/production-checklist)
-- [https://nextjs.org/docs/app/guides/deploying-to-platforms](https://nextjs.org/docs/app/guides/deploying-to-platforms)
+- [【维基百科】Next.js 框架体系与服务端渲染](https://en.wikipedia.org/wiki/Next.js)  
+  *说明：React 生态主流全栈框架，融合 SSR、SSG 与客户端 SPA 的架构演变。*
+- [【维基百科】服务于前端的后端模式（BFF, Backend for Frontend）](https://en.wikipedia.org/wiki/Backend_for_frontend)  
+  *说明：面向特定前端界面定制专属聚合网关接口的经典架构模式。*
+- [【Next.js 官方指南】App Router 架构与路由体系](https://nextjs.org/docs/app)  
+  *说明：Vercel 官方文档，系统讲解基于文件系统的嵌套路由、布局与服务端组件。*
+- [【Next.js 官方指南】Server Components 服务端组件与客户端组件边界](https://nextjs.org/docs/app/getting-started/server-and-client-components)  
+  *说明：核心分水岭：哪些代码安全运行在服务器保护凭据，哪些代码打包到浏览器处理用户交互。*
+- [【Next.js 官方最佳实践】生产环境部署与微服务接口安全核对清单](https://nextjs.org/docs/app/guides/production-checklist)  
+  *说明：官方指导缓存策略配置、跨域安全、身份认证与静态资产 CDN 分发优化。*

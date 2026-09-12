@@ -136,7 +136,13 @@ Gateway API 通过角色分离改善多团队协作与可移植性。
 
 ## 参考资料
 
-- [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
-- [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)
-- [Istio Ingress](https://istio.io/latest/docs/tasks/traffic-management/ingress/)
-- [Apache APISIX Ingress](https://apisix.apache.org/docs/ingress-controller/overview/)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
+
+- [【官方资料】Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Istio Ingress](https://istio.io/latest/docs/tasks/traffic-management/ingress/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Apache APISIX Ingress](https://apisix.apache.org/docs/ingress-controller/overview/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

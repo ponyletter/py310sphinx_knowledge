@@ -161,7 +161,13 @@ AI 更像放大器：好的测试和规范会被放大，模糊需求和薄弱�
 
 ## 参考资料
 
-- [OpenAI Codex](https://openai.com/index/introducing-codex/)
-- [GitHub Copilot coding agent](https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/)
-- [Anthropic: Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
-- [DORA 2025 report](https://dora.dev/research/2025/dora-report/)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
+
+- [【官方资料】OpenAI Codex](https://openai.com/index/introducing-codex/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】GitHub Copilot coding agent](https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Anthropic: Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】DORA 2025 report](https://dora.dev/research/2025/dora-report/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

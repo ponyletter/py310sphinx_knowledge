@@ -128,9 +128,11 @@ UML 管的是表达方式，不管你采用敏捷迭代、系统工程，还是�
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://www.omg.org/UML/what-is-uml.htm](https://www.omg.org/UML/what-is-uml.htm)
-- [https://www.omg.org/uml/why-uml-is-important.htm](https://www.omg.org/uml/why-uml-is-important.htm)
-- [https://www.omg.org/spec/UML/](https://www.omg.org/spec/UML/)
-- [https://www.omg.org/spec/UML/2.5.1/PDF](https://www.omg.org/spec/UML/2.5.1/PDF)
+- [【OMG 官方权威说明】什么是统一建模语言（UML）？](https://www.omg.org/UML/what-is-uml.htm)  
+  *说明：对象管理组织（Object Management Group）对软件蓝图标准的权威定义与核心使命。*
+- [【OMG 官方指南】为什么软件工程必须重视 UML 建模？](https://www.omg.org/uml/why-uml-is-important.htm)  
+  *说明：解析面向对象系统设计中如何通过可视化图谱统一业务方与工程师的理解。*
+- [【OMG 官方规范】UML 2.5.1 国际通用标准规范](https://www.omg.org/spec/UML/)  
+  *说明：结构图（类图、组件图）与行为图（时序图、状态图）共 14 种图谱的国际标准定义。*

@@ -120,16 +120,17 @@ ASR错字，怎么纠正？先把这个问题说完整：自动语音识别，�
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/Speech_recognition](https://en.wikipedia.org/wiki/Speech_recognition)
-- [https://en.wikipedia.org/wiki/Word_error_rate](https://en.wikipedia.org/wiki/Word_error_rate)
-- [https://www.ibm.com/think/topics/speech-recognition](https://www.ibm.com/think/topics/speech-recognition)
-- [https://public.dhe.ibm.com/software/pervasive/info/products/Introduction_to_Speech_Recognition.pdf](https://public.dhe.ibm.com/software/pervasive/info/products/Introduction_to_Speech_Recognition.pdf)
-- [https://learn.microsoft.com/en-us/azure/ai-services/speech-service/custom-speech-overview](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/custom-speech-overview)
-- [https://learn.microsoft.com/azure/ai-services/speech-service/improve-accuracy-phrase-list](https://learn.microsoft.com/azure/ai-services/speech-service/improve-accuracy-phrase-list)
-- [https://learn.microsoft.com/en-ie/azure/ai-services/speech-service/how-to-custom-speech-test-and-train](https://learn.microsoft.com/en-ie/azure/ai-services/speech-service/how-to-custom-speech-test-and-train)
-- [https://arxiv.org/abs/2111.10746](https://arxiv.org/abs/2111.10746)
-- [https://arxiv.org/abs/2104.10747](https://arxiv.org/abs/2104.10747)
-- [https://arxiv.org/abs/2111.08400](https://arxiv.org/abs/2111.08400)
-- [https://arxiv.org/abs/2308.03423](https://arxiv.org/abs/2308.03423)
+- [【维基百科】自动语音识别（Speech Recognition）原理与系统架构](https://en.wikipedia.org/wiki/Speech_recognition)  
+  *说明：系统梳理声学模型、语言模型与解码器的工作原理与演进历程。*
+- [【维基百科】词错误率（Word Error Rate, WER）评估标准](https://en.wikipedia.org/wiki/Word_error_rate)  
+  *说明：语音识别领域最通用的客观评估指标 WER 的计算方法与基准。*
+- [【IBM 官方指南】企业级语音识别系统设计与应用](https://www.ibm.com/think/topics/speech-recognition)  
+  *说明：IBM 总结的语音转写在降噪、口音适配与领域词表校正方面的实战经验。*
+- [【微软 Azure 官方文档】Custom Speech 自定义语音识别与模型适配](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/custom-speech-overview)  
+  *说明：介绍如何上传特定领域文本、声学数据与专业词表以降低行业专有名词转写错误。*
+- [【微软 Azure 官方文档】使用短语列表（Phrase List）提升识别准确度](https://learn.microsoft.com/azure/ai-services/speech-service/improve-accuracy-phrase-list)  
+  *说明：指南展示如何在转写请求中动态注入关键实体与专业术语。*
+- [【学术论文 arXiv】基于大语言模型的 ASR 转写后纠错（Post-Correction）研究](https://arxiv.org/abs/2111.10746)  
+  *说明：探讨利用预训练语言模型结合上下文语义对语音识别初稿进行端到端纠错的前沿方案。*

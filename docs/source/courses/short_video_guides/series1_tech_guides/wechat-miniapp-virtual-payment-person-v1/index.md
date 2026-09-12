@@ -79,8 +79,11 @@
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与行业规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [微信小程序虚拟支付接入指南](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/virtual-payment.html)
-- [微信小程序运营规范（虚拟支付章节）](https://developers.weixin.qq.com/miniprogram/product/)
-- [微信公众平台服务类目资质要求](https://developers.weixin.qq.com/miniprogram/product/material/)
+- [【官方资料】微信小程序虚拟支付接入指南](https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/virtual-payment.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】微信小程序运营规范（虚拟支付章节）](https://developers.weixin.qq.com/miniprogram/product/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】微信公众平台服务类目资质要求](https://developers.weixin.qq.com/miniprogram/product/material/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

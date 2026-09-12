@@ -123,13 +123,17 @@ Pro 的重点不是一个神奇加速按钮，而是更细的规则、托管防�
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://developers.cloudflare.com/fundamentals/concepts/how-cloudflare-works/](https://developers.cloudflare.com/fundamentals/concepts/how-cloudflare-works/)
-- [https://developers.cloudflare.com/dns/proxy-status/](https://developers.cloudflare.com/dns/proxy-status/)
-- [https://developers.cloudflare.com/dns/nameservers/update-nameservers/](https://developers.cloudflare.com/dns/nameservers/update-nameservers/)
-- [https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/](https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/)
-- [https://developers.cloudflare.com/waf/](https://developers.cloudflare.com/waf/)
-- [https://developers.cloudflare.com/ssl/](https://developers.cloudflare.com/ssl/)
-- [https://developers.cloudflare.com/ddos-protection/](https://developers.cloudflare.com/ddos-protection/)
-- [https://developers.cloudflare.com/waf/feature-interoperability/](https://developers.cloudflare.com/waf/feature-interoperability/)
+- [【Cloudflare 官方文档】Cloudflare 边缘网络核心工作原理](https://developers.cloudflare.com/fundamentals/concepts/how-cloudflare-works/)  
+  *说明：官方解析反向代理、Anycast 任播网络与分布式安全清洗中心拓扑。*
+- [【Cloudflare 官方文档】DNS 代理状态（小橙云）与仅 DNS 模式](https://developers.cloudflare.com/dns/proxy-status/)  
+  *说明：详解开橙云代理与灰云穿透源站的本质区别及对流量安全的影响。*
+- [【Cloudflare 官方文档】域名 Nameserver 修改与生效指引](https://developers.cloudflare.com/dns/nameservers/update-nameservers/)  
+  *说明：如何在各类注册商后台修改权威 NS 记录并完成平滑迁移。*
+- [【Cloudflare 官方文档】Web 应用防火墙（WAF）托管规则集](https://developers.cloudflare.com/waf/)  
+  *说明：Cloudflare 托管安全规则、自定义拦截策略与速率限制防护手册。*
+- [【Cloudflare 官方文档】SSL/TLS 加密模式全解析（Flexible/Full/Strict）](https://developers.cloudflare.com/ssl/)  
+  *说明：详细对比灵活加密、完全加密与严格加密证书的安全性与防中间人攻击配置。*
+- [【Cloudflare 官方文档】DDoS 防护机制与自动化防御规范](https://developers.cloudflare.com/ddos-protection/)  
+  *说明：三到七层未计量 DDoS 流量清洗与智能防护策略说明。*

@@ -145,9 +145,17 @@ Prometheus 三件套不是把三个产品装齐，而是一条清晰的判断路
 
 ## 参考资料
 
-- [Prometheus Overview](https://prometheus.io/docs/introduction/overview/)
-- [Prometheus Instrumentation](https://prometheus.io/docs/practices/instrumentation/)
-- [Grafana data sources](https://grafana.com/docs/grafana/latest/datasources/)
-- [Loki overview](https://grafana.com/docs/loki/latest/get-started/overview/)
-- [OpenTelemetry signals](https://opentelemetry.io/docs/concepts/signals/)
-- [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
+
+- [【官方资料】Prometheus Overview](https://prometheus.io/docs/introduction/overview/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Prometheus Instrumentation](https://prometheus.io/docs/practices/instrumentation/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Grafana data sources](https://grafana.com/docs/grafana/latest/datasources/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Loki overview](https://grafana.com/docs/loki/latest/get-started/overview/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】OpenTelemetry signals](https://opentelemetry.io/docs/concepts/signals/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

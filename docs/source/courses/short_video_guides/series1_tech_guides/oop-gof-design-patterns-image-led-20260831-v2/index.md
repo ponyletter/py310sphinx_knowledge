@@ -114,12 +114,13 @@ GoF 是四位作者总结的二十三种经典设计模式，可以把它当成�
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/Design_Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
-- [https://en.wikipedia.org/wiki/Object-oriented_programming](https://en.wikipedia.org/wiki/Object-oriented_programming)
-- [https://www.oreilly.com/library/view/design-patterns-elements/0201633612/](https://www.oreilly.com/library/view/design-patterns-elements/0201633612/)
-- [https://ursinus.ecampus.com/design-patterns-elements-reusable/bk/9780201633610](https://ursinus.ecampus.com/design-patterns-elements-reusable/bk/9780201633610)
-- [https://refactoring.guru/design-patterns/catalog](https://refactoring.guru/design-patterns/catalog)
-- [https://refactoring.guru/design-patterns/what-is-pattern](https://refactoring.guru/design-patterns/what-is-pattern)
-- [https://en.wikipedia.org/wiki/Software_design_pattern；https://en.wikipedia.org/wiki/Design_Patterns；https://www.oreilly.com/library/view/design-patterns-elements/0201633612/；https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610。](https://en.wikipedia.org/wiki/Software_design_pattern；https://en.wikipedia.org/wiki/Design_Patterns；https://www.oreilly.com/library/view/design-patterns-elements/0201633612/；https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-software-9780201633610。)
+- [【维基百科】GoF 设计模式：可复用面向对象软件的基础](https://en.wikipedia.org/wiki/Design_Patterns)  
+  *说明：四人帮（Gang of Four）奠定的经典 23 种设计模式与系统复用基石。*
+- [【Refactoring Guru 权威图解】设计模式通俗分类与应用图解](https://refactoring.guru/design-patterns/catalog)  
+  *说明：全球知名重构与设计模式学习平台，以清晰架构图拆解各模式的优缺点与代码结构。*
+- [【Refactoring Guru】什么是设计模式？软件架构中的共性问题解答](https://refactoring.guru/design-patterns/what-is-pattern)  
+  *说明：阐述为什么模式不是具体算法，而是面对软件演进变化时隔离复杂度的思想工具。*
+- [【O'Reilly 经典著作】《设计模式：可复用面向对象软件的基础》原书资料](https://www.oreilly.com/library/view/design-patterns-elements/0201633612/)  
+  *说明：软件工程圣经级原著，系统奠定创建型、结构型与行为型三大流派。*

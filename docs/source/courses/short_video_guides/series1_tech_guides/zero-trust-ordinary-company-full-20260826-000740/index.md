@@ -80,13 +80,13 @@
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/Zero_trust_architecture](https://en.wikipedia.org/wiki/Zero_trust_architecture)
-- [https://csrc.nist.gov/pubs/sp/800/207/final](https://csrc.nist.gov/pubs/sp/800/207/final)
-- [https://csrc.nist.gov/pubs/sp/1800/35/final](https://csrc.nist.gov/pubs/sp/1800/35/final)
-- [https://www.cisa.gov/sites/default/files/2023-04/CISA_Zero_Trust_Maturity_Model_Version_2_508c.pdf](https://www.cisa.gov/sites/default/files/2023-04/CISA_Zero_Trust_Maturity_Model_Version_2_508c.pdf)
-- [https://www.cisa.gov/news-events/alerts/2024/06/18/cisa-and-partners-release-guidance-modern-approaches-network-access-security](https://www.cisa.gov/news-events/alerts/2024/06/18/cisa-and-partners-release-guidance-modern-approaches-network-access-security)
-- [https://www.ncsc.gov.uk/collection/zero-trust/architecture-design-principles](https://www.ncsc.gov.uk/collection/zero-trust/architecture-design-principles)
-- [https://www.ncsc.gov.uk/collection/zero-trust/demystifying-zero-trust](https://www.ncsc.gov.uk/collection/zero-trust/demystifying-zero-trust)
-- [https://www.ncsc.gov.uk/collection/zero-trust/architecture-design-principles/use-policies-to-authorise-requests](https://www.ncsc.gov.uk/collection/zero-trust/architecture-design-principles/use-policies-to-authorise-requests)
+- [【维基百科】零信任架构（Zero Trust Architecture）核心哲学](https://en.wikipedia.org/wiki/Zero_trust_architecture)  
+  *说明：基于“从不信任，始终验证”原则重构传统基于网络边界的安防模型。*
+- [【NIST 官方标准】SP 800-207：零信任网络国家通用标准指南](https://csrc.nist.gov/pubs/sp/800/207/final)  
+  *说明：美国国家标准技术研究所系统定义策略决策点（PDP）与策略执行点（PEP）架构。*
+- [【CISA 官方模型】零信任成熟度模型 2.0 版（Zero Trust Maturity Model）](https://www.cisa.gov/zero-trust-maturity-model)  
+  *说明：美国网络安全局给出的五大支柱（身份、设备、网络、应用、数据）渐进式实施路线图。*
+- [【英国 NCSC 权威建议】中小企业零信任实施建议与务实落地指南](https://www.ncsc.gov.uk/collection/zero-trust/demystifying-zero-trust)  
+  *说明：英国国家网络安全中心为普通团队提供的非极端、低成本零信任改造落地指南。*

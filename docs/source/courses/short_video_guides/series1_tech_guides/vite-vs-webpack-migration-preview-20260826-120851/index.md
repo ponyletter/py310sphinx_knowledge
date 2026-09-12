@@ -74,19 +74,15 @@ Vite 的优势通常首先体现在开发反馈路径；生产构建速度、产
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://vite.dev/guide/why.html](https://vite.dev/guide/why.html)
-- [https://vite.dev/guide/dep-pre-bundling.html](https://vite.dev/guide/dep-pre-bundling.html)
-- [https://vite.dev/guide/features](https://vite.dev/guide/features)
-- [https://vite.dev/guide/api-plugin](https://vite.dev/guide/api-plugin)
-- [https://vite.dev/guide/env-and-mode](https://vite.dev/guide/env-and-mode)
-- [https://vite.dev/guide/assets](https://vite.dev/guide/assets)
-- [https://vite.dev/guide/build](https://vite.dev/guide/build)
-- [https://vite.dev/guide/backend-integration](https://vite.dev/guide/backend-integration)
-- [https://vite.dev/blog/announcing-vite8](https://vite.dev/blog/announcing-vite8)
-- [https://vite.dev/guide/migration](https://vite.dev/guide/migration)
-- [https://webpack.js.org/concepts/loaders/](https://webpack.js.org/concepts/loaders/)
-- [https://webpack.js.org/concepts/plugins/](https://webpack.js.org/concepts/plugins/)
-- [https://webpack.js.org/concepts/module-federation/](https://webpack.js.org/concepts/module-federation/)
-- [https://webpack.js.org/configuration/cache/](https://webpack.js.org/configuration/cache/)
+- [【Vite 官方指南】为什么选择 Vite？下一代前端构建工具的思考](https://vite.dev/guide/why.html)  
+  *说明：尤雨溪与 Vite 团队详述基于原生 ES 模块（ESM）与 esbuild 达成毫秒级开发启动的机制。*
+- [【Vite 官方指南】依赖预构建（Dependency Pre-bundling）深度解析](https://vite.dev/guide/dep-pre-bundling.html)  
+  *说明：解析 Vite 如何利用 Go 语言编写的 esbuild 将 CommonJS 模块快速转换为标准 ESM。*
+- [【Vite 官方指南】从 Webpack 到 Vite 的工程化平滑迁移手册](https://vite.dev/guide/migration)  
+  *说明：官方指导如何迁移环境变量、静态资源别名与特定 Webpack 插件的等价方案。*
+- [【Webpack 官方概念】Webpack 加载器（Loaders）与插件（Plugins）工作机理](https://webpack.js.org/concepts/loaders/)  
+  *说明：Webpack 静态模块打包器的 AST 分析树与全量依赖图编译构建核心哲学。*
+- [【Webpack 官方进阶】模块联邦（Module Federation）与微前端架构](https://webpack.js.org/concepts/module-federation/)  
+  *说明：Webpack 5 最核心的企业级杀手特性：多个独立构建的应用间动态共享运行时代码。*

@@ -79,8 +79,11 @@ Snyk 的最大优势在于它不仅仅是扫描器，更是一套赋能开发者
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与行业规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [Trivy Official Documentation](https://aquasecurity.github.io/trivy/)
-- [Grype & Syft by Anchore](https://github.com/anchore/grype)
-- [Snyk Container Documentation](https://docs.snyk.io/products/snyk-container)
+- [【官方资料】Trivy Official Documentation](https://aquasecurity.github.io/trivy/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Grype & Syft by Anchore](https://github.com/anchore/grype)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Snyk Container Documentation](https://docs.snyk.io/products/snyk-container)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

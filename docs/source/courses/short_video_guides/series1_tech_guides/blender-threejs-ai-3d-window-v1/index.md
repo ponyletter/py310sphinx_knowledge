@@ -112,7 +112,13 @@ Three.js 加载成功也不表示资产适合交互；运行时不能补回缺�
 
 ## 参考资料
 
-- [Blender Documentation](https://docs.blender.org/)
-- [Blender Python API](https://docs.blender.org/api/current/)
-- [Three.js: Creating a scene](https://threejs.org/manual/en/creating-a-scene.html)
-- [Khronos glTF](https://www.khronos.org/gltf/)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
+
+- [【官方资料】Blender Documentation](https://docs.blender.org/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Blender Python API](https://docs.blender.org/api/current/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Three.js: Creating a scene](https://threejs.org/manual/en/creating-a-scene.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Khronos glTF](https://www.khronos.org/gltf/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

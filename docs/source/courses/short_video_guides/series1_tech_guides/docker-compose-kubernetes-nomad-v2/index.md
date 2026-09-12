@@ -83,8 +83,11 @@ Docker Compose 专注于单主机上的多容器微服务定义，用一个 YAML
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与行业规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [Docker Compose Overview](https://docs.docker.com/compose/)
-- [Kubernetes Documentation](https://kubernetes.io/docs/home/)
-- [HashiCorp Nomad Documentation](https://developer.hashicorp.com/nomad/docs)
+- [【官方资料】Docker Compose Overview](https://docs.docker.com/compose/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Kubernetes Documentation](https://kubernetes.io/docs/home/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】HashiCorp Nomad Documentation](https://developer.hashicorp.com/nomad/docs)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

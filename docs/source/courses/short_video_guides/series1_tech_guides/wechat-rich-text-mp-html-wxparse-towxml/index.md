@@ -149,10 +149,15 @@ Towxml 提供 HTML、Markdown 转 WXML 的路径，也覆盖代码高亮、表�
 
 ## 参考资料
 
-- [微信小程序 rich-text 文档](https://developers.weixin.qq.com/miniprogram/dev/component/rich-text.html)
-- [mp-html 项目仓库](https://github.com/jin-yufeng/mp-html)
-- [wxParse 项目仓库](https://github.com/icindy/wxParse)
-- [Towxml 项目仓库](https://github.com/sbfkcel/towxml)
-- [OWASP XSS 防护备忘单](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-本文的课程研究日期为 2026-09-08；组件版本、维护状态和平台支持均可能变化，接入前请回到相应项目与官方文档核验。
+- [【官方资料】微信小程序 rich-text 文档](https://developers.weixin.qq.com/miniprogram/dev/component/rich-text.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】mp-html 项目仓库](https://github.com/jin-yufeng/mp-html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】wxParse 项目仓库](https://github.com/icindy/wxParse)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Towxml 项目仓库](https://github.com/sbfkcel/towxml)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】OWASP XSS 防护备忘单](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

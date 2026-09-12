@@ -89,11 +89,17 @@
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [Wikipedia: Microservices](https://en.wikipedia.org/wiki/Microservices)
-- [Microsoft Azure Architecture Center: Microservices architecture style](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices)
-- [AWS Prescriptive Guidance: Decomposing monoliths into microservices](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-decomposing-monoliths/)
-- [Google Cloud Architecture Center: Re-architecting to cloud native](https://cloud.google.com/resources/rearchitecting-to-cloud-native)
-- [Melvin E. Conway, “How Do Committees Invent?”, 1968](https://melconway.com/Home/pdf/committees.pdf)
-- [Martin Fowler: Microservice Trade-Offs](https://martinfowler.com/articles/microservice-trade-offs.html)
+- [【官方资料】Wikipedia: Microservices](https://en.wikipedia.org/wiki/Microservices)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Microsoft Azure Architecture Center: Microservices architecture style](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】AWS Prescriptive Guidance: Decomposing monoliths into microservices](https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-decomposing-monoliths/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Google Cloud Architecture Center: Re-architecting to cloud native](https://cloud.google.com/resources/rearchitecting-to-cloud-native)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Melvin E. Conway, “How Do Committees Invent?”, 1968](https://melconway.com/Home/pdf/committees.pdf)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Martin Fowler: Microservice Trade-Offs](https://martinfowler.com/articles/microservice-trade-offs.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

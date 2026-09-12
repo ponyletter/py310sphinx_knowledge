@@ -112,9 +112,13 @@
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [CLIP: Connecting Text and Images (OpenAI)](https://openai.com/index/clip/)
-- [Flamingo: a Visual Language Model for Few-Shot Learning (DeepMind)](https://www.deepmind.com/publications/tackling-multiple-tasks-with-a-single-visual-language-model)
-- [Google Gemini Multimodal Architecture Paper](https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf)
-- [LLaVA: Large Language and Vision Assistant](https://llava-vl.github.io/)
+- [【官方资料】CLIP: Connecting Text and Images (OpenAI)](https://openai.com/index/clip/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Flamingo: a Visual Language Model for Few-Shot Learning (DeepMind)](https://www.deepmind.com/publications/tackling-multiple-tasks-with-a-single-visual-language-model)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Google Gemini Multimodal Architecture Paper](https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】LLaVA: Large Language and Vision Assistant](https://llava-vl.github.io/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

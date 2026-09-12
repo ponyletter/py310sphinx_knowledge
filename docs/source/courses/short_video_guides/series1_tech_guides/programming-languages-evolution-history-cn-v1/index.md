@@ -118,11 +118,15 @@ TypeScript 等现代语言披上强类型装甲，融合函数式与声明式，
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://www.ibm.com/history/fortran](https://www.ibm.com/history/fortran)
-- [https://www.bell-labs.com/usr/dmr/www/chist.pdf](https://www.bell-labs.com/usr/dmr/www/chist.pdf)
-- [https://docs.oracle.com/javase/specs/jvms/se24/html/jvms-1.html](https://docs.oracle.com/javase/specs/jvms/se24/html/jvms-1.html)
-- [https://developer.mozilla.org/en-US/docs/Glossary/JavaScript](https://developer.mozilla.org/en-US/docs/Glossary/JavaScript)
-- [https://docs.python.org/3/tutorial/](https://docs.python.org/3/tutorial/)
-- [https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- [【IBM 官方历史档案】FORTRAN 语言与科学计算的高级语言开端](https://www.ibm.com/history/fortran)  
+  *说明：1957 年人类首个成功的高级编程语言，将程序员从打孔纸带与机器指令中彻底解放。*
+- [【贝尔实验室权威史料】丹尼斯·里奇《C 语言的发展历程》技术论文](https://www.bell-labs.com/usr/dmr/www/chist.pdf)  
+  *说明：C 语言创始人亲笔撰写的经典论文，回顾类型系统、指针与跨硬件结构化革命。*
+- [【Oracle 官方规范】Java 虚拟机规范（The Java Virtual Machine Specification）](https://docs.oracle.com/javase/specs/jvms/se24/html/jvms-1.html)  
+  *说明：系统阐述字节码格式、内存模型与自动垃圾收集（GC）跨平台执行机理。*
+- [【MDN 权威文档】JavaScript 语言的历史、标准与动态脚本演进](https://developer.mozilla.org/en-US/docs/Glossary/JavaScript)  
+  *说明：Mozilla 记录的 JS 演进史：从 10 天诞生到统领全球 Web 浏览器与全栈运行时。*
+- [【Rust 官方权威教材】理解所有权（Understanding Ownership）](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)  
+  *说明：深入解读 Rust 如何在编译期通过所有权与借用检查实现零成本内存绝对安全。*

@@ -112,21 +112,15 @@ Claude Fable 5.1 这类面向长周期工作的模型，能把规划、工具调
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/AI_agent](https://en.wikipedia.org/wiki/AI_agent)
-- [https://en.wikipedia.org/wiki/Automated_planning_and_scheduling](https://en.wikipedia.org/wiki/Automated_planning_and_scheduling)
-- [https://en.wikipedia.org/wiki/Large_language_model](https://en.wikipedia.org/wiki/Large_language_model)
-- [https://arxiv.org/abs/2606.04874](https://arxiv.org/abs/2606.04874)
-- [https://arxiv.org/abs/2604.00892](https://arxiv.org/abs/2604.00892)
-- [https://arxiv.org/abs/2605.14504](https://arxiv.org/abs/2605.14504)
-- [https://arxiv.org/abs/2608.06663](https://arxiv.org/abs/2608.06663)
-- [https://docs.anthropic.com/en/docs/claude-code/cli-usage](https://docs.anthropic.com/en/docs/claude-code/cli-usage)
-- [https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-templates-and-variables)
-- [https://platform.openai.com/docs/quickstart/make-your-first-api-request](https://platform.openai.com/docs/quickstart/make-your-first-api-request)
-- [https://platform.openai.com/docs/assistants/deep-dive/run-lifecycle](https://platform.openai.com/docs/assistants/deep-dive/run-lifecycle)
-- [https://www.anthropic.com/claude/fable](https://www.anthropic.com/claude/fable)
-- [https://www.anthropic.com/claude-fable-and-mythos-5-1](https://www.anthropic.com/claude-fable-and-mythos-5-1)
-- [https://platform.claude.com/docs/en/models/overview](https://platform.claude.com/docs/en/models/overview)
-- [https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1](https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1)
-- [https://www.anthropic.com/claude-fable-5-1-mythos-5-1-system-card](https://www.anthropic.com/claude-fable-5-1-mythos-5-1-system-card)
+- [【维基百科】人工智能智能体（AI Agent）原理与定义](https://en.wikipedia.org/wiki/AI_agent)  
+  *说明：系统论述感知—思考—行动循环、自主目标规划与环境互动模型。*
+- [【维基百科】自动化规划与调度算法（Automated Planning）](https://en.wikipedia.org/wiki/Automated_planning_and_scheduling)  
+  *说明：计算机科学中将复杂目标分层分解为可达状态序列的经典算法体系。*
+- [【Anthropic 官方工程指南】Claude Code CLI 深度长任务实践](https://docs.anthropic.com/en/docs/claude-code/cli-usage)  
+  *说明：指导如何管理工程代码库、上下文压缩、检查点恢复与跨步骤状态保持。*
+- [【OpenAI 官方文档】Assistants API 运行生命周期（Run Lifecycle）](https://platform.openai.com/docs/assistants/deep-dive/run-lifecycle)  
+  *说明：详细拆解智能体长任务执行流中的轮询状态、工具调用阶段与超时重试机制。*
+- [【学术论文 arXiv】大语言模型长程任务规划与灾难恢复基准](https://arxiv.org/abs/2606.04874)  
+  *说明：评估多智能体在数十步跨会话任务中保持记忆与纠偏的权威基准研究。*

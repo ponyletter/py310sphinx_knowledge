@@ -91,14 +91,13 @@ Workflow 负责分类后的标准处理链、失败重试和固定审批，让�
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://openai.github.io/openai-agents-python/agents/](https://openai.github.io/openai-agents-python/agents/)
-- [https://openai.github.io/openai-agents-python/ref/run/](https://openai.github.io/openai-agents-python/ref/run/)
-- [https://openai.github.io/openai-agents-python/tools/](https://openai.github.io/openai-agents-python/tools/)
-- [https://openai.github.io/openai-agents-python/handoffs/](https://openai.github.io/openai-agents-python/handoffs/)
-- [https://openai.github.io/openai-agents-python/multi_agent/](https://openai.github.io/openai-agents-python/multi_agent/)
-- [https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/](https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/)
-- [https://www.anthropic.com/engineering/building-effective-agents](https://www.anthropic.com/engineering/building-effective-agents)
-- [https://www.anthropic.com/research/trustworthy-agents](https://www.anthropic.com/research/trustworthy-agents)
-- [https://langchain-ai.github.io/langgraph/agents/tools/](https://langchain-ai.github.io/langgraph/agents/tools/)
+- [【OpenAI 官方指南】Agents SDK 智能体定义、执行与工具编排](https://openai.github.io/openai-agents-python/agents/)  
+  *说明：OpenAI 官方 Python 框架关于确定性代码流程与大模型推理节点调度的结合实践。*
+- [【OpenAI 官方文档】Agent 工具调用（Tool Calling）与状态持久化](https://openai.github.io/openai-agents-python/tools/)  
+  *说明：如何安全将 Python 函数暴露给模型调用，并验证输出类型与返回约束。*
+- [【Anthropic 官方研究】构建值得信赖的可靠智能体系统（Trustworthy Agents）](https://www.anthropic.com/research/trustworthy-agents)  
+  *说明：深度探讨为什么必须用确定性工作流约束 Agent 的自治边界，避免幻觉与失控。*
+- [【LangChain 官方指南】LangGraph 循环图流与有状态多 Agent 编排](https://langchain-ai.github.io/langgraph/)  
+  *说明：将复杂业务逻辑抽象为状态机有向图（Graph），实现断点调试与人工回退。*

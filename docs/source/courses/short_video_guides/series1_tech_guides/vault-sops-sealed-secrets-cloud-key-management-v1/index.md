@@ -79,9 +79,13 @@ HashiCorp Vault 是企业级机密管理的终极形态。它不仅管理静态�
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [HashiCorp Vault Documentation](https://developer.hashicorp.com/vault/docs)
-- [Mozilla SOPS on GitHub](https://github.com/getsops/sops)
-- [Bitnami Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets)
-- [External Secrets Operator](https://external-secrets.io/)
+- [【官方资料】HashiCorp Vault Documentation](https://developer.hashicorp.com/vault/docs)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Mozilla SOPS on GitHub](https://github.com/getsops/sops)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Bitnami Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】External Secrets Operator](https://external-secrets.io/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

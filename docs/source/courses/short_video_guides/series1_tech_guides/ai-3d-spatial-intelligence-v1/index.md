@@ -137,7 +137,13 @@ Unity 常被用于跨平台原型、机器人训练和合成数据；Unreal 擅�
 
 ## 参考资料
 
-- [Blender Features](https://www.blender.org/features/)
-- [Three.js Scene](https://threejs.org/docs/pages/Scene.html)
-- [CARLA Introduction](https://carla.readthedocs.io/en/latest/start_introduction/)
-- [Unity Synthetic Data](https://docs.unity.cn/Packages/com.unity.mars@1.3/manual/ReferenceGuideSyntheticData.html)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
+
+- [【官方资料】Blender Features](https://www.blender.org/features/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Three.js Scene](https://threejs.org/docs/pages/Scene.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】CARLA Introduction](https://carla.readthedocs.io/en/latest/start_introduction/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Unity Synthetic Data](https://docs.unity.cn/Packages/com.unity.mars@1.3/manual/ReferenceGuideSyntheticData.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

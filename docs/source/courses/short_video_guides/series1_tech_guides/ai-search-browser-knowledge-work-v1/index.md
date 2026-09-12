@@ -125,8 +125,15 @@ Research Agent 是研究循环的助手，不是免检报告机。
 
 ## 参考资料
 
-- [Google: How Search Works](https://developers.google.com/search/docs/fundamentals/how-search-works)
-- [OpenAI: Deep research in ChatGPT](https://help.openai.com/en/articles/10500283-deep-research)
-- [Google AI Mode](https://blog.google/products-and-platforms/products/search/ai-mode-search/)
-- [RAG 原始论文](https://arxiv.org/abs/2005.11401)
-- [Stanford Law：AI 法律研究工具可靠性研究](https://law.stanford.edu/publications/hallucination-free-assessing-the-reliability-of-leading-ai-legal-research-tools/)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
+
+- [【官方资料】Google: How Search Works](https://developers.google.com/search/docs/fundamentals/how-search-works)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】OpenAI: Deep research in ChatGPT](https://help.openai.com/en/articles/10500283-deep-research)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Google AI Mode](https://blog.google/products-and-platforms/products/search/ai-mode-search/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】RAG 原始论文](https://arxiv.org/abs/2005.11401)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Stanford Law：AI 法律研究工具可靠性研究](https://law.stanford.edu/publications/hallucination-free-assessing-the-reliability-of-leading-ai-legal-research-tools/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

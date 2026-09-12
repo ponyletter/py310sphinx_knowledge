@@ -143,9 +143,17 @@ SQLite 可以并发读取，但同一个数据库文件在同一时刻只能有�
 
 ## 参考资料
 
-- [PostgreSQL：About](https://www.postgresql.org/about/)
-- [PostgreSQL：Data Types](https://www.postgresql.org/docs/current/datatype.html)
-- [MySQL：InnoDB Transaction Model](https://dev.mysql.com/doc/refman/26.7/en/innodb-transaction-model.html)
-- [MySQL：InnoDB Recovery](https://dev.mysql.com/doc/refman/26.7/en/innodb-recovery.html)
-- [SQLite：About](https://www.sqlite.org/about.html)
-- [SQLite：Transactions](https://www.sqlite.org/lang_transaction.html)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
+
+- [【官方资料】PostgreSQL：About](https://www.postgresql.org/about/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】PostgreSQL：Data Types](https://www.postgresql.org/docs/current/datatype.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】MySQL：InnoDB Transaction Model](https://dev.mysql.com/doc/refman/26.7/en/innodb-transaction-model.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】MySQL：InnoDB Recovery](https://dev.mysql.com/doc/refman/26.7/en/innodb-recovery.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】SQLite：About](https://www.sqlite.org/about.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】SQLite：Transactions](https://www.sqlite.org/lang_transaction.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

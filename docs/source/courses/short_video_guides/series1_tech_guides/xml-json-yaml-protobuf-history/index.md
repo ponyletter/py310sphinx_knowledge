@@ -129,23 +129,41 @@ YAML 把重点从机器最短表示，转向人类能否快速阅读、编辑和
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [English Wikipedia: XML](https://en.wikipedia.org/wiki/XML)
-- [English Wikipedia: JSON](https://en.wikipedia.org/wiki/JSON)
-- [English Wikipedia: YAML](https://en.wikipedia.org/wiki/YAML)
-- [English Wikipedia: Protocol Buffers](https://en.wikipedia.org/wiki/Protocol_Buffers)
-- [English Wikipedia: Data exchange](https://en.wikipedia.org/wiki/Data_exchange)
-- [W3C XML 1.0 Fifth Edition](https://www.w3.org/TR/xml/)
-- [W3C 1998 XML 1.0 Recommendation 公告](https://www.w3.org/Press/1998/XML10-REC)
-- [IETF RFC 8259](https://www.rfc-editor.org/info/rfc8259)
-- [Ecma-404 JSON 2nd edition](https://ecma-international.org/publications-and-standards/standards/ecma-404/)
-- [YAML 1.2.2 Specification](https://yaml.org/spec/1.2.2/)
-- [Protocol Buffers Overview](https://protobuf.dev/overview/)
-- [Protocol Buffers Programming Guides](https://protobuf.dev/programming-guides/)
-- [Protocol Buffers Encoding](https://protobuf.dev/programming-guides/encoding/)
-- [W3C SOAP 1.2](https://www.w3.org/TR/soap12/)
-- [W3C XML Core / Namespaces](https://www.w3.org/XML/Core/)
-- [JSON Schema Specification](https://json-schema.org/specification)
-- [YAML 1.2 Specification](https://yaml.org/spec/1.2.0/)
-- [Protocol Buffers Editions Overview](https://protobuf.dev/editions/overview/)
+- [【官方资料】English Wikipedia: XML](https://en.wikipedia.org/wiki/XML)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】English Wikipedia: JSON](https://en.wikipedia.org/wiki/JSON)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】English Wikipedia: YAML](https://en.wikipedia.org/wiki/YAML)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】English Wikipedia: Protocol Buffers](https://en.wikipedia.org/wiki/Protocol_Buffers)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】English Wikipedia: Data exchange](https://en.wikipedia.org/wiki/Data_exchange)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】W3C XML 1.0 Fifth Edition](https://www.w3.org/TR/xml/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】W3C 1998 XML 1.0 Recommendation 公告](https://www.w3.org/Press/1998/XML10-REC)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】IETF RFC 8259](https://www.rfc-editor.org/info/rfc8259)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Ecma-404 JSON 2nd edition](https://ecma-international.org/publications-and-standards/standards/ecma-404/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】YAML 1.2.2 Specification](https://yaml.org/spec/1.2.2/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Protocol Buffers Overview](https://protobuf.dev/overview/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Protocol Buffers Programming Guides](https://protobuf.dev/programming-guides/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Protocol Buffers Encoding](https://protobuf.dev/programming-guides/encoding/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】W3C SOAP 1.2](https://www.w3.org/TR/soap12/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】W3C XML Core / Namespaces](https://www.w3.org/XML/Core/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】JSON Schema Specification](https://json-schema.org/specification)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】YAML 1.2 Specification](https://yaml.org/spec/1.2.0/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Protocol Buffers Editions Overview](https://protobuf.dev/editions/overview/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

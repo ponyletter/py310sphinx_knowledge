@@ -77,13 +77,13 @@
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://csrc.nist.gov/pubs/sp/800/41/r1/final](https://csrc.nist.gov/pubs/sp/800/41/r1/final)
-- [https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-41r1.pdf](https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-41r1.pdf)
-- [https://owasp.org/Top10/2025/0x00_2025-Introduction/](https://owasp.org/Top10/2025/0x00_2025-Introduction/)
-- [https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/](https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/)
-- [https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-278a](https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-278a)
-- [https://www.cisa.gov/known-exploited-vulnerabilities-catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
-- [https://csrc.nist.gov/pubs/sp/800/207/final](https://csrc.nist.gov/pubs/sp/800/207/final)
-- [https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/use-logging-on-business-systems](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/use-logging-on-business-systems)
+- [【NIST 官方指南】SP 800-41：企业防火墙与安全策略指南](https://csrc.nist.gov/pubs/sp/800/41/r1/final)  
+  *说明：美国国家标准技术研究所（NIST）关于包过滤、状态检测与代理防火墙配置权威规范。*
+- [【OWASP 官方标准】OWASP Top 10 全球 Web 应用安全风险榜单](https://owasp.org/Top10/)  
+  *说明：开放式 Web 应用程序安全项目权威总结的应用层常见漏洞与攻击手段（注入、权限越权等）。*
+- [【CISA 官方通告】已知利用漏洞目录（KEV Catalog）](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)  
+  *说明：美国网络安全和基础设施安全局公布的已被黑客广泛利用的真实高危漏洞数据库。*
+- [【NIST 官方标准】SP 800-207：零信任架构（ZTA）国家标准](https://csrc.nist.gov/pubs/sp/800/207/final)  
+  *说明：阐述为什么仅有网络边界防火墙无法抵御内网横向移动，必须建立全链路身份与动态访问核验。*

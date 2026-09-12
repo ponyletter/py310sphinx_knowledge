@@ -80,14 +80,17 @@
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://en.wikipedia.org/wiki/Message_queue](https://en.wikipedia.org/wiki/Message_queue)
-- [https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling](https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling)
-- [https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber](https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber)
-- [https://docs.cloud.google.com/pubsub/docs/overview](https://docs.cloud.google.com/pubsub/docs/overview)
-- [https://docs.cloud.google.com/pubsub/architecture](https://docs.cloud.google.com/pubsub/architecture)
-- [https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html)
-- [https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html)
-- [https://www.rabbitmq.com/docs/reliability](https://www.rabbitmq.com/docs/reliability)
-- [https://kafka.apache.org/41/design/design/](https://kafka.apache.org/41/design/design/)
+- [【维基百科】消息队列（Message Queue）工作原理](https://en.wikipedia.org/wiki/Message_queue)  
+  *说明：异步通信、解耦生产者与消费者、系统故障隔离的核心软件模式。*
+- [【微软云架构模式】基于队列的负载平抑模式（Queue-Based Load Leveling）](https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling)  
+  *说明：微软官方架构设计模式指南，解析如何利用消息缓冲解决突发高并发流量压垮下游的问题。*
+- [【微软云架构模式】发布者—订阅者模式（Publisher-Subscriber Pattern）](https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber)  
+  *说明：详细介绍事件驱动架构下消息广播、跨微服务解耦的设计规范。*
+- [【AWS 官方文档】Amazon SQS 消息队列与 At-Least-Once 投递语义](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html)  
+  *说明：AWS 官方手册，解析消息重试、幂等性消费与死信队列（DLQ）的落地要点。*
+- [【RabbitMQ 官方文档】消息投递可靠性与仲裁队列（Quorum Queues）](https://www.rabbitmq.com/docs/reliability)  
+  *说明：保障生产不丢消息的生产者确认机制、镜像集群与消费者手动 ACK 原理。*
+- [【Apache Kafka 官方架构】Kafka 分区设计与顺序存储日志](https://kafka.apache.org/documentation/)  
+  *说明：Kafka 核心设计哲学：高吞吐顺序 I/O、分区分片机制与可回放流处理。*

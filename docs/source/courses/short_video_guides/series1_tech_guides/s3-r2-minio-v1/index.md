@@ -79,8 +79,11 @@ AWS S3 提供了极致的数据耐久性（99.999999999%）与完备的生命周
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [AWS S3 Storage Classes & Guides](https://aws.amazon.com/s3/)
-- [Cloudflare R2 Documentation](https://developers.cloudflare.com/r2/)
-- [MinIO High Performance Object Storage](https://min.io/docs/minio/linux/index.html)
+- [【官方资料】AWS S3 Storage Classes & Guides](https://aws.amazon.com/s3/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Cloudflare R2 Documentation](https://developers.cloudflare.com/r2/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】MinIO High Performance Object Storage](https://min.io/docs/minio/linux/index.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

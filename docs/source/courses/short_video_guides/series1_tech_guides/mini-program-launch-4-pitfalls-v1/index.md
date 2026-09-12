@@ -180,8 +180,11 @@ CSS 模糊只能让内容“看起来不清楚”，却不一定阻止完整正�
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [微信小程序登录流程与凭证校验 (wx.login)](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html)
-- [微信小程序分包加载与发布规范](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages.html)
-- [微信小程序网络与域名安全配置](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html)
+- [【官方资料】微信小程序登录流程与凭证校验 (wx.login)](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】微信小程序分包加载与发布规范](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】微信小程序网络与域名安全配置](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/network.html)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

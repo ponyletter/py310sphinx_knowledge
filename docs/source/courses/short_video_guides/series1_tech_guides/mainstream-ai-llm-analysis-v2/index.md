@@ -240,10 +240,15 @@ Stable、Preview、Latest 和 Experimental，主要描述版本生命周期。AP
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [OpenAI Models & API Documentation](https://platform.openai.com/docs/models)
-- [Anthropic Claude Models Overview](https://docs.anthropic.com/en/docs/about-claude/models)
-- [Google DeepMind Gemini Documentation](https://ai.google.dev/gemini-api/docs/models/gemini)
-- [xAI Grok Documentation](https://docs.x.ai/)
-- [DeepSeek Open Source Models](https://github.com/deepseek-ai)
+- [【官方资料】OpenAI Models & API Documentation](https://platform.openai.com/docs/models)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Anthropic Claude Models Overview](https://docs.anthropic.com/en/docs/about-claude/models)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Google DeepMind Gemini Documentation](https://ai.google.dev/gemini-api/docs/models/gemini)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】xAI Grok Documentation](https://docs.x.ai/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】DeepSeek Open Source Models](https://github.com/deepseek-ai)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

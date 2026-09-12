@@ -136,10 +136,15 @@ Grok 的付费权益会提高消息、搜索、多媒体或智能体使用量。
 
 ## 参考资料
 
-以下链接来自原始课程研究笔记；动态信息请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [https://claude.com/pricing；https://support.claude.com/en/articles/11049762-choose-a-claude-plan；https://support.claude.com/en/articles/11049741-what-is-the-max-plan](https://claude.com/pricing；https://support.claude.com/en/articles/11049762-choose-a-claude-plan；https://support.claude.com/en/articles/11049741-what-is-the-max-plan)
-- [https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan](https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan)
-- [https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq；https://help.openai.com/en/articles/11487671-flexible-pricing-for-the-enterprise-and-team-plan；https://help.openai.com/en/articles/11481834-chatgpt-rate-card-business-enterpriseedu/](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq；https://help.openai.com/en/articles/11487671-flexible-pricing-for-the-enterprise-and-team-plan；https://help.openai.com/en/articles/11481834-chatgpt-rate-card-business-enterpriseedu/)
-- [https://support.google.com/gemini/answer/16275805?hl=en；https://support.google.com/googleone/answer/14534406](https://support.google.com/gemini/answer/16275805?hl=en；https://support.google.com/googleone/answer/14534406)
-- [https://docs.x.ai/grok/overview；https://docs.x.ai/developers/pricing；https://docs.x.ai/developers/models](https://docs.x.ai/grok/overview；https://docs.x.ai/developers/pricing；https://docs.x.ai/developers/models)
+- [【Anthropic 官方定价】Claude 个人会员与计划梯度详解](https://claude.com/pricing)  
+  *说明：官方公布的 Free、Pro 与 Team 会员权益、使用限额与模型调用说明。*
+- [【Anthropic 官方指南】Claude Enterprise 企业版治理与安全合规](https://support.claude.com/en/articles/9797531-what-is-the-enterprise-plan)  
+  *说明：企业版 SSO 单点登录、数据不参与模型训练及安全审计日志标准。*
+- [【OpenAI 官方帮助】ChatGPT 免费版与付费版功能对比 FAQ](https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq)  
+  *说明：解析 GPT 免费额度、上下文窗口限制与高峰期保障差异。*
+- [【Google 官方文档】Gemini Advanced 会员权益与 Google One 方案](https://support.google.com/gemini/answer/16275805?hl=en)  
+  *说明：Gemini 高级会员在百万上下文、Google Workspace 联动与存储空间方面的权益说明。*
+- [【xAI 官方文档】Grok 商业产品矩阵与 API 定价体系](https://docs.x.ai/grok/overview)  
+  *说明：介绍 Grok 网页端、X 社交网络会员权益与企业级开发者 API 计费规则。*

@@ -119,8 +119,15 @@ Java 与 Spring 团队希望在熟悉的运行时内扩展路由和过滤器时�
 
 ## 参考资料
 
-- [Traefik Gateway API](https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/gateway-api/)
-- [HAProxy Documentation](https://www.haproxy.com/documentation/)
-- [Envoy](https://www.envoyproxy.io/docs/envoy/latest/)
-- [Kong Gateway](https://docs.konghq.com/gateway/latest/)
-- [Apache APISIX](https://apisix.apache.org/docs/)
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
+
+- [【官方资料】Traefik Gateway API](https://doc.traefik.io/traefik/reference/routing-configuration/kubernetes/gateway-api/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】HAProxy Documentation](https://www.haproxy.com/documentation/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Envoy](https://www.envoyproxy.io/docs/envoy/latest/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Kong Gateway](https://docs.konghq.com/gateway/latest/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Apache APISIX](https://apisix.apache.org/docs/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

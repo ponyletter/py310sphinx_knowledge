@@ -55,8 +55,11 @@ Ansible 的核心优势在于极简的无代理（Agentless）架构：受管服
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [HashiCorp Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
-- [Ansible Community Documentation](https://docs.ansible.com/ansible/latest/)
-- [OpenTofu Project (Open Source Fork)](https://opentofu.org/)
+- [【官方资料】HashiCorp Terraform Documentation](https://developer.hashicorp.com/terraform/docs)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Ansible Community Documentation](https://docs.ansible.com/ansible/latest/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】OpenTofu Project (Open Source Fork)](https://opentofu.org/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*

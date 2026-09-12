@@ -83,8 +83,11 @@ Memcached 凭借原生多线程事件循环与无锁内存哈希表，在处理�
 
 ## 参考资料
 
-以下链接来自官方权威技术文档与开源规范；动态规则请以其当前页面为准。
+> 📌 **查阅提示**：点击下方超链接可直接复制对应网址，粘贴至手机或电脑浏览器中即可查阅官方完整技术文档与规范。
 
-- [Valkey Official Project](https://valkey.io/)
-- [Redis Documentation & Commands](https://redis.io/docs/)
-- [Memcached Wiki & Architecture](https://github.com/memcached/memcached/wiki)
+- [【官方资料】Valkey Official Project](https://valkey.io/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Redis Documentation & Commands](https://redis.io/docs/)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
+- [【官方资料】Memcached Wiki & Architecture](https://github.com/memcached/memcached/wiki)  
+  *说明：官方权威技术规范与开发者实现参考手册。*
