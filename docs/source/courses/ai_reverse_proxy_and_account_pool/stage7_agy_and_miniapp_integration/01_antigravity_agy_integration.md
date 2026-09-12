@@ -1,80 +1,134 @@
-# 7.1 Antigravity (AGY) 接入自定义反代与多 Agent 协同加速
+# 7.1 本地桌面号池工具（CLIProxyAPIPlus）、Claude Code 桥接与 AGY 编程助手集成
 
-**Google Antigravity (AGY)** 是前沿的智能体编程开发环境与命令行工具（AGY CLI / Antigravity IDE）。在面对超大规模工程重构、跨文件代码推演以及多子智能体并行作业（Subagents Concurrent Invocation）时，AGY 对底层大语言模型有着极高的推理吞吐量与高并发要求。
+大模型高阶编程工具（如 Google Antigravity AGY、Claude Code、Cursor）对底层模型的推理吞吐量与稳定性有着极高要求。如果在本地进行全天候代码重构或触发多 Agent 协同推演，直接直连官方单账号极易撞上 TPM/RPM 速率上限。
 
-如果直接使用官方单账号直连，在连续调用 3~5 个并发子智能体（如同时执行 `research`、代码架构分析、测试用例编写）时，极易瞬间撞上官方的 TPM / RPM（Tokens / Requests Per Minute）速率天花板，触发恼人的 HTTP 429 限流阻断。
+针对个人开发者与团队，除了在海外 VPS 部署外，在本地运行**轻量级桌面代理号池工具（基于开源项目 `CLIProxyAPIPlus` / `ToAPI Proxy`）** 也是一种极其轻巧、开箱即用的高性价比方案。
 
-将 AGY 接入我们搭建的 **CLIProxyAPI 多账号智能调度反代服务**，不仅能大幅降低使用成本，更能利用账号池的平摊分流机制，让多智能体协同畅快奔跑。
+本节系统讲解跨平台桌面工具的使用、多账号导入，以及如何将其无缝桥接到 **Claude Code** 与 **Antigravity (AGY)**。
 
 ---
 
-## 架构拓扑：AGY 与反代网关的集成关系
+## 一、跨平台本地桌面代理工具（ToAPI Proxy / CLIProxyAPIPlus）
+
+为了降低普通开发者在本地配置 Docker 与编译 Go 环境的门槛，社区基于 `CLIProxyAPIPlus` 封装了专用的跨平台桌面客户端应用：
+
+### 1. 四大系统芯片架构安装包规范
+根据本地电脑的芯片架构与操作系统，选择对应的软件包：
+- **Mac 平台 (Intel 芯片)**：`ToAPI_Proxy_0.1.0_macos_intel.dmg`
+- **Mac 平台 (Apple Silicon M系列芯片 M1/M2/M3/M4)**：`ToAPI_Proxy_0.1.0_macos_apple_silicon.dmg`
+- **Windows 平台 (x64 传统架构)**：`ToAPI_Proxy_0.1.0_windows_x64_setup.exe`
+- **Windows 平台 (arm64 架构)**：`ToAPI_Proxy_0.1.0_windows_arm64_setup.exe`
+
+下载安装后启动，软件将在本地环回端口（通常为 `http://127.0.0.1:8317`）静默拉起高性能代理核心。
+
+---
+
+## 二、账号池导入与登录实操（两种模式）
+
+桌面工具支持将多个 Plus 账号（如在 Gamsgo 购买的 6 人拼车账号）统一导入池化：
 
 ```mermaid
 flowchart TD
-    subgraph AGYEnvironment [Antigravity 开发者环境]
-        AGYCore[AGY CLI / Antigravity 2.0]
-        SubAgent1[子智能体 1: 架构推演]
-        SubAgent2[子智能体 2: 代码审查]
-        SubAgent3[子智能体 3: 自动化测试]
+    subgraph LoginChoice [账号登入方式]
+        M1["方式 A: 一键导入 VSCode 凭据<br/>(import Current Codex)"]
+        M2["方式 B: 官方 OpenAI 邮箱验证码登录<br/>(Login with OpenAI)"]
     end
 
-    subgraph CustomGateway [私有反向代理集群]
-        NginxTLS[HTTPS 网关: api.yourdomain.com]
-        CPA[CLIProxyAPI 动态调度池]
+    subgraph Pool [桌面多账号池]
+        AccPool["本地账号池: 账号 1 ~ 7+<br/>自动轮换保活 / 避免单号限流"]
     end
 
-    subgraph AccountPool [海外官方多账号并发池]
-        Acc1[(Plus 账号 1)]
-        Acc2[(Plus 账号 2)]
-        Acc3[(Codex 账号 3)]
-    end
-
-    AGYCore --> SubAgent1 & SubAgent2 & SubAgent3
-    SubAgent1 & SubAgent2 & SubAgent3 -->|标准 OpenAI 协议并发请求| NginxTLS
-    NginxTLS -->|Keepalive 长连接| CPA
-    CPA -->|Round-Robin 分流| Acc1
-    CPA -->|Round-Robin 分流| Acc2
-    CPA -->|Round-Robin 分流| Acc3
+    M1 --> AccPool
+    M2 --> AccPool
+    AccPool --> Out["对外输出统一接口: http://127.0.0.1:8317/v1"]
 ```
+
+### 1. 方式 A：从 VSCode Codex 插件一键导入
+- 若你已在 VSCode 的 Codex 官方插件中登录过账号；
+- 打开本地代理客户端，直接点击 **“import Current Codex”**；
+- 客户端将自动提取本地的合法 OAuth 凭证并无缝载入号池。
+
+### 2. 方式 B：走官方 "Login with OpenAI" 邮箱验证码流程
+适合导入从正规拼车平台（如 Gamsgo）获取的账号：
+1. 在桌面代理工具中点击 **“Login with OpenAI”**；
+2. 弹出登录页面后，输入你在拼车后台分配的专属邮箱账号；
+3. 输入密码后，若提示安全验证，点击 **“试试邮箱 / 发送验证码”**；
+4. 在对应的邮箱控制台获取 6 位数字动态验证码，填入客户端；
+5. 验证成功！该账号即被永久载入本地账号池。
+6. 重复上述步骤可依次添加 5~10 个账号，实现本地多账号并发调度。
 
 ---
 
-## 接入配置指南
+## 三、桥接至 Claude Code：在 Claude Code 中使用 GPT-5.4 / 满血模型
 
-### 1. 环境变量全局注入方式（最简推荐）
+Claude Code 是 Anthropic 官方推出的强大终端 Agent 编程利器。通过将本地代理地址映射为 Claude Code 的上游端点，开发者可以以极低成本让 GPT-5.4 或其它满血模型在 Claude Code 内部奔跑：
 
-在开发者的操作系统（Linux / macOS / Windows WSL）环境配置文件（如 `~/.bashrc` 或 `~/.zshrc`）中注入以下标准环境变量：
+### 1. 配置 Claude Code 端点环境变量
+在终端中注入本地代理地址与密钥：
 
 ```bash
-# 1. 指向你自己的海外反代网关域名（末尾必须带 /v1）
-export OPENAI_BASE_URL="https://api.yourdomain.com/v1"
+# 指向本地代理工具的监听地址
+export ANTHROPIC_BASE_URL="http://127.0.0.1:8317"
+export ANTHROPIC_API_KEY="sk-prod-cliproxy-secret-2026"
 
-# 2. 注入在 config.yaml 中配置的授权密钥
+# 或者针对兼容 OpenAI 协议的扩展配置:
+export OPENAI_BASE_URL="http://127.0.0.1:8317/v1"
 export OPENAI_API_KEY="sk-prod-cliproxy-secret-2026"
+```
 
-# 3. (可选) 指定默认基座模型
+### 2. 启动 Claude Code 与模型选择
+在终端进入你的代码项目目录，启动客户端：
+
+```bash
+claude
+```
+
+在交互命令行中，通过 `/model` 指令快速查看或切换你配置的基座模型：
+```text
+/model gpt-5.4
+```
+发送一条测试提示词（例如：“请检查当前项目的目录结构”）。若收到模型流畅回复，即代表本地代理号池与 Claude Code 全链路贯通！
+
+---
+
+## 四、接入 Antigravity (AGY) 智能编程助手
+
+对于使用 Google Antigravity (AGY CLI / IDE) 的开发者，接入本地或远程反代同样极为简单：
+
+```mermaid
+flowchart TD
+    subgraph AGYEnvironment [Antigravity 开发者工作区]
+        AGYCore[AGY CLI / Antigravity 2.0]
+        SubAgent1[Subagent 1: 架构分析]
+        SubAgent2[Subagent 2: 测试用例生成]
+    end
+
+    subgraph LocalCPA [本地/远程反代网关 :8317]
+        CPA[CLIProxyAPI 动态调度引擎]
+        Pool[(账号池: 账号 A, B, C...)]
+    end
+
+    AGYCore --> SubAgent1 & SubAgent2
+    SubAgent1 & SubAgent2 -->|并发 OpenAI 标准请求| LocalCPA
+    LocalCPA -->|Round-Robin 分流| Pool
+```
+
+### 1. 环境变量全局注入方式
+在 `~/.bashrc` 或 `~/.zshrc` 中配置：
+
+```bash
+export OPENAI_BASE_URL="http://127.0.0.1:8317/v1"
+export OPENAI_API_KEY="sk-prod-cliproxy-secret-2026"
 export AGY_DEFAULT_MODEL="gpt-4o"
 ```
-
-保存后执行 `source ~/.bashrc` 即可全局生效。
-
----
+执行 `source ~/.bashrc` 即可生效。
 
 ### 2. AGY 客户端配置文件定制
-
-若使用 Antigravity CLI 工具，可在其全局配置文件目录中进行定制：
-
-```bash
-# 配置文件通常位于 ~/.gemini/antigravity-cli/config.json
-vim ~/.gemini/antigravity-cli/config.json
-```
-
-注入对应端点配置：
+在 `~/.gemini/antigravity-cli/config.json` 中配置模型别名与映射：
 
 ```json
 {
-  "api_endpoint": "https://api.yourdomain.com/v1",
+  "api_endpoint": "http://127.0.0.1:8317/v1",
   "api_key": "sk-prod-cliproxy-secret-2026",
   "default_model": "gpt-4o",
   "streaming": true,
@@ -87,23 +141,9 @@ vim ~/.gemini/antigravity-cli/config.json
 }
 ```
 
----
-
-## 验证与多 Agent 性能实战
-
-配置完成后，启动 AGY CLI 进行端到端握手测试：
-
+### 3. 多 Agent 并发测试验证
+在终端执行冒烟测试：
 ```bash
-# 执行简单提示词测试连通性
 agy "请简要介绍当前工作空间"
 ```
-
-在反向代理宿主机上实时监控 `docker compose logs -f cli-proxy-api`，你将看到 AGY 发起的请求被实时捕获并分发：
-
-```text
-[debug] [conductor_execution.go:1788] Use OAuth provider=codex auth_file=codex-plus-01.json for model gpt-4o
-[info ] [gin_logger.go:103] 200 | 1.821s | 127.0.0.1 | POST "/v1/chat/completions"
-```
-
-### 多子智能体并行并发体验
-当在 AGY 中运行复杂任务（例如触发多智能体并行重构或分析大仓库）时，多个 Subagent 同时向网关发起请求，CLIProxyAPI 的 `routing.strategy: "round-robin"` 将自动在多个 Plus 账号之间均匀轮流交替分发，彻底杜绝单号 429 报错，实现如丝般顺滑的开发体验！
+得益于本地或 VPS 号池的 Round-Robin 自动轮换调度，AGY 在并发调用多个子智能体（Subagents）时再也不会触发 429 限流，编码推理飞速推进！
