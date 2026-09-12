@@ -4,7 +4,7 @@
 
 本章系统梳理项目开发前必须核验的**“全要素审查自检表”**、**“道具与代币配置规范”**，并提供**“批量导入 Excel 标准模板下载”**。
 
-> **本次生产复盘校准（必须先读）**：消息推送 URL `https://meme.tg-cc755.cn/api/wechat/msg_push` 只有在后端已经启动、`/health` 可从公网访问、GET Token 握手通过后，才能在微信后台保存。Token 填服务端 `.env` 的 `WX_MSG_TOKEN`，不是 `XPAY_CALLBACK_TOKEN`；EncodingAESKey 使用微信后台生成的 43 位值。选择 JSON/明文模式并不代表可以跳过 GET 握手和支付通知幂等校验。微信后台的数据格式变更在本项目实测约 5 分钟生效，期间保持后端在线。
+> **本次生产复盘校准（必须先读）**：消息推送 URL `https://meme.yourdomain.cn/api/wechat/msg_push` 只有在后端已经启动、`/health` 可从公网访问、GET Token 握手通过后，才能在微信后台保存。Token 填服务端 `.env` 的 `WX_MSG_TOKEN`，不是 `XPAY_CALLBACK_TOKEN`；EncodingAESKey 使用微信后台生成的 43 位值。选择 JSON/明文模式并不代表可以跳过 GET 握手和支付通知幂等校验。微信后台的数据格式变更在本项目实测约 5 分钟生效，期间保持后端在线。
 
 ---
 
@@ -54,19 +54,19 @@
 微信后台支持上传 Excel 文件批量创建道具。我们为你准备好了严格符合微信官方最新规范的 **标准版批量导入 Excel 模板**（已修复点号字符合规问题，预置 1 元至 99 元六大标准研学档位）：
 
 * 📥 **官方服务端 CDN 在线直链下载**：
-  [点击直接下载 xpay_goods_batch_template.xlsx](https://apiwx.tg-cc755.cn/uploads/xpay_goods_batch_template.xlsx)
+  [点击直接下载 xpay_goods_batch_template.xlsx](https://api.yourdomain.cn/uploads/xpay_goods_batch_template.xlsx)
 * 📥 **静态文档工程内直接下载**：
   [下载工程静态资源模板](/_static/xpay_goods_batch_template.xlsx)
 
 #### Excel 文件内容结构对照：
 | 道具id | 道具名称 | 道具图片 | 道具价格 |
 | :--- | :--- | :--- | :--- |
-| `item_100` | 数创研学包1元 | `https://apiwx.tg-cc755.cn/api/assets/goods_icon.png` | 100 |
-| `item_990` | 数创研学包9元9 | `https://apiwx.tg-cc755.cn/api/assets/goods_icon.png` | 990 |
-| `item_1990` | 数创研学包19元9 | `https://apiwx.tg-cc755.cn/api/assets/goods_icon.png` | 1990 |
-| `item_2990` | 数创研学包29元9 | `https://apiwx.tg-cc755.cn/api/assets/goods_icon.png` | 2990 |
-| `item_4990` | 数创研学包49元9 | `https://apiwx.tg-cc755.cn/api/assets/goods_icon.png` | 4990 |
-| `item_9900` | 数创研学包99元 | `https://apiwx.tg-cc755.cn/api/assets/goods_icon.png` | 9900 |
+| `item_100` | 数创研学包1元 | `https://api.yourdomain.cn/api/assets/goods_icon.png` | 100 |
+| `item_990` | 数创研学包9元9 | `https://api.yourdomain.cn/api/assets/goods_icon.png` | 990 |
+| `item_1990` | 数创研学包19元9 | `https://api.yourdomain.cn/api/assets/goods_icon.png` | 1990 |
+| `item_2990` | 数创研学包29元9 | `https://api.yourdomain.cn/api/assets/goods_icon.png` | 2990 |
+| `item_4990` | 数创研学包49元9 | `https://api.yourdomain.cn/api/assets/goods_icon.png` | 4990 |
+| `item_9900` | 数创研学包99元 | `https://api.yourdomain.cn/api/assets/goods_icon.png` | 9900 |
 
 > [!IMPORTANT]
 > 导入完成后，务必在微信公众平台的【道具管理】列表中点击**【发布】**，只有状态显示为“已发布”的道具，现网收银台才能成功完成拉取与扣费！

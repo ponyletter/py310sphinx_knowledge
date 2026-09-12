@@ -20,8 +20,8 @@ graph TD
 <provider>-<hash/uuid>-<email_prefix>-<tier>.json
 ```
 - **示例解析**：
-  - `codex-f11baede-akuncalback9@gmail.com-plus.json`：清晰表明底层为 Codex 协议、关联邮箱、带有 Plus 高阶模型配额。
-  - `codex-03ac9188-teamtest@gmail.com-free.json`：表明为免费测试号。
+  - `codex-f11baede-devplus01@example.com-plus.json`：清晰表明底层为 Codex 协议、关联邮箱、带有 Plus 高阶模型配额。
+  - `codex-03ac9188-teamtest@example.com-free.json`：表明为免费测试号。
 
 ---
 

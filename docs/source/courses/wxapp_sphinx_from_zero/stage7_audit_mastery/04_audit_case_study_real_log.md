@@ -80,7 +80,7 @@ tmux send-keys -t weixin_api '/root/miniconda3/envs/py310sphinx_knowledge/bin/uv
 
 通过 `curl` 进行最后验证：
 ```bash
-curl -i -X POST https://apiwx.tg-cc755.cn/api/auth/test_login \
+curl -i -X POST https://api.yourdomain.cn/api/auth/test_login \
   -H "Content-Type: application/json" \
   -d '{"username":"audit_tester","password":"wx2026test"}'
 # 预期返回 HTTP/1.1 403 Forbidden

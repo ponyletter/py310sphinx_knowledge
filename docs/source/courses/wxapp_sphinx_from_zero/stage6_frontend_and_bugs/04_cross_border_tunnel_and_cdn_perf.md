@@ -16,7 +16,7 @@
 
 ```bash
 curl -w "耗时: %{time_total}s | 速度: %{speed_download} 字节/秒\n" \
-     -o /dev/null -s "https://meme.tg-cc755.cn/outputs/showcase_dance_1/meme_result.gif"
+     -o /dev/null -s "https://meme.yourdomain.cn/outputs/showcase_dance_1/meme_result.gif"
 ```
 
 **实测监控数据令人触目惊心**：
@@ -47,7 +47,7 @@ graph TD
 ### 2.1 怀疑一：数据库查询卡死？（❌ 排除）
 - **检测方式**：检查 SQLite 的慢查询日志与 API 响应时长：
   ```bash
-  curl -w "接口耗时: %{time_total}s\n" -s "https://meme.tg-cc755.cn/api/collection/list?openid=test"
+  curl -w "接口耗时: %{time_total}s\n" -s "https://meme.yourdomain.cn/api/collection/list?openid=test"
   ```
 - **数据依据**：接口纯 JSON 数据返回耗时仅 **0.038 秒**（38 毫秒），数据库读写性能极其充沛，无锁表现象。
 
@@ -77,11 +77,11 @@ graph TD
 sequenceDiagram
     autonumber
     actor User as 国内微信用户
-    participant CN as 国内腾讯云 (81.69.190.161)
+    participant CN as 国内腾讯云 (118.xx.xx.xx)
     participant SSH as SSH 反向隧道 (-R 8290)
-    participant US as 美区洛杉矶 (204.44.67.184)
+    participant US as 美区洛杉矶 (198.51.100.xx)
 
-    User->>CN: 1. 请求动图 (https://meme.tg-cc755.cn/outputs/xxx.gif)
+    User->>CN: 1. 请求动图 (https://meme.yourdomain.cn/outputs/xxx.gif)
     Note over CN: 国内 Nginx 没有任何缓存,<br/>直接反代至本地 8290
     CN->>SSH: 2. 流量被捕获, 送入 SSH 隧道
     Note over SSH: 跨太平洋物理往返延迟 235ms<br/>TCP-over-TCP 窗口严重收缩<br/>国际单流带宽被运营商 QoS 限速在 15KB/s
@@ -108,13 +108,13 @@ sequenceDiagram
 我们在国内腾讯云服务器配置独立的本地存储目录 `/var/www/outputs/`，并对 Nginx 进行重大重构：
 
 ```nginx
-# /etc/nginx/sites-available/meme.tg-cc755.cn
+# /etc/nginx/sites-available/meme.yourdomain.cn
 
 # 开启 1GB 磁盘二级反向缓存区
 proxy_cache_path /var/cache/nginx/meme_cache levels=1:2 keys_zone=meme_cache:20m max_size=1g inactive=30d use_temp_path=off;
 
 server {
-    server_name meme.tg-cc755.cn;
+    server_name meme.yourdomain.cn;
 
     client_max_body_size 20M;
 
@@ -185,10 +185,10 @@ async def sync_task_outputs_to_domestic(task_id: str, task_dir: Path):
             return
 
         # 美区沙箱环境退避逻辑
-        remote_dest = f"81.69.190.161:/var/www/outputs/{task_id}/"
+        remote_dest = f"118.xx.xx.xx:/var/www/outputs/{task_id}/"
         proc = await asyncio.create_subprocess_exec(
             "ssh", "-o", "ConnectTimeout=4", "-o", "BatchMode=yes",
-            "81.69.190.161", f"mkdir -p /var/www/outputs/{task_id}"
+            "118.xx.xx.xx", f"mkdir -p /var/www/outputs/{task_id}"
         )
         await proc.wait()
         # 异步传输文件略...
@@ -203,7 +203,7 @@ async def sync_task_outputs_to_domestic(task_id: str, task_dir: Path):
 2. **收拢 SSH 隧道职责**：美区服务器的 `cpa-tunnel-domestic.service` **移除了 `-R 8290:127.0.0.1:8290`**，只保留 `-R 8317:127.0.0.1:8317`：
    ```ini
    # 仅出海大模型走隧道，业务流量 100% 留在国内
-   ExecStart=/usr/bin/ssh -NT -R 8317:127.0.0.1:8317 root@81.69.190.161
+   ExecStart=/usr/bin/ssh -NT -R 8317:127.0.0.1:8317 root@118.xx.xx.xx
    ```
 3. **国内注册系统级守护**：创建 `/etc/systemd/system/meme-backend.service`，监听 `127.0.0.1:8290`，由国内 Nginx 极速反代。
 

@@ -36,7 +36,7 @@ graph TD
         StaticFS["静态文件存储 (HTML / CSS / Images)"]
     end
 
-    UI -->|"HTTPS / WSS (apiwx.tg-cc755.cn)"| Nginx
+    UI -->|"HTTPS / WSS (api.yourdomain.cn)"| Nginx
     Nginx -->|"Proxy Pass 8280"| FastAPI
     FastAPI --> JWT
     FastAPI --> XPay

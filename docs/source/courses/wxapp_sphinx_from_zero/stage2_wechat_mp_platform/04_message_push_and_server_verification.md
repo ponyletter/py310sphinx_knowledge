@@ -30,7 +30,7 @@
 微信发起的握手请求格式如下：
 ```http
 GET /api/wechat/msg_push?signature=xxx&timestamp=1788945600&nonce=987654&echostr=wx_echo_test_success_12345 HTTP/1.1
-Host: apiwx.tg-cc755.cn
+Host: api.yourdomain.cn
 ```
 
 * `signature`：微信加密签名，结合了开发者填写的 Token 参数和请求中的 timestamp、nonce 参数；

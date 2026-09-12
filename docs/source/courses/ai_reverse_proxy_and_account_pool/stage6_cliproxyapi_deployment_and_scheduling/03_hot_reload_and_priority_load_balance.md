@@ -117,15 +117,15 @@ routing:
 观察以下真实的生产环境调度追踪日志：
 
 ```text
-# 步骤 1: 客户端请求 gpt-5.6-sol 模型，网关优先选择 Priority 100 的主力账号 A (JonathanSullivan)
-[1ea35ec2] [debug] [conductor_execution.go:1788] Use OAuth provider=codex auth_file=codex-JonathanSullivan435658V@outlook.com.json for model gpt-5.6-sol
+# 步骤 1: 客户端请求 gpt-5.6-sol 模型，网关优先选择 Priority 100 的主力账号 A (account_primary)
+[1ea35ec2] [debug] [conductor_execution.go:1788] Use OAuth provider=codex auth_file=codex-account_primary@outlook.com.json for model gpt-5.6-sol
 
 # 步骤 2: 上游返回 400，账号 A (高权限Free号) 不支持 sol 特权模型
 [1ea35ec2] [debug] [codex_executor_stream.go:132] request error, error status: 400, error message: {"detail":"The 'gpt-5.6-sol' model is not supported when using Codex with a ChatGPT account."}
-[1ea35ec2] [warn ] [conductor_execution.go:1907] 400 | upstream execution failed: provider=codex auth_file=codex-JonathanSullivan...
+[1ea35ec2] [warn ] [conductor_execution.go:1907] 400 | upstream execution failed: provider=codex auth_file=codex-account_primary...
 
-# 步骤 3: 调度器并没有将 400 抛给客户端！而是立即无缝尝试 Priority 1 的备用账号 B (akuncalback9-plus)
-[1ea35ec2] [debug] [conductor_execution.go:1788] Use OAuth provider=codex auth_file=codex-f11baede-akuncalback9@gmail.com-plus.json for model gpt-5.6-sol
+# 步骤 3: 调度器并没有将 400 抛给客户端！而是立即无缝尝试 Priority 1 的备用账号 B (account_backup-plus)
+[1ea35ec2] [debug] [conductor_execution.go:1788] Use OAuth provider=codex auth_file=codex-account_backup@gmail.com-plus.json for model gpt-5.6-sol
 
 # 步骤 4: 备用账号具备 Plus 特权，执行成功并流式回传！客户端请求耗时 10.5 秒成功完成
 [1ea35ec2] [info ] [gin_logger.go:103] 200 OK | 10.591s | POST "/v1/chat/completions"

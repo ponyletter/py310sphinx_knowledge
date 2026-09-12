@@ -15,7 +15,7 @@
 ```javascript
 // ❌ 早期危险的同步阻塞长连接
 const res = await wx.request({
-  url: 'https://meme.tg-cc755.cn/api/generate-and-process',
+  url: 'https://meme.yourdomain.cn/api/generate-and-process',
   method: 'POST',
   data: { template_id: 'kiss', caption: '爱你哟' }
 });
@@ -54,14 +54,14 @@ flowchart TD
         WX["微信小程序客户端 (iOS / Android)"]
     end
 
-    subgraph CNServer ["国内云服务器 (81.69.190.161 · 已备案节点)"]
-        CN_API["FastAPI 业务后端<br>https://meme.tg-cc755.cn"]
+    subgraph CNServer ["国内云服务器 (118.xx.xx.xx · 已备案节点)"]
+        CN_API["FastAPI 业务后端<br>https://meme.yourdomain.cn"]
         CN_DB["用户数据 / 微信虚拟支付 / 订单流水"]
         CN_CV["本地 OpenCV 视觉切片去底加速引擎"]
     end
 
-    subgraph USServer ["海外中转服务器 (204.44.67.184)"]
-        NginxGateway["Nginx 反向代理 (443 SSL)<br>https://cpa.tg-cc755.cn"]
+    subgraph USServer ["海外中转服务器 (198.51.100.xx)"]
+        NginxGateway["Nginx 反向代理 (443 SSL)<br>https://cpa.yourdomain.cn"]
         CPA["CLIProxyAPI 服务 (8317)<br>持久化 OAuth 会话池"]
     end
 
@@ -79,7 +79,7 @@ flowchart TD
 ```
 
 ### 核心架构优势
-1. **微信审核合规 100%**：小程序公众平台后台仅登记 `https://meme.tg-cc755.cn`。审核员抓包检测时，全部流量均在国内节点，无任何违规境外直连行为；
+1. **微信审核合规 100%**：小程序公众平台后台仅登记 `https://meme.yourdomain.cn`。审核员抓包检测时，全部流量均在国内节点，无任何违规境外直连行为；
 2. **极速国内 CDN 体验**：所有的静态资源、动图直链下载、界面交互响应走国内优质 BGP 线路，首屏加载在 20ms~50ms 内完成；
 3. **Codex Device Code 与 Antigravity 无头免端口授权**：
    - 在海外服务器上使用 CLIProxyAPI 的设备码免桌面登录模式（`-codex-device-login`），8 位码一键绑定 ChatGPT Plus；

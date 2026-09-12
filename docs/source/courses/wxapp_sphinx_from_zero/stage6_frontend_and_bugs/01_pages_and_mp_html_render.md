@@ -129,7 +129,7 @@ def render_or_cache_mermaid(code_text: str) -> Optional[str]:
     # 若缓存存在直接命中返回，否则调用渲染并写入本地
     ...
 ```
-在送入小程序的 HTML 中，代码块被无缝替换为带有微光投影与圆角样式的纯白底卡片 `<img src="https://apiwx.tg-cc755.cn/uploads/mermaid/{hash}.svg" />`。用户可以在小程序内任意手势缩放、双击查看大图，渲染性能达到毫秒级！
+在送入小程序的 HTML 中，代码块被无缝替换为带有微光投影与圆角样式的纯白底卡片 `<img src="https://api.yourdomain.cn/uploads/mermaid/{hash}.svg" />`。用户可以在小程序内任意手势缩放、双击查看大图，渲染性能达到毫秒级！
 
 ---
 

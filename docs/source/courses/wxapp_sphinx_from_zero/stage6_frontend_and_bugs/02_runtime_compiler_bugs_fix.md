@@ -139,7 +139,7 @@ wx.showToast({ title: err.message || '操作失败', icon: 'none' });
 ### 4.1 案发现场与报错信息
 登录测试账号后，微信开发者工具控制台反复打印鲜红的错误提示：
 ```text
-[渲染层网络层错误] Failed to load image https://docs.tg-cc755.cn/_static/cover_short_video.png
+[渲染层网络层错误] Failed to load image https://docs.yourdomain.cn/_static/cover_short_video.png
 net::OK From server 127.0.0.1
 ```
 
@@ -211,20 +211,20 @@ net::OK From server 127.0.0.1
 
 ### 6.1 案发现场
 在接口修复了空列表后，前端终于拿到了图片 URL，但 `<image>` 却显示为白块或无法加载。直接在浏览器访问图片链接：
-`https://docs.tg-cc755.cn/uploads/20260910_3adecdf3.jpg` ➔ 直接返回 Cloudflare / Nginx 404 Not Found！
+`https://docs.yourdomain.cn/uploads/20260910_3adecdf3.jpg` ➔ 直接返回 Cloudflare / Nginx 404 Not Found！
 
 ### 6.2 根因深挖
-* 后端配置中将静态域名统一定义为了 `STATIC_BASE_URL = "https://docs.tg-cc755.cn"`；
+* 后端配置中将静态域名统一定义为了 `STATIC_BASE_URL = "https://docs.yourdomain.cn"`；
 * 但在 Nginx 的站点反向代理中：
-  * `docs.tg-cc755.cn` 仅仅代理了 8269 端口的 Sphinx 静态网页，**根本没有配置 `/uploads/` 路径的转发路由**！
-  * 真实的 FastAPI 文件上传与访问挂载在 8280 端口，且由 `apiwx.tg-cc755.cn/uploads/` 专门代理！
+  * `docs.yourdomain.cn` 仅仅代理了 8269 端口的 Sphinx 静态网页，**根本没有配置 `/uploads/` 路径的转发路由**！
+  * 真实的 FastAPI 文件上传与访问挂载在 8280 端口，且由 `api.yourdomain.cn/uploads/` 专门代理！
 * 导致上传接口下发的图片外网链接实际上是指向了一个不存在的虚拟路由。
 
 ### 6.3 终极解法
-1. **解耦配置**：引入专属的 `UPLOAD_BASE_URL = "https://apiwx.tg-cc755.cn"`，将课件静态资源与动态业务上传资源彻底物理隔离；
+1. **解耦配置**：引入专属的 `UPLOAD_BASE_URL = "https://api.yourdomain.cn"`，将课件静态资源与动态业务上传资源彻底物理隔离；
 2. **数据自愈迁移**：通过后端在返回接口中执行动态 replace，并将历史 SQLite 数据库中的旧路径批量替换：
    ```sql
-   UPDATE feedback SET attachments = REPLACE(attachments, 'https://docs.tg-cc755.cn/uploads/', 'https://apiwx.tg-cc755.cn/uploads/');
+   UPDATE feedback SET attachments = REPLACE(attachments, 'https://docs.yourdomain.cn/uploads/', 'https://api.yourdomain.cn/uploads/');
    ```
 
 ---

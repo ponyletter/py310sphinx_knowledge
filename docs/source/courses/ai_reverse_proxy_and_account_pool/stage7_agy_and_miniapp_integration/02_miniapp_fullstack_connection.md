@@ -215,15 +215,15 @@ flowchart TD
         UserApp[微信小程序前端]
     end
 
-    subgraph DomesticNode [国内腾讯云服务器 81.69.190.161]
-        Nginx80_443["Nginx 网关 (meme.tg-cc755.cn)<br/>Let's Encrypt SSL 443 自动续签<br/>本地 SSD 动图缓存 (/outputs/ 零延迟直出)"]
+    subgraph DomesticNode [国内云服务器 118.xx.xx.xx]
+        Nginx80_443["Nginx 网关 (meme.yourdomain.cn)<br/>Let's Encrypt SSL 443 自动续签<br/>本地 SSD 动图缓存 (/outputs/ 零延迟直出)"]
         PyBackend["Python FastAPI 后端 (Uvicorn 2 Workers :8290)<br/>16 格多尺度物理切割 & 去白底引擎<br/>微信虚拟支付 2.0 (XPay) & 消息推送"]
         LocalSSHTunnel["SSH 反向穿透隧道监听<br/>127.0.0.1:8317"]
     end
 
-    subgraph OverseasCPA [海外美区服务器 204.44.67.184]
+    subgraph OverseasCPA [海外美区服务器 198.51.100.xx]
         TunnelService["cpa-tunnel-domestic.service<br/>Systemd 守护 SSH 穿透进程"]
-        OverseasNginx["美区 Nginx (cpa.tg-cc755.cn)"]
+        OverseasNginx["美区 Nginx (cpa.yourdomain.cn)"]
         CPADocker["CLIProxyAPI Docker 容器 (:8317)<br/>fill-first 优先级号池 (Plus + Free 容灾)"]
     end
 
@@ -242,14 +242,14 @@ flowchart TD
 
     %% 静态加速旁路
     Nginx80_443 -.->|本地已缓存动图直接响应 (HIT)| UserApp
-    OverseasNginx -.->|备用公网直连通道 (https://cpa.tg-cc755.cn)| CPADocker
+    OverseasNginx -.->|备用公网直连通道 (https://cpa.yourdomain.cn)| CPADocker
 ```
 
 ### 1. 动图产物静态极速交付（Nginx SSD 本地缓存）
 由于动图（GIF）生成后体积极大（单张 300KB ~ 1.5MB），若每次让用户跨国从海外机器拉取，加载极其缓慢甚至超时断流。
 生产方案在 Nginx 采用**本地 SSD 拦截 + 回源缓存策略**：
 ```nginx
-# 1. 动图产物静态交付 (国内腾讯云本地 SSD 零延迟秒级直出)
+# 1. 动图产物静态交付 (国内云服务器本地 SSD 零延迟秒级直出)
 location /outputs/ {
     root /var/www;
     try_files $uri @proxy_backend;
@@ -271,7 +271,7 @@ location @proxy_backend {
 ### 2. 出海中转双通道实战对比：SSH 隧道 vs 公网反代 URL
 线上系统同时验证了两种出海模式，两者均完全可用但定位互补：
 
-| 对比维度 | 通道 A：SSH 反向加密隧道 (`127.0.0.1:8317`) | 通道 B：公网反代域名 (`https://cpa.tg-cc755.cn/v1`) |
+| 对比维度 | 通道 A：SSH 反向加密隧道 (`127.0.0.1:8317`) | 通道 B：公网反代域名 (`https://cpa.yourdomain.cn/v1`) |
 | :--- | :--- | :--- |
 | **当前状态** | **生产主力通道**（Systemd `cpa-tunnel-domestic` 守护运行） | **已部署且实测通畅**（美区 Nginx + Let's Encrypt SSL） |
 | **网络抗干扰能力** | ⭐️ **极高**。基于长连接 SSH 协议与 Keepalive 心跳，天然免疫 DNS 污染与 SNI 审查，生图长请求 0 丢包。 | **中等**。跨国公网 HTTPS 直连，遇网络高峰偶发丢包或握手延迟。 |
@@ -279,12 +279,12 @@ location @proxy_backend {
 | **切换成本** | 仅需在业务端 `.env` 中改一行 `CPA_API_BASE` 变量即可秒级互切。 | 同左。 |
 
 ### 3. 微信生态关键能力闭环
-* **消息推送握手**：微信公众平台消息推送配置为 `https://meme.tg-cc755.cn/api/wechat/msg_push`，后端完成 GET 握手并处理 `xpay_goods_deliver_notify` 虚拟支付发货通知，应答 `ErrCode: 0`；
+* **消息推送握手**：微信公众平台消息推送配置为 `https://meme.yourdomain.cn/api/wechat/msg_push`，后端完成 GET 握手并处理 `xpay_goods_deliver_notify` 虚拟支付发货通知，应答 `ErrCode: 0`；
 * **回调伪造防范**：在 Nginx 反代层对支付回调接口注入内部信任标头：
   ```nginx
   location = /api/pay/notify {
       proxy_pass http://127.0.0.1:8290;
-      proxy_set_header X-XPay-Callback-Token "258742fef829087740a998e953442395438d8ce0af1eb0bdee188df7ea7ef3ee";
+      proxy_set_header X-XPay-Callback-Token "your_secure_internal_callback_token_here";
   }
   ```
   后端强校验该 Token，阻断一切外部伪造支付成功的仿冒请求；

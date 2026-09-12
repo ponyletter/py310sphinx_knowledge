@@ -29,17 +29,17 @@
 
 ```{mermaid}
 graph LR
-    MiniApp[微信小程序客户端] -->|wx.request| Req[request 合法域名: https://apiwx.tg-cc755.cn]
-    MiniApp -->|wx.uploadFile| Up[uploadFile 合法域名: https://apiwx.tg-cc755.cn]
-    MiniApp -->|wx.downloadFile| Down[downloadFile 合法域名: https://docs.tg-cc755.cn]
+    MiniApp[微信小程序客户端] -->|wx.request| Req[request 合法域名: https://api.yourdomain.cn]
+    MiniApp -->|wx.uploadFile| Up[uploadFile 合法域名: https://api.yourdomain.cn]
+    MiniApp -->|wx.downloadFile| Down[downloadFile 合法域名: https://docs.yourdomain.cn]
 ```
 
 ### 2.1 域名填报规范与限制
 | 域名类别 | 作用范围 | 本项目配置示例 | 填报规则与避坑指南 |
 | :--- | :--- | :--- | :--- |
-| **request 合法域名** | 支撑 `wx.request` 发起的数据请求（登录、资料、订单） | `https://apiwx.tg-cc755.cn` | ① **协议必须是 HTTPS**，不支持 HTTP；<br>② **不能写 IP 地址**（例如 `http://123.56.xx.xx:8280` 会直接报错）；<br>③ **不能带端口号**（只能默认 443 端口）；<br>④ 域名必须具有工信部 ICP 备案号。 |
-| **uploadFile 合法域名** | 用户上传头像、留言反馈附件 | `https://apiwx.tg-cc755.cn` | 通常与 API 接口域名保持一致。 |
-| **downloadFile 合法域名** | 下载 Sphinx 静态构建资源、文件 | `https://docs.tg-cc755.cn` | 若有 CDN 加速或独立文档域名，须填入此处。 |
+| **request 合法域名** | 支撑 `wx.request` 发起的数据请求（登录、资料、订单） | `https://api.yourdomain.cn` | ① **协议必须是 HTTPS**，不支持 HTTP；<br>② **不能写 IP 地址**（例如 `http://123.56.xx.xx:8280` 会直接报错）；<br>③ **不能带端口号**（只能默认 443 端口）；<br>④ 域名必须具有工信部 ICP 备案号。 |
+| **uploadFile 合法域名** | 用户上传头像、留言反馈附件 | `https://api.yourdomain.cn` | 通常与 API 接口域名保持一致。 |
+| **downloadFile 合法域名** | 下载 Sphinx 静态构建资源、文件 | `https://docs.yourdomain.cn` | 若有 CDN 加速或独立文档域名，须填入此处。 |
 
 ---
 
@@ -57,18 +57,18 @@ graph LR
 ```nginx
 server {
     listen 80;
-    server_name apiwx.tg-cc755.cn;
+    server_name api.yourdomain.cn;
     # 强制将所有 HTTP 流量 301 重定向至安全 HTTPS
     return 301 https://$host$request_uri;
 }
 
 server {
     listen 443 ssl http2;
-    server_name apiwx.tg-cc755.cn;
+    server_name api.yourdomain.cn;
 
     # SSL 证书文件（由 Certbot/Let's Encrypt 自动颁发或腾讯云申请）
-    ssl_certificate /etc/letsencrypt/live/apiwx.tg-cc755.cn/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/apiwx.tg-cc755.cn/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/api.yourdomain.cn/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.yourdomain.cn/privkey.pem;
 
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;

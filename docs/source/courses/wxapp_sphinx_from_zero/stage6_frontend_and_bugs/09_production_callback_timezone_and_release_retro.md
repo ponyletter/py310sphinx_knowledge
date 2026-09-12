@@ -14,7 +14,7 @@
 
 | 字段 | 值 |
 | --- | --- |
-| URL | `https://meme.tg-cc755.cn/api/wechat/msg_push` |
+| URL | `https://meme.yourdomain.cn/api/wechat/msg_push` |
 | Token | 服务端 `.env` 的 `WX_MSG_TOKEN`，不是 `XPAY_CALLBACK_TOKEN` |
 | EncodingAESKey | 微信后台点击【随机生成】得到的 43 位值，保存到 `WX_MSG_AES_KEY` |
 | 加密方式 | 当前联调：明文模式；切换安全模式需接入解密 SDK |
@@ -26,7 +26,7 @@
 cd /root/02project/weixinpy310mememiniapp/backend
 source /root/miniconda3/bin/activate weixinpy310mememiniapp
 uvicorn app.main:app --host 127.0.0.1 --port 8290 --workers 2
-curl -fsS https://meme.tg-cc755.cn/health
+curl -fsS https://meme.yourdomain.cn/health
 ```
 
 微信保存 URL 时会先发 GET：服务端按 `SHA1(sort(Token, timestamp, nonce))` 校验并原样返回 `echostr`。生产环境对错误签名应返回 403，而不是无条件返回 `echostr`。平台允许的用户消息和事件会转发到已配置地址，但这不等于后端可读取任意微信私聊内容；只处理平台定义的事件类型，并对非支付事件快速回成功。
@@ -83,7 +83,7 @@ stateDiagram-v2
 
 ```bash
 python -m compileall -q backend
-curl -fsS https://meme.tg-cc755.cn/health
+curl -fsS https://meme.yourdomain.cn/health
 ```
 
 完成 1 元测试后，必须同时留存：GET 握手日志、发货 POST 原文（脱敏）、平台流水号、订单状态变化、额度流水、订阅消息返回值和前端真机录屏。确认重复通知不会重复发货、时区没有二次转换、前端缓存不会显示旧合集后，才逐步开放正式档位。

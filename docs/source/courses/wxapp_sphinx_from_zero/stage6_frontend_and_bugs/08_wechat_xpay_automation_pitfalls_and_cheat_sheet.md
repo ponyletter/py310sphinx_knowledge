@@ -117,21 +117,21 @@ def sync_props():
             "name": "动图制作尝鲜包1元",
             "price": 100,             # 100分 = 1.00元
             "remark": "尝鲜包20次额度",
-            "item_url": "https://apiwx.tg-cc755.cn/uploads/goods_icon.png"
+            "item_url": "https://api.yourdomain.cn/uploads/goods_icon.png"
         },
         {
             "id": "meme_500",
             "name": "动图制作超值包5元",
             "price": 500,             # 500分 = 5.00元
             "remark": "超值包120次额度",
-            "item_url": "https://apiwx.tg-cc755.cn/uploads/goods_icon.png"
+            "item_url": "https://api.yourdomain.cn/uploads/goods_icon.png"
         },
         {
             "id": "meme_990",
             "name": "动图制作尊享包9元9",
             "price": 990,             # 990分 = 9.90元
             "remark": "尊享包300次额度VIP",
-            "item_url": "https://apiwx.tg-cc755.cn/uploads/goods_icon.png"
+            "item_url": "https://api.yourdomain.cn/uploads/goods_icon.png"
         }
     ]
 
