@@ -202,3 +202,90 @@ CPA_API_KEY = "sk-prod-cliproxy-secret-2026"
 ```
 
 不管是网页前端、微信小程序、还是团队桌面端的二次开发，用户与客户端仅与国内正规业务接口进行常规交互。后端在调用 AI 能力时，流量经由国内中枢的 `127.0.0.1:8317`，自动通过高可靠 SSH 隧道分发至海外可用号池，兼备极致的业务安全性与容灾稳定性。
+
+---
+
+## 五、真实项目工程拆解：微信表情包小程序全栈与出海双通道架构
+
+下面以国内真实线上运行的**微信表情包 / 斗图小程序全栈项目（weixinpy310mememiniapp）**为例，复盘其从微信前台交互、国内中枢服务，到海外 CPA 号池调度的完整生产拓扑：
+
+```{mermaid}
+flowchart TD
+    subgraph WeChatUser [微信客户端 / 终端用户]
+        UserApp[微信小程序前端]
+    end
+
+    subgraph DomesticNode [国内腾讯云服务器 81.69.190.161]
+        Nginx80_443["Nginx 网关 (meme.tg-cc755.cn)<br/>Let's Encrypt SSL 443 自动续签<br/>本地 SSD 动图缓存 (/outputs/ 零延迟直出)"]
+        PyBackend["Python FastAPI 后端 (Uvicorn 2 Workers :8290)<br/>16 格多尺度物理切割 & 去白底引擎<br/>微信虚拟支付 2.0 (XPay) & 消息推送"]
+        LocalSSHTunnel["SSH 反向穿透隧道监听<br/>127.0.0.1:8317"]
+    end
+
+    subgraph OverseasCPA [海外美区服务器 204.44.67.184]
+        TunnelService["cpa-tunnel-domestic.service<br/>Systemd 守护 SSH 穿透进程"]
+        OverseasNginx["美区 Nginx (cpa.tg-cc755.cn)"]
+        CPADocker["CLIProxyAPI Docker 容器 (:8317)<br/>fill-first 优先级号池 (Plus + Free 容灾)"]
+    end
+
+    subgraph OpenAICluster [OpenAI 官方集群]
+        GPT_Image["gpt-image-2 (16宫格连续动作雪碧图)"]
+        GPT_Text["gpt-5.6-luna / sol / terra (提示词与对话)"]
+    end
+
+    UserApp -->|HTTPS / WSS| Nginx80_443
+    Nginx80_443 -->|API 业务代理| PyBackend
+    PyBackend -->|生图与推理调用| LocalSSHTunnel
+
+    LocalSSHTunnel == "加密穿透隧道 (ServerAliveInterval=30)" ==> TunnelService
+    TunnelService --> CPADocker
+    CPADocker --> GPT_Image & GPT_Text
+
+    %% 静态加速旁路
+    Nginx80_443 -.->|本地已缓存动图直接响应 (HIT)| UserApp
+    OverseasNginx -.->|备用公网直连通道 (https://cpa.tg-cc755.cn)| CPADocker
+```
+
+### 1. 动图产物静态极速交付（Nginx SSD 本地缓存）
+由于动图（GIF）生成后体积极大（单张 300KB ~ 1.5MB），若每次让用户跨国从海外机器拉取，加载极其缓慢甚至超时断流。
+生产方案在 Nginx 采用**本地 SSD 拦截 + 回源缓存策略**：
+```nginx
+# 1. 动图产物静态交付 (国内腾讯云本地 SSD 零延迟秒级直出)
+location /outputs/ {
+    root /var/www;
+    try_files $uri @proxy_backend;
+    expires 30d;
+    add_header Cache-Control "public, max-age=2592000, immutable";
+    add_header X-Static-Delivery "domestic-ssd-direct";
+}
+
+# 2. 未落盘资源自动反向缓存 (从后台回源并沉降至国内本地缓存)
+location @proxy_backend {
+    proxy_pass http://127.0.0.1:8290;
+    proxy_cache meme_cache;
+    proxy_cache_valid 200 30d;
+    add_header X-Cache-Status $upstream_cache_status;
+}
+```
+客户端请求动图时，Nginx 直接在本地磁盘响应，命中状态为 `X-Cache-Status: HIT`，加载延迟降至 **10~30 毫秒**。
+
+### 2. 出海中转双通道实战对比：SSH 隧道 vs 公网反代 URL
+线上系统同时验证了两种出海模式，两者均完全可用但定位互补：
+
+| 对比维度 | 通道 A：SSH 反向加密隧道 (`127.0.0.1:8317`) | 通道 B：公网反代域名 (`https://cpa.tg-cc755.cn/v1`) |
+| :--- | :--- | :--- |
+| **当前状态** | **生产主力通道**（Systemd `cpa-tunnel-domestic` 守护运行） | **已部署且实测通畅**（美区 Nginx + Let's Encrypt SSL） |
+| **网络抗干扰能力** | ⭐️ **极高**。基于长连接 SSH 协议与 Keepalive 心跳，天然免疫 DNS 污染与 SNI 审查，生图长请求 0 丢包。 | **中等**。跨国公网 HTTPS 直连，遇网络高峰偶发丢包或握手延迟。 |
+| **安全性** | 端口仅监听国内 `127.0.0.1`，公网不可见、不可扫。 | 需依靠 API Key 防护，接口暴露在公网。 |
+| **切换成本** | 仅需在业务端 `.env` 中改一行 `CPA_API_BASE` 变量即可秒级互切。 | 同左。 |
+
+### 3. 微信生态关键能力闭环
+* **消息推送握手**：微信公众平台消息推送配置为 `https://meme.tg-cc755.cn/api/wechat/msg_push`，后端完成 GET 握手并处理 `xpay_goods_deliver_notify` 虚拟支付发货通知，应答 `ErrCode: 0`；
+* **回调伪造防范**：在 Nginx 反代层对支付回调接口注入内部信任标头：
+  ```nginx
+  location = /api/pay/notify {
+      proxy_pass http://127.0.0.1:8290;
+      proxy_set_header X-XPay-Callback-Token "258742fef829087740a998e953442395438d8ce0af1eb0bdee188df7ea7ef3ee";
+  }
+  ```
+  后端强校验该 Token，阻断一切外部伪造支付成功的仿冒请求；
+* **真实业务数据沉淀**：线上系统稳定承载 16 位用户、63 笔微信支付订单、22 批次 16 宫格表情包拆分生成，全链路商业闭环彻底跑通。
