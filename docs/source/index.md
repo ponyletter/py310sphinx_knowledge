@@ -9,6 +9,7 @@
 courses/douyin_short_video/index
 courses/wxapp_sphinx_from_zero/index
 courses/short_video_guides/index
+courses/ai_reverse_proxy_and_account_pool/index
 ```
 
 ```{toctree}
