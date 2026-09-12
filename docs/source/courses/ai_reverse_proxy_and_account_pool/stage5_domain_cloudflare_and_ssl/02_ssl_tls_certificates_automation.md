@@ -24,7 +24,7 @@ Cloudflare Origin CA 是 Cloudflare 专门为其生态内的源站服务器签�
 - **免端口验证**：直接在后台生成，无需源站开放 80 端口或做 HTTP-01 文件验证；
 - **仅限 Cloudflare 回源**：该证书由 Cloudflare 私有 CA 根证书签发，浏览器直接访问该源站 IP 会提示不信任，但只要经过 Cloudflare 橙云转发，外部客户端看到的就是 100% 权威信任的顶级泛域名证书。
 
-```mermaid
+```{mermaid}
 sequenceDiagram
     autonumber
     actor Client as 微信小程序 / Web / AGY
@@ -122,11 +122,14 @@ acme.sh --set-default-ca --server letsencrypt
 
 为了让 `acme.sh` 能够在 Cloudflare 域名后台自动添加 `_acme-challenge.api.yourdomain.com` 的 TXT 临时记录完成所有权验证，我们需要提供 Cloudflare API Token。
 
-> [!TIP] 最佳安全实践：创建专用 API Token，不要使用全局 Global API Key
-> 1. 访问 Cloudflare Dashboard -> 右上角 **My Profile** -> **API Tokens**。
-> 2. 点击 **Create Token** -> 选用模板 **Edit zone DNS**。
-> 3. 权限设置为：`Zone - DNS - Edit`；Zone Resources 选择 `Include - Specific zone - yourdomain.com`。
-> 4. 生成并复制 40 位的 Token。
+````{admonition} 最佳安全实践：创建专用 API Token，不要使用全局 Global API Key
+:class: tip
+
+1. 访问 Cloudflare Dashboard -> 右上角 **My Profile** -> **API Tokens**。
+2. 点击 **Create Token** -> 选用模板 **Edit zone DNS**。
+3. 权限设置为：`Zone - DNS - Edit`；Zone Resources 选择 `Include - Specific zone - yourdomain.com`。
+4. 生成并复制 40 位的 Token。
+````
 
 在 Linux 终端中导出临时环境变量（`acme.sh` 在首次签发成功后会将密钥持久化加密保存至 `~/.acme.sh/account.conf` 中，后续 Cron 调度会自动调用）：
 
@@ -158,8 +161,11 @@ acme.sh --issue --dns dns_cf \
 
 ### 5. 安装证书并绑定 Nginx 自动重载钩子
 
-> [!IMPORTANT] 切勿直接在 Nginx 配置文件中指向 `~/.acme.sh/` 内部的原始文件！
-> `~/.acme.sh/` 目录为内部工作区，随时可能变动。必须使用官方提供的 `--install-cert` 命令将证书复制到目标系统目录并注册安装钩子（Hooks）：
+````{admonition} 切勿直接在 Nginx 配置文件中指向 ~/.acme.sh/ 内部的原始文件！
+:class: important
+
+`~/.acme.sh/` 目录为内部工作区，随时可能变动。必须使用官方提供的 `--install-cert` 命令将证书复制到目标系统目录并注册安装钩子（Hooks）：
+````
 
 ```bash
 # 创建统一的证书存放路径

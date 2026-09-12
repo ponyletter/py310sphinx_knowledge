@@ -36,7 +36,7 @@ AI 中转站（Relay Station）单月盈利数万甚至数十万，靠的从来�
 
 很多人以为中转站就是一个简单的反向代理，实际其内部链条极其复杂：
 
-```mermaid
+```{mermaid}
 sequenceDiagram
     autonumber
     actor User as 开发者客户端 (Claude Code / Cursor)
@@ -66,7 +66,7 @@ sequenceDiagram
 
 ## 四、中转站“不可能三角”法则与性价比折中
 
-```mermaid
+```{mermaid}
 flowchart TD
     A["稳定 (High Stability)<br/>SLA 99.9% 绝不断线"] --- B["真实 (Authentic)<br/>原生满血模型 无阉割生图"]
     B --- C["便宜 (Low Cost)<br/>远低于官方成本 白菜价"]
@@ -77,8 +77,11 @@ flowchart TD
     CA["【稳且廉 = 必定不真实】<br/>大模型偷梁换柱掺水，标着 GPT-4o 暗中降级成 mini 或开源小模型"]
 ```
 
-> [!NOTE] 客观商业规律
-> “稳定、真实、便宜”不可兼得。自建私有号池（如基于 CLIProxyAPI）正是以最低的服务器维护成本，换取“模型 100% 真实、数据 100% 自主掌控、多账号互备高稳定”的最佳折中解。
+````{admonition} 客观商业规律
+:class: note
+
+“稳定、真实、便宜”不可兼得。自建私有号池（如基于 CLIProxyAPI）正是以最低的服务器维护成本，换取“模型 100% 真实、数据 100% 自主掌控、多账号互备高稳定”的最佳折中解。
+````
 
 ---
 

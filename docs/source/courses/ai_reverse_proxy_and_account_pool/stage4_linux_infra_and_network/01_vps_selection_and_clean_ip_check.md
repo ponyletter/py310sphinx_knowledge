@@ -6,7 +6,7 @@
 
 ## 一、海外机房地域选型推荐
 
-```mermaid
+```{mermaid}
 flowchart LR
     subgraph Regions["推荐首选节点"]
         US["🇺🇸 美国西海岸 (硅谷/洛杉矶)\n网络带宽充裕，对OpenAI原生支持最好"]
@@ -50,7 +50,7 @@ bash <(curl -sL https://github.com/missuo/OpenAI-Checker/raw/main/openai.sh)
 curl -s https://ipinfo.io/json | python3 -m json.tool
 ```
 - 检查返回结果中的 `org`（运营商）、`country`（国家代码）是否正确。
-- 登录 [https://scamalytics.com/](https://scamalytics.com/)，输入该 IP：
+- 登录 [Scamalytics 欺诈分查询官网](https://scamalytics.com/)，输入该 IP：
   - **Fraud Score < 15**：极佳原生纯净 IP；
   - **Fraud Score 15~40**：良好；
   - **Fraud Score > 60**：高危脏 IP，建议立即联系服务商更换 IP 或退款。

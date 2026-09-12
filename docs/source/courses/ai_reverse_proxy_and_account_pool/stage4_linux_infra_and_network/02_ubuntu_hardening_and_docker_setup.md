@@ -18,9 +18,12 @@ sudo apt install -y curl wget git jq htop ufw ca-certificates gnupg lsb-release
 
 ## 二、UFW 防火墙安全端口隔离策略
 
-> [!IMPORTANT] 端口暴露安全准则
-> 反代中转引擎（如 CLIProxyAPI 的 `8317` 端口）**绝不能直接向全公网 `0.0.0.0` 裸奔开放**，否则极易遭到黑客针对性穷举 API-Key 或发动 DDoS 攻击。
-> **正确的生产规范**：`8317` 端口只监听本地 `127.0.0.1`，仅通过 Nginx 反向代理配合 SSL/TLS 对外服务。
+````{admonition} 端口暴露安全准则
+:class: important
+
+反代中转引擎（如 CLIProxyAPI 的 `8317` 端口）**绝不能直接向全公网 `0.0.0.0` 裸奔开放**，否则极易遭到黑客针对性穷举 API-Key 或发动 DDoS 攻击。
+**正确的生产规范**：`8317` 端口只监听本地 `127.0.0.1`，仅通过 Nginx 反向代理配合 SSL/TLS 对外服务。
+````
 
 ```bash
 # 1. 默认拒绝所有入站流量，允许所有出站流量

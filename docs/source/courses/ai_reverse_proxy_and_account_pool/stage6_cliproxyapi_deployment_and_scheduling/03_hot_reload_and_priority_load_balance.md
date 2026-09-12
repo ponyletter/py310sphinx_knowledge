@@ -18,7 +18,7 @@ CLIProxyAPI 启动时，`service_lifecycle.go` 会在后台拉起针对凭据目
 
 ### 1. 动态感知与增量热重载全流程
 
-```mermaid
+```{mermaid}
 sequenceDiagram
     autonumber
     actor Ops as 运维工程师 / 自动化脚本
@@ -49,9 +49,12 @@ sequenceDiagram
 - **当前正在执行的 HTTP 请求完全不受干扰**；
 - **新账号立刻加入轮询或首发候选队列**。
 
-> [!TIP] 原子化文件写入技巧（Atomic Write）
-> 在编写 Python 自动抓取或批量写入脚本时，如果直接在大并发时向 `auths/` 写半截文件，可能触发 `[clients.go:179] ignoring empty auth file`。
-> **最佳实践**：先写入临时文件（如 `/tmp/temp.json`），再使用 Linux 原子重命名命令 `mv /tmp/temp.json /root/cliproxyapi/auths/codex-account.json`。`inotify` 将捕获到单次原子 `MOVED_TO` 事件，实现 100% 稳定的热注入。
+````{admonition} 原子化文件写入技巧（Atomic Write）
+:class: tip
+
+在编写 Python 自动抓取或批量写入脚本时，如果直接在大并发时向 `auths/` 写半截文件，可能触发 `[clients.go:179] ignoring empty auth file`。
+**最佳实践**：先写入临时文件（如 `/tmp/temp.json`），再使用 Linux 原子重命名命令 `mv /tmp/temp.json /root/cliproxyapi/auths/codex-account.json`。`inotify` 将捕获到单次原子 `MOVED_TO` 事件，实现 100% 稳定的热注入。
+````
 
 ---
 
@@ -108,7 +111,7 @@ CLIProxyAPI 内置了定时刷新引擎：
 
 | 分级队列 | 包含账号类型 | 路由分配机制 | 适用业务场景 |
 | :--- | :--- | :--- | :--- |
-| **Tier 1: 独享主力池** | 官方正价礼品卡订阅的 Plus 账号 | `fill-first` 或优先调度 | 微信小程序高客单价会员、AGY 核心开发、高并发实时打字机 |
+| **Tier 1: 独享主力池** | 官方正价订阅的 Plus 账号（包含美区礼品卡、海外 Visa/Mastercard 银行卡、U卡借记卡等全套正规采买渠道） | `fill-first` 或优先调度 | 微信小程序高客单价会员、AGY 核心开发、高并发实时打字机 |
 | **Tier 2: 拼车备用池** | Gamsgo 独立车位号、高信誉中转号 | `round-robin` 轮询平摊 | 普通用户日常闲聊、非流式后台批量摘要提取 |
 | **Tier 3: 体验探索池** | 发卡网低成本号、白嫖号、测试号 | 仅作为 Fallback 兜底 | 离线爬虫清洗、自动化单元测试、临时试用体验 |
 

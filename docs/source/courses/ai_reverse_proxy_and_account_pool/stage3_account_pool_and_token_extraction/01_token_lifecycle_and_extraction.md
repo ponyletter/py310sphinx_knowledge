@@ -6,7 +6,7 @@
 
 ## 一、Access Token 与 Refresh Token 的生命周期机制
 
-```mermaid
+```{mermaid}
 sequenceDiagram
     autonumber
     participant Client as 客户端 / 业务系统

@@ -8,9 +8,9 @@
 
 ## 一、网络拓扑模型：多海外节点 + SSH 隧道中枢
 
-```mermaid
+```{mermaid}
 flowchart TD
-    subgraph Clients [终端与业务接入 (一笔带过)]
+    subgraph Clients ["终端与业务接入 (一笔带过)"]
         Client1[移动端 / 微信小程序用户]
         Client2[企业 Web SaaS 平台]
         Client3[本地 AGY 编程开发机]
@@ -39,8 +39,8 @@ flowchart TD
     BizServer -->|请求 127.0.0.1:8317| LocalLB
     LocalLB -->|轮询/主备分发| Port1 & Port2
 
-    Port1 == 纯加密 SSH 隧道 A (无域名/抗干扰) ==> CPA_A
-    Port2 == 纯加密 SSH 隧道 B (无域名/抗干扰) ==> CPA_B
+    Port1 == "纯加密 SSH 隧道 A (无域名/抗干扰)" ==> CPA_A
+    Port2 == "纯加密 SSH 隧道 B (无域名/抗干扰)" ==> CPA_B
 
     CPA_A --> Upstream
     CPA_B --> Upstream

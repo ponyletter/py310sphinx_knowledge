@@ -6,7 +6,7 @@
 
 ## 一、文件命名标准与目录规范
 
-```mermaid
+```{mermaid}
 graph TD
     Root["/root/cliproxyapi/auths/ (号池根目录)"]
     Root --> F1["codex-f11baede-account1@gmail.com-plus.json (主力 Plus 号)"]
@@ -29,7 +29,7 @@ graph TD
 
 为了保障关键业务系统（如已付费用户的请求）永不被限流，建议将号池在逻辑上划分为三个梯队：
 
-```mermaid
+```{mermaid}
 flowchart TD
     Req["下游应用请求 (如微信小程序)"] --> Router{"路由与分流策略"}
     Router -->|"付费VIP请求 / 表情包合成"| Tier1["第一梯队：主力 Plus 独享池\n(高速响应、高并发、gpt-5.5/gpt-image-2)"]
@@ -38,7 +38,7 @@ flowchart TD
 ```
 
 ### 1. 第一梯队：主力高可用 Plus 池
-- **构成**：由正规苹果礼品卡开通的纯净独享 Plus 账号组成；
+- **构成**：由官方正价订阅的纯净独享 Plus 账号组成（包含正规美区苹果礼品卡、海外 Visa/Mastercard 实体卡或高权重虚拟卡/U卡开通）；
 - **职责**：专供核心业务，如小程序内付费会员的动图生成（`gpt-image-2`）与高阶复杂提示词解析。
 
 ### 2. 第二梯队：常规业务池
@@ -65,15 +65,18 @@ flowchart TD
 引擎热监听会在数毫秒内感知变更，并在下一次轮询请求中自动跳过该账号。
 
 ### 2. 安全备份与严禁提交 Git
-> [!CAUTION] 绝禁将号池凭证泄露至公网
-> 1. 号池 JSON 文件包含完整的 `refresh_token` 和私密信息，**严禁将其提交至 GitHub 等任何公网代码仓库**；
-> 2. 项目的 `.gitignore` 中必须严格写入：
->    ```gitignore
->    auths/*.json
->    *.token
->    *.key
->    ```
-> 3. 定期使用加密压缩归档备份到内网私有存储：
->    ```bash
->    tar -czf - /root/cliproxyapi/auths | openssl enc -aes-256-cbc -salt -out auths_backup_$(date +%F).tar.gz.enc
->    ```
+````{admonition} 绝禁将号池凭证泄露至公网
+:class: caution
+
+1. 号池 JSON 文件包含完整的 `refresh_token` 和私密信息，**严禁将其提交至 GitHub 等任何公网代码仓库**；
+2. 项目的 `.gitignore` 中必须严格写入：
+   ```gitignore
+   auths/*.json
+   *.token
+   *.key
+   ```
+3. 定期使用加密压缩归档备份到内网私有存储：
+   ```bash
+   tar -czf - /root/cliproxyapi/auths | openssl enc -aes-256-cbc -salt -out auths_backup_$(date +%F).tar.gz.enc
+   ```
+````

@@ -14,10 +14,10 @@
 
 ### 1. 四大系统芯片架构安装包规范
 根据本地电脑的芯片架构与操作系统，选择对应的软件包：
-- **Mac 平台 (Intel 芯片)**：`ToAPI_Proxy_0.1.0_macos_intel.dmg`
-- **Mac 平台 (Apple Silicon M系列芯片 M1/M2/M3/M4)**：`ToAPI_Proxy_0.1.0_macos_apple_silicon.dmg`
-- **Windows 平台 (x64 传统架构)**：`ToAPI_Proxy_0.1.0_windows_x64_setup.exe`
-- **Windows 平台 (arm64 架构)**：`ToAPI_Proxy_0.1.0_windows_arm64_setup.exe`
+- **Mac 平台 (Intel 芯片)**：`ToAPI_Proxy_xx_macos_intel.dmg`
+- **Mac 平台 (Apple Silicon M系列芯片 M1/M2/M3/M4)**：`ToAPI_Proxy_xx_macos_apple_silicon.dmg`
+- **Windows 平台 (x64 传统架构)**：`ToAPI_Proxy_xx_windows_x64_setup.exe`
+- **Windows 平台 (arm64 架构)**：`ToAPI_Proxy_xx_windows_arm64_setup.exe`
 
 下载安装后启动，软件将在本地环回端口（通常为 `http://127.0.0.1:8317`）静默拉起高性能代理核心。
 
@@ -27,7 +27,7 @@
 
 桌面工具支持将多个 Plus 账号（如在 Gamsgo 购买的 6 人拼车账号）统一导入池化：
 
-```mermaid
+```{mermaid}
 flowchart TD
     subgraph LoginChoice [账号登入方式]
         M1["方式 A: 一键导入 VSCode 凭据<br/>(import Current Codex)"]
@@ -59,9 +59,9 @@ flowchart TD
 
 ---
 
-## 三、桥接至 Claude Code：在 Claude Code 中使用 GPT-5.4 / 满血模型
+## 三、桥接至 Claude Code：在 Claude Code 中使用 GPT-5 系列满血基座模型
 
-Claude Code 是 Anthropic 官方推出的强大终端 Agent 编程利器。通过将本地代理地址映射为 Claude Code 的上游端点，开发者可以以极低成本让 GPT-5.4 或其它满血模型在 Claude Code 内部奔跑：
+Claude Code 是 Anthropic 官方推出的强大终端 Agent 编程利器。通过将本地代理地址映射为 Claude Code 的上游端点，开发者可以以极低成本让 GPT-5 系列或其它满血基座模型在 Claude Code 内部奔跑：
 
 ### 1. 配置 Claude Code 端点环境变量
 在终端中注入本地代理地址与密钥：
@@ -85,7 +85,7 @@ claude
 
 在交互命令行中，通过 `/model` 指令快速查看或切换你配置的基座模型：
 ```text
-/model gpt-5.4
+/model gpt-5
 ```
 发送一条测试提示词（例如：“请检查当前项目的目录结构”）。若收到模型流畅回复，即代表本地代理号池与 Claude Code 全链路贯通！
 
@@ -95,7 +95,7 @@ claude
 
 对于使用 Google Antigravity (AGY CLI / IDE) 的开发者，接入本地或远程反代同样极为简单：
 
-```mermaid
+```{mermaid}
 flowchart TD
     subgraph AGYEnvironment [Antigravity 开发者工作区]
         AGYCore[AGY CLI / Antigravity 2.0]
@@ -105,7 +105,7 @@ flowchart TD
 
     subgraph LocalCPA [本地/远程反代网关 :8317]
         CPA[CLIProxyAPI 动态调度引擎]
-        Pool[(账号池: 账号 A, B, C...)]
+        Pool[("账号池: 账号 A, B, C...")]
     end
 
     AGYCore --> SubAgent1 & SubAgent2

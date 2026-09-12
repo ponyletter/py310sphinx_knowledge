@@ -13,7 +13,7 @@
 
 ## 核心痛点与必须配置的关键参数解析
 
-```mermaid
+```{mermaid}
 flowchart TD
     subgraph Client [客户端]
         C[微信小程序 / Web / AGY]
