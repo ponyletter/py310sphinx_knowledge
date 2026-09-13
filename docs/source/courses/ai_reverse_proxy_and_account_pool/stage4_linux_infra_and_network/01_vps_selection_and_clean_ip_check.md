@@ -54,3 +54,24 @@ curl -s https://ipinfo.io/json | python3 -m json.tool
   - **Fraud Score < 15**：极佳原生纯净 IP；
   - **Fraud Score 15~40**：良好；
   - **Fraud Score > 60**：高危脏 IP，建议立即联系服务商更换 IP 或退款。
+
+---
+
+### 3. 企业级威胁情报与机房 IP 特征嗅探 ([ipdata.co](https://ipdata.co/))
+
+OpenAI、Cloudflare 与 Google 等巨头的 WAF 规则系统，通常依赖类似于 [ipdata.co](https://ipdata.co/) 的高精度企业级威胁情报数据库对入站/出站 IP 进行画像识别：
+
+```bash
+# 查询当前 IP 的威胁情报、ASN 归属与代理特征
+curl -s "https://api.ipdata.co/?api-key=test" | python3 -m json.tool
+```
+
+在 [ipdata.co](https://ipdata.co/) 控制台或 API 返回结果中，必须重点审查 `threat` 威胁对象：
+
+| 评估字段 | 安全合格值 | 生产风险解读 |
+| :--- | :--- | :--- |
+| **`is_datacenter`** | `false` (最优) 或纯净 IDC | 若为 `true`，代表被识别为机房服务器 IP，极易被上游施加频率惩罚或要求输入验证码（建议通过本课程 Stage 6 部署 Cloudflare WARP 出站代理予以洗白）。 |
+| **`is_vpn` / `is_proxy`** | `false` | 若被标记为公共代理或商业 VPN 节点，账号调用容易触发伪 429 报错或封号。 |
+| **`is_tor`** | `false` | 绝对严禁为 Tor 洋葱路由节点，上游 100% 拒绝服务。 |
+| **`is_threat` / `is_attacker`** | `false` | 确认该 IP 历史未被记录为僵尸网络（Botnet）或爬虫攻击源。 |
+

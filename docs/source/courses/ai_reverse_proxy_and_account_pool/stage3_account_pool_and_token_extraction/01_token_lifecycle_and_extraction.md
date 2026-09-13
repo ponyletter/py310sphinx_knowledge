@@ -72,3 +72,30 @@ CLIProxyAPI 官方二进制内置了标准 OAuth 授权拦截器，能够模拟�
 docker exec -it cli-proxy-api ./CLIProxyAPI -codex-device-login
 ```
 系统会输出一个 **8 位字符的设备配对码**（如 `WDJB-49KM`）和官方配对网址 `https://auth0.openai.com/activate`。用任何手机或电脑浏览器打开该网址，输入该 8 位码并确认授权，服务器后台便会立刻捕获并下发凭据包。
+
+---
+
+### 途径 C：开源会话嗅探与标本工具箱 ([chatgpt-specimen-toolbox](https://github.com/1837620622/chatgpt-specimen-toolbox))
+
+对于已有 Web 浏览器登录会话、需要批量分析账号属性或协助朋友代充的场景，推荐使用开源的标本提取工具：
+
+- **开源仓库地址**：[chatgpt-specimen-toolbox (GitHub)](https://github.com/1837620622/chatgpt-specimen-toolbox)
+- **核心功能亮点**：
+  1. **一键会话嗅探**：快速捕获当前浏览器上下文中的 `session-token`、`access_token` 以及敏感授权凭据，无需手动打开 F12 审查网络包；
+  2. **账号资产与订阅探测**：自动识别目标账号绑定的邮箱、订阅套餐类别（Free / Plus / Team / Enterprise）及会员到期截止日；
+  3. **Stripe 独立充值长链提取**：基于会话底层自动调用 `/backend-api/payments/checkout` 并解析出免账密独立付款长链接，实现零风控朋友代付；
+  4. **导出标准格式**：将捕获的会话参数一键转为标准 JSON 格式，方便导入号池管理网关。
+
+---
+
+### 途径 D：Claude 官方免密会话直登插件 ([Claude Session Login](https://chromewebstore.google.com/detail/claude-session-login/oajafgeonljhlfedcmeolcfmnnjiclbc))
+
+在维护 Anthropic Claude 账号池时，号商或协同人员交付的往往是长效会话密钥（`sessionKey`，形如 `sk-ant-sid01-...`）。为了避免跨设备登录反复触发邮箱验证码，或在不暴露主账号密码的前提下实现多人复用，可使用专用的 Chrome 浏览器扩展：
+
+- **Chrome 网上应用店官方下载**：[Claude Session Login 扩展插件](https://chromewebstore.google.com/detail/claude-session-login/oajafgeonljhlfedcmeolcfmnnjiclbc)
+- **核心机制与使用流程**：
+  1. **安装扩展**：在 Google Chrome 浏览器中访问 [Chrome 应用店详情页](https://chromewebstore.google.com/detail/claude-session-login/oajafgeonljhlfedcmeolcfmnnjiclbc)，点击添加至浏览器；
+  2. **粘贴 Session Key**：打开 Claude 官方网站（`claude.ai`），点击扩展图标，在输入框中直接粘贴 `sessionKey`（sk 格式会话密钥）；
+  3. **一秒免密直登**：插件会自动将该 Session Token 注入浏览器的目标安全 Cookie 作用域并刷新页面，瞬间完成免账密登录；
+  4. **号池验活与抓包制作**：登录成功后，即可直接在开发者工具中提取最新的会话 Header 与 Cookie，制作规范的 Claude JSON 凭据挂载进反代服务中。
+

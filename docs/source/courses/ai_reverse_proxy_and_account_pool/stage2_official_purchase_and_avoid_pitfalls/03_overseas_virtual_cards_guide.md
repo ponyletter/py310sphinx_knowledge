@@ -84,7 +84,7 @@ Stripe 是 OpenAI 的核心支付收单服务商，其风控系统（Stripe Rada
 
 ## 五、进阶免密代充技术：Stripe 独立长链生成引擎（无密码/免登录）
 
-针对“帮朋友代充”或“号商代充”场景，目前社区最优雅且零风控的工业解法是**基于 Stripe init 三步法提取独立支付长链**（开源代表如 `chatgpt-specimen-toolbox`）：
+针对“帮朋友代充”或“号商代充”场景，目前社区最优雅且零风控的工业解法是**基于 Stripe init 三步法提取独立支付长链**（开源代表如 [chatgpt-specimen-toolbox (GitHub)](https://github.com/1837620622/chatgpt-specimen-toolbox)）：
 
 ```{mermaid}
 sequenceDiagram

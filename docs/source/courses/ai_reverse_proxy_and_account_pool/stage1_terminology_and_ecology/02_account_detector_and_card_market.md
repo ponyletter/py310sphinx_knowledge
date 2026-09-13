@@ -21,22 +21,43 @@ flowchart TD
 
 ---
 
-## 二、行业聚合探测器：以 AI号探 (aihaotan.com) 为例
+## 二、行业聚合探测器与 AI 订阅价格雷达生态
 
-当号池规模扩大时，开发者不可能逐个收藏并刷新数十个零散的发卡网。[AI号探聚合平台](https://aihaotan.com/) 等聚合监控平台应运而生，其核心价值在于消弭信息差与实时监测号商品质：
+当号池规模扩大或需要为团队长期采购 AI 会员时，开发者不可能逐个收藏并刷新数十个零散的发卡网与渠道网站。行业内涌现出一批**聚合监控平台与价格雷达工具**，其核心价值在于消弭信息差、实时监测号商品质与横向比价：
 
 ```{mermaid}
-graph LR
-    Probe["AI号探 核心能力"] --> Search["全网发卡网聚合检索\n快速定位稀缺品类"]
-    Probe --> Price["价格波动与走势对比\n识破异常暴跌或高价割韭菜"]
-    Probe --> Health["号商存活率与更新频次监控\n标记死链与跑路商家"]
-    Probe --> Stock["实时库存告警\n防止生产号池断粮"]
+graph TD
+    subgraph RadarEcosystem ["AI 订阅采购与价格雷达矩阵"]
+        subgraph PriceTools ["价格对比与订阅雷达"]
+            PriceAI["PriceAI (priceai.cc)<br/>全网 AI 订阅与模型价格比价"]
+            AIRadar["AI Radar (airadar.vip)<br/>全球 AI 工具订阅指南与价格走势"]
+            AISubDeal["AISubDeal (aisubdeal.com)<br/>实时 AI 订阅折扣与优惠汇总"]
+            OpenTheRank["OpenTheRank (opentherank.com)<br/>大模型 Token 成本与定价天梯榜"]
+        end
+
+        subgraph StockTools ["货源探测与发卡流转"]
+            AIHaoTan["AI号探 (aihaotan.com)<br/>发卡网全网爬虫 & 库存活跃度雷达"]
+            KaQuanWang["卡券网 (kaquanwang.cn)<br/>虚拟卡密/礼品卡券自动化流转"]
+        end
+    end
+
+    PriceTools --> Decision["开发者采买成本核算 & 渠道择优"]
+    StockTools --> Decision
+    Decision --> Delivery["安全低成本入库生产号池"]
 ```
 
-### 1. 核心实战功能
-- **全网聚合检索**：输入关键字（如 `ChatGPT Plus 独享`、`Claude 3.5 Sonnet`、`Codex JSON`），系统自动聚合数十家活跃发卡网的商品、单价与实时库存。
-- **号商信誉雷达**：根据历史发卡成功率、更新频率、商品评价综合评分，标记高风险商家。
-- **价格走势预警**：帮助开发者识别市场行情。如果某类 Plus 账号市场公允价在 140~160 元左右，突然出现 30~50 元的商品，AI号探可帮助买家快速辨别其大概率是黑卡或共享车位。
+### 1. AI 订阅与大模型价格雷达平台
+- **[PriceAI (priceai.cc)](https://priceai.cc/)**：专业的 AI 订阅与模型服务综合比价平台，全面收录主流海外大模型（ChatGPT Plus、Claude Pro、Gemini Advanced、Midjourney 等）的官方标价、渠道代理价以及代充服务费率，帮助团队快速核算月度算力采购支出；
+- **[AI Radar Guides (airadar.vip/guides)](https://airadar.vip/guides)**：面向开发者的全球 AI 工具与订阅价格雷达指南，深度评测不同地区（如土区、美区、日区）的汇率差异与优惠开通姿势；
+- **[AISubDeal (aisubdeal.com/zh/pricing)](https://www.aisubdeal.com/zh/pricing/)**：实时监控海外主流 AI 产品的促销折扣码、学生优惠与年付限时特惠，提供第一手的降本羊毛情报；
+- **[OpenTheRank (opentherank.com/zh/ai-pricing)](https://opentherank.com/zh/ai-pricing/)**：全球大模型官方 API 与反代定价排行榜，以每百万 Token（1M Tokens）输入/输出为统一基准横向对齐，便于在业务中枢挑选最具性价比的备选模型。
+
+### 2. 号商发卡聚合与卡券流转平台
+- **[AI号探 (aihaotan.com)](https://aihaotan.com/)**：行业知名的全网发卡网爬虫聚合引擎。核心功能包括：
+  - **全网聚合检索**：输入关键字（如 `ChatGPT Plus 独享`、`Claude 3.5 Sonnet`、`Codex JSON`），系统自动抓取数十家活跃发卡网的货架、单价与实时库存；
+  - **号商信誉雷达**：根据历史发卡成功率、商品更新频次与差评反馈进行加权评分，自动标记高危跑路店铺；
+  - **价格异常预警**：若 Plus 独享号均价在 140~160 元，突然出现 30~50 元且声称独享的商品，可秒级辨别其大概率是被盗料卡或超售共享车位。
+- **[卡券网 (www.kaquanwang.cn)](http://www.kaquanwang.cn/)**：国内老牌虚拟卡密与礼品卡券自动化交易聚合平台，涵盖苹果 App Store 礼品卡、数字卡券与点卡流转，适合需要小额采买兑换码的开发者作为备选渠道。
 
 ---
 
