@@ -25,9 +25,9 @@ tls:
 
 # 3. 远程运维管理面板设置
 remote-management:
-  allow-remote: false
-  secret-key: "$2a$10$bBL1V/qAEOdozTbvHfqeBOajYy5k4QV9Xke1tNIIYOsD18FeIZB1q"
-  disable-control-panel: false
+  allow-remote: true       # 是否允许非 localhost 访问管理接口 (通过 Nginx 反代公网访问时务必设为 true)
+  secret-key: "$2a$10$NZCcnti3VCM2bwlaokX7k.XNBzDT/jWKhEaeALY75gVRjLYxY4mqa"
+  disable-control-panel: false # 保持 false 开启内置 Web 管理控制面板
 
 # 4. 授权凭据存放目录 (容器内部的绝对路径)
 auth-dir: "/root/.cli-proxy-api"
@@ -56,17 +56,25 @@ gpt-image-2-base-model: "gpt-5.5"
 ## 核心参数深度剖析与实战细节
 
 ### 1. `remote-management`（管理面板与 Bcrypt 安全散列）
-- **`allow-remote`**：默认为 `false`。表示只允许在本地内网环境访问管理接口。
-- **`secret-key`**：访问 Web 管理后台（8085 端口）时的管理员密码。**重要：此处严禁直接填明文密码，必须填入标准的 Bcrypt 单向哈希值**。
-  
-  **如何生成强密码的 Bcrypt 哈希值**：
-  在服务器上借助 Python 一键生成：
-  ```bash
-  python3 -c "import bcrypt; pw = b'YourStrongPassword2026'; print(bcrypt.hashpw(pw, bcrypt.gensalt()).decode())"
-  # 输出示例: $2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW
-  ```
-  将生成的以 `$2a$10$` 开头的长字符串粘贴到 `secret-key` 中即可。
-- **`disable-control-panel`**：是否彻底关闭 8085 端口的 Web 界面。若设置为 `true`，则只保留 8317 纯 API 接口，杜绝任何管理界面的潜在暴破攻击面。
+- **`allow-remote`**：
+  - 默认值为 `false`（仅允许宿主机内网 127.0.0.1 访问）。
+  - **生产建议**：当我们需要配置 Nginx 反向代理并通过公网独立域名（如 `https://cpa.tg-cc755.cn/management.html`）安全访问 Web 管理面板时，**必须将其设置为 `true`**，否则网关将拒绝外部转发的管理请求。
+- **`secret-key`（管理密钥自动哈希与密码重置机制）**：
+  - **核心机制**：CLIProxyAPI 具备高度人性化的密码哈希保护策略。在首次配置或修改密码时，**你可以直接填入明文密码**（如 `secret-key: "rootsugar"`）。
+  - **启动自动散列**：容器启动加载配置文件时，程序会自动检测该字段内容；若发现是普通明文（非 Bcrypt 哈希特征字符串），程序会自动在内存中调用 Bcrypt 算法计算强单向哈希，并**自动将散列值回写至宿主机的 `config.yaml` 文件中**（显示为形如 `$2a$10$...` 的加密散列）。这就是启动后检查 yml 发现“不是明文”的根本原因。
+  - **忘记密码的紧急重置方案**：
+    由于 Bcrypt 属于强单向加密，任何人都无法反解原始明文。如果你忘记了 Web 管理后台的登录密码，**切勿尝试爆破或重置整个系统**，标准操作极其简捷：
+    1. 登录 VPS 宿主机，编辑配置文件：
+       ```bash
+       vim /root/cliproxyapi/config.yaml
+       ```
+    2. 将 `secret-key` 直接修改为你所需的新密码明文（例如 `secret-key: "rootsugar"`）；
+    3. 保存退出后，重启容器：
+       ```bash
+       docker restart cli-proxy-api
+       ```
+    4. 容器启动后将重新读取明文、更新 Bcrypt 哈希并回写文件。你即可直接在 Web 管理界面使用新密码 `rootsugar` 畅行登录。
+- **`disable-control-panel`**：是否彻底关闭内置 Web 控制面板静态资源服务。保持 `false` 即可正常使用自带的现代化管理后台。
 
 ### 2. `auth-dir`（凭据存储目录映射）
 - 必须严格设置为容器内部路径 `"/root/.cli-proxy-api"`。

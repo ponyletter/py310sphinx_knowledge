@@ -27,7 +27,7 @@ flowchart TD
     S3["阶段三：账号池构建、凭据规范与防封混淆<br/>(OAuth全流程/JSON标准/Free vs Plus/请求混淆)"]
     S4["阶段四：海外 Linux 节点选型与环境加固<br/>(原生干净IP检测/TCP BBR加速/Docker CE安全加固)"]
     S5["阶段五：跨境通信管道：SSH 加密隧道 vs HTTPS<br/>(纯加密隧道/灰橙云取舍/ACME ECC证书/Nginx流式调优)"]
-    S6["阶段六：CLIProxyAPI 核心网关部署与动态调度<br/>(容器编排/config.yaml详解/增量热重载/容灾测试)"]
+    S6["阶段六：CLIProxyAPI 核心网关部署与动态调度<br/>(容器编排/config.yaml密码机制/Web可视化控制台/排除Free模型/动态调度)"]
     S7["阶段七：桌面客户端、多机 SSH 容灾与故障排查<br/>(ToAPI Proxy/Claude Code与AGY集成/多VPS容灾/故障反推)"]
 
     S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7

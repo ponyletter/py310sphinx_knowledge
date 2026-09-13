@@ -17,4 +17,5 @@
 02_config_yaml_deep_dive
 03_hot_reload_and_priority_load_balance
 04_full_verification_commands_suite
+05_web_management_dashboard_and_operations
 ```
