@@ -112,7 +112,80 @@ flowchart TD
 
 ---
 
-## 六、生产实用工具：凭证完整性批量自检脚本
+## 六、xAI 类型凭据规范（xAI Grok OAuth 体系）
+
+用于承载 xAI 平台系列模型（如 `grok-4.6`、`grok-4.5`、`grok-composer-2.5-fast`）的认证凭证形态。
+
+```json
+{
+  "type": "xai",
+  "auth_kind": "oauth",
+  "email": "user_xai_01@example.com",
+  "base_url": "https://cli-chat-proxy.grok.com/v1",
+  "access_token": "eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NiIs...",
+  "refresh_token": "TEV1G1Sc_YDiH731x0QX_TpOxM86VCfhE1UAyvBlY8tz...",
+  "token_endpoint": "https://auth.x.ai/oauth2/token",
+  "token_type": "Bearer",
+  "expires_in": 21600,
+  "expired": "2026-09-13T17:09:58Z",
+  "last_refresh": "2026-09-13T11:09:58Z",
+  "disabled": false,
+  "headers": {
+    "User-Agent": "grok-pager/0.2.93 grok-shell/0.2.93 (linux; x86_64)",
+    "X-XAI-Token-Auth": "xai-grok-cli",
+    "x-authenticateresponse": "authenticate-response",
+    "x-grok-client-identifier": "grok-pager",
+    "x-grok-client-version": "0.2.93"
+  },
+  "excluded_models": [
+    "grok-imagine-video-1.5",
+    "grok-imagine-image-2.0"
+  ]
+}
+```
+
+---
+
+## 七、多账号请求头（Headers）精细化差异与防连坐去重实战
+
+在同一台 VPS 或单 IP 节点下运行多个同厂商账号（如 2~5 个 xAI 号、多个 Codex 凭证）时，**必须避免所有账号使用 100% 相同字面的客户端指纹**：
+
+### 1. 相同指纹连坐风险
+如果账号 A 与账号 B 在极短时间内先后从同一个出口 IP 发起高频调用，且两者的请求头中：
+```http
+User-Agent: grok-pager/0.2.93 grok-shell/0.2.93 (linux; x86_64)
+x-grok-client-identifier: grok-pager
+x-grok-client-version: 0.2.93
+```
+完全分毫不差，上游反作弊模型极易在聚合分析时将两者判定为“同一开发者使用多账号并发轮换白嫖”，从而触发风控关联惩罚。
+
+### 2. 实战解耦方案：微调版本与标识指纹
+通过在各自凭据 JSON 的 `"headers"` 字典中引入符合官方规范的合理相邻差异，既保留了合法调用的必要键，又消除了静态指纹重叠：
+
+- **账号 A 凭据配置**：
+  ```json
+  "headers": {
+    "User-Agent": "grok-pager/0.2.93 grok-shell/0.2.93 (linux; x86_64)",
+    "X-XAI-Token-Auth": "xai-grok-cli",
+    "x-authenticateresponse": "authenticate-response",
+    "x-grok-client-identifier": "grok-pager",
+    "x-grok-client-version": "0.2.93"
+  }
+  ```
+- **账号 B 凭据配置（微调相邻版本与客户端标识）**：
+  ```json
+  "headers": {
+    "User-Agent": "grok-pager/0.2.95 grok-shell/0.2.95 (linux; x86_64)",
+    "X-XAI-Token-Auth": "xai-grok-cli",
+    "x-authenticateresponse": "authenticate-response",
+    "x-grok-client-identifier": "grok-shell",
+    "x-grok-client-version": "0.2.95"
+  }
+  ```
+
+---
+
+## 八、生产实用工具：凭证完整性批量自检脚本
 
 在向生产号池目录批量投递 JSON 文件前，可使用以下内置 Python 脚本进行快速自检：
 
@@ -137,13 +210,15 @@ def validate_auth_file(file_path: Path):
 
     auth_type = data.get("type")
     if not auth_type:
-        print("❌ 缺失必需的 'type' 字段 (如 'codex' 或 'antigravity')")
+        print("❌ 缺失必需的 'type' 字段 (如 'codex', 'antigravity', 'xai')")
         return False
 
     if auth_type == "codex":
         required = ["refresh_token", "email", "account_id"]
     elif auth_type == "antigravity":
         required = ["refresh_token", "email", "project_id"]
+    elif auth_type == "xai":
+        required = ["refresh_token", "email", "access_token"]
     else:
         required = ["refresh_token"]
 

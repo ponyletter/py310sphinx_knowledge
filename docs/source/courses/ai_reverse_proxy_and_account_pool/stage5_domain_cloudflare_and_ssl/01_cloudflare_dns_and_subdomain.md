@@ -77,3 +77,33 @@ graph TD
 | :--- | :--- | :--- |
 | **作为后端业务直接 API 接口** | ⭐️ **首选 灰云 (DNS Only)** | 延迟最低，完全避免任何 100s 握手断连风险。在 VPS 上依靠 UFW 与 Nginx 限流保证安全。 |
 | **需要隐藏源站 IP / 防止被恶意攻击** | ⭐️ **选择 橙云 (Proxied)** | 必须在 Cloudflare 的【Configuration Rules】中针对该二级域名设置 **Disable Buffer** 并延长超时时间。 |
+
+---
+
+## 四、核心辨析：入站“小云朵” vs 出站“Cloudflare WARP”（新手必读）
+
+许多初学者在搭建反代网关时，容易将 **“Cloudflare 小云朵（橙云代理）”** 与 **“Cloudflare WARP 出口代理”** 混为一谈，甚至误以为“开启小云朵就能防止账号被封”，导致灾难性翻车。两者具有完全相反的流量方向与职责定位：
+
+```{mermaid}
+flowchart LR
+    subgraph InboundTraffic ["【入站链路 Inbound】—— 必须保持灰云"]
+        User["客户端 / 开发者"] -->|域名请求| CF_DNS["Cloudflare DNS (灰云 DNS Only)"]
+        CF_DNS -->|直连原生握手| Nginx["海外 VPS (Nginx 反代)"]
+    end
+
+    subgraph OutboundTraffic ["【出站链路 Outbound】—— 建议挂 WARP 混淆"]
+        CPA["CLIProxyAPI 网关"] -->|本地 SOCKS5 :40000| WARP["Cloudflare WARP 客户端"]
+        WARP -->|Anycast 优质原生 IP| Upstream["海外官方 (Google / OpenAI / xAI)"]
+    end
+
+    Nginx -->|本地环回 127.0.0.1:8317| CPA
+```
+
+### 关键对比清单
+
+| 对比维度 | Cloudflare 小云朵 (Proxied 橙云) | Cloudflare WARP (出站网关) |
+| :--- | :--- | :--- |
+| **生效流向** | **入站 (Inbound)**：从终端用户指向你的 VPS 域名 | **出站 (Outbound)**：从你的 VPS 指向上游 AI 官方接口 |
+| **核心用途** | 隐藏源站服务器公网 IP，提供全球 CDN 缓存与 DDoS 防护 | 掩盖 VPS 机房机架 IP，伪装成优质 Anycast 原生家庭/移动双栈 IP |
+| **对大模型的影响** | 🚨 **破坏流式推流**：100 秒强制作废（524 错误）+ 分块缓冲延迟 | ⭐️ **抵御账号封锁**：有效解除 Google/OpenAI 对机房 IP 的验证码与假 429 拦截 |
+| **生产配置建议** | 🚨 **坚决关闭（保持灰云 DNS Only）** | ⭐️ **强烈推荐开启（以本地 SOCKS5 模式运行）** |

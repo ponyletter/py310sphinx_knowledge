@@ -18,7 +18,7 @@ CLIProxyAPI 的管理面板前端基于现代 Web 技术栈构建，后端通过
 
 ```{mermaid}
 flowchart LR
-    Browser["运维浏览器<br/>https://cpa.tg-cc755.cn/management.html"]
+    Browser["运维浏览器<br/>https://cpa.yourdomain.com/management.html"]
     
     subgraph HostGateway ["宿主机 Nginx 网关 (:443)"]
         direction TB
@@ -47,19 +47,19 @@ flowchart LR
 ```yaml
 remote-management:
   allow-remote: true           # 必须为 true，允许经由 Nginx 反代的外部流量访问管理接口
-  secret-key: "rootsugar"      # 初始直接填明文，启动后自动转为 Bcrypt 加密哈希
+  secret-key: "AdminPassword123" # 初始直接填明文，启动后自动转为 Bcrypt 加密哈希
   disable-control-panel: false # 必须为 false，保持 Web 控制台开启
 ```
 
-#### (2) Nginx 站点配置参考（`cpa.tg-cc755.cn`）
-在 `/etc/nginx/sites-available/cpa.tg-cc755.cn` 中，确保将请求准确反代至容器的 `8317` 端口：
+#### (2) Nginx 站点配置参考（`cpa.yourdomain.com`）
+在 `/etc/nginx/sites-available/cpa.yourdomain.com` 中，确保将请求准确反代至容器的 `8317` 端口：
 ```nginx
 server {
     listen 443 ssl http2;
-    server_name cpa.tg-cc755.cn;
+    server_name cpa.yourdomain.com;
 
-    ssl_certificate /etc/letsencrypt/live/cpa.tg-cc755.cn/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/cpa.tg-cc755.cn/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/cpa.yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/cpa.yourdomain.com/privkey.pem;
 
     location / {
         proxy_pass http://127.0.0.1:8317;
@@ -88,7 +88,7 @@ server {
 
 打开浏览器访问公网管理地址：
 ```text
-https://cpa.tg-cc755.cn/management.html#/login
+https://cpa.yourdomain.com/management.html#/login
 ```
 
 ```{image} /_static/research/traditional_templates.png
@@ -97,8 +97,8 @@ https://cpa.tg-cc755.cn/management.html#/login
 :width: 700px
 ```
 
-* **管理密钥（Management Key）**：输入在 `config.yaml` 中配置的明文密码（例如 `rootsugar`）。
-* **服务地址（API Base）**：默认自动锁定为当前访问域名（`https://cpa.tg-cc755.cn`），无需改动。
+* **管理密钥（Management Key）**：输入在 `config.yaml` 中配置的明文密码（例如 `AdminPassword123`）。
+* **服务地址（API Base）**：默认自动锁定为当前访问域名（`https://cpa.yourdomain.com`），无需改动。
 * **记住密码**：勾选后前端会将 Token 暂存至本地安全的 LocalStorage 中，刷新页面无需重复登录。
 
 ````{admonition} 核心技术真相：为什么查看 yml 文件密码“不是明文”？
@@ -113,12 +113,12 @@ https://cpa.tg-cc755.cn/management.html#/login
    若忘记密码，**切勿尝试逆向解密**！仅需两步：
    ```bash
    # 步骤 1: 直接在宿主机编辑配置，将 secret-key 改回新密码明文
-   sed -i 's|secret-key:.*|secret-key: "rootsugar"|g' /root/cliproxyapi/config.yaml
+   sed -i 's|secret-key:.*|secret-key: "AdminPassword123"|g' /root/cliproxyapi/config.yaml
    
    # 步骤 2: 重启容器生效
    docker restart cli-proxy-api
    ```
-   重启后，程序重新读取明文 `rootsugar`，自动更新 Bcrypt 哈希并保存，你即可用新密码登录，整个过程耗时不足 5 秒！
+   重启后，程序重新读取明文 `AdminPassword123`，自动更新 Bcrypt 哈希并保存，你即可用新密码登录，整个过程耗时不足 5 秒！
 ````
 
 ---
@@ -311,20 +311,20 @@ docker logs -f --tail 50 cli-proxy-api
 
 ### 2. 密码重置与配置自愈
 ```bash
-# 紧急将 Web 管理密码重置为 rootsugar (支持明文输入，启动自动哈希)
-sed -i 's|secret-key:.*|secret-key: "rootsugar"|g' /root/cliproxyapi/config.yaml
+# 紧急将 Web 管理密码重置为 AdminPassword123 (支持明文输入，启动自动哈希)
+sed -i 's|secret-key:.*|secret-key: "AdminPassword123"|g' /root/cliproxyapi/config.yaml
 docker restart cli-proxy-api
 
 # 验证管理接口是否已支持新密码鉴权 (返回 HTTP 200 即成功)
 curl -s -o /dev/null -w "%{http_code}\n" \
-  -H "Authorization: Bearer rootsugar" \
+  -H "Authorization: Bearer AdminPassword123" \
   http://127.0.0.1:8317/v0/management/config
 ```
 
 ### 3. Nginx 外部网络连通性验证
 ```bash
 # 测试 Web 控制台静态页面分发状态 (预期 200 OK)
-curl -I https://cpa.tg-cc755.cn/management.html
+curl -I https://cpa.yourdomain.com/management.html
 
 # 重新加载 Nginx 配置
 sudo nginx -t && sudo systemctl reload nginx

@@ -112,7 +112,66 @@ curl -X POST http://127.0.0.1:8317/v1/images/generations \
 
 ---
 
-### 5. 跨公网域名 HTTPS 全链路验证
+### 5. Cloudflare WARP 出站代理与出口 IP 校验
+验证 WARP 容器本地 SOCKS5 代理通道是否畅通，并确认公网出站 IP 已被 Cloudflare Anycast 原生干净 IP 成功混淆：
+
+```bash
+curl -s -x socks5h://127.0.0.1:40000 https://www.cloudflare.com/cdn-cgi/trace
+```
+
+**关键观察指标**：
+```text
+fl=...
+h=www.cloudflare.com
+ip=104.28.xxx.xxx   <-- 确认显示为 Cloudflare Anycast 出口 IP，非 VPS 真实机房原生 IP
+ts=...
+warp=on             <-- 确认已成功接入 WARP 隧道网络 (若绑定 Teams 许可则显示 warp=plus)
+gateway=off
+...
+```
+
+---
+
+### 6. xAI (Grok) 系列模型流式推流测试
+验证 xAI 独立凭据接入与 `grok-4.6` 模型调度：
+
+```bash
+curl -N -X POST http://127.0.0.1:8317/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-prod-cliproxy-secret-2026" \
+  -d '{
+    "model": "grok-4.6",
+    "stream": true,
+    "messages": [
+      {"role": "user", "content": "请用一句话证明你是 Grok 模型。"}
+    ]
+  }'
+```
+
+---
+
+### 7. 协议层零宽字符防伪 429 敏感词对抗测试
+向 Google Antigravity 模型发送包含 `"Claude Agent SDK"` 固定指纹的 Prompt，验证网关零宽字符混淆机制是否生效：
+
+```bash
+curl -X POST http://127.0.0.1:8317/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer sk-prod-cliproxy-secret-2026" \
+  -d '{
+    "model": "gemini-3.6-flash",
+    "messages": [
+      {"role": "user", "content": "Hello, I am testing Claude Agent SDK integration."}
+    ]
+  }' | jq .
+```
+
+**预期结果**：
+- 响应返回标准的 `200 OK` 与有效生成内容；
+- 若未配置零宽字符混淆，Google 后端正则命中将直接抛出 `429 Too Many Requests / Resource Exhausted` 假报错。
+
+---
+
+### 8. 跨公网域名 HTTPS 全链路验证
 在任意外部网络（如本地开发机或国内服务器）执行以下命令，验证 Cloudflare + Nginx + SSL + CLIProxyAPI 全链路贯通：
 
 ```bash
@@ -122,7 +181,7 @@ curl -Iv https://api.yourdomain.com/v1/models \
 
 ---
 
-### 6. Web 可视化管理后台与接口状态验证
+### 9. Web 可视化管理后台与接口状态验证
 验证管理控制面板静态资源与底层 Management API 状态：
 
 ```bash
