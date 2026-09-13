@@ -43,6 +43,7 @@ caddy-apache-nginx-v3/index
 claude-chatgpt-gemini-grok-free-membership-enterprise-products-v2/index
 claude-chatgpt-gemini-grok-model-comparison-v5/index
 cloudflare-explained-v1/index
+cloudflare-orange-gray-v1/index
 computer-history-origins-v2/index
 docker-vs-k8s-full-20260826-041213/index
 firewall-server-breach-blackboard-20260825/index
