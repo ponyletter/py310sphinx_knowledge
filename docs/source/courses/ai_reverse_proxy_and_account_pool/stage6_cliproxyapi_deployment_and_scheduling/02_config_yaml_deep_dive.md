@@ -142,6 +142,42 @@ disable-claude-cloak-mode: false  # 开启 Claude 客户端指纹伪装
 - `disable-codex-cloaking: false`：开启针对 OpenAI Codex 接口的客户端伪装，自动为出站请求补全完整的浏览器特征头（如 `sec-ch-ua`、`referer: https://chatgpt.com/`、真实 Desktop User-Agent），彻底消除无头脚本特征；
 - `disable-claude-cloak-mode: false`：开启针对 Anthropic Claude 接口的指纹混淆，防止被上游识别为代理中继节点。
 
+### 8. xAI 实时连网搜索自动注入（`xai.inject-x-search`）
+- **核心机制**：
+  默认情况下，外部客户端若未在请求中显式附带 `tools: [type: "x_search"]`，xAI 后端将不会主动调用连网检索。
+  开启此参数后：
+  ```yaml
+  xai:
+    inject-x-search: true
+  ```
+  CLIProxyAPI 会在上游代理请求中自动注入原生的 `x_search` 工具定义，并自动将其列入 `tool_choice.allowed_tools`。即使客户端（如第三方 WebUI、普通 API 调用者）没有连网插件，免费的 Grok 账号也能自动激活官方的实时全网信息检索能力。
+
+### 9. 模型别名与多客户端规范化（`oauth-model-alias`）
+- **业务痛点**：
+  不同的开发工具或智能体客户端（例如 Claude Code、Cursor、NextChat、Aider 等）在请求模型时，对模型 ID 的命名存在差异（例如带 `[1m]`、`[thinking]`、或习惯简写为 `gpt-4o`、`gpt-5.6`）。若网关未识别这些别名，上游会直接报错 `400 Bad Request: unknown provider for model ...`。
+- **映射语法与 `fork` 分叉特性**：
+  ```yaml
+  oauth-model-alias:
+    antigravity:
+      - name: "gemini-3.8-flash-high"
+        alias: "gemini-3.8-flash-high[1m]"
+        fork: true # 关键：保持原名可用的同时，额外派生出别名供客户端识别
+    codex:
+      - name: "gpt-5.5"
+        alias: "gpt-4o"
+        fork: true
+      - name: "gpt-5.6-sol"
+        alias: "gpt-5.6"
+        fork: true
+    xai:
+      - name: "grok-4.6"
+        alias: "grok-beta"
+        fork: true
+  ```
+- **核心收益**：
+  1. `fork: true` 保证双轨运行，原有脚本使用标准名不会受影响，新客户端使用别名也能无缝识别；
+  2. 彻底解决 Claude Code 或特定 Agent 客户端硬编码模型后缀时的 `400 unknown provider` 兼容性故障。
+
 ---
 
 ## 配置生效与安全性核对清单
@@ -159,4 +195,6 @@ docker compose restart
 - [x] `proxy-url` 已绑定到 `socks5://warp-socks:1080`，出站流量走 Cloudflare 原生 IP 池；
 - [x] `antigravity.sensitive-words` 已配置 `"Claude Agent SDK"` 混淆，杜绝假 429 拦截；
 - [x] `api-keys` 长度大于 24 字符，包含随机数字与字母组合；
+- [x] `xai.inject-x-search: true` 已开启，提升 Grok 渠道实时检索能力；
+- [x] `oauth-model-alias` 已配置规范化别名，兼容 Claude Code 等下游开发工具；
 - [x] 前端已配置 Nginx 代理，并通过 HTTPS 域名对外交互。
