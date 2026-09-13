@@ -30,6 +30,8 @@ graph TD
     subgraph RadarEcosystem ["AI 订阅采购与价格雷达矩阵"]
         subgraph PriceTools ["价格对比与订阅雷达"]
             PriceAI["PriceAI (priceai.cc)<br/>全网 AI 订阅与模型价格比价"]
+            YikeTools["一刻比价 (vs.yiketools.com)<br/>模型 API 价格横向对比与算力核算"]
+            ShuiTa["水獭比价 (shuita.xyz)<br/>全球 AI 订阅与合租价格聚合监控"]
             AIRadar["AI Radar (airadar.vip)<br/>全球 AI 工具订阅指南与价格走势"]
             AISubDeal["AISubDeal (aisubdeal.com)<br/>实时 AI 订阅折扣与优惠汇总"]
             OpenTheRank["OpenTheRank (opentherank.com)<br/>大模型 Token 成本与定价天梯榜"]
@@ -37,7 +39,9 @@ graph TD
 
         subgraph StockTools ["货源探测与发卡流转"]
             AIHaoTan["AI号探 (aihaotan.com)<br/>发卡网全网爬虫 & 库存活跃度雷达"]
+            AiFaKa["AiFaKa (GitHub)<br/>开源 AI 发卡网与号商信誉索引"]
             KaQuanWang["卡券网 (kaquanwang.cn)<br/>虚拟卡密/礼品卡券自动化流转"]
+            WzypShops["微资源发卡高销店铺群<br/>F51WX60H / 7HVUEC3Y / GV0HQ2C0 等"]
         end
     end
 
@@ -47,23 +51,28 @@ graph TD
 ```
 
 ### 1. AI 订阅与大模型价格雷达平台
-- **[PriceAI (priceai.cc)](https://priceai.cc/)**：专业的 AI 订阅与模型服务综合比价平台，全面收录主流海外大模型（ChatGPT Plus、Claude Pro、Gemini Advanced、Midjourney 等）的官方标价、渠道代理价以及代充服务费率，帮助团队快速核算月度算力采购支出；
+- **[一刻工具箱 AI比价 (vs.yiketools.com)](https://vs.yiketools.com/)**：专注全球主流商业与开源大模型（GPT-4o、Claude 3.5 Sonnet、Gemini 1.5/2.0、DeepSeek V3/R1 等）API 价格横向对比，提供基于单次 Prompt 规模与 Token 输入/输出吞吐量的动态成本测算器；
+- **[水獭比价 (shuita.xyz)](https://shuita.xyz/)**：国内领先的 AI 订阅与发卡聚合比价站点，实时追踪 ChatGPT Plus、Claude Pro、Midjourney、Cursor 等官方与渠道代购的实时价格走势与优惠车位；
+- **[PriceAI (priceai.cc)](https://priceai.cc/)**：专业的 AI 订阅与模型服务综合比价平台，全面收录主流海外大模型的官方标价、渠道代理价以及代充服务费率，帮助团队快速核算月度算力采购支出；
 - **[AI Radar Guides (airadar.vip/guides)](https://airadar.vip/guides)**：面向开发者的全球 AI 工具与订阅价格雷达指南，深度评测不同地区（如土区、美区、日区）的汇率差异与优惠开通姿势；
 - **[AISubDeal (aisubdeal.com/zh/pricing)](https://www.aisubdeal.com/zh/pricing/)**：实时监控海外主流 AI 产品的促销折扣码、学生优惠与年付限时特惠，提供第一手的降本羊毛情报；
 - **[OpenTheRank (opentherank.com/zh/ai-pricing)](https://opentherank.com/zh/ai-pricing/)**：全球大模型官方 API 与反代定价排行榜，以每百万 Token（1M Tokens）输入/输出为统一基准横向对齐，便于在业务中枢挑选最具性价比的备选模型。
 
-### 2. 号商发卡聚合与卡券流转平台
+### 2. 号商发卡聚合与开源项目
 - **[AI号探 (aihaotan.com)](https://aihaotan.com/)**：行业知名的全网发卡网爬虫聚合引擎。核心功能包括：
   - **全网聚合检索**：输入关键字（如 `ChatGPT Plus 独享`、`Claude 3.5 Sonnet`、`Codex JSON`），系统自动抓取数十家活跃发卡网的货架、单价与实时库存；
   - **号商信誉雷达**：根据历史发卡成功率、商品更新频次与差评反馈进行加权评分，自动标记高危跑路店铺；
   - **价格异常预警**：若 Plus 独享号均价在 140~160 元，突然出现 30~50 元且声称独享的商品，可秒级辨别其大概率是被盗料卡或超售共享车位。
+- **[AiFaKa 开源发卡导航 (GitHub: AiHaoTan/AiFaKa)](https://github.com/AiHaoTan/AiFaKa/blob/main/README.md)**：
+  - 由 AI号探团队在 GitHub 上开源维护的 AI 发卡网全网汇总白皮书；
+  - 整理了全网长期存活的 AI 自动化发卡店铺、代充渠道评级、失信黑名单与避坑准则，适合开发者作为采买货源与甄别店铺信誉的开源备忘录。
 - **[卡券网 (www.kaquanwang.cn)](http://www.kaquanwang.cn/)**：国内老牌虚拟卡密与礼品卡券自动化交易聚合平台，涵盖苹果 App Store 礼品卡、数字卡券与点卡流转，适合需要小额采买兑换码的开发者作为备选渠道。
 
 ---
 
-## 三、典型发卡网商品剖析：以微资源发卡网为例
+## 三、典型发卡网商品剖析与高销量店铺样例：以微资源发卡网为例
 
-以典型平台 [微资源发卡网](https://wzyp.cn/shop/9S9N5V82) 等店铺为例，深入拆解号商货架上的常见商品分类与技术内幕：
+以行业典型平台 [微资源发卡网 (wzyp.cn)](https://wzyp.cn/) 及其旗下活跃店铺为例，深入拆解号商货架上的常见商品分类、高销店铺特征与采购内幕：
 
 ### 1. 常见商品分类深度解读
 
@@ -74,6 +83,30 @@ graph TD
 | **Plus 独享成品号 / 直登号** | 已经开通了 ChatGPT Plus（每月 $20）的独立账号，交付完整的账号、密码及绑定的海外邮箱控制权。 | 必须索取原始辅助邮箱所有权，登录后立即修改密码、检查是否已绑定手机双重验证（2FA）。 |
 | **Plus 充值服务 / 代充直充** | 买家提供自己的老账号，号商登录或通过专用付款链接完成 Plus 会员代充值。 | 必须问清充值手段！坚决拒绝任何需要索取账号密码让对方上号操作的黑卡代充，**优先选择苹果官方正规礼品卡充值**。 |
 | **Codex / OAuth JSON 凭据包** | 号商直接从 Plus 账号中提取出的标准 JSON 文件，包含 `access_token` 与 `refresh_token`。 | **号池搭建最理想形态**。买家无需在本地重复进行网页模拟登录，拿来即用，但必须校验 JSON 内是否包含长效 `refresh_token`。 |
+
+### 2. 活跃高销量店铺案例参考（微资源店铺样例）
+
+微资源发卡系统聚集了大量独立上游号商，不同店铺主营业务和客群存在明显技术分化：
+
+- **[微资源店铺 F51WX60H](https://wzyp.cn/shop/F51WX60H)**：
+  - **特点**：行业高销量老店，主营 ChatGPT 独享成品号、Plus 稳定代充服务与正规车位；
+  - **适用**：需要稳定个人主力号或小批量高可用账号的开发者。
+- **[微资源店铺 7HVUEC3Y](https://wzyp.cn/shop/7HVUEC3Y)**：
+  - **特点**：高出货量店铺，主营海外大模型开发者凭据、Codex / Claude OAuth 授权包及高权重点卡；
+  - **适用**：反代号池扩容、需要直接将 JSON 凭据注入 CLIProxyAPI 的工程团队。
+- **[微资源店铺 GV0HQ2C0](https://wzyp.cn/shop/GV0HQ2C0)**：
+  - **特点**：主打批量低价 Free 消耗号、临时接码测试号与 API 试用额度号批发；
+  - **适用**：压力测试、新模型冒烟测试及低成本逆向接口实验。
+- **[微资源店铺 9S9N5V82](https://wzyp.cn/shop/9S9N5V82)**：
+  - **特点**：早期技术型店铺，提供多类模型直登号与定制自动化凭据。
+
+````{admonition} 高销店铺选购“三看原则”
+:class: tip
+
+1. **看补货与库存活跃度**：长期高频次补货（近 24 小时有新入库）说明上游自动化产线或采购通道通畅；长期零库存或单批积压的商品容易出现凭据过期；
+2. **看发卡质保声明**：优质店铺通常标明“包首登 24~48 小时”或“质保首月”，若无任何售后保障说明需保持警惕；
+3. **先买单件测通，再批量采买**：切忌一上来就采购数十个账号，先采购 1 个进行模型推理与刷新测试，确认 Token 结构完整后再行批量入库。
+````
 
 ---
 
