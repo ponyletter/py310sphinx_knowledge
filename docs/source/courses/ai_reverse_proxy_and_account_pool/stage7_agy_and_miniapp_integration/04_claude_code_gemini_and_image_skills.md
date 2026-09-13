@@ -36,17 +36,62 @@ flowchart TD
     end
 ```
 
-* **Web 对话模式（纯 API 转发）**：
-  * 普通 Web 聊天软件（如 NextChat、Chatbox 等）如果未显式配置搜索引擎插件，发送给 CPA 的 API 请求中 `tools` 列表为空。
-  * 模型本身是静态权重，无法凭空突破沙箱访问外网，因此只能回答“我无法访问网络”。
-  * 官方 Web 网页版（ChatGPT Web）的连网依赖于 OpenAI 服务器端的云端爬虫集群（Browse with Bing），这项重型基础设施不会开放给通过 CLI 逆向接口调用的免费账号。
-* **终端 CLI 模式（客户端 Agent 驱动）**：
-  * 像 Claude Code、Aider 这类终端工具本质上是**全功能的 Agent（智能体）**。
-  * 连网抓取的真正执行者**不是云端模型，而是运行在你本地计算机上的 CLI 客户端**！
-  * 模型仅负责输出结构化的“工具调用指令”（Tool Call），本地 CLI 截获指令后调用本地系统的网络库或 Shell 命令发起真实 HTTP 请求，再把抓取到的网页正文灌回给模型。
-  * **核心结论**：哪怕你的号池全部由免费账号组成，只要在本地终端运行 Agent 客户端，就能 100% 具备稳定的连网读取与抓取能力！
+### 2. 对接你自己的 CPA 时，它是怎么工作的？
 
-### 2. xAI 渠道的特殊优化：服务端原生搜索自动注入
+很多开发者直觉上认为：*“是不是我在云端配置了反代网关，所有网络请求和爬虫都由服务器完成？”* —— **并非如此**。
+
+当在本地开发机（如 Windows）运行 Claude Code 或 Codex CLI 并将其网关指向你自己的 CPA（如 `https://cpa.yourdomain.com`）时，其端到端的工作时序如下：
+
+```
+[你在本地 Windows 终端输入任务: "请总结 https://docs.example.com 的内容"]
+       │
+       ▼
+[本地 Windows 运行的 Claude Code]
+       │  (1) 组装请求：包含你的 Prompt + 本地自带的工具声明 (web_fetch, bash, view_file)
+       ▼
+[你的私有 CPA 反代网关 (https://cpa.yourdomain.com)]
+       │  (2) 协议转换与身份鉴权：将 Anthropic/OpenAI 格式转为上游 Provider 格式
+       ▼
+[云端 AI 基础模型 (即便绑定的是免费 Free 账号)]
+       │  (3) 模型推理计算：识别到需要抓取网页，输出一条标准的 Tool Call 指令
+       ▼
+[你的私有 CPA 反代网关]
+       │  (4) 透传 Tool Call (例如: `fetch_url("https://docs.example.com")`)
+       ▼
+[本地 Windows 运行的 Claude Code] ◄── 接收到 Tool Call 指令！
+       │
+       ├─► (5) 本地执行：Claude Code 在你的 Windows 电脑上直接发起网络请求获取网页文本
+       │
+       ▼
+[本地 Windows 运行的 Claude Code]
+       │  (6) 组装 Tool Result：将抓取到的几千字网页正文打包为结果消息
+       ▼
+[你的私有 CPA 反代网关] ──► [云端 AI 基础模型]
+                                   │  (7) 二次推理：模型根据回传的正文进行归纳总结
+                                   ▼
+[本地 Windows 终端] ◄── 输出结构化的网页分析结果给开发者！
+```
+
+**这一设计带来的巨大红利**：
+1. **完全解耦账号连网限制**：不管你号池里是免费账号还是付费账号，云端模型只负责“发出抓取指令”，真实的网络请求全是在**你本地 Windows 上由客户端执行的**；
+2. **零封号风险**：云端官方只看到普通的文本生成与代码交互流量，爬虫行为完全发生在开发者的本地 IP 上，彻底避免了机房 IP 高频爬网页导致账号被连坐封控。
+
+### 3. 在本地 Windows 用 CLI 工具，会调用连网工具吗？自带了吗？还是需要另外配置？
+
+这是许多开发者非常关心的实操疑问：
+
+| 客户端类别 | 是否自带连网工具？ | 连网工具的实现原理 | 是否需要额外配置？ |
+| :--- | :--- | :--- | :--- |
+| **Claude Code** | **原生自带**基础抓取<br/>（支持 URL 访问与命令执行） | 内置 `read_url_content` 工具，可直接提取网页 Markdown；内置终端工具可执行本地 `curl`、`PowerShell` | **基础抓取免配置**（开箱即用）；<br/>若需**全网关键词检索**，建议挂载 MCP 扩展 |
+| **Codex CLI / Aider** | **原生自带**网页读取 | Aider 原生支持 `/web <URL>` 抓取指令；Codex 终端内置终端 Shell 执行环境 | **开箱即用**，自动调用本地 Python 或系统网络栈抓取 |
+| **Cursor / Windsurf** | **原生自带**网络搜索 | 软件自身维护了客户端搜索索引与文档爬虫管线 | **开箱即用**，在对话中勾选 `@Web` 即可激活 |
+
+* **原生自带的能力（无需配置）**：
+  只要你在对话中直接给出一个具体的 URL 网址（如 GitHub 仓库地址、在线 API 手册、Issue 链接），Claude Code 和各类 CLI 就会自动调用本地网络直接读取，不需要你单独写爬虫代码。
+* **什么时候需要额外配置？**
+  当你需要让模型像 Google/Brave 搜索一样，根据一段朦胧的“关键词”在互联网上漫游找资料时，模型本身缺乏搜索引擎索引。此时可以通过 **MCP（Model Context Protocol）** 为 Claude Code 挂载一个搜索插件（后文有详细配置指南）。
+
+### 4. xAI 渠道的特殊优化：服务端原生搜索自动注入
 
 如果希望在第三方 WebUI 界面中也能让免费 xAI 账号具备实时联网能力，CPA 支持在网关层自动注入官方搜索工具。在 `/root/cliproxyapi/config.yaml` 中配置：
 
@@ -153,6 +198,57 @@ function geminicc {
     claude --teammate-mode in-process --dangerously-skip-permissions $args
 }
 ```
+
+### 4. 本地 Windows 开发环境深度配置与避坑排雷指南
+
+在 Windows 本地使用各类 CLI 智能体（Claude Code、Codex CLI、Aider）对接 CPA 时，以下三处配置直接决定了日常开发的顺畅度：
+
+#### ① 核心大坑：本地网络代理设置（防止海外网页抓取超时）
+如前文所述，**网页抓取是由你本地 Windows 计算机直接发起的**。
+如果你让智能体抓取海外技术文档（如 GitHub Issue、Next.js 官网、Python 官方库），而国内本地终端默认未走代理，终端会频繁报错 `ETIMEDOUT` 或 `Connection reset by peer`。
+
+**解决办法**：在运行 CLI 之前，先在终端声明本地科学上网客户端（如 Clash / v2rayA）的 HTTP/SOCKS 端口：
+```powershell
+# Windows PowerShell 临时设置
+$env:HTTP_PROXY = "http://127.0.0.1:7890"
+$env:HTTPS_PROXY = "http://127.0.0.1:7890"
+
+# 若使用 CMD
+set HTTP_PROXY=http://127.0.0.1:7890
+set HTTPS_PROXY=http://127.0.0.1:7890
+```
+或直接将其写入 PowerShell 启动配置脚本 `$PROFILE` 中。
+
+#### ② 终端乱码与 UTF-8 编码修正
+Windows 默认控制台代码页可能是 GBK（CP936），当 Claude Code 或 Python 脚本在终端打印抓取到的多语言网页或中文 Markdown 时，极易产生乱码甚至导致 JSON 解析崩溃。
+
+**解决办法**：在 PowerShell 的 `$PROFILE` 开头追加：
+```powershell
+[Console]::InputEncoding = [System.Text.Encoding]::UTF8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+```
+
+#### ③ OpenAI 兼容型 CLI 工具（Aider / Cursor / Codex CLI）的 Windows 配置
+除了 Claude Code 使用 Anthropic 协议外，如果你使用的是 Aider、Cursor、开源 Codex CLI 或 VSCode Continue 插件，它们通常基于标准 OpenAI 规范：
+
+```powershell
+# Windows PowerShell 下对接 CPA
+$env:OPENAI_BASE_URL = "https://cpa.yourdomain.com/v1"
+$env:OPENAI_API_KEY = "sk-prod-cliproxy-secret-2026"
+
+# 运行 Aider 并指定模型（例如别名 gpt-4o 或原生 gpt-5.5）
+aider --model openai/gpt-4o
+```
+
+#### ④ 进阶：为 Claude Code 挂载全网关键词搜索（MCP 扩展）
+如果不想只局限于给固定 URL 抓取，而是希望 Claude Code 具备全网实时关键词检索的能力，可以通过 **MCP（Model Context Protocol）** 接入官方开源的 Fetch 服务：
+
+```bash
+# 在 Windows 终端执行（需本地安装有 Node.js 18+）
+claude mcp add fetch npx -y @modelcontextprotocol/server-fetch
+```
+挂载后，Claude Code 会获得强大的网页抓取与 HTML 文本转换能力，遇到不懂的问题会自动在全网查询资料。
 
 ---
 
