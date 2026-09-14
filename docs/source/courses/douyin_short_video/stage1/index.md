@@ -9,6 +9,7 @@
 ```{toctree}
 :maxdepth: 2
 
-01_positioning
+01_positioning/index
 02_editing
 ```
+
