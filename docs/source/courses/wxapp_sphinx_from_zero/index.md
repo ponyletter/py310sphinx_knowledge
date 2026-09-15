@@ -20,4 +20,5 @@ stage5_backend_and_user/index
 stage6_frontend_and_bugs/index
 stage7_audit_mastery/index
 stage8_references_and_skills/index
+stage9_cloud_storage_and_production_hardening/index
 ```
