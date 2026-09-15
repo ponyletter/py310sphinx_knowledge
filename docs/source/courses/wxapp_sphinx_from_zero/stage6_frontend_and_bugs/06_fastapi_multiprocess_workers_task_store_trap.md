@@ -27,7 +27,7 @@
 
 ## 2. 根本原因深挖：多进程 Worker 下的进程内存隔离
 
-在排查后端代码时，我们在 [`backend/app/api/meme.py`](file:///root/02project/weixinpy310mememiniapp/backend/app/api/meme.py) 中看到了任务状态的存储方式：
+在排查后端代码时，我们在 `backend/app/api/meme.py` 中看到了任务状态的存储方式：
 
 ```python
 # 全局异步任务内存字典
@@ -143,7 +143,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/root/02project/weixinpy310mememiniapp/backend
+WorkingDirectory=<project_root>/backend
 # 关键环境变量：禁止 Python 输出缓冲，保证实时在 journalctl 中打印日志
 Environment=PYTHONUNBUFFERED=1
 ExecStart=/root/miniconda3/envs/weixinpy310mememiniapp/bin/uvicorn app.main:app --host 127.0.0.1 --port 8290 --workers 1

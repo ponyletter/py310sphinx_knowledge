@@ -164,7 +164,7 @@ server {
 ```
 
 ### 第二步：新生成动图的后台自适应热同步
-在动图合成完毕的流水线末端（[`backend/app/api/meme.py`](file:///root/02project/weixinpy310mememiniapp/backend/app/api/meme.py)），加入自适应推送机制：
+在动图合成完毕的流水线末端（`backend/app/api/meme.py`），加入自适应推送机制：
 
 ```python
 async def sync_task_outputs_to_domestic(task_id: str, task_dir: Path):

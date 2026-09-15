@@ -23,7 +23,7 @@
 服务器示例：
 
 ```bash
-cd /root/02project/weixinpy310mememiniapp/backend
+cd <project_root>/backend
 source /root/miniconda3/bin/activate weixinpy310mememiniapp
 uvicorn app.main:app --host 127.0.0.1 --port 8290 --workers 2
 curl -fsS https://meme.yourdomain.cn/health

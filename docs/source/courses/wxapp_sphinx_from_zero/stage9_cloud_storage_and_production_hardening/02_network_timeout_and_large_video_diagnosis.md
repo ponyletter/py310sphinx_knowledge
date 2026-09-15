@@ -42,7 +42,7 @@
 ```bash
 # 查询 API 域名的权威 A 记录
 dig +short apiwx.tg-cc755.cn
-# 输出：81.69.190.161 (直接返回腾讯云国内机房 IP)
+# 输出：124.xx.xx.xx (直接返回腾讯云国内机房公网 IP)
 
 # 检查 HTTP 响应头
 curl -Iv https://apiwx.tg-cc755.cn/health

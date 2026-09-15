@@ -8,7 +8,7 @@
 
 ## 一、架构演进：单机本地存储的四大死穴
 
-在项目初期（MVP 阶段），最直观的做法是将用户生成的 GIF、拼接长图以及压缩图片保存在应用服务器的本地目录中（如 `/root/02project/weixinpy310mememiniapp/backend/storage/outputs/{task_id}/`），并通过 Nginx 进行静态映射：
+在项目初期（MVP 阶段），最直观的做法是将用户生成的 GIF、拼接长图以及压缩图片保存在应用服务器的本地目录中（如 `<project_root>/backend/storage/outputs/{task_id}/`），并通过 Nginx 进行静态映射：
 
 ```mermaid
 flowchart LR
@@ -72,7 +72,116 @@ flowchart LR
 
 ---
 
-## 三、后端异步双写与产物白名单架构实现
+## 三、Cloudflare R2 控制台保姆级配置实操与凭证获取
+
+在动手编写 Python 代码之前，必须先在 Cloudflare 官方控制台完成 **存储桶创建、自定义域名 CDN 绑定与 S3 兼容 API 令牌** 的签发。以下是生产环境的精确点击链路与参数映射。
+
+### 1. 登录控制台与进入 R2 产品页
+
+1. 打开浏览器访问 Cloudflare 官方控制台：[https://dash.cloudflare.com/](https://dash.cloudflare.com/) 并登录你的 Cloudflare 账号。
+2. 在左侧主导航栏中，点击展开 **【存储与数据库 (Storage & Databases)】**，然后点击 **【R2 对象存储 (R2 Object Storage)】**。
+3. （首次使用提示）如果账号未曾开通 R2，页面会提示绑定支付方式（Visa/MasterCard 或 PayPal 均可）。Cloudflare R2 享有**永久免费层级（每月 10 GB 存储空间、100 万次 Class A 写入操作、1000 万次 Class B 读取操作，且全球出网流量费用永远为 0 元）**，正常中小型小程序表情包业务初期完全可以零成本运行。
+
+### 2. 创建 R2 存储桶（Bucket）
+
+1. 在 R2 概览页面，点击蓝色的 **【创建存储桶 (Create bucket)】** 按钮。
+2. **存储桶名称 (Bucket Name)**：
+   - 命名规则为小写字母、数字与连字符，这里我们命名为：`memo`。
+   - 该名称直接对应系统环境变量中的：`R2_BUCKET_NAME=memo`。
+3. **位置提示 (Location Hint)**：
+   - 选择 **【自动 (Automatic)】**，Cloudflare 会根据流量来源自动就近优化存储分区。
+   - 该配置直接对应系统环境变量中的：`R2_REGION=auto`。
+4. 默认存储类别选择 **Standard**，核对无误后点击右下角的 **【创建存储桶 (Create Bucket)】**。
+
+### 3. 绑定公开访问自定义域名（Custom Domain）
+
+> [!IMPORTANT] 为什么必须绑定自定义域名？
+> R2 创建完成后默认处于私有保护状态。虽然控制台提供了一个形如 `pub-xxx.r2.dev` 的公开测试子域，但该域名在国内部分网络环境可能存在解析阻断或频次受限。生产环境必须绑定自己在 Cloudflare 托管解析的二级域名（例如 `media.tg-cc755.cn`），从而无缝激活 Cloudflare 全球 Anycast CDN 节点加速。
+
+1. 在存储桶列表中，点击进入刚刚创建的 `memo` 存储桶。
+2. 在存储桶顶部导航栏中，切换到 **【设置 (Settings)】** 标签页。
+3. 向下滚动找到 **【公开访问 (Public access)】** 模块，在“自定义域 (Custom Domains)”右侧点击 **【连接域 (Connect Domain)】**。
+4. 在弹出框中输入你要专用于静态媒体分发的二级域名：`media.tg-cc755.cn`（前提是主域名 `tg-cc755.cn` 已经在 Cloudflare 解析托管）。
+5. 点击 **【继续 (Continue)】** -> Cloudflare 会自动在 DNS 记录中创建一条 CNAME 记录，指向 R2 边缘存储集群。
+6. 点击 **【连接域 (Connect Domain)】** 完成绑定。此时状态会显示为“初始化中”，通常 1~2 分钟内即刷新为绿色的 **【活动 (Active)】**。
+7. 该域名直接对应系统环境变量中的：`R2_PUBLIC_BASE_URL=https://media.tg-cc755.cn`。
+
+### 4. 创建 R2 API 令牌并获取 S3 兼容凭据
+
+为了让服务器端的 FastAPI（通过 `boto3`）拥有上传、读取和删除文件的权限，我们需要为后端服务生成一组专用的 S3 兼容 Access Key / Secret Key。
+
+1. 点击左侧导航栏返回 **【存储与数据库 (Storage & Databases)】** -> **【R2 对象存储】** 概览页。
+2. 在页面右侧找到 **【账户详情】** 下方的 **【管理 R2 API 令牌 (Manage R2 API Tokens)】** 链接并点击。
+3. 点击页面右上角的 **【创建 API 令牌 (Create API token)】** 按钮。
+4. **令牌配置项填写**：
+   - **令牌名称 (Token Name)**：输入具有明确用途的标识，如 `miniapp-meme-storage-token`。
+   - **权限 (Permissions)**：务必勾选 **【对象读和写 (Object Read & Write)】**（后端服务既需要上传动图生成结果，又需要执行校验与清理）。
+   - **指定存储桶 (Specify bucket(s))**：推荐选择 **【应用到特定存储桶】** 并选中 `memo` 存储桶（遵循安全最小权限法则，防止该令牌误操作其他项目的数据）。
+   - **TTL (有效期)**：选择 **永久 (Forever)**，或按公司合规要求设置轮换周期。
+   - **客户端 IP 地址筛选**：留空（或填入后端服务器固定公网 IP）。
+5. 确认无误后，点击右下角 **【创建 API 令牌 (Create API Token)】**。
+
+### 5. 核心凭据提取与环境变量对照表
+
+令牌创建成功后，页面会**仅此一次**展示敏感机密信息（请立即复制并妥善保管，离开该页面后 Secret Key 将无法二次找回）：
+
+```
+========================= Cloudflare 页面回显凭据 =========================
+
+令牌值 (Token Value):
+cfat_DhpVngldubN2ik36XhDFKOcRItNJOrNFRhQLevZ**** (单击以复制)
+
+为 S3 客户端使用以下凭据:
+访问密钥 ID (Access Key ID):
+db92229e4b4f94fe301693e3b5b5**** (单击以复制)
+
+机密访问密钥 (Secret Access Key):
+7cabb6a5efed0ab8d773f9a33ae0b6f1a447411edba9ad1552dea4431b89**** (单击以复制)
+
+为 S3 客户端使用管辖权地特定的终结点:
+默认 (Default Endpoint):
+https://2b8b32244fb5f932eeaaa106ac264061.r2.cloudflarestorage.com
+========================================================================
+```
+
+将上述页面信息与我们后端项目中的环境变量进行 1:1 精确映射：
+
+| Cloudflare 控制台展示字段 | 环境变量 Key | 示例值 | 说明与作用 |
+| :--- | :--- | :--- | :--- |
+| **账户 ID (Account ID)** | `R2_ACCOUNT_ID` | `2b8b32244fb5f932eeaaa106ac264061` | Endpoint URL 中的 32 位十六进制账户哈希 |
+| **默认终结点 (Endpoint URL)** | `R2_ENDPOINT_URL` | `https://2b8b32244fb5f932eeaaa106ac264061.r2.cloudflarestorage.com` | `boto3` S3 客户端通信的专用 REST 接入网关 |
+| **存储桶名称 (Bucket Name)** | `R2_BUCKET_NAME` | `memo` | 步骤 2 中创建的对象存储桶名称 |
+| **位置提示 (Region)** | `R2_REGION` | `auto` | 固定填写 `auto`，由 Cloudflare 自适应寻路 |
+| **自定义公开访问域名** | `R2_PUBLIC_BASE_URL` | `https://media.tg-cc755.cn` | 小程序客户端最终加载图片的 CDN 根域名 |
+| **访问密钥 ID (Access Key ID)** | `R2_ACCESS_KEY_ID` | `db92229e4b4f94fe301693e3b5b5****` | S3 协议握手公钥身份识别 |
+| **机密访问密钥 (Secret Access Key)** | `R2_SECRET_ACCESS_KEY` | `7cabb6a5efed0ab8d773f9a33ae0b6f1a447411edba9ad1552dea4431b89****` | S3 协议 HMAC-SHA256 签名鉴权私钥 |
+
+### 6. 服务器环境部署（`backend/.env`）
+
+在服务器项目根目录下编辑环境配置文件（严禁将包含真实机密密钥的 `.env` 提交到公开 Git 仓库）：
+
+```ini
+# backend/.env
+# ===================================================================
+# Cloudflare R2 对象存储与全球 CDN 生产配置
+# ===================================================================
+R2_ACCOUNT_ID=2b8b32244fb5f932eeaaa106ac264061
+R2_ENDPOINT_URL=https://2b8b32244fb5f932eeaaa106ac264061.r2.cloudflarestorage.com
+R2_BUCKET_NAME=memo
+R2_REGION=auto
+R2_PUBLIC_BASE_URL=https://media.tg-cc755.cn
+R2_ACCESS_KEY_ID=db92229e4b4f94fe301693e3b5b5****
+R2_SECRET_ACCESS_KEY=7cabb6a5efed0ab8d773f9a33ae0b6f1a447411edba9ad1552dea4431b89****
+```
+
+> [!TIP] 安全加固提醒
+> - `R2_SECRET_ACCESS_KEY` 属于最高数据安全级别的私密凭据，泄露后任何人均可擦除存储桶内的数据；
+> - 在写成教程或分享配置时，务必将密钥后半段替换为 `****` 脱敏掩码；
+> - 服务器上的 `.env` 文件权限推荐设置为 `chmod 600 backend/.env`，仅限运行 uvicorn 的服务用户有读取权限。
+
+---
+
+## 四、后端异步双写与产物白名单架构实现
 
 在 `backend/app/r2_storage.py` 中，设计了一套基于 **产物白名单（Durable Artifacts Whitelist）** 的异步归档引擎。
 
@@ -147,7 +256,7 @@ def cleanup_local_intermediates(task_dir: Path) -> None:
 
 ---
 
-## 四、全双工 URL 自适应与存量数据迁移实战
+## 五、全双工 URL 自适应与存量数据迁移实战
 
 ### 1. 前后端全双工 URL 兼容层
 
@@ -189,7 +298,7 @@ python -m scripts.migrate_outputs_to_r2 --concurrency 6
 
 ---
 
-## 五、生产环境效益对比
+## 六、生产环境效益对比
 
 | 指标 | 改造前（单机本地存储） | 改造后（Cloudflare R2 + CDN） |
 | :--- | :--- | :--- |
