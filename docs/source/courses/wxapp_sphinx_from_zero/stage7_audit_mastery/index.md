@@ -15,4 +15,5 @@
 04_audit_case_study_real_log
 05_official_rejection_rules_deep_dive
 06_universal_miniapp_first_audit_guide_and_appeals
+07_2026_audit_crackdown_content_sec_and_de_socialization
 ```

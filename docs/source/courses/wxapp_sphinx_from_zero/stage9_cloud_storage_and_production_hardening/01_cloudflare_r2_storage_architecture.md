@@ -201,7 +201,11 @@ R2_FINAL_ARTIFACT_NAMES = frozenset({
     "matting_result.png",    # 抠图结果
     "stitched.jpg",          # 长图拼接结果
 })
-R2_SOURCE_ARTIFACT_NAMES = frozenset({"input_sprite.png"})  # 原始九宫格母图
+# 原始关键素材：原始九宫格母图 + 用户原始上传照片（用于二次重混与相册高清留存）
+R2_SOURCE_ARTIFACT_NAMES = frozenset({
+    "input_sprite.png",
+    "original_image.png"
+})
 ```
 
 ### 2. S3 兼容客户端与不可变缓存配置

@@ -20,4 +20,5 @@
 07_wechat_share_viral_loop_and_emoticon_trap
 08_wechat_xpay_automation_pitfalls_and_cheat_sheet
 09_production_callback_timezone_and_release_retro
+10_chat_materials_supported_and_time_estimation_algorithms
 ```
