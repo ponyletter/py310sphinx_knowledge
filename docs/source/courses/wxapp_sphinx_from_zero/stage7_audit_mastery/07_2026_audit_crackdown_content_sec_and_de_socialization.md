@@ -252,6 +252,63 @@ flowchart TD
 3. **文本失焦预检**：
    在 `textarea` 与 `input` 上绑定 `bindblur="onBlurCaption"`，当用户离开输入焦点时静默校验，违规时自动重置为空；在主生成按钮点击时执行全文本遍历二次复验。
 
+### 2.7 视频转动图场景破局：微信无同步视频检测时的“抽帧检测 + 封面预检”
+
+#### 1. 微信内容安全没有“视频同步接口”？
+很多团队在开发“短视频转 GIF”功能时发现：
+* 微信小程序官方仅提供了同步的文本接口 `security.msgSecCheck` 与图片接口 `security.imgSecCheck`；
+* 多媒体异步检测 `security.mediaCheckAsync` 仅支持音频（`media_type: 1`）和异步图片（`media_type: 2`），且异步结果需要数分钟通过 Webhook 异步推回，根本无法直接用于**用户在线实时转动图的同步请求交互**。
+
+#### 2. 破局工程方案：三层全时段视频防护
+
+由于 GIF 动图本质上是**无声的视觉序列帧**，视频转 GIF 的安全本质就是其**画面帧的安全**。我们设计了业界成熟的“三层抽帧校验模型”：
+
+```mermaid
+flowchart TD
+    SelectVideo["用户选择本地视频 (wx.chooseMedia)"] --> CoverCheck["第一层: 微信原生封面预检<br/>(直接校验 file.thumbTempFilePath)"]
+    CoverCheck -- "封面违规" --> RejectVideo["立即弹窗标准文案并清空视频选择"]
+    CoverCheck -- "封面合规" --> UploadVideo["上传视频至后端 POST /api/convert/video-to-gif"]
+    
+    UploadVideo --> ExtractFrames["第二层: OpenCV / FFmpeg 关键帧均匀抽样<br/>(截取时间段内提取 3~5 张关键帧)"]
+    ExtractFrames --> CheckFrames["送检 WeChatService.check_image_security"]
+    CheckFrames -- "任一关键帧违规" --> BlockVideo["立即中止并删除临时文件<br/>返回 400 违规标准文案"]
+    CheckFrames -- "全部关键帧合规" --> RenderGif["执行 FFmpeg palettegen 高品质调色转动图"]
+
+    RenderGif --> FinalCheck["第三层: 最终成品 GIF 二次强校验<br/>(check_image_security output_gif_bytes)"]
+    FinalCheck -- "合规" --> DeliverGif["200 OK 交付最终动图 URL"]
+```
+
+#### 3. 核心抽帧实现代码范式 (Python OpenCV)
+在 FastAPI 后端利用 OpenCV 无损提取截取时间段内的均匀采样帧，避免耗费 GPU / CPU 生成完成后才发现违规：
+
+```python
+def extract_video_sample_frames(video_path: Path, start_time: float, duration: float, sample_count: int = 3) -> list[bytes]:
+    """从截取时间段中均匀提取关键帧，并编码为 JPEG 字节流供微信安全检测"""
+    frames = []
+    cap = cv2.VideoCapture(str(video_path))
+    if not cap.isOpened():
+        return frames
+    try:
+        fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
+        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
+        start_frame = int(start_time * fps)
+        end_frame = min(total_frames, int((start_time + duration) * fps))
+        
+        step = max(1, (end_frame - start_frame) // (sample_count - 1)) if sample_count > 1 else 1
+        indices = [min(end_frame - 1, start_frame + i * step) for i in range(sample_count)]
+
+        for idx in indices:
+            cap.set(cv2.CAP_PROP_POS_FRAMES, max(0, idx))
+            ret, frame = cap.read()
+            if ret and frame is not None:
+                success, buf = cv2.imencode(".jpg", frame, [int(cv2.IMWRITE_JPEG_QUALITY), 80])
+                if success:
+                    frames.append(buf.tobytes())
+    finally:
+        cap.release()
+    return frames
+```
+
 
 ## 3. 个人主体类目破局：【工具 - 图片处理】
 
