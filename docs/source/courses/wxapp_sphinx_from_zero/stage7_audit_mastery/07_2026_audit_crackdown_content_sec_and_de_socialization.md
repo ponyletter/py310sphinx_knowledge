@@ -208,6 +208,50 @@ flowchart LR
 2. **端到端测试闭环**：通过脚本将测试卡直接 POST 到 `/api/convert/compress-image` 等次级接口，断言 HTTP 响应为 400，返回 JSON 必须严格为 `{"detail": "所发布内容包含违规信息，请修改后重试"}`；
 3. **真实群聊与设备互验**：将生成的测试卡分发至测试协作群（如内网团队群 `https://chat.tg-cc755.cn/group-chat`），在真机小程序与微信开发者工具中实际选择上传，确保前端模态弹窗 100% 弹出且文案规范统一。
 
+### 2.6 选图即检与失焦即检：从“提交滞后报错”到“前置即时防御”
+
+#### 1. 为什么“点击按钮才提示违规”会导致审核驳回？
+传统 Web 与小程序开发往往采用**“表单滞后提交模式”**：
+* 用户调用 `wx.chooseMedia` 选图后，图片仅存储在手机本地临时路径（`wxfile://...`）；
+* 用户输入台词后，文案仅暂存在 Page 的 `data` 状态中；
+* 只有当用户点击底部的“开始制作”或“提交”按钮时，客户端才把图片和表单打包 POST 到后端由安全 API 拦截。
+
+**这种设计在审核员视角下的致命问题**：
+审核员在真机测试时，先从相册选择一张包含违规内容的测试图。此时页面若**毫无反应地将违规图片渲染成缩略图呈现在画板上**，审核员很可能会直接判定为*“未在上传发布的第一时间生效，存在传播与呈现隐患”*，甚至根本不去点击下方的生成按钮就直接打回！
+
+#### 2. “双重防线”即时闭环体系架构
+
+```mermaid
+flowchart TD
+    subgraph Client["小程序前端即时前置校验 (第一道防线)"]
+        Upload["用户相册选图 / 拍照"] --> PreCheckImg["选图即检: POST /api/check/image<br/>(wx.showLoading 静默预检)"]
+        InputText["用户输入台词 / 细节"] --> PreCheckTxt["失焦即检: POST /api/check/text<br/>(bindblur 离开焦点触发)"]
+        
+        PreCheckImg -- "违规: 400 Bad Request" --> RejectImg["立即弹窗标准文案<br/>强制清空本地路径，禁止预览呈现"]
+        PreCheckImg -- "合规: 200 OK" --> ShowImg["显示缩略图，允许进入下一步"]
+
+        PreCheckTxt -- "违规: 400 Bad Request" --> RejectTxt["立即弹窗标准文案<br/>强制清空输入框"]
+        PreCheckTxt -- "合规: 200 OK" --> PassTxt["保留文本，平滑无感"]
+    end
+
+    subgraph Backend["服务端提交强校验兜底 (第二道防线)"]
+        ClickSubmit["用户点击【开始制作】主按钮"] --> DoubleCheck["后端任务入口二次强校验<br/>(WeChatService.check_image_security<br/>+ check_text_security)"]
+        DoubleCheck -- "非法绕过或新增内容" --> FinalBlock["HTTP 400 阻断任务入库"]
+        DoubleCheck -- "全部合规" --> Pipeline["安全进入 GPU 渲染与图像合成"]
+    end
+
+    ShowImg --> ClickSubmit
+    PassTxt --> ClickSubmit
+```
+
+#### 3. 前后端实现关键要点
+1. **轻量预检端点 (`/api/check/image` & `/api/check/text`)**：
+   专职负责将图片流与文本送交微信 `msgSecCheck` 与 `imgSecCheck`，不执行任何复杂的渲染或落库操作，网络开销极小、毫秒级返回；
+2. **选图无缝拦截**：
+   在 `chooseImage`、`chooseCompressImage`、`chooseMultiImages`、`chooseStitchImages`、`chooseMattingImage` 的 `success` 回调中，必须 `await app.checkImageSecurity(tempFilePath)`。若返回不合规，**立即 `setData({ refImagePath: '' })`**，绝不在界面上残留违规图形；
+3. **文本失焦预检**：
+   在 `textarea` 与 `input` 上绑定 `bindblur="onBlurCaption"`，当用户离开输入焦点时静默校验，违规时自动重置为空；在主生成按钮点击时执行全文本遍历二次复验。
+
 
 ## 3. 个人主体类目破局：【工具 - 图片处理】
 
