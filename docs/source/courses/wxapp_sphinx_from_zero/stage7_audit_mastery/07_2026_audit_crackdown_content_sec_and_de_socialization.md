@@ -145,14 +145,69 @@ def raise_if_incompliant(is_valid: bool):
 handleSecurityError(errMsg) {
   wx.showModal({
     title: '内容合规提示',
-    content: errMsg || '所发布内容含违规信息，请修改后重试',
+    content: errMsg || '所发布内容包含违规信息，请修改后重试',
     showCancel: false,
     confirmText: '我知道了'
   });
 }
 ```
 
----
+### 2.4 审核盲区剖析：切勿遗漏“次级工具链” (Secondary Tooling)
+
+许多工程团队在提审时往往只给**主生成流程**（如首页“一键生成”按钮）接入了内容安全校验，结果依然收到审核员驳回：
+> *“你好，你的小程序【图片】功能在进行内容安全验证时，存在信息安全风险，请尽快完善内容机制：1、确保已接入内容安全API并要求所调用API可在小程序内任意发布的场景生效；2、小程序内检测结果安全说明仅需提示用户所发布内容含违规信息即可；”*
+
+**为什么主流程接入了依然被拒？**  
+因为微信安全合规爬虫与人工审核员会深入测试小程序的每一个辅助工具或百宝箱页面。在我们的表情包小程序中，次级工具包括：
+* 🎞️ **多图合成动图** (`POST /api/convert/images-to-gif`)
+* ✂️ **动图改字二创** (`POST /api/convert/edit-caption`)
+* 📜 **长图拼接** (`POST /api/convert/stitch-images`)
+* 🗜️ **图片/动图压缩瘦身** (`POST /api/convert/compress-image`)
+* 🪄 **智能抠图与换底** (`POST /api/convert/matting`)
+
+这些次级接口往往直接接收 `UploadFile` 并由 OpenCV、PIL 处理后返回给客户端，若缺少前置安全过滤，就会被审核团队认定为**“存在信息安全风险，未在任意发布场景生效”**。
+
+#### 全接口强校验代码范式 (FastAPI)
+在所有接收用户图片或文本的接口首行，强制执行前置校验：
+
+```python
+@router.post("/compress-image")
+async def compress_image(
+    file: UploadFile = File(...),
+    target_kb: int = Form(default=500),
+    openid: CurrentOpenid = None,
+):
+    content = await read_limited_upload(file, max_bytes=10 * 1024 * 1024)
+    
+    # 核心：执行微信内容安全强校验 (图片字节流)
+    is_safe, tip = await WeChatService.check_image_security(content)
+    if not is_safe:
+        raise HTTPException(
+            status_code=400, 
+            detail=tip or "所发布内容包含违规信息，请修改后重试"
+        )
+
+    # 校验通过后再进入后续压缩与图像处理逻辑...
+```
+
+### 2.5 违规测试卡套件设计与自动化验证
+
+为了在不产生真实违法违规传播的前提下，由工程团队与审核前自测拦截效果，我们设计了**高对比度合规测试卡**机制：
+
+```mermaid
+flowchart LR
+    Dev["开发者 / 审核员上传测试卡"] --> Detect{"识别测试特征码 / 文本"}
+    Detect -- "命中微信内容安全违规特征" --> Block["拦截: 400 Bad Request"]
+    Block --> Toast["统一文案: 所发布内容包含违规信息，请修改后重试"]
+    Detect -- "正常合规图片" --> Pass["200 OK 快速进入后续图像处理"]
+```
+
+#### 测试卡生成方案
+使用 Python Pillow 生成带有明显警示条与典型测试敏感词的图片卡片（如涉诈高仿办证、虚假金融、违禁品提示卡），在开发与测试环境中验证：
+1. **测试卡标识注入**：在测试卡 EXIF 或图片元数据与图像正中绘制测试字样；
+2. **端到端测试闭环**：通过脚本将测试卡直接 POST 到 `/api/convert/compress-image` 等次级接口，断言 HTTP 响应为 400，返回 JSON 必须严格为 `{"detail": "所发布内容包含违规信息，请修改后重试"}`；
+3. **真实群聊与设备互验**：将生成的测试卡分发至测试协作群（如内网团队群 `https://chat.tg-cc755.cn/group-chat`），在真机小程序与微信开发者工具中实际选择上传，确保前端模态弹窗 100% 弹出且文案规范统一。
+
 
 ## 3. 个人主体类目破局：【工具 - 图片处理】
 
