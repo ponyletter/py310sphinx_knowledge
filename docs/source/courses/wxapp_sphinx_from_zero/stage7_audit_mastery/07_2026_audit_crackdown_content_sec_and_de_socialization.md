@@ -413,3 +413,53 @@ classDiagram
 - [x] **去社交化清理**：已彻底关闭公开内容广场、点赞流与公共排行榜，合集仅限个人 OpenID 私有访问；
 - [x] **前端代码 AI 脱敏**：全文搜索 `\b[Aa][Ii]\b` 与 `人工智能`，确保 WXML/JS/分享卡片中无敏感字眼；
 - [x] **测试暗门通道就绪**：提审备注中已提供专供审核员体验的测试账号与完整功能指引。
+
+---
+
+## 7. 审核通过后的“全量 AI 模式”动态切回与上线发布
+
+2026 年 9 月 17 日，随着微信官方审核人员完成全量内容安全回归检测，小程序顺利**一次性审核通过（Approved）**！
+
+审核通过后，运营与技术团队需在公众平台后台点击【发布上线】前，完成核心业务流水线的“解封与切回”：
+
+```mermaid
+flowchart LR
+    Passed["微信审核通过 (Approved)"] --> ToggleOff["执行开关切回: toggle_audit.py off<br/>或 POST /api/admin/audit-mode"]
+    ToggleOff --> DBUpdate["修改 SQLite app_settings.audit_mode = false<br/>(内存毫秒级感知，无需重启 Uvicorn)"]
+    DBUpdate --> RestoreTemplates["模板列表动态恢复<br/>(飞吻/点赞/热舞等全量 AI 动图模板)"]
+    DBUpdate --> RestoreEngine["流水线恢复: GPU 扩散模型 + 16帧物理网格切割"]
+    DBUpdate --> RestoreEstimate["预估耗时恢复: 数据库最近10次真实平均值 (约90s)"]
+    RestoreEstimate --> Release["微信公众平台后台点击【全量发布】上线！"]
+```
+
+### 7.1 一键切换命令与自动化生效验证
+
+在生产服务器（`81.69.190.161`）上直接运行切回脚本：
+
+```bash
+# 一键关闭审核降级模式，恢复全量 16 帧 AI 动图生成
+cd /root/02project/weixinpy310mememiniapp/backend
+/root/miniconda3/envs/weixinpy310mememiniapp/bin/python toggle_audit.py off
+```
+
+执行后即刻输出：
+```text
+>>> 已切换为：【 全量 AI 模式 (FULL AI MODE) 】<<<
+============================================================
+当前小程序运行模式: 【 全量 AI 模式 (FULL AI MODE) 】
+数据库 app_settings.audit_mode: false
+出图流水线: GPU 扩散大模型 (16帧完整动图生成)
+当前模板示例 (第1个): 飞吻示爱 (连贯循环)
+============================================================
+```
+
+### 7.2 生产环境接口在线自测核验
+
+通过公开 HTTPS 域名验证各核心端点，确保全量就绪：
+1. **模式状态**：`GET https://meme.tg-cc755.cn/api/admin/audit-mode`
+   返回：`{"code": 0, "audit_mode": false, "message": "当前处于全量 AI 动图生成模式"}`
+2. **模板丰富度**：`GET https://meme.tg-cc755.cn/api/templates`
+   返回：完整 AI 动作模板列表（飞吻示爱、疯狂点赞、魔性摇摆、崩溃大哭等）；
+3. **动态时间预估**：`GET https://meme.tg-cc755.cn/api/meme/estimate`
+   返回：`{"code": 0, "data": {"estimated_seconds": 91.7}}`（真实根据历史耗时动态计算，给用户最合理的心理预期）。
+
