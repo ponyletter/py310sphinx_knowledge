@@ -65,4 +65,5 @@ monolith-vs-microservices-full-20260826-041049/index
 vite-vs-webpack-migration-preview-20260826-120851/index
 workflow-agent-programming-full-20260826-183921/index
 website-deployment-platforms-v1/index
+git-svn-code-hosting-cnb-v1/index
 ```
