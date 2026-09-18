@@ -14,41 +14,41 @@ CLIProxyAPI 运行在反代 VPS 的内网环回地址（`127.0.0.1`），位于 
 graph TD
     subgraph Internet [公网接入]
         Client1[微信小程序后端]
-        Client2[本地开发 IDE / AGY]
+        Client2["本地开发 IDE / AGY"]
     end
 
     subgraph HostGateway [宿主机 Nginx 网关]
-        Nginx[Nginx :443 TLS 终止]
+        Nginx["Nginx :443 TLS 终止"]
     end
 
     subgraph DockerBridgeNet [Docker 内部专属网络 cliproxyapi_net]
         direction TB
         subgraph CPAContainer [容器: cli-proxy-api]
-            Port8317[API 服务端口 :8317]
-            Port8085[管理控制台端口 :8085]
-            Scheduler[多账号调度网关 Conductor Engine]
-            Watcher[文件变动监听器 events.go]
-            Refresher[Token 自动刷新调度器 auto_refresh_loop.go]
+            Port8317["API 服务端口 :8317"]
+            Port8085["管理控制台端口 :8085"]
+            Scheduler["多账号调度网关 Conductor Engine"]
+            Watcher["文件变动监听器 events.go"]
+            Refresher["Token 自动刷新调度器 auto_refresh_loop.go"]
         end
 
         subgraph WarpContainer [容器: warp-socks 出站代理网关]
-            WarpDaemon[Cloudflare WARP 核心进程]
-            SocksPort[SOCKS5 服务端口 :1080]
+            WarpDaemon["Cloudflare WARP 核心进程"]
+            SocksPort["SOCKS5 服务端口 :1080"]
         end
     end
 
     subgraph DiskVolume [宿主机挂载卷 ./auths]
-        Auth1[Plus 账号 A: codex-accountA.json]
-        Auth2[Plus 账号 B: codex-accountB.json]
-        Auth3[AGY 账号 C: antigravity-accountC.json]
-        Auth4[xAI 账号 D: xai-accountD.json]
+        Auth1["Plus 账号 A: codex-accountA.json"]
+        Auth2["Plus 账号 B: codex-accountB.json"]
+        Auth3["AGY 账号 C: antigravity-accountC.json"]
+        Auth4["xAI 账号 D: xai-accountD.json"]
     end
 
     subgraph UpstreamAI [海外官方 AI 接口]
-        OAI[OpenAI / Codex Backend]
-        Anth[Anthropic Backend]
-        AGYBack[Google Antigravity Backend]
-        XAIBack[xAI Grok Backend]
+        OAI["OpenAI / Codex Backend"]
+        Anth["Anthropic Backend"]
+        AGYBack["Google Antigravity Backend"]
+        XAIBack["xAI Grok Backend"]
     end
 
     Client1 -->|HTTPS| Nginx

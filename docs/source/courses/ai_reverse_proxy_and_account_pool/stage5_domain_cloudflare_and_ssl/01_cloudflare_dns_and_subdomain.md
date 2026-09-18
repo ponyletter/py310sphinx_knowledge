@@ -36,8 +36,8 @@
 
 ```{mermaid}
 flowchart LR
-    Domain["二级域名\nproxy.example.com"] --> CF["Cloudflare DNS 权威解析"]
-    CF --> VPS["海外反代 VPS 真实 IP\n(如 45.x.x.x)"]
+    Domain["二级域名<br/>proxy.example.com"] --> CF["Cloudflare DNS 权威解析"]
+    CF --> VPS["海外反代 VPS 真实 IP<br/>(如 45.x.x.x)"]
 ```
 
 1. 进入 Cloudflare 对应域名的【DNS】->【Records】；

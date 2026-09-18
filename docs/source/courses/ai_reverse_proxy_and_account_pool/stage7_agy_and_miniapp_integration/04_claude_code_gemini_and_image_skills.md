@@ -220,7 +220,7 @@ CLAUDE_CODE_EFFORT_LEVEL=max \
 claude --teammate-mode in-process --dangerously-skip-permissions"
 ```
 
-#### Windows PowerShell 配置（`$PROFILE`）
+#### Windows PowerShell 配置（`\$PROFILE`）
 ```powershell
 function geminicc {
     $env:CLAUDE_CODE_NO_FLICKER = "1"
@@ -260,12 +260,12 @@ $env:HTTPS_PROXY = "http://127.0.0.1:7890"
 set HTTP_PROXY=http://127.0.0.1:7890
 set HTTPS_PROXY=http://127.0.0.1:7890
 ```
-或直接将其写入 PowerShell 启动配置脚本 `$PROFILE` 中。
+或直接将其写入 PowerShell 启动配置脚本 `\$PROFILE` 中。
 
 #### ② 终端乱码与 UTF-8 编码修正
 Windows 默认控制台代码页可能是 GBK（CP936），当 Claude Code 或 Python 脚本在终端打印抓取到的多语言网页或中文 Markdown 时，极易产生乱码甚至导致 JSON 解析崩溃。
 
-**解决办法**：在 PowerShell 的 `$PROFILE` 开头追加：
+**解决办法**：在 PowerShell 的 `\$PROFILE` 开头追加：
 ```powershell
 [Console]::InputEncoding = [System.Text.Encoding]::UTF8
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8

@@ -25,7 +25,7 @@ my_knowledge_project/
 
 - **项目名称**：例如 `数创库知识库`；
 - **目录**：必须选中包含 `app.json` 的 **`miniapp`** 目录；若选到整个仓库根目录，工具会提示“未找到 app.json”而无法识别；
-- **AppID**：填入上一阶段在微信公众平台获取的真实 AppID（如 `wxef6c0e98e6******`），也可暂时选用“测试号”，但测试号无法调试虚拟支付等受保护接口。
+- **AppID**：填入上一阶段在微信公众平台获取的真实 AppID（如 `wxef6c0e98e6xxxxxx`），也可暂时选用“测试号”，但测试号无法调试虚拟支付等受保护接口。
 
 ---
 
@@ -35,11 +35,11 @@ my_knowledge_project/
 
 ```{mermaid}
 graph TD
-    Settings[开发者工具 - 详情 - 本地设置]
+    Settings["开发者工具 - 详情 - 本地设置"]
     Settings --> Opt1[不校验合法域名、web-view、TLS版本以及HTTPS证书]
-    Settings --> Opt2[将 JS 代码编译成 ES5]
+    Settings --> Opt2["将 JS 代码编译成 ES5"]
     Settings --> Opt3[增强编译]
-    Settings --> Opt4[上传代码时自动压缩样式/脚本]
+    Settings --> Opt4["上传代码时自动压缩样式/脚本"]
 ```
 
 ### 3.1 核心配置项解析与生产避坑对照表
@@ -62,7 +62,7 @@ graph TD
   "miniprogramRoot": "./",
   "projectname": "数创库知识库",
   "description": "项目配置文件",
-  "appid": "wxef6c0e98e6******",
+  "appid": "wxef6c0e98e6xxxxxx",
   "setting": {
     "urlCheck": false,
     "es6": true,

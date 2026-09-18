@@ -15,13 +15,13 @@ Cockpit Tools 是一款基于 **Tauri (Rust + React + TypeScript + Vite)** 构�
 
 ```{mermaid}
 flowchart TD
-    A[Cockpit Tools Desktop UI<br/>React + Vite] --> B(Tauri Core<br/>Rust)
+    A["Cockpit Tools Desktop UI<br/>React + Vite"] --> B["Tauri Core<br/>Rust"]
     B --> C{支持的平台与客户端}
     C --> D[Codex]
-    C --> E[Antigravity IDE]
-    C --> F[Cursor / Windsurf]
-    C --> G[Grok CLI / CodeBuddy]
-    B --> H[CLIProxyAPI<br/>网关层]
+    C --> E["Antigravity IDE"]
+    C --> F["Cursor / Windsurf"]
+    C --> G["Grok CLI / CodeBuddy"]
+    B --> H["CLIProxyAPI<br/>网关层"]
     H --> I[账号池额度聚合]
 ```
 
@@ -66,7 +66,7 @@ npm run tauri build
 2. **导入账号**：点击蓝色的 `+` 按钮，选择 `Import`，支持批量选择 JSON 文件。
 3. **格式验证**：确保你的 JSON 格式符合 Cockpit 的原生格式 (`cockpit_tools` format)。
    * 如果你持有的 JSON 是 `CPA` 或 `sub2api` 格式，**必须先使用工具**（如 `GPTSession2CPAandSub2API`）进行格式转换（详见下一篇 7.6 节）。
-4. **完整导入工作流**：卡密网站激活 $\rightarrow$ 下载 JSON $\rightarrow$ 格式转换 (如有需要) $\rightarrow$ 导入 Cockpit。
+4. **完整导入工作流**：卡密网站激活 \$\rightarrow\$ 下载 JSON \$\rightarrow\$ 格式转换 (如有需要) \$\rightarrow\$ 导入 Cockpit。
 5. **启动客户端**：
    * 在启动前，请前往 Settings (设置)，找到 Codex 启动路径配置，选择手动指定或使用 `Default Auto-Select`（默认自动匹配）。
    * 点击每个账号右侧的 Launch 按钮即可启动对应的 Codex 客户端。
@@ -91,11 +91,11 @@ npm run tauri build
 
 ```{mermaid}
 flowchart LR
-    Client[Codex 客户端] -->|发送 API 请求| Gateway[Cockpit API 服务]
+    Client["Codex 客户端"] -->|发送 API 请求| Gateway["Cockpit API 服务"]
     Gateway --> Pool[多账号聚合池]
-    Pool -->|账号 1| Account1[API 额度]
-    Pool -->|账号 2| Account2[API 额度]
-    Pool -->|账号 N| AccountN[API 额度]
+    Pool -->|账号 1| Account1["API 额度"]
+    Pool -->|账号 2| Account2["API 额度"]
+    Pool -->|账号 N| AccountN["API 额度"]
     Gateway -.->|额度耗尽自动切换| Pool
 ```
 

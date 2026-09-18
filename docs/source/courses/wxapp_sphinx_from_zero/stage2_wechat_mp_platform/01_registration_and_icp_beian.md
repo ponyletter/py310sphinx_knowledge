@@ -24,10 +24,10 @@
 
 ```{mermaid}
 graph TD
-    Category[选择服务类目] --> Safe[安全免审类目: 工具/教育/IT科技]
-    Category --> Danger[高危前置审批类目: 知识付费/出版物/社交/论坛]
-    Safe --> Pass[无需额外证件 极速过审]
-    Danger --> Reject[强制要求 ICP证/出版物许可证/EDI证]
+    Category[选择服务类目] --> Safe["安全免审类目: 工具/教育/IT科技"]
+    Category --> Danger["高危前置审批类目: 知识付费/出版物/社交/论坛"]
+    Safe --> Pass["无需额外证件 极速过审"]
+    Danger --> Reject["强制要求 ICP证/出版物许可证/EDI证"]
 ```
 
 ### 2.1 推荐选用的安全类目（即选即用）

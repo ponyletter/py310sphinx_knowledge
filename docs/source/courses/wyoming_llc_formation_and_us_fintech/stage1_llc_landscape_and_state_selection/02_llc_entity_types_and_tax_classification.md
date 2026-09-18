@@ -55,14 +55,14 @@ LLC 的灵活性在于它可以通过提交特定表格来改变其税务分类�
 
 ```{mermaid}
 flowchart TD
-    Start(成立一家 LLC) --> Q1{有多少个成员?}
+    Start["成立一家 LLC"] --> Q1{有多少个成员?}
     Q1 -->|只有一个 (Single-Member)| SME(默认分类)
     Q1 -->|两个及以上 (Multi-Member)| MME(默认分类)
     
-    SME --> DE[视为被忽略实体 Disregarded Entity\n税务穿透给个人]
-    MME --> P[视为合伙企业 Partnership\n税务穿透给各合伙人]
+    SME --> DE["视为被忽略实体 Disregarded Entity<br/>税务穿透给个人"]
+    MME --> P["视为合伙企业 Partnership<br/>税务穿透给各合伙人"]
     
-    DE -.->|如果提交 Form 8832| CCORP[按 C-Corp 纳税\n引发双重征税 ❌]
+    DE -.->|如果提交 Form 8832| CCORP["按 C-Corp 纳税<br/>引发双重征税 ❌"]
     P -.->|如果提交 Form 8832| CCORP
     
     classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;

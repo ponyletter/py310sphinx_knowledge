@@ -32,9 +32,9 @@ graph TD
 ```{mermaid}
 flowchart TD
     Req["下游应用请求 (如微信小程序)"] --> Router{"路由与分流策略"}
-    Router -->|"付费VIP请求 / 表情包合成"| Tier1["第一梯队：主力 Plus 独享池\n(高速响应、高并发、gpt-5.5/gpt-image-2)"]
-    Router -->|"普通用户日常对话 / 试探请求"| Tier2["第二梯队：共享与平价号池\n(成本控制、承接中低优先级流量)"]
-    Tier1 -->|"发生 429 速率超限或熔断"| Tier3["第三梯队：冷备灾备应急池\n(自动热激活、降级容灾)"]
+    Router -->|"付费VIP请求 / 表情包合成"| Tier1["第一梯队：主力 Plus 独享池<br/>(高速响应、高并发、gpt-5.5/gpt-image-2)"]
+    Router -->|"普通用户日常对话 / 试探请求"| Tier2["第二梯队：共享与平价号池<br/>(成本控制、承接中低优先级流量)"]
+    Tier1 -->|"发生 429 速率超限或熔断"| Tier3["第三梯队：冷备灾备应急池<br/>(自动热激活、降级容灾)"]
 ```
 
 ### 1. 第一梯队：主力高可用 Plus 池
@@ -77,6 +77,6 @@ flowchart TD
    ```
 3. 定期使用加密压缩归档备份到内网私有存储：
    ```bash
-   tar -czf - /root/cliproxyapi/auths | openssl enc -aes-256-cbc -salt -out auths_backup_$(date +%F).tar.gz.enc
+   tar -czf - /root/cliproxyapi/auths | openssl enc -aes-256-cbc -salt -out auths_backup_\$(date +%F).tar.gz.enc
    ```
 ````

@@ -16,19 +16,19 @@
 ```{mermaid}
 flowchart TD
     subgraph Client [客户端]
-        C[微信小程序 / Web / AGY]
+        C["微信小程序 / Web / AGY"]
     end
 
     subgraph NginxGateway [Nginx 前端网关]
         direction TB
-        N1[TLS 1.3 握手终端]
+        N1["TLS 1.3 握手终端"]
         N2["proxy_buffering off (禁用缓冲，即发即收)"]
         N3["proxy_read_timeout 600s (防长推理 504 超时)"]
         N4["client_max_body_size 64M (放行 Base64 图像)"]
     end
 
     subgraph Upstream [上游 AI 服务]
-        CPA[CLIProxyAPI :8317]
+        CPA["CLIProxyAPI :8317"]
     end
 
     C -->|HTTPS 请求| N1

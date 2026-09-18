@@ -75,9 +75,9 @@ CLIProxyAPI 采用“基于文件描述符”的凭据解析架构。反代引�
 
 ```{mermaid}
 flowchart TD
-    Req[客户端请求] --> Jitter[1. 注入请求抖动 Jitter<br/>毫秒级随机延迟，打散机械规律]
-    Jitter --> HeaderRand[2. 请求头混淆 Header Randomization<br/>动态轮换 UA 与客户端指纹]
-    HeaderRand --> StickyIP[3. 出口 IP 粘性绑定 Sticky Session<br/>固定账号走固定代理，防止跨洲异地飘移]
+    Req[客户端请求] --> Jitter["1. 注入请求抖动 Jitter<br/>毫秒级随机延迟，打散机械规律"]
+    Jitter --> HeaderRand["2. 请求头混淆 Header Randomization<br/>动态轮换 UA 与客户端指纹"]
+    HeaderRand --> StickyIP["3. 出口 IP 粘性绑定 Sticky Session<br/>固定账号走固定代理，防止跨洲异地飘移"]
     StickyIP --> Upstream[上游官方接口]
 ```
 

@@ -10,9 +10,9 @@
 
 ```{mermaid}
 graph LR
-    V1[阶段 1: wx.getUserInfo<br>2021年前] -->|直接静默或弹窗全量读取微信资料<br>被官方全面废弃| V2[阶段 2: wx.getUserProfile<br>2021-2022年]
-    V2 -->|点击按钮唤起弹窗授权<br>后因被开发者滥用弹窗强制授权再次废弃| V3[阶段 3: 官方最新规范<br>2022年底至今]
-    V3 -->|头像选图组件 chooseAvatar<br>+ 昵称键盘组件 type=nickname| Standard[用户自主选择权<br>100% 合规与保护隐私]
+    V1["阶段 1: wx.getUserInfo<br>2021年前"] -->|直接静默或弹窗全量读取微信资料<br>被官方全面废弃| V2["阶段 2: wx.getUserProfile<br>2021-2022年"]
+    V2 -->|点击按钮唤起弹窗授权<br>后因被开发者滥用弹窗强制授权再次废弃| V3["阶段 3: 官方最新规范<br>2022年底至今"]
+    V3 -->|头像选图组件 chooseAvatar<br>+ 昵称键盘组件 type=nickname| Standard["用户自主选择权<br>100% 合规与保护隐私"]
 ```
 
 ### 1.1 为什么必须遵循最新规范？

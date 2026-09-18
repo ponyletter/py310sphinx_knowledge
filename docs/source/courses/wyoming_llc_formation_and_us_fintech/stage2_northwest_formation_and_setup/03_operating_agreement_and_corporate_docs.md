@@ -21,12 +21,12 @@
 
 ```{mermaid}
 flowchart TD
-    State[怀俄明州政府签发] --> AO[Articles of Organization\n(组织条款 - 公司出生证明)]
+    State[怀俄明州政府签发] --> AO["Articles of Organization<br/>(组织条款 - 公司出生证明)"]
     
-    Internal[公司内部生成文件] --> OA[Operating Agreement\n(运营协议 - 规则与所有权)]
-    Internal --> IR[Initial Resolution\n(初始决议 - 授权与开户权)]
+    Internal[公司内部生成文件] --> OA["Operating Agreement<br/>(运营协议 - 规则与所有权)"]
+    Internal --> IR["Initial Resolution<br/>(初始决议 - 授权与开户权)"]
     
-    AO --> Bank[银行开户 & Stripe 申请]
+    AO --> Bank["银行开户 & Stripe 申请"]
     OA --> Bank
     IR --> Bank
     

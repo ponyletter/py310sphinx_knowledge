@@ -11,13 +11,13 @@
 ```{mermaid}
 flowchart TD
     subgraph Clients ["终端与业务接入 (一笔带过)"]
-        Client1[移动端 / 微信小程序用户]
-        Client2[企业 Web SaaS 平台]
-        Client3[本地 AGY 编程开发机]
+        Client1["移动端 / 微信小程序用户"]
+        Client2["企业 Web SaaS 平台"]
+        Client3["本地 AGY 编程开发机"]
     end
 
     subgraph DomesticHub [国内生产服务器中枢]
-        BizServer[国内业务 API 服务]
+        BizServer["国内业务 API 服务"]
         LocalLB["本地负载均衡器 (Nginx / HAProxy)<br/>监听 127.0.0.1:8317<br/>健康检查 + 秒级故障转移"]
         Port1["本地映射端口 :18317<br/>(指向海外节点 A)"]
         Port2["本地映射端口 :28317<br/>(指向海外节点 B)"]
@@ -32,7 +32,7 @@ flowchart TD
     end
 
     subgraph Upstream [官方大模型集群]
-        OAI[OpenAI / Claude / Gemini]
+        OAI["OpenAI / Claude / Gemini"]
     end
 
     Client1 & Client2 & Client3 -->|常规业务交互| BizServer

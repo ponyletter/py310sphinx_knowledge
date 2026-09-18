@@ -218,24 +218,24 @@ GPTSession2CPAandSub2API 的一大优势在于强大的“杂食”输入处理�
 ````
 ```{mermaid}
 flowchart TD
-    A[用户输入: 文本粘贴 / 文件拖拽] --> B{解析为 JSON}
+    A["用户输入: 文本粘贴 / 文件拖拽"] --> B{解析为 JSON}
     B -- 失败 --> E[输出错误并跳过]
-    B -- 成功 --> C[调用 collectSessionLikeObjects 递归遍历]
+    B -- 成功 --> C["调用 collectSessionLikeObjects 递归遍历"]
     
     C --> D{节点是否包含 AccessToken ?}
     D -- 否 --> C
-    D -- 是 --> F[深度解析 JWT Payload]
+    D -- 是 --> F["深度解析 JWT Payload"]
     
-    F --> G[提取 exp, 账户ID, email]
+    F --> G["提取 exp, 账户ID, email"]
     G --> H{是否存在 ID Token?}
-    H -- 否 --> I[生成 Synthetic ID Token]
+    H -- 否 --> I["生成 Synthetic ID Token"]
     H -- 是 --> J[保留原始数据]
     
     I --> K[组装为标准化中间模型]
     J --> K
     
-    K --> L[根据用户选择，映射到 7 种目标格式之一]
-    L --> M[单文件复制 / 批量打包下载]
+    K --> L["根据用户选择，映射到 7 种目标格式之一"]
+    L --> M["单文件复制 / 批量打包下载"]
 ```
 ````
 

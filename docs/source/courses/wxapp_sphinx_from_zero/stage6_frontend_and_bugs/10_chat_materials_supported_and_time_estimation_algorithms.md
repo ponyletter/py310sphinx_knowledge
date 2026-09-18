@@ -12,10 +12,10 @@
 
 ### 1.1 业务场景与交互革命
 传统工具小程序的交互路径极其冗长：
-$$\text{微信好友发图} \longrightarrow \text{长按保存到手机相册} \longrightarrow \text{退出聊天} \longrightarrow \text{搜索打开小程序} \longrightarrow \text{点击上传并从相册勾选} \longrightarrow \text{制作}$$
+\$\$\text{微信好友发图} \longrightarrow \text{长按保存到手机相册} \longrightarrow \text{退出聊天} \longrightarrow \text{搜索打开小程序} \longrightarrow \text{点击上传并从相册勾选} \longrightarrow \text{制作}\$\$
 
 而微信官方提供的**聊天素材快捷打开能力**，将全流程压缩为极致的一键直达：
-$$\text{微信好友发图} \longrightarrow \text{长按图片} \longrightarrow \text{点击「使用小程序打开」} \longrightarrow \text{直接进入制作工作台并预置图像！}$$
+\$\$\text{微信好友发图} \longrightarrow \text{长按图片} \longrightarrow \text{点击「使用小程序打开」} \longrightarrow \text{直接进入制作工作台并预置图像！}\$\$
 
 ```mermaid
 sequenceDiagram
@@ -111,7 +111,7 @@ at validator (app.json:28)
 ### 2.1 痛点复盘：为什么之前总卡死在“预计共 90s”？
 
 在制作高质量 16 帧 GIF 动图或执行复杂 AI 抠图时，云端通常需要经历：
-$$\text{人像/宠物定位} \longrightarrow \text{深度分帧生成} \longrightarrow \text{Alpha 遮罩抠图} \longrightarrow \text{色彩空间量化 (Quantization)} \longrightarrow \text{GIF 打包封装}$$
+\$\$\text{人像/宠物定位} \longrightarrow \text{深度分帧生成} \longrightarrow \text{Alpha 遮罩抠图} \longrightarrow \text{色彩空间量化 (Quantization)} \longrightarrow \text{GIF 打包封装}\$\$
 
 在单个 GPU 节点上，该流程根据服务器瞬时负载，通常耗时在 **170 秒 ~ 260 秒** 之间。
 

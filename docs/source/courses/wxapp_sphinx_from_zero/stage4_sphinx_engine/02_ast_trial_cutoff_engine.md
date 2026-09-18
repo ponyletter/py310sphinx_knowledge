@@ -9,10 +9,10 @@
 ```{mermaid}
 graph TD
     UserReq[用户请求章节内容] --> Server{是否已订阅/开通VIP?}
-    Server -->|是| Full[返回 100% 完整文章 HTML 源码]
-    Server -->|否| Cutoff[调用 AST/DOM 截断引擎 仅提取前 15% 内容]
+    Server -->|是| Full["返回 100% 完整文章 HTML 源码"]
+    Server -->|否| Cutoff["调用 AST/DOM 截断引擎 仅提取前 15% 内容"]
     Cutoff --> Banner[拼接底部渐变虚化遮罩与订阅卡片]
-    Banner --> Response[返回残缺 HTML 数据流]
+    Banner --> Response["返回残缺 HTML 数据流"]
 ```
 
 ### 1.1 传统前端遮罩的致命漏洞

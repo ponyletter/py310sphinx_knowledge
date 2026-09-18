@@ -10,9 +10,9 @@
 
 ```{mermaid}
 flowchart LR
-    Card["海外支付渠道全景"] --> U["加密货币 U 卡 (USDT 充值)\nDupay / PokePay / RedotPay"]
-    Card --> Bank["正规外币银行借记卡/信用卡\n中行/招行全币种/海外本土卡"]
-    Card --> ThirdParty["第三方代充服务\n(基于提供 Session Token / 账密)"]
+    Card["海外支付渠道全景"] --> U["加密货币 U 卡 (USDT 充值)<br/>Dupay / PokePay / RedotPay"]
+    Card --> Bank["正规外币银行借记卡/信用卡<br/>中行/招行全币种/海外本土卡"]
+    Card --> ThirdParty["第三方代充服务<br/>(基于提供 Session Token / 账密)"]
     Card --> Dead["野卡 WildCard (已停止运营 🚨)"]
 ```
 

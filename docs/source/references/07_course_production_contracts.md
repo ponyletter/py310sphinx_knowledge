@@ -9,11 +9,11 @@
 每一期视频必须在策划之初明确其属于 **6 大认知原型** 之一，杜绝图表的机械轮换：
 
 1. **概念机制拆解课 (Concept Deep-Dive)**：以直觉物理隐喻开场，经由时序泳道流与核心代码，最终收束于能力边界与全局图景。严禁空洞的对比表。
-2. **多产品对比选型课 (Product Comparison)**：全景选型光谱 $\rightarrow$ 机制对照 $\rightarrow$ 横向评估矩阵 $\rightarrow$ 选型决策树。每个被比较工具必须在至少 2 个场景中同台竞技。
-3. **反常识动机揭秘课 (Paradox Motivation)**：单体美好假象 $\rightarrow$ 级联雪崩因果图 $\rightarrow$ 自愈解耦闭环 $\rightarrow$ 复杂度与收益天平。
-4. **技术演进替代课 (Evolution Shift)**：旧代际性能瓶颈 $\rightarrow$ 演进梯度坐标轴 $\rightarrow$ 新旧对比矩阵 $\rightarrow$ 迁移图谱。
-5. **故障排查诊断课 (Troubleshooting)**：故障现场指标 $\rightarrow$ 排查决策树 $\rightarrow$ 根因修复补丁 $\rightarrow$ 长期防范。
-6. **架构经济学决策课 (Economics Decision)**：显性成本对比 $\rightarrow$ 隐性运维与故障成本 $\rightarrow$ 临界点判定 $\rightarrow$ 选型清单。
+2. **多产品对比选型课 (Product Comparison)**：全景选型光谱 \$\rightarrow\$ 机制对照 \$\rightarrow\$ 横向评估矩阵 \$\rightarrow\$ 选型决策树。每个被比较工具必须在至少 2 个场景中同台竞技。
+3. **反常识动机揭秘课 (Paradox Motivation)**：单体美好假象 \$\rightarrow\$ 级联雪崩因果图 \$\rightarrow\$ 自愈解耦闭环 \$\rightarrow\$ 复杂度与收益天平。
+4. **技术演进替代课 (Evolution Shift)**：旧代际性能瓶颈 \$\rightarrow\$ 演进梯度坐标轴 \$\rightarrow\$ 新旧对比矩阵 \$\rightarrow\$ 迁移图谱。
+5. **故障排查诊断课 (Troubleshooting)**：故障现场指标 \$\rightarrow\$ 排查决策树 \$\rightarrow\$ 根因修复补丁 \$\rightarrow\$ 长期防范。
+6. **架构经济学决策课 (Economics Decision)**：显性成本对比 \$\rightarrow\$ 隐性运维与故障成本 \$\rightarrow\$ 临界点判定 \$\rightarrow\$ 选型清单。
 
 ---
 

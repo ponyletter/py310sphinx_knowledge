@@ -39,7 +39,7 @@
 ## 第 2 章：推荐系统的公开原理
 
 ### 2.1 推荐系统不是人工分发，而是概率预估
-算法本质是一个巨大的数学评分器：预估特定用户 $u$ 在特定场景 $c$ 下对特定内容 $i$ 发生正向行为（点击、完播、点赞、关注）的**条件概率** $P(\text{Action} \mid u, i, c)$。
+算法本质是一个巨大的数学评分器：预估特定用户 \$u\$ 在特定场景 \$c\$ 下对特定内容 \$i\$ 发生正向行为（点击、完播、点赞、关注）的**条件概率** \$P(\text{Action} \mid u, i, c)\$。
 
 ### 2.2 召回、过滤、排序：内容进入推荐链路的通用过程
 ```{mermaid}
@@ -63,7 +63,7 @@ graph TD
 
 ### 2.4 多目标推荐与多任务模型（Multi-Task Learning）
 现代短视频推荐并非单指标排队，而是采用如 MMoE（Multi-gate Mixture-of-Experts）等深度模型，同时预测用户的**完播概率 (pCTR)**、**点赞概率 (pLike)**、**关注概率 (pFollow)**、**分享概率 (pShare)**。综合评分公式抽象表示为：
-$$\text{Score} = w_1 \cdot P(\text{Finish}) + w_2 \cdot P(\text{Like}) + w_3 \cdot P(\text{Follow}) + w_4 \cdot P(\text{Share})$$
+\$\$\text{Score} = w_1 \cdot P(\text{Finish}) + w_2 \cdot P(\text{Like}) + w_3 \cdot P(\text{Follow}) + w_4 \cdot P(\text{Share})\$\$
 
 ### 2.5 多样化推荐与信息茧房治理
 平台具有“冷启动探索与利用（Exploration & Exploitation, E&E）”机制，会定期对用户分发其未曾涉猎的小众或跨界优质内容，防止用户陷入信息茧房引发审美疲劳。
@@ -121,7 +121,7 @@ $$\text{Score} = w_1 \cdot P(\text{Finish}) + w_2 \cdot P(\text{Like}) + w_3 \cd
 * **建议黄金宽度**：以“一个核心技术工具 + 一个垂直应用场景”为基准（如：针对会计群体的 Excel/Python 办公自动化）。
 
 ### 4.4 一句话定位公式
-$$\text{一句话定位} = \text{我是 [专业身份]} + \text{用 [特色方式]} + \text{帮 [明确受众]} + \text{解决 [核心痛点]}$$
+\$\$\text{一句话定位} = \text{我是 [专业身份]} + \text{用 [特色方式]} + \text{帮 [明确受众]} + \text{解决 [核心痛点]}\$\$
 
 ### 4.5 内容禁区清单
 * 严禁无资质涉足违规医疗诊疗与金融股票个股推荐。
@@ -139,8 +139,8 @@ $$\text{一句话定位} = \text{我是 [专业身份]} + \text{用 [特色方�
 | **原型 2：产品对比选型课 (Product Comparison)** | MySQL vs PostgreSQL / Vue vs React / Go vs Java 金融高并发 | 统一技术尺度，证明机制差异，划定工程落地边界 | 1. `continuum_axis` (全景选型光谱)<br/>2. `swimlane_workflow` (核心工作流对照)<br/>3. `comparison_matrix` (横向能力评估表)<br/>4. `decision_tree` (实战选型决策树) |
 | **原型 3：反常识动机揭秘课 (Paradox Motivation)** | 单体简单为何非拆微服务？/ 为什么接口没做幂等会重复扣款？ | 打破单机美好假象，揭露规模放大后的级联雪崩，论证复杂度必然性 | 1. `hero-with-notes` (初期单机直觉与良好运行)<br/>2. `causal_map` (并发雪崩因果级联图)<br/>3. `swimlane_workflow` (自愈解耦闭环)<br/>4. `tradeoff_balance` (成本收益天平权衡) |
 | **原型 4：技术演进替代课 (Evolution Shift)** | Vite 凭什么颠覆 Webpack？/ Next.js 带来哪些变革？ | 梳理技术演进动力，对比新旧突破与历史包袱 | 1. `layer-stack` (旧代际性能瓶颈墙)<br/>2. `continuum_axis` (演进梯度坐标轴)<br/>3. `comparison_matrix` (新旧核心机制对比)<br/>4. `radial_cluster` (迁移阻力与共存图谱) |
-| **原型 5：故障排查诊断课 (Troubleshooting)** | 线上接口超时如何抓虫？/ 为什么出现死锁？ | 还原案发现场，建立科学排查树与根因定位法 | 1. 现象复现与报警指标 $\rightarrow$ 2. 排查决策树 $\rightarrow$ 3. 根因补丁 $\rightarrow$ 4. 防御复盘 |
-| **原型 6：架构经济学决策课 (Economics Decision)** | 自建服务器 vs 买云服务？/ 开源自研 vs 商业采购？ | 从总体拥有成本 (TCO) 与技术债务评估商业决策 | 1. 显性成本 $\rightarrow$ 2. 隐性运维与停机成本 $\rightarrow$ 3. 盈亏平衡临界点 $\rightarrow$ 4. 决策清单 |
+| **原型 5：故障排查诊断课 (Troubleshooting)** | 线上接口超时如何抓虫？/ 为什么出现死锁？ | 还原案发现场，建立科学排查树与根因定位法 | 1. 现象复现与报警指标 \$\rightarrow\$ 2. 排查决策树 \$\rightarrow\$ 3. 根因补丁 \$\rightarrow\$ 4. 防御复盘 |
+| **原型 6：架构经济学决策课 (Economics Decision)** | 自建服务器 vs 买云服务？/ 开源自研 vs 商业采购？ | 从总体拥有成本 (TCO) 与技术债务评估商业决策 | 1. 显性成本 \$\rightarrow\$ 2. 隐性运维与停机成本 \$\rightarrow\$ 3. 盈亏平衡临界点 \$\rightarrow\$ 4. 决策清单 |
 
 ---
 

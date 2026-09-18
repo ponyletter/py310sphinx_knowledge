@@ -29,9 +29,9 @@
 
 ```{mermaid}
 graph LR
-    MiniApp[微信小程序客户端] -->|wx.request| Req[request 合法域名: https://api.yourdomain.cn]
-    MiniApp -->|wx.uploadFile| Up[uploadFile 合法域名: https://api.yourdomain.cn]
-    MiniApp -->|wx.downloadFile| Down[downloadFile 合法域名: https://docs.yourdomain.cn]
+    MiniApp[微信小程序客户端] -->|wx.request| Req["request 合法域名: https://api.yourdomain.cn"]
+    MiniApp -->|wx.uploadFile| Up["uploadFile 合法域名: https://api.yourdomain.cn"]
+    MiniApp -->|wx.downloadFile| Down["downloadFile 合法域名: https://docs.yourdomain.cn"]
 ```
 
 ### 2.1 域名填报规范与限制

@@ -98,13 +98,13 @@ claude
 ```{mermaid}
 flowchart TD
     subgraph AGYEnvironment [Antigravity 开发者工作区]
-        AGYCore[AGY CLI / Antigravity 2.0]
-        SubAgent1[Subagent 1: 架构分析]
-        SubAgent2[Subagent 2: 测试用例生成]
+        AGYCore["AGY CLI / Antigravity 2.0"]
+        SubAgent1["Subagent 1: 架构分析"]
+        SubAgent2["Subagent 2: 测试用例生成"]
     end
 
     subgraph LocalCPA [本地/远程反代网关 :8317]
-        CPA[CLIProxyAPI 动态调度引擎]
+        CPA["CLIProxyAPI 动态调度引擎"]
         Pool[("账号池: 账号 A, B, C...")]
     end
 

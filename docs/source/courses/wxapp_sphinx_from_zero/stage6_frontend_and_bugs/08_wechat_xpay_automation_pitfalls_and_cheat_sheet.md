@@ -20,7 +20,7 @@
    - 腾讯米大师（Midas）网关全国边缘 CDN 节点与防刷风控强制设有 15 ~ 30 分钟同步冷却，静待即可自动恢复。
 4. **iOS 端特有报错 (`requestVirtualPayment fail ios支付时订单号重复`)**：
    - **根因**：iOS 微信虚拟支付底层接入 Apple 支付事务队列（Transaction Queue），初次拉起收银台后，该 `outTradeNo` 被系统锁定。退出后再次拿同一单号请求，iOS 底层风控直接拦截；
-   - **解法**：采用主流电商的 **“业务主订单号 + 动态支付流水号”** 双层设计。重试支付时派发唯一新单号（如 `MEME_..._R9fe5`，长度严格限制在 $\le 32$ 字符），通过 Webhook 异步通知精准归集履约。
+   - **解法**：采用主流电商的 **“业务主订单号 + 动态支付流水号”** 双层设计。重试支付时派发唯一新单号（如 `MEME_..._R9fe5`，长度严格限制在 \$\le 32\$ 字符），通过 Webhook 异步通知精准归集履约。
 5. **电商化订单中心闭环设计**：
    - 支持 `PENDING`（待付款）、`PAID`（已履约）、`CANCELLED`（已关闭）状态机；
    - 待付款订单提供【取消订单】（二次确认）与【继续支付】（动态流水重新拉起微信原生收银台）。
@@ -69,7 +69,7 @@
 3. **查询道具发布进度**：`/xpay/query_publish_goods`
 
 ### 2.2 签名算法 pay_sig 计算
-$$\text{pay\_sig} = \text{HMAC-SHA256}(\text{uri} + "\&" + \text{post\_body}, \text{AppKey})$$
+\$\$\text{pay\_sig} = \text{HMAC-SHA256}(\text{uri} + "\&" + \text{post\_body}, \text{AppKey})\$\$
 - `uri`：请求的 URI 路径，例如 `/xpay/start_upload_goods`；
 - `post_body`：请求体 JSON 字符串（紧凑无空格，`separators=(',', ':')`）；
 - `AppKey`：现网（`env=0`）必须使用现网正式 AppKey。
@@ -220,7 +220,7 @@ requestVirtualPayment:fail ios支付时订单号重复
 
 #### 关键约束：
 - 微信 `outTradeNo` 限制最大长度为 **32 字符**；
-- 主订单号（22位，如 `MEME_1789081221_03009e`） + 重试后缀 `_R` + 4位十六进制随机字符 = **28 位字符**，严格满足 $\le 32$ 规范。
+- 主订单号（22位，如 `MEME_1789081221_03009e`） + 重试后缀 `_R` + 4位十六进制随机字符 = **28 位字符**，严格满足 \$\le 32\$ 规范。
 
 #### 服务端重签核心实现：
 ```python
@@ -362,7 +362,7 @@ project.private.config.json 无依赖文件
 | :--- | :--- | :--- |
 | `GOODS_PRICE_INVALID` (-15013) | 道具价格严重不匹配（Excel 按“元”导入，代码按“分”签名，相差 100 倍） | 代码中严格传“分”，后台修正单位为“元”，或直接运行 API 脚本自动发布 |
 | `COIN_OR_PRODUCT_ID_CREATED_IN_RECENTLY` | 道具刚新建或刚改价，腾讯 Midas CDN 全网节点同步与防刷冷却中 | **参数签名已全部正确通过！** 无需改代码，耐心等待 15~30 分钟即可 |
-| `ios支付时订单号重复` | iOS 端退出支付后，复用原单号再次调起 `wx.requestVirtualPayment` | 采用“业务主单号 + 动态支付流水号”架构，重试时派发全新流水号（$\le 32$ 字符） |
+| `ios支付时订单号重复` | iOS 端退出支付后，复用原单号再次调起 `wx.requestVirtualPayment` | 采用“业务主单号 + 动态支付流水号”架构，重试时派发全新流水号（\$\le 32\$ 字符） |
 | `INVALID_SIGN` / 签名错误 | `paySig` 或 `signature` 算法错误，或混淆了沙箱/现网密钥 | 现网环境（`env=0`）必须使用现网正式 AppKey，`signData` 字符串去除多余空格 |
 | `USER_SESSION_KEY_INVALID` | 传给用户态签名的 `session_key` 失效 | 前端调用 `wx.login` 重新登录换取最新 `session_key` 并存入服务端缓存 |
 | `OFFER_ID_INVALID` | `offerId` 填错或与申请虚拟支付的 AppID 不匹配 | 登录小程序后台【虚拟支付】核对正确的 10 位纯数字 OfferID |

@@ -35,16 +35,16 @@
 
 ```{mermaid}
 flowchart TD
-    Creditor[愤怒的债权人\n(赢得对你的个人诉讼)] --> Court[法院]
-    Court --> |只能签发| CO[充电令 Charging Order]
+    Creditor["愤怒的债权人<br/>(赢得对你的个人诉讼)"] --> Court[法院]
+    Court --> |只能签发| CO["充电令 Charging Order"]
     
-    CO -.x|❌ 试图冻结| Bank[LLC 的商业银行账户\n(安全!)]
-    CO -.x|❌ 试图夺取| Code[SaaS 代码与域名\n(安全!)]
-    CO -.x|❌ 试图干涉| Control[强迫 LLC 分配利润\n(无效!)]
+    CO -.->|"❌ "|❌ 试图冻结| Bank["LLC 的商业银行账户<br/>(安全!)"]
+    CO -.->|"❌ "|❌ 试图夺取| Code["SaaS 代码与域名<br/>(安全!)"]
+    CO -.->|"❌ "|❌ 试图干涉| Control["强迫 LLC 分配利润<br/>(无效!)"]
     
     CO -->|✅ 只能截留| Dist[实际分配的利润分红]
     
-    Manager[你作为 LLC 经理\n(完全控制)] -->|决定不分红| Retain[利润保留在公司继续发展]
+    Manager["你作为 LLC 经理<br/>(完全控制)"] -->|决定不分红| Retain[利润保留在公司继续发展]
     Retain --> Dist
     
     classDef danger fill:#ffebee,stroke:#f44336;

@@ -43,10 +43,10 @@
 
 ```{mermaid}
 graph TD
-    Test[真机验证模式] --> ModeA[预览 Preview 二维码]
-    Test --> ModeB[真机调试 Remote Debug 二维码]
-    ModeA --> DetailA[打包离线上传 适合最终体验与视觉验收 与线上运行体验100%一致]
-    ModeB --> DetailB[手机与电脑建立 WebSocket 调试隧道 手机端操作 电脑控制台实时输出日志 断点调试]
+    Test[真机验证模式] --> ModeA["预览 Preview 二维码"]
+    Test --> ModeB["真机调试 Remote Debug 二维码"]
+    ModeA --> DetailA["打包离线上传 适合最终体验与视觉验收 与线上运行体验100%一致"]
+    ModeB --> DetailB["手机与电脑建立 WebSocket 调试隧道 手机端操作 电脑控制台实时输出日志 断点调试"]
 ```
 
 - **什么时候用“真机调试”？** 当真机出现模拟器无法复现的网络超时、音频播放异常或键盘遮挡时，使用真机调试可以在电脑屏幕上打断点一步步跟踪；
