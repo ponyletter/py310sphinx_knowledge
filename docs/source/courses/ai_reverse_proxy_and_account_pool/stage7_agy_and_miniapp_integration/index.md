@@ -7,7 +7,9 @@
 1. **跨平台桌面号池客户端与 IDE 桥接**：基于开源项目打造的 `ToAPI Proxy`（覆盖 Mac/Windows），支持一键导入 VSCode 凭据或邮箱验证码登录，轻松桥接 Claude Code 与 Antigravity (AGY)，在本地直接调度 GPT-5 系列等满血基座模型；
 2. **多海外 VPS + SSH 隧道 + 国内中枢高可用容灾**：多台海外 VPS 节点通过原生高强度 SSH 隧道回传国内中枢，配置本地故障自动转移，免域名、免备案、防端口扫描，为下游业务提供永不掉线的企业级服务网格；
 3. **全链路运维监控与故障反推上游诊断表**：深度总结日志特征，独家揭秘如何根据 401、429、Tool Use 异常、回答风格突变等故障信号，反推中转商是否暗中掺水降级或层层转包；
-4. **Claude Code 桥接、Gemini 1M 上下文调优与 GPT 绘图 Skill 扩展**：深度剖析 Free 账号连网限制与客户端 Agent 工具循环原理，实操 Gemini 3.8 Flash High 别名映射与超长上下文配置，并编写轻量 Skill 脚本实现 Plus 账号绘图无缝集成。
+4. **Claude Code 桥接、Gemini 1M 上下文调优与 GPT 绘图 Skill 扩展**：深度剖析 Free 账号连网限制与客户端 Agent 工具循环原理，实操 Gemini 3.8 Flash High 别名映射与超长上下文配置，并编写轻量 Skill 脚本实现 Plus 账号绘图无缝集成；
+5. **Cockpit Tools 桌面级多账号管理与 Windows 反代实战**：基于 Tauri 架构的跨平台桌面工具 Cockpit Tools，支持 16 大平台的账号统一管理、额度实时监控、号池 API 聚合与自动切换，特别面向 Windows 用户提供完整的 JSON 导入与反代工作流教程；
+6. **GPTSession2CPAandSub2API 七合一凭据格式转换中枢**：纯前端零依赖的轻量级格式转换工具，支持将凭据在 CPA、sub2api、Cockpit、9router、Codex、AxonHub、Codex-Manager 七大格式间无缝互转，打通不同号池管理系统之间的数据壁垒。
 
 ---
 
@@ -20,4 +22,6 @@
 02_miniapp_fullstack_connection
 03_ops_monitoring_and_troubleshooting
 04_claude_code_gemini_and_image_skills
+05_cockpit_tools_desktop_management
+06_gptsession_format_conversion_hub
 ```

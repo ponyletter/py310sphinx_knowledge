@@ -93,6 +93,7 @@ flowchart TD
 | **sub2api (Subscription to API)** | TypeScript / Go | 专注于将个人网页端订阅（如 ChatGPT Plus、Claude Pro Web 会话）快速转为标准 OpenAI 格式的 API 适配器。 | 适合个人快速把自己手头的单个 Plus 网页账号转成 API 跑脚本，但多账号并发池与故障转移能力较弱。 |
 | **New API / One API** | Go + React 前端 | 具备完整商业中转站功能的大一统系统。支持多租户、用户充值计费、多渠道权重分流、模型倍率自定义、兑换码发卡与渠道健康度探测。 | 功能极其强大全面，但架构相对庞大复杂，适合打算对外公开运营商业中转站的站长使用。 |
 | **LiteLLM** | Python | 专注将 100+ 种主流大模型统一包装为 OpenAI 标准输入输出的 Python 轻量网关。 | 适合 Python 数据流与微服务内部调用，但在多 OAuth 凭据长效保活与桌面开箱即用方面不如专用 CPA。 |
+| **Cockpit Tools** | Tauri (Rust + React + TypeScript) | 跨平台桌面级 AI IDE 账号管理工作台。支持 **16 大平台**（Codex / AGY / Copilot / Cursor / Windsurf / Grok CLI / Trae / Zed 等）的账号统一管理、实时额度监控、号池 API 聚合与自动切换、内置 CLIProxyAPI 网关 Sidecar。 | ⭐️ **Windows 用户首选**：开箱即用的 GUI 面板，支持 JSON 批量导入/导出、混合模型路由、鹈鹕测智基准测试、多实例隔离，适合不愿折腾 Docker 命令行的桌面开发者。 |
 
 ---
 
