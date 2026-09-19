@@ -11,6 +11,7 @@
 
 01_external_links_and_bookmarks
 02_recommended_tools_cheat_sheet
+03_miniapp_navigation_station_and_curated_open_source_matrix
 ```
 
 ```{important}
