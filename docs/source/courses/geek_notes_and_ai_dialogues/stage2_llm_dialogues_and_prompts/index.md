@@ -14,6 +14,7 @@
 01_dialogue_template
 02_claude_code_and_agents
 03_prompt_engineering_records
+04_llm_speed_cost_benchmarks_and_tiered_workflow
 ```
 
 ```{important}
