@@ -14,6 +14,7 @@
 01_topic_template_snippet
 02_ai_ecosystem_discoveries
 03_open_source_curation
+04_chatgpt_account_login_2fa_and_recharge_pitfalls
 ```
 
 ```{important}
