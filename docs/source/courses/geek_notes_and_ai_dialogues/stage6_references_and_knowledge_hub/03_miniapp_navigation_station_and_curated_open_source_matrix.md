@@ -190,7 +190,7 @@ sequenceDiagram
    * 如涉及用户自定义输入文本或上传图片，务必接入官方免费的 `msgSecCheck` 内容安全校验；
    * 埋设好激励视频广告点（例如：免费导出提供标清，看 15 秒视频直接导出 4K 原画）。
 3. **第三天：打包提审与配置**
-   * 对照[第7阶段 09章官方免资质类目全景对照表](../wxapp_sphinx_from_zero/stage7_audit_mastery/09_personal_developer_ecosystem_pros_cons_and_zero_qualification_category_matrix.md)，精准选择二级类目（如【工具 - 图片处理】）；
+   * 对照[第7阶段 09章官方免资质类目全景对照表](../../wxapp_sphinx_from_zero/stage7_audit_mastery/09_personal_developer_ecosystem_pros_cons_and_zero_qualification_category_matrix.md)，精准选择二级类目（如【工具 - 图片处理】）；
    * 提审备注清晰写明：“本小程序为纯本地离线工具，不涉及用户社交互动与第三方在线支付”。
 4. **第七天及以后：流量冷启动与变现**
    * 分享至精准社群、朋友圈或小红书做初始种子用户积累；
@@ -200,7 +200,7 @@ sequenceDiagram
 
 ## 🔗 相关扩展与交叉参考
 
-* 📖 **小程序合规必修**：[第7阶段 09. 微信小程序生态实战全景复盘：个人开发者得失权衡与全量免资质类目权威对照表](../wxapp_sphinx_from_zero/stage7_audit_mastery/09_personal_developer_ecosystem_pros_cons_and_zero_qualification_category_matrix.md)
+* 📖 **小程序合规必修**：[第7阶段 09. 微信小程序生态实战全景复盘：个人开发者得失权衡与全量免资质类目权威对照表](../../wxapp_sphinx_from_zero/stage7_audit_mastery/09_personal_developer_ecosystem_pros_cons_and_zero_qualification_category_matrix.md)
 * 📖 **大模型对话精选**：[阶段二：大模型对话与 Prompt 沉淀](../stage2_llm_dialogues_and_prompts/index.md)
 * 📖 **独立开发者思考录**：[阶段四 03. 独立黑客的心态修炼与长期主义](../stage4_business_insights_and_thinking/03_indie_hacker_mindset.md)
 * 🌐 **外部高价值信源**：
