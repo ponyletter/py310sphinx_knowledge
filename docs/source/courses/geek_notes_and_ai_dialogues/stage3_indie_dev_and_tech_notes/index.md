@@ -20,6 +20,8 @@
 | **[08 哈宝桌宠与开源桌面引擎](08_case_superman_desktop_pet_engine)** | ✞超人✞<br>macOS 原生应用 | Swift + AppKit、3×3 九宫格表情设定、Nike 球衣硬约束、8 向视线追踪、Alpha 穿透 | 零基础完成 `.app` 自检打包，全网开源 `desktop-pet-engine` |
 | **[09 微信工具小程序全栈与商单报价](09_case_anxiaosheng_fullstack_miniapp_guide)** | 安小生<br>全栈开发指南 | 腾讯云轻量、宝塔 LNMP、Laravel 11+MySQL、Stitch UI 三步法、微信支付 | 2~3 周上线首款工具，变现 1W+，提供完整 Prompt 库与商单防坑模型 |
 | **[10 拾光肖像馆 3 小时次日收款](10_case_fish_portrait_mvp_in_3hours)** | Fish 嗡嗡鱼<br>精益产品 MVP | 0 行手写代码、砍掉登录/支付/后台、无感 Session、人工微信客服转账核销 | 3 小时极速上线，次日获得真实付费，跑通敏捷验证飞轮 |
+| **[11 小红书心理测试 1天跑通 MVP](11_case_guoxiaowen_1day_xiaohongshu_ai_psych_test_mvp)** | 郭晓文<br>轻量虚拟商品 | 调研三字诀（看<问<干）、小红书个人买卖闲置免资质挂车、Claude Code 静态交互页 | 1 天跑通，次日首单，3 天出单 49 笔（利润 180~200 元，仅 1 退款） |
+| **[12 AI 原创虚拟产品万字方法论](12_case_luke_ai_original_virtual_products_methodology)** | Luke<br>虚拟资产策展 | 1.2w字长文、NotebookLM 私域扎根、NanoBanana 统一视觉、WPS 在线嵌入 HTML 互动课件 | 摆脱搬运降价内卷，4 大原创航道，Few-shot 标题仿写与 One-shot 框架 |
 
 ---
 
@@ -38,6 +40,8 @@
 08_case_superman_desktop_pet_engine
 09_case_anxiaosheng_fullstack_miniapp_guide
 10_case_fish_portrait_mvp_in_3hours
+11_case_guoxiaowen_1day_xiaohongshu_ai_psych_test_mvp
+12_case_luke_ai_original_virtual_products_methodology
 ```
 
 ```{important}

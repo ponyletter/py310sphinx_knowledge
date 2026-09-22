@@ -17,7 +17,7 @@
 | **[5.5 【案例】Codex + Obsidian 个人 IP 系统（亦恒）](05_case_yiheng_personal_ip_content_system)** | IP 资产系统 | 亦恒<br>个人 IP SOP | 破除四重错位，五层架构模型，录音/书籍/数据资产化，跑通 7 天 MVP 闭环 |
 | **[5.6 【案例】日更 1092 天：开源 AI 内容工厂全解（朝暮拾花）](06_case_zhaomu_ai_content_factory_opensource)** | 工业化工厂 | 朝暮拾花<br>开源架构 | 淘金/布局/铸文/鉴文/淬文五大引擎，七罪标题系统，生产与质检严格物理隔离 |
 | **[5.7 【案例】公众号 99% 自动化：草稿箱直连（根源）](07_case_genyuan_wechat_mp_automation)** | 微信图文闭环 | 根源<br>TikHub+RAG | TikHub 数据对标，本地 Obsidian RAG 混合检索，活人感写作，官方草稿箱直发 |
-| **[5.8 【案例】Codex × Obsidian 满意稿日产 8~10 篇（七天假）](08_case_qitianjia_obsidian_content_pipeline)** | 生产流水线 | 七天假<br>双轨工作流 | 拆解创作判断，双轨初稿与定稿归档，不拿空数据强行生成，沉淀复利资产 |
+| **[5.8 【案例】Claude Code 自动化内容生产系统（七天假）](08_case_qitianjia_obsidian_content_pipeline)** | 自动化内容系统 | 七天假<br>1.4w字实操 | 三层解耦架构、Coze 工作流 API 采集、CLAUDE.md 大脑、双轨成稿与写作偏好档案自演进 |
 | **[5.9 【案例】视频号 AI 剧情带货：3个月40万GMV（淳于）](09_case_chunyu_channels_ai_drama_ecommerce)** | 视频号短剧 | 淳于<br>SD2.0+工作台 | 黄金前30秒严格1:1复刻，短挂与短引模型，SD2.0分镜批量生成，人机协同10分钟出片 |
 | **[5.10 【案例】飞书批量提取100+图书视频文案并仿写（千代）](10_case_qiandai_feishu_book_video_workflow)** | 图书视频带货 | 千代🍂<br>飞书多维表格 | 20w播放起号，wx_channels_download批量下载，火山引擎豆包识别书名与口播仿写 |
 | **[5.11 【案例】B站好物内容工厂：从两周1条到1小时1条（林幻雨）](11_case_linhuanyu_bilibili_goods_content_factory)** | 测评内容工厂 | 林幻雨<br>内容工厂V4.3 | 京好客+京东API穿透itemIds，RPA/API混合采集，PPT单背景文字插入，剪映草稿对齐 |

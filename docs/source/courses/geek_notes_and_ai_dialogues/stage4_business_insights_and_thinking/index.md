@@ -16,6 +16,8 @@
 | **[4.4 【案例】资深架构师 AI 10 天交付 9000 元小程序（Allen）](04_case_allen_miniapp_customization_9k_10days)** | 架构师降维交付 | 零小程序基础，42分钟切割需求边界，前后台双轨推进与基础设施踩坑 |
 | **[4.5 【案例】0基础0英语小白用 Codex 接单月入过万（路飞）](05_case_lufei_codex_miniapp_freelance_11k)** | 小白接单 SOP | 小红书评论区精准截流、首单1100元破局、6月到账11288元、7步交付法 |
 | **[4.6 【案例】零代码 25 天变现 5100 元接单复盘（年轻人）](06_case_youngster_ai_coding_monetization_sop)** | 全渠道与黑科技工具 | 闲鱼投流转化、HTML 转 Figma 偷懒神器、Cloudflare 部署与阶梯加法报价 |
+| **[4.7 【商业洞察】生财项目做两遍：MVP跑通与五大加杠杆（许老师）](07_case_xulaoshi_project_two_times_mvp_and_leverage)** | 项目放大心法 | 破除低水平重复加法思维、矩阵杠杆、付费投流、回购时间组建团队、阿米巴与技术杠杆 |
+| **[4.8 【超级标012】亦仁：AI 工作流与 Agent 定制服务商](08_case_yiren_super_benchmark_12_ai_workflow_agency)** | B端企业高客单定制 | 全网近万条工作流调研、99元样品背后的万级交付机会、坤汀游学高客单案例与Maker工作室 |
 
 ---
 
@@ -30,6 +32,8 @@
 04_case_allen_miniapp_customization_9k_10days
 05_case_lufei_codex_miniapp_freelance_11k
 06_case_youngster_ai_coding_monetization_sop
+07_case_xulaoshi_project_two_times_mvp_and_leverage
+08_case_yiren_super_benchmark_12_ai_workflow_agency
 ```
 
 ```{important}

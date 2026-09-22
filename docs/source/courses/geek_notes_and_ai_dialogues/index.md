@@ -36,9 +36,9 @@ flowchart TD
 | 模块类别 | 核心定位 | 建议记录内容 | 形式与特色 |
 | :--- | :--- | :--- | :--- |
 | **[阶段一：前沿资讯与碎片资料](stage1_web_resources_and_snippets/index)** | 外部输入沉淀 | X/Twitter 干货、技术推文、GitHub 新锐仓库 | 链接引用 + 要点摘录 |
-| **[阶段二：大模型对话、Agent 协同与使用技巧](stage2_llm_dialogues_and_prompts/index)** | AI 协同与企业级 Agent 落地 | 深度推演、多模型横评、高强度实战（令狐峰/亦仁）、Worktree多窗口并发（李香君）、Agent制作八步法（鹿书野）、微信群助理（轩辕）、24项领队Skill（阿喂）、精华帖SOP产品化（Jason）、一人公司文件白皮书（周知2.0）与AI员工体系（亦仁） | 问答卡片 + 工程SOP + 治理白皮书 |
-| **[阶段三：独立开发、产品实战与技术碎思](stage3_indie_dev_and_tech_notes/index)** | 动手实战与极速 MVP | 避坑调试、环境配置、极速小程序上线与桌面引擎（HP/周小白/暮子风/超人/安小生/Fish） | 实操复盘 + 架构代码 + 交付SOP |
-| **[阶段四：商业洞察与出海思考](stage4_business_insights_and_thinking/index)** | 商业闭环与交付 | 竞品分析、出海随想、AI接单与敏捷交付案例（Allen/路飞/年轻人） | 实战复盘 + 交付SOP |
+| **[阶段二：大模型对话、Agent 协同与使用技巧](stage2_llm_dialogues_and_prompts/index)** | AI 协同与企业级 Agent 落地 | 深度推演、多模型横评、高强度实战（令狐峰/亦仁）、Worktree多窗口并发（李香君）、Agent制作八步法（鹿书野）、微信群助理（轩辕）、24项领队Skill（阿喂）、精华帖SOP产品化（Jason）、一人公司文件白皮书（周知2.0）、AI员工体系（亦仁）与Claude Skill公众号全自动流水线（田威） | 问答卡片 + 工程SOP + 治理白皮书 |
+| **[阶段三：独立开发、产品实战与技术碎思](stage3_indie_dev_and_tech_notes/index)** | 动手实战与极速 MVP | 避坑调试、极速小程序上线、桌面引擎、小红书心理测试1天MVP与AI原创虚拟产品万字方法论（HP/周小白/暮子风/超人/安小生/Fish/郭晓文/Luke） | 实操复盘 + 架构代码 + 交付SOP |
+| **[阶段四：商业洞察与出海思考](stage4_business_insights_and_thinking/index)** | 商业闭环与交付 | 竞品分析、出海随想、AI接单与敏捷交付（Allen/路飞/年轻人）、生财项目做两遍与五大加杠杆放大（许老师）、超级标012 B端AI工作流与Agent定制服务商（亦仁） | 实战复盘 + 商业模型 + 交付SOP |
 | **[阶段五：数字花园、内容工厂、个人IP与视频带货](stage5_digital_garden_and_random_thoughts/index)** | 内容系统与视频带货流水线 | 随笔火花、小红书/公众号自动化，以及视频号剧情带货、飞书图书仿写、B站好物、自动剪辑与矩阵二创（尹星河/亦恒/朝暮/根源/七天假/淳于/千代/林幻雨/乔久伴/周行/舒然/阿甘/森林） | 工业化流水线 + 视音频工程 + 商业闭环 |
 | **[阶段六：参考中枢与资源书签](stage6_references_and_knowledge_hub/index)** | 工具与信源字典 | 长期书签、生产力插件、常用 API | 结构化清单表格 |
 

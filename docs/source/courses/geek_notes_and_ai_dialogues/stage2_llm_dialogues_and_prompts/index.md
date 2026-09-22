@@ -23,6 +23,7 @@
 | **2.11** | [【案例精选】海量精华帖产品化：生财 MCP + Codex 架构拆解 SOP](11_case_jason_shengcai_mcp_to_website_sop.md) | 生财大盘需求雷达、SOP 翻译为系统架构、FastAPI 四层架构与离线 Mock、防 100 个子 Agent 失控死锁 | Jason、mar（AI在读博士） | SOP 软件化全流程 + 避坑指南 |
 | **2.12** | [【案例精选】一人公司 AI Agent 文件管理白皮书：四框架与安全治理](12_case_zhouzhi_one_person_company_agent_files_whitepaper.md) | 万物皆文件哲学、四框架选型决策树（CC/Codex/OpenClaw/Hermes）、CLAUDE.md 200 行法则、PreToolUse 拦截 | #周知2.0（AI超级个体） | OPC Agent 文件白皮书 + Hook 防线 |
 | **2.13** | [【案例精选】企业级 AI 员工体系与 AI 中心建设实战](13_case_yiren_shengcai_ai_employee_system.md) | 生产关系重组、管理 Agent 的 Agent 治理层（架构师/运维官/审核官）、统一 Codex+飞书、TokenRank 竞技大盘 | 亦仁（生财有术创始人） | AI 中心落地架构 + 组织改造心法 |
+| **2.14** | [【案例精选】Claude Skill 从原理到实战：公众号自动撰写与发布](14_case_tianwei_claude_skill_official_wechat_automation.md) | Skill与MCP解剖（菜谱vs冰箱）、DeepSeek V3 兼容反代、skill-creator 一句话构建、MCP-Exa + Nanobanana + 官方草稿箱直连 | 田威（生财创作者） | Skill 标准工程 + 全自动生产链 |
 
 ---
 
@@ -44,6 +45,7 @@
 11_case_jason_shengcai_mcp_to_website_sop
 12_case_zhouzhi_one_person_company_agent_files_whitepaper
 13_case_yiren_shengcai_ai_employee_system
+14_case_tianwei_claude_skill_official_wechat_automation
 ```
 
 ```{important}
@@ -51,4 +53,5 @@
 1. **常规突破性对话**：导出文本并使用 `01_dialogue_template.md` 归档。
 2. **高强度高阶开发**：深度参考令狐峰的 **50 条高强度实践法则**（[2.5 章节](05_case_linghufeng_23b_tokens_codex_practices.md)）转变心智；结合亦仁的 **双工具协作与交接 SOP**（[2.6 章节](06_case_yiren_claude_code_codex_collaboration_backup.md)）与李香君的 **Worktree 多窗口并发**（[2.7 章节](07_case_lixiangjun_codex_worktree_multiwindow.md)）杜绝代码冲突与账号单点故障。
 3. **数字员工与企业治理**：参考鹿书野的 **业务流程做成 Agent 八步法**（[2.8 章节](08_case_lushuye_build_ai_agent_employee_8steps.md)）沉淀确定性资产；遵照周知 2.0 的 **Agent 文件白皮书**（[2.12 章节](12_case_zhouzhi_one_person_company_agent_files_whitepaper.md)）构筑安全 Hook 防线；结合亦仁的 **企业 AI 员工与 AI 中心实战**（[2.13 章节](13_case_yiren_shengcai_ai_employee_system.md)）完成团队生产关系重组。
+4. **自然语言流水线**：参考田威的 **Claude Skill 极简实战**（[2.14 章节](14_case_tianwei_claude_skill_official_wechat_automation.md)），用“菜谱+冰箱”思维与 `skill-creator` 一句话快速搭建专属全自动业务流水线。
 ```
