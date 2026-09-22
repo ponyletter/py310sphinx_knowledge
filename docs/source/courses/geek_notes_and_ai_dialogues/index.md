@@ -36,7 +36,7 @@ flowchart TD
 | 模块类别 | 核心定位 | 建议记录内容 | 形式与特色 |
 | :--- | :--- | :--- | :--- |
 | **[阶段一：前沿资讯与碎片资料](stage1_web_resources_and_snippets/index)** | 外部输入沉淀 | X/Twitter 干货、技术推文、GitHub 新锐仓库 | 链接引用 + 要点摘录 |
-| **[阶段二：大模型对话与 Prompt](stage2_llm_dialogues_and_prompts/index)** | AI 协同对话精选 | 与 Claude/GPT 深度对话、复杂任务 Prompt | 问答卡片 + 交付代码 |
+| **[阶段二：大模型对话、Agent 协同与使用技巧](stage2_llm_dialogues_and_prompts/index)** | AI 协同与心智进化 | 深度推演、多模型横评、高强度烧Token经验与双工具协作（令狐峰/亦仁） | 问答卡片 + 工程SOP |
 | **[阶段三：独立开发与技术碎思](stage3_indie_dev_and_tech_notes/index)** | 动手实践手记 | 边缘小坑、环境命令、架构闪念 | 代码块 + 避坑复盘 |
 | **[阶段四：商业洞察与出海思考](stage4_business_insights_and_thinking/index)** | 商业闭环与交付 | 竞品分析、出海随想、AI接单与敏捷交付案例（Allen/路飞/年轻人） | 实战复盘 + 交付SOP |
 | **[阶段五：数字花园、内容工厂与个人IP](stage5_digital_garden_and_random_thoughts/index)** | 内容系统与IP复利 | 随笔火花、小红书工作站、开源AI内容工厂与公众号自动化（尹星河/亦恒/朝暮/根源/七天假） | 工业化流水线 + 资产复利 |
