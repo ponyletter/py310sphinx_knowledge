@@ -92,7 +92,7 @@ your-project/
 
 ### 3.3 严格的 `.gitignore` 凭证隔离清单
 在开源或团队协同中，必须死守隐私底线：
-```gitignore
+```text
 # 必须严格忽略的敏感文件
 .env*
 auth.json
