@@ -31,6 +31,7 @@ postgresql-mysql-sqlite-choice-v1/index
 rabbitmq-kafka-nats-v1/index
 rag-retrieval-architecture-v1/index
 rag-retrieval-architecture-v1/jev-system-one-decision-model-v1
+rag-retrieval-architecture-v1/ffmpeg-opencv-outline-subtitles-v1
 gpu-npu-cpu-v1/index
 redis-memcached-valkey-v1/index
 s3-r2-minio-v1/index
