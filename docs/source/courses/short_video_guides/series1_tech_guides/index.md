@@ -36,6 +36,7 @@ rag-retrieval-architecture-v1/r-language-conda-jupyter-editors-v1/index
 gpu-npu-cpu-v1/index
 redis-memcached-valkey-v1/index
 s3-r2-minio-v1/index
+supabase-vercel-github-stack-v1/index
 sphinx-vitepress-docusaurus-material-mkdocs-wordpress-v1/index
 terraform-ansible-selection-v1/index
 vault-sops-sealed-secrets-cloud-key-management-v1/index
