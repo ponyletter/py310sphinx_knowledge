@@ -32,6 +32,7 @@ rabbitmq-kafka-nats-v1/index
 rag-retrieval-architecture-v1/index
 rag-retrieval-architecture-v1/jev-system-one-decision-model-v1
 rag-retrieval-architecture-v1/ffmpeg-opencv-outline-subtitles-v1
+rag-retrieval-architecture-v1/r-language-conda-jupyter-editors-v1/index
 gpu-npu-cpu-v1/index
 redis-memcached-valkey-v1/index
 s3-r2-minio-v1/index
@@ -66,6 +67,7 @@ cdn-sometimes-slower-full-20260825-230727/index
 monolith-vs-microservices-full-20260826-041049/index
 vite-vs-webpack-migration-preview-20260826-120851/index
 workflow-agent-programming-full-20260826-183921/index
+wireguard-private-tunnel-lan-v1/index
 website-deployment-platforms-v1/index
 git-svn-code-hosting-cnb-v1/index
 coze-dify-n8n-v1/index
