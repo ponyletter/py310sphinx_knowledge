@@ -5,7 +5,7 @@
 ● Your account is on hold and can't use Claude Code. View details or appeal: https://claude.ai/restricted
 ```
 
-本篇深度结合官方服务条款（Terms of Service）、可接受使用政策（AUP）、真实生产封号日志，系统拆解 Claude 账号的**注册支付链路、封号底层逻辑、官方条文归因、申诉话术**以及**全渠道退款挽损实战 SOP**。
+本篇结合 Anthropic 官方服务条款（Terms of Service）、可接受使用政策（AUP）、官方透明度报告、社区一手实战博主（雪踏乌云、劳伦斯、gkxspace、leo_xiaolei 等）的保号心得，系统梳理 **Claude 注册环境构建、纯净支付方案、封号底层逻辑、官方条文归因、急救黄金四步法、申诉模板** 以及 **苹果与网页全渠道退款实操 SOP**。
 
 ---
 
@@ -13,273 +13,259 @@
 
 ```mermaid
 flowchart TD
-    subgraph 注册与支付环节
-        IP["出口网络环境<br/>(纯净住宅IP vs 机房VPS)"] --> Reg["账号注册: 邮箱+海外手机号<br/>(Gmail老号 vs 批量Outlook)"]
-        Reg --> PayMode{"支付开通渠道选择"}
-        PayMode -->|高稳定性首选| ApplePay["iOS App Store 内购<br/>(美区Apple ID + 正版礼品卡)"]
-        PayMode -->|风控极严| StripePay["网页端 Stripe 直绑<br/>(海外实体卡/高权重虚拟卡)"]
-        PayMode -->|企业生产推荐| ApiConsole["Anthropic Console 商业 API<br/>(按量付费充值，天然免疫封号)"]
+    subgraph 注册与支付环境搭建
+        Net["网络与指纹伪装<br/>(静态住宅IP + 全局TUN + WebRTC屏蔽)"] --> RegMode{"注册路线选择"}
+        RegMode -->|极简匿名路线| AppleHide["美区 Apple ID + 隐藏邮件地址 (Hide My Email)<br/>(免海外手机号 / 免人脸KYC)"]
+        RegMode -->|实体高阶路线| RealSim["自用 Gmail + 海外实体 eSIM (Red Pocket/T-Mobile)<br/>(海外实体卡/Wise/水星银行/StarryBlu)"]
+        
+        AppleHide --> IosPay["iOS App Store 内购支付<br/>(正规美区礼品卡，退款有保障)"]
+        RealSim --> StripePay["网页端/移动端开卡<br/>(从 Free 养号 ➔ Pro ➔ Max 5x/20x)"]
     end
 
-    subgraph 消费与号池应用
-        ApplePay & StripePay --> ProAuth["提取 OAuth 凭据<br/>(cliproxyapi auths / claude.json)"]
-        ProAuth --> UseMode{"使用场景"}
-        UseMode --> WebUse["网页日常交互使用"]
-        UseMode --> CliUse["Linux 服务器 Claude Code<br/>(--permission-mode auto 长程工程)"]
-        UseMode --> PoolUse["反代号池对外分发<br/>(并发轮询中转)"]
+    subgraph 架构分工与防爆防熔断
+        IosPay & StripePay --> ProAuth["提取 OAuth 凭据<br/>(~/.claude.json / cliproxyapi)"]
+        ProAuth --> Arch["JEV + Opus 5.5 生产架构分工<br/>(Jev 搞定 9000 次初筛 / Opus 只跑 20 次高精推理)"]
+        Arch --> WorkStation["Orca + Tailscale 远程工作站模式<br/>(固定海外 VPS + BBR 加速 UDP + 移动端随时随地连)"]
     end
 
-    subgraph 官方风控熔断模型
-        CliUse & PoolUse --> RiskModel{"Anthropic 自动化滥用检测<br/>(Abuse & Anomaly Detection)"}
-        RiskModel -->|多维特征超标| Hold["Account on Hold / 封号阻断<br/>(https://claude.ai/restricted)"]
-        RiskModel -->|健康低频| Stable["长期稳定运行"]
+    subgraph 官方风控拦截模型
+        WorkStation --> RiskModel{"Anthropic 自动化滥用检测<br/>(Abuse & Anomaly Detection)"}
+        RiskModel -->|多维特征超标/Token暴涨| Hold["Account on Hold / 封号阻断<br/>(https://claude.ai/restricted)"]
+        RiskModel -->|低频拟人交互| Stable["长期稳定存活 (50+ 天无异常)"]
     end
 
-    subgraph 救济与止损
-        Hold --> Appeal["官方在线申诉 (Appeals)"]
-        Hold --> Refund{"退款挽回损失"}
-        Refund -->|iOS 订阅| AppleRefund["reportaproblem.apple.com<br/>(苹果官方 48h 快速原路退款)"]
-        Refund -->|网页订阅| StripeRefund["Anthropic Support 工单退款"]
+    subgraph 急救黄金四步法
+        Hold --> S1["1. 抢救资料 (Export data / 备份本地 ~/.claude)"]
+        S1 --> S2["2. 立即停扣费 (iOS 设置取消自动续费)"]
+        S2 --> S3["3. 全额退款 (reportaproblem.apple.com 48h 到账)"]
+        S3 --> S4["4. 规范申诉 (3.3% 成功率 / 附高通过率英文模板)"]
     end
 ```
 
 ---
 
-## 二、Claude 纯净注册与正规支付全渠道对比
+## 二、Claude Code 不被封号“焚诀”：远程工作站架构与 JEV 分工范式
 
-### 1. 注册三要素标准规范
-要保证账号具备高信誉底子，注册阶段必须严格遵循三大安全要素：
-* **网络环境（IP 信誉）**：严禁使用知名机房 IP（如 AWS、Oracle Cloud、DigitalOcean 等）直接打开注册页。必须使用干净的家庭住宅宽带节点（Residential IP），并通过 [ipinfo.io](https://ipinfo.io) 或 [scamalytics.com](https://scamalytics.com) 检查 Fraud Score（欺诈分建议低于 15）；
-* **邮箱选择（权重核心）**：
-  * 🔴 **极低权重（封号高危）**：批量生成的微软免费邮箱（`@outlook.com`、`@hotmail.com`）。Anthropic 的风控引擎对带有随机杂乱字符前缀（如 `AnnamaeTock180@outlook.com`）的邮箱有极其敏锐的标记规则；
-  * 🟢 **高权重（首选推荐）**：具有正常使用历史、开通了两步验证（2FA）并绑定了个人辅助手机的自用 **Google Gmail** 或 **ProtonMail**；
-* **海外手机号验证**：Anthropic 强制要求海外实体手机号接收短信验证。接码平台建议选择真实英国（+44）、美国（+1）或新加坡实卡接码，避开廉价虚拟 VoIP 号段。
+### 1. 远程跳板工作站架构（Orca + Tailscale）
+在云端服务器直接跑 Claude Code 时，若直接用国内网络或廉价机房 IP 裸连，非常容易因环境跳跃触发风控。社区实战派推崇的**“固定海外跳板焚诀”**：
+1. **购买一台正规海外 VPS**（如美国、新加坡、日本等正规机房节点，网络干净）；
+2. **在 VPS 宿主机登录 Claude Code 订阅**，保持本地认证环境绝对固定；
+3. **安装配置 Orca 与 Tailscale**：
+   * 通过 Tailscale 构建点对点加密私有虚拟内网，实现多设备互通；
+   * 服务器开启 BBR 加速 UDP 流量，确保极速低延迟；
+4. **全球无缝漫游**：无论在手机、iPad 还是办公电脑，只需打开 Orca 客户端连接至该固定服务器。Anthropic 服务端看到的永远是该海外服务器单一稳定的网络指纹，彻底隔绝因客户端频繁切网、移动基站漫游引发的风控。
 
 ---
 
-### 2. 官方三大支付渠道横向评测
+### 2. JEV + Opus 5.5 架构分工（防止 Token 爆炸与财务熔断）
 
-| 支付渠道 | 风控抵抗力 | 支付成功率 | 封号连带影响 | 适合场景 | 核心注意事项 |
-| :--- | :---: | :---: | :---: | :--- | :--- |
-| **iOS App Store 内购**<br>(美区 Apple ID + 礼品卡) | 🟢 **极高**<br>(五星推荐) | **99%** | 仅封 Claude 账号，**可向苹果申请全额退款** | 个人自用、Claude Code CLI 开发、号池主力账号储备 | 必须配置美国免税州账单地址（避免加税）；必须使用正规渠道采购的礼品卡（如 Pockyt Shop）。 |
-| **网页端 Stripe 绑卡**<br>(海外信用卡 / 虚拟卡) | 🔴 **极低**<br>(极易拒付) | **30%~50%** | 封号且预扣款难以退回，卡头可能被 Stripe 标记拉黑 | 具备海外真实实体银行卡的个人 | 必须开启 3D Secure 认证，浏览器必须指纹隔离，账单地址与 IP 必须同省/同州。 |
-| **Anthropic Console 商业 API**<br>(按量充值 Balance) | 🟢 **免疫封号**<br>(工业级) | **95%** | **天然合法，无惧机房 IP 和并发** | 生产环境自动化脚本、企业集群、高吞吐号池分发 | 属于实打实按 Token 付费（无 $20 羊毛），但享有官方 SLA 保障。 |
-
-```{admonition} 警惕：严禁使用淘宝/发卡网第三方代充
+```{admonition} 核心认知：千万别让 Opus 5.5 干所有琐碎脏活！
 :class: warning
-市面上标价低于官方汇率（如 80~120 元人民币）的“代充”，99% 采用跨区黑产礼品卡（土耳其/尼日利亚套利）、黑卡（盗刷信用卡）或退款漏洞。这类充值通常会在 3~7 天内被发卡行 Chargeback 拒付，Anthropic 会立即对账号执行永久除名并拉黑绑定设备。
+很多团队把海量网页爬取、长文本初步清洗、多链接初筛全部丢给 Opus 5.5，导致单会话迅速膨胀至数千万甚至数亿 Token。不仅产生数倍的巨额账单（几十美元甚至上百美元），更会因单位时间内 Token 消耗速率（Velocity）过高，被 Anthropic 后台反爬与反蒸馏系统直接判定为异常滥用。
 ```
 
----
+工业级开发推荐采用 **“轻量快速判定模型（如 Jev / TypeSafe）+ 旗舰大模型（Opus 5.5）”的双层漏斗架构**：
 
-## 三、Anthropic 官方封号条款（ToS & AUP）全景剖析
+| 处理阶段 | 任务性质 | 承载模型 | 调用频次 | 处理成本与耗时 | 职责分工 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **前置初筛层** | 链接连通性判断、文本粗分类、特征打标、敏感词过滤 | **Jev** (小型专用模型) | **5,000 ~ 9,000 次** | 不到 1 分钟，总成本仅**几毛钱** | 快速过滤掉 99% 的无效噪音，完成大批量结构化判断。 |
+| **深度决策层** | 终审裁决、高难度逻辑架构推演、成片导演编剧、归因解释 | **Claude Opus 5.5** | **仅 10 ~ 20 次** | 几秒完成，单次成本几分钱 | 集中所有高价值算力，只做最硬核的顶级推理。 |
 
-很多开发者误以为封号是“玄学误封”，实际上 Anthropic 的法务条款与自动化风控系统有非常明确、严密的法理条文支撑。
-
-### 1. 《消费者服务条款》（Consumer Terms of Service）核心条文
-根据 Anthropic 官方公布的《Consumer Terms of Service》：
-* **单方面服务暂停权（Termination and Suspension）**：
-  > *"We may suspend or terminate your access to our Services at any time, with or without cause or notice, if we believe you have violated these Terms, our Usage Policy, or for other business, security, or legal reasons."*
-  * **解读**：官方保留在怀疑发生违规、系统安全风险或业务合理性受损时，**无需提前通知即可单方面挂起或终止服务**的绝对裁量权；
-* **合理使用政策（Fair Use Policy）**：
-  * 官方明确定义 Pro 订阅（$20/月）为**“个人交互式日常消费品”**。官方系统不承诺 Pro 会员具备无限量计算配额，明确禁止将个人包月账号用于“企业级吞吐、自动化批处理或转售套利”。
+* **成本差距**：若全部由 Opus 处理 9,000 次判定，成本将迅速暴增至 **40 美元以上**（差距高达 **200 倍**）；
+* **防封收益**：大幅降低单个 Session 的上下文长度与调用频度，让账号始终保持在健康低负载绿区。
 
 ---
 
-### 2. 《可接受使用政策》（Usage Policy / AUP）违规条文拆解
-在 Anthropic 的《Usage Policy》（前身 AUP）中，以下条款直接对应号池与自动化开发场景：
+## 三、纯净注册与支付升级实操方案（白号培育）
 
-#### ① 禁止未经授权的自动化与机器人行为（Automated Systems Prohibited）
-> *"You may not use any automated system, script, robot, or scraper to access, query, or extract data from our Services in a manner that exceeds human interactive capabilities or bypasses rate limits."*
-* **命中实战**：在 Linux 终端执行 `claude --permission-mode auto` 时，系统在无人监管下发起高频的毫秒级工具调用与连续读写，其请求间隔与行为指纹完全不符合人类打字习惯，直接触发了自动化滥用探针。
+### 1. 注册前环境检测与分值拉升（从 36 分提升至 98 分）
+Anthropic 与专业 IP 质量库（如 `ipdata.co`、`ipinfo.io`）深度合作，在注册与支付阶段会执行多维反欺诈探测。
 
-#### ② 严禁逆向工程与未授权二次分发（Reverse Engineering & Reselling）
-> *"You may not reverse engineer, decompile, or attempt to extract the source code or underlying architecture of the Services, nor may you sublicense, resell, or distribute the Services to third parties without express written authorization."*
-* **命中实战**：将 Claude Pro 账号凭据注入反代号池（如 `cliproxyapi`），对外封装成 OpenAI 兼容接口或提供给第三方调用，完全踩中“未经授权转售与分发”红线。
+#### 核心检测指标与穿透权重：
+$$\text{WebRTC 泄漏} > \text{DNS 泄漏} > \text{设备指纹/Keychain 标记} > \text{IPQS/MaxMind 欺诈分} > \text{数据中心 IP} > \text{付款卡}$$
 
-#### ③ 规避速率限制与多账号对抗（Circumventing Rate Limits）
-> *"You may not circumvent, disable, or interfere with security-related features, rate limits, or quota controls, including by creating multiple accounts to evade restrictions."*
-* **命中实战**：通过批量注册多个账号互相轮询中转，以绕过官方单个账号的 5 小时提问配额。
+#### 满分环境配置清单：
+1. **网络链式代理与静态住宅 IP 落地**：
+   * 采用海外住宅代理（如 Webshare、ProxyCheap 的 ISP 静态住宅 IP）作为落地节点，前置搭配商业梯子；
+   * 在 Clash Verge / 代理客户端开启**全局 + 严格 TUN 虚拟网卡模式**，拦截所有底层流量；
+2. **阻断 WebRTC 泄漏**：在浏览器安装 *WebRTC Leak Shield* 扩展，开启 Strict Protection，防止真实物理网卡内网 IP 与公网 IP 外泄；
+3. **系统语言与时区对齐**：系统语言设为英文，时区改为与落地 IP 一致的美区或亚太对应时区；
+4. **清理旧设备残留指纹**：
+   * macOS 必须打开【钥匙串访问（Keychain Access）】搜索并删除所有包含 `claude`、`anthropic` 的废弃凭据；
+   * 彻底删除用户目录下的残留配置：`rm -rf ~/.claude ~/.config/claude`；
+   * 清理 Chrome/Edge 浏览器中 `claude.ai` 的全部 LocalStorage、IndexedDB 与 Cookie。
 
 ---
 
-### 3. 触发系统级挂起（`account_on_hold`）的四大综合风控权重
+### 2. 方案 A：美区 Apple ID + 隐藏邮件地址（极简零门槛路线）
+* **核心优势**：无需海外手机号、无需人脸认证、无需海外信用卡，退款成功率最高；
+* **操作步骤**：
+  1. 准备一台美区 Apple ID 的 iPhone，App Store 搜索下载官方 Claude App；
+  2. 注册登录时选择 **“Continue with Apple”**，并勾选 **“隐藏我的邮件地址（Hide My Email）”**；
+  3. 记录 Apple 自动分配给你的中继邮箱（格式如 `xxxx@privaterelay.appleid.com`）；
+  4. 使用正规美区礼品卡（通过 Pockyt Shop 官方购买）充值至 Apple ID 余额，在 App 内一键内购订阅 Claude Pro；
+  5. 后续在电脑或服务器上使用该随机中继邮箱登录，输入收到的邮箱验证码即可无缝使用。
 
-通过对实际生产会话（如本案中 `5cc61a5d` 会话在第 6035 行返回 `error: account_on_hold`）的底层抓包分析，系统的封控是由**多维特征打分累加**引发的：
+---
+
+### 3. 方案 B：自用 Gmail + 实体卡 + 阶梯养号升级路线（Max 20x 终极方案）
+针对需要升级至 **Claude Max 5x 或 Max 20x** 的重度高阶开发者，实战验证最稳的阶梯升级 SOP：
 
 ```mermaid
-pie title 自动化风控模型违规权重分布
-    "Token 消耗速度与等价成本爆炸 (>100 美元)" : 45
-    "云机房 / 数据中心 ASN 出口 IP" : 25
-    "邮箱信誉分过低 (批量生成的 Outlook)" : 15
-    "无间隔免确认机器行为 (--permission-mode auto)" : 15
+timeline
+    title Claude 高阶账号生命周期推进表 (实战沉淀)
+    第 1~5 天 : 纯净 Gmail 注册新号 : 仅使用赠送的免费额度 (每次用到限额，模拟真人探索)
+    第 6 天 : 绑定海外实体卡首充 Pro ($20) : 用满 2 次 5 小时限额，充值小额 Balance 混合使用
+    第 12 天 : 平稳使用一周后，后台一键直升 Max 5x (无弹窗，无 KYC)
+    第 13 天 : 冲击 Max 20x : 触发手机短信验证，使用美国实卡 (Red Pocket / T-Mobile eSIM) 接码
+    后续生产 : Max 20x 订阅激活成功，独享海量上下文与多开会话
 ```
 
-1. **等价算力成本击穿（45% 决定性权重）**：
-   * 在单会话中，仅仅 1~2 天内就消耗了 **3 亿 Cache 缓存 Token** 和 **近 100 万 Output Token**，折算商业 API 成本达到 **$114.18 美元**；
-   * 对于固定月费仅 $20 的 Pro 个人订阅而言，这种高达 600% 的“反向负收益”必然会触动财务与算力风控的硬性熔断阈值；
-2. **机房网络指纹（25% 权重）**：
-   * 客户端请求来自云厂商机房 IP，直接被 ASN 规则标记为“服务器自动化脚本”；
-3. **批量邮箱特征（15% 权重）**：
-   * 采用前缀特征明显的随机 Outlook 邮箱，在账号信誉评分体系中初始分极低；
-4. **高频自动执行（15% 权重）**：
-   * 缺乏人类交互的打字停顿、退格修正等生物特征。
+* **支持的优质支付卡**：美国水星银行（Mercury Bank）商业卡、Capital One 实体卡、Wise、OCBC 华侨银行、StarryBlu 等。**绝对不要使用易被批量发卡的劣质虚拟卡！**
 
 ---
 
-## 四、账号受限表现形式与排查诊断
+## 四、封号底层归因与 2025 透明度报告真相
 
-| 现象类型 | 客户端展示 | 底层 API 原始响应 | 严重程度 | 处理优先级 |
-| :--- | :--- | :--- | :---: | :--- |
-| **Claude Code CLI 受限** | `● Your account is on hold and can't use Claude Code. View details or appeal: https://claude.ai/restricted` | `{"error": "account_on_hold", "isApiErrorMessage": true}` | 🟠 **高**<br>(风控挂起) | 本地数据完好，立即停止调用，申请退款或准备申诉。 |
-| **Web 控制台禁用** | `Your account has been disabled / restricted` | HTTP 403 Forbidden | 🔴 **极高**<br>(完全封停) | 账号被注销或禁用，直接走退款流程。 |
-| **组织异常暂停** | `Organization paused due to unusual activity` | `{"error": "organization_paused"}` | 🟡 **中**<br>(临时冻结) | 通常为并发超频，提交审核有较大概率解冻。 |
+### 1. 规模比想象的大：官方透明度报告数据曝光
+根据 Anthropic 官方公布的最新 Transparency Report（透明度报告）：
+* 仅 2025 下半年，官方在全球范围内累计封禁账号超过 **145 万个**；
+* 全球申诉成功恢复率**仅为 3.3%**（即 100 次申诉仅有 3 个能够解封成功）；
+* **四大基本判死刑的申诉场景**：
+  1. 来自未支持地区（Unsupported Locations）；
+  2. 涉及拼车/共享/第三方代充黑卡；
+  3. 拿普通 Pro/Max 个人订阅高并发驱动第三方客户端或跑批处理 Agent；
+  4. 批量抓取模型输出做模型蒸馏（Model Distillation）。
 
 ---
 
-## 五、官方申诉（Appeals）实战与话术指南
+### 2. 封号与模型发布周期的“反蒸馏猎杀”
+社区实测表明，封号高发期往往高度重合于新模型的发布节点（如 Opus 5、Opus 5.5、Fable 5.1 上线前后）：
+* **原因**：每次新模型发布，全球黑产爬虫、套壳站、越狱攻击与蒸馏训练集群流量暴增，Anthropic 会在发布后 48~72 小时内**拉满自动化风控规则等级**，执行地毯式扫描，大批边缘行为账号集中暴雷；
+* **新号前 72 小时最危险**：刚注册、刚绑卡就立刻高强度刷满并发，且账单地址与出网 IP 不一致的账号，几乎 100% 存活不过 24 小时。
 
-当遭遇 `account_on_hold` 且确定不是因为恶意攻击或盗刷信用卡时，可以尝试向 Anthropic 提交官方申诉。
+---
 
-### 1. 申诉官方通道
-* **通道 A（首选）**：保持登录受限账号，直接访问 [https://claude.ai/restricted](https://claude.ai/restricted)，在受限页面点击 **“Submit an Appeal”** 提交在线表单；
-* **通道 B（备用）**：使用注册邮箱向官方安全合规团队发送邮件：`appeals@anthropic.com`。
+### 3. 额度经济学：为什么“高强度 Coding”比“聊天”更容易被封？
+Anthropic 的 $20/月 Pro 订阅从财务模型上是**以对话场景为主、编程为辅**设计的：
+* 普通日常聊天：用户输入 50 词，模型回复 200 词，单次交互消耗成本仅几厘钱；
+* 高强度 Agent Coding：一次改 Bug 需要上传数十个文件（几万 Token 上下文），结合思考过程与工具调用，单轮请求的物理成本就达到数毛甚至数美元；
+* **熔断线**：当额度进度条变成黄色，或在 24~48 小时内打满 API 等价成本超过 $50~$100 时，系统就会从“反商业套利”的角度判定该账号属于非正常使用，进而触发 `account_on_hold`。
 
-### 2. 申诉成功率客观评估
-* **极难解封场景**：批量生成的 Outlook/Hotmail 临时邮箱 + 机房 VPS IP + 单日巨额 Token 消耗。此类账号在后台被判定为“商用 Bot/反代号”，人工复核往往直接维持原判；
-* **较高解封概率场景**：自用 Gmail 个人老号 + 住宅宽带 IP + 误开代理或误触自动脚本，且能提供真实个人开发背景。
+---
 
-### 3. 高通过率申诉邮件模板
+## 五、【Claude 封号急救指南】黄金四步法
+
+一旦遭遇账号被封或收到限制通知，**切忌惊慌！切忌在同一设备或 IP 上疯狂切节点反复登录！** 遵循以下标准四步法：
+
+```mermaid
+flowchart LR
+    Step1["第一步：抢救核心资产<br/>(点 Export Data / 备份本地工程)"] 
+    --> Step2["第二步：立即停止扣费<br/>(iOS 设置 / 邮件撤销自动续费)"]
+    --> Step3["第三步：全额申请退款<br/>(reportaproblem.apple.com)"]
+    --> Step4["第四步：提交规范申诉<br/>(在线复核页 / 英文专业话术)"]
+```
+
+### 第一步：抢救核心工程资产（立刻执行）
+1. **Web 端数据**：在封号或受限页面点击 **“Export your data”**，等待官方发送数据归档邮件，邮件到达后立即点击下载（链接通常 24 小时内有效）；
+2. **Claude Code 本地工程**：
+   * 账号被封丝毫不会损坏本地磁盘上的代码与历史会话；
+   * 本地核心配置文件（`CLAUDE.md`、`~/.claude/`、项目根目录下的 `.claude/`）以及我们前面提取的全部 Markdown 会话，立即全部 Commit 并 Push 至私有 Git 仓库备份。
+
+---
+
+### 第二步：停止自动续费（绝大部分人遗忘的致命漏项）
+```{important}
+**被封号 ≠ 自动停止扣费！**
+许多开发者账号被封后不管不顾，结果次月信用卡或 Apple ID 依然被扣除 $20 美元月费！
+```
+* **Apple 订阅取消 SOP**：
+  * 打开 iPhone【设置】➔ 点击顶部【Apple 账户头像】➔【订阅】；
+  * 在活跃订阅中找到【Claude】➔ 点击最底部的**【取消订阅】**；
+* **官网信用卡直充取消**：若无法登录网页后台，立即向 `support@anthropic.com` 发送邮件，声明账号已被禁用，要求立即终止该账户的自动扣费（Cancel Recurring Billing）。
+
+---
+
+### 第三步：全渠道退款实操 SOP（挽回损失核心操作）
+
+#### 1. iOS App Store 苹果官方 48 小时极速退款（成功率 > 90%）
+由于苹果对内购采用中心化担保机制，只要账号封禁导致服务无法使用，向苹果申请退款极为顺畅：
+
+1. **登录苹果官方售后服务台**：浏览器打开 [reportaproblem.apple.com](https://reportaproblem.apple.com)，登录付款使用的美区 Apple ID；
+2. **提交退款意向**：
+   * “我需要（I'd like to）”下拉选择：**“请求退款（Request a refund）”**；
+   * 次级原因下拉选择：**“其他（Other）”** 或 **“我的购买未按预期工作（My purchase does not work as expected）”**；
+3. **勾选 Claude 订单**：在消费列表中勾选 **Claude Pro Subscription ($20.00)**；
+4. **填入标准退款申述文案（直接复制）**：
+   ```text
+   I paid for the Claude Pro subscription through the Apple App Store, but my Claude account was recently disabled/suspended by the service provider, and I can no longer access the service I paid for. I would like to request a full refund for this unusable subscription. Thank you for your assistance.
+   ```
+5. **处理与到账**：Apple 通常在 **24~48 小时内**给出审核结果。审核通过后，20 美元全额原路退回到 Apple ID 余额或原支付卡中。
+
+#### 2. 网页端 Stripe / 信用卡渠道退款
+* 若是通过网页直接绑卡：访问 [support.anthropic.com](https://support.anthropic.com)，通过客服入口提供付款账单（Invoice PDF）及封号页面截图，说明服务在购买后异常中断，要求人工退款；
+* **慎用发卡行拒付（Chargeback）**：除非金额巨大且客服完全失联，否则不要轻易走银行 Chargeback，因为这会导致你的姓名、卡号和账单地址被 Stripe 全球反欺诈网络永久拉黑。
+
+---
+
+### 第四步：官方申诉流程与高通过率中英文模板
+
+#### 1. 申诉入口
+* **入口一（最快）**：登录 `claude.ai`，在封号提示弹窗中直接点击 **“Request a review”** 或 **“Submit an Appeal”** 访问官方审核表单；
+* **入口二**：直接发送邮件至安全合规团队：`support@anthropic.com` 与 `appeals@anthropic.com`。
+
+#### 2. 经典申诉模板（已成功解封的真实案例模板）
 
 ```text
-Subject: Appeal for Account Restriction - [Your Email Address] - Account ID: [accountUuid]
+Subject: Appeal for Account Review - [Your Email Address] - Account ID: [Optional]
 
-Dear Anthropic Trust & Safety Team,
+Hello Anthropic Trust & Safety Team,
 
-I am writing to respectfully appeal the recent restriction placed on my Claude Pro account ([Your Email Address]). 
+My Claude account (email: [Your Email Address]) appears to have been disabled. I believe this may be a false positive. I use Claude strictly for legitimate personal purposes: product copywriting, software translation/localization, reviewing code snippets for my personal projects, and drafting technical notes. I have never engaged in any prohibited activities under your Acceptable Use Policy.
 
-Today, while using Claude Code in my local development environment to refactor a software project, I received the notice stating: "Your account is on hold and can't use Claude Code."
+Possible triggers I can think of and the corrective steps I have taken:
+• Network / Environment: I occasionally used a proxy service while traveling for connectivity. I understand this may trigger security anomalies. I have standardized my network environment and disabled proxy hopping.
+• Request Frequency: During a recent coding task, I ran several consecutive code analysis sessions within a short span. I now realize this may have generated an unusually high context volume. Moving forward, I will strictly keep my usage within normal interactive limits and avoid any automated loops.
+• Single-User Policy: I confirm this is my sole account and I have never shared my credentials or used multi-tenant reverse proxies.
 
-I would like to clarify that:
-1. I am a legitimate individual software developer using Claude Code strictly for my own personal programming tasks and educational research.
-2. I have never shared my account credentials, nor have I engaged in unauthorized reselling, web scraping, or public proxying.
-3. During my recent session, I was running local integration tests with automated tool loops, which I now realize generated an unusually high volume of context tokens in a short period. I sincerely apologize for any strain this may have caused to your infrastructure.
+I have thoroughly re-read Anthropic’s Terms of Service and Usage Policy and will strictly adhere to them. Could you please review my account and consider reinstating my access? If additional identity or usage verification is required, I am ready to provide it immediately.
 
-I have reviewed your Terms of Service and Usage Policy thoroughly, and I am fully committed to adhering to all fair use guidelines moving forward. I will strictly manage my prompt frequency and session length to ensure standard interactive usage.
+Thank you very much for your time and assistance.
 
-Could you please review my account history and consider lifting the restriction? I greatly rely on Claude as my primary coding assistant and look forward to your positive consideration.
-
-Account Email: [Your Email Address]
-Account UUID: [accountUuid]
-
-Sincerely,
+Best regards,
 [Your Name]
 ```
 
 ---
 
-## 六、全渠道退款实战指南（挽回损失核心操作）
+## 六、反代号池（cliproxyapi）高可用自愈配置实战
 
-一旦账号被 Hold 且申诉希望渺茫，**首要任务是在扣费周期内发起全额退款，挽回资金损失**。
+在多账号反代号池建设中，不能将所有希望寄托于“单个账号永远不封”，而必须在系统架构层实现**“坏号自动熔断、多号动态轮换、流量拟人削峰”**：
 
-### 渠道一：iOS App Store 苹果官方退款（核心首选，成功率 90%+）
-
-```{important}
-**为什么必须找苹果而不是 Anthropic？**
-Anthropic 官方客服明确声明：**所有通过苹果 iOS App Store 内购产生的订阅，费用由 Apple 统一收缴和结算，Anthropic 客服在后台无权干预，也无法直接执行退款**。必须由用户向 Apple 提交申请。
-```
-
-#### 退款操作 SOP 步骤：
-
-1. **登录苹果官方售后门户**：
-   * 在电脑或手机浏览器打开 [reportaproblem.apple.com](https://reportaproblem.apple.com)；
-   * 登录你开通该 Claude Pro 订阅时使用的**美区 Apple ID**；
-2. **提交退款申请**：
-   * 在“我需要（I'd like to）”下拉菜单中选择：**“请求退款（Request a refund）”**；
-   * 在次级原因下拉菜单中选择：**“我的购买未按预期工作（My purchase does not work as expected）”**，或选择 **“我无意购买此项目”**；
-   * 点击下一步（Next）；
-3. **勾选订单**：
-   * 在消费历史列表中找到 **Claude: AI Assistant - Claude Pro Subscription ($20.00)**；
-   * 勾选该订单并点击提交（Submit）；
-4. **审核与到账周期**：
-   * 提交后，页面显示“正在审核中”；
-   * **处理周期通常为 24~48 小时**。审核通过后，已扣除的 20 美元将**全额原路退回到你的 Apple ID 礼品卡余额**（或绑定的外币卡）；
-5. **重要自保防扣费动作**：
-   * 申请退款并不会自动解约！必须立即打开 iPhone【设置】➔ 点击【个人头像】➔【订阅】➔ 找到【Claude】➔ 点击**【取消订阅】**，防止下个月继续扣费。
-
----
-
-### 渠道二：网页 Stripe / 信用卡直充渠道退款
-
-如果订阅是通过网页端信用卡/虚拟卡直充的：
-1. **通过客服发起售后（Get Help）**：
-   * 登录网页端进入 Settings ➔ 点击右下角 **“Get Help”**；
-   * 开启客服工单，提供账单 Invoice PDF 截图，说明“账号在开通后短时间内因系统误判受限，未能享受到约定的服务周期，申请退款”；
-   * 若封号时间距离付款不足 72 小时，且没有严重的恶意欺诈记录，官方客服通常会人性化地批准一次性退款（按比例或全额）；
-2. **银行争议拒付（Chargeback）的利弊警告**：
-   * 若客服拒绝退款，可通过发卡银行发起拒付（Chargeback）。虽然发卡行通常会垫付退款，但**该信用卡卡号、持卡人姓名和账单地址将被 Stripe 全球反欺诈网络拉黑**，今后该卡将永久无法在任何接入 Stripe 的海外平台付款。
-
----
-
-## 七、反代与号池工程中的高可用自愈防御架构
-
-基于本次封号教训，在生产级号池中间件（如 `cliproxyapi`）的工程落地中，必须补充以下四大防御屏障：
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Client as 客户端调用
-    participant Proxy as cliproxyapi 反代调度核心
-    participant Health as 账号健康度探测与限流器
-    participant Upstream as Anthropic 官方服务端
-
-    Client->>Proxy: 发起 Claude 补全请求
-    Proxy->>Health: 校验当前候选 Token 健康状态
-    alt 账号单日成本超限 (> $25)
-        Health-->>Proxy: 触发软限流，跳过当前账号
-        Proxy->>Proxy: 自动切换轮询下一个活跃 Token
-    else 账号健康正常
-        Proxy->>Upstream: 发起请求 (经由住宅代理出网)
-        alt 官方返回 account_on_hold
-            Upstream-->>Proxy: HTTP 403 / account_on_hold 错误
-            Proxy->>Health: 立即熔断并标记 disabled=True
-            Health-->>Proxy: 触发 Telegram 运维告警推送
-            Proxy->>Proxy: 剔除坏号，无感故障转移 (Failover)
-            Proxy->>Upstream: 使用备用健康账号重试
-            Upstream-->>Proxy: 正常响应
-            Proxy-->>Client: 返回成功结果
-        end
-    end
-```
-
-### 1. 错误代码捕获与秒级自动剔除熔断
-在反代中间件中，一旦拦截到官方返回 `account_on_hold`、`user_restricted` 或 HTTP 403，配置处理器立即自动修改对应 JSON 凭证文件：
+### 1. 坏号秒级自动隔离下线
+在 `cliproxyapi` 中配置错误拦截探针，一旦检测到上游返回 `account_on_hold`、`403 Forbidden` 或 `user_restricted`，调度器立即对对应的 `auths/claude-*.json` 进行标记锁定：
 ```json
 {
   "email": "AnnamaeTock180@outlook.com",
   "disabled": true,
   "disabled_reason": "account_on_hold",
-  "disabled_at": "2026-09-25T11:14:42Z"
+  "disabled_timestamp": 1790353284,
+  "auto_failover": true
 }
 ```
-保证坏号在 0 秒内从内存轮询列表中隔离，彻底杜绝坏号引发下游业务大面积报错。
+隔离后的坏号不再参与负载均衡轮询，下游业务调用会自动无感转移（Failover）至下一个健康活跃账号。
 
-### 2. Token Velocity 单号成本熔断保护
-在调度器中引入**单账号日消耗天花板机制**：
-* 监控每个账号在 24 小时内的输入/输出 Token 估算总值；
-* 当单个账号等价成本达到 **$25~$30 美元** 时，自动进入休眠冷却（Cooldown），切换至下一个储备账号；
-* 模拟真人交互的“人类作息规律”，避免单个包月账号在 48 小时内被薅破 100 刀。
+### 2. 单号 Token Velocity 熔断限流保护
+* **设定软配额限制**：在号池中间件中设置单账号单日累计等价成本上限（推荐 **$25~$30 美元**）；
+* **进入平滑冷却**：一旦某账号当天消耗触及软配额，调度器自动将其标记为 `cooldown` 并暂停分发 12 小时，强制引导流量切换至其他备用账号，彻底消除单日几亿 Token 引发官方财务风控的隐患。
 
-### 3. 出口动态住宅代理穿透
-在反代容器中配置外网出境路由，强制走动态住宅代理（Residential Proxy）：
-```yaml
-# cliproxyapi 环境变量或出网代理配置
-environment:
-  - HTTP_PROXY=socks5://user:pass@residential.proxy.com:1080
-  - HTTPS_PROXY=socks5://user:pass@residential.proxy.com:1080
-```
-彻底剥离 VPS 云主机的机房 ASN 标签，使流量在 Anthropic 防火墙视角下呈现为全球普通家庭宽带行为。
+---
 
-### 4. 商业环境终极选型法则
-* **开发/测试/低频辅助**：使用“美区 Apple ID + 官方礼品卡内购”的 Claude Pro 账号，成本低、退款有保障；
-* **企业/大规模高并发/商业对外交付**：**坚决停止使用逆向 Web/Pro 号池**，全面接入官方商业 API Key（或 AWS Bedrock / Google Cloud Vertex AI Claude 企业级端点），按量付费，享有法定商业 SLA，从根本上终结封号焦虑。
+## 七、权威博主与实战方案索引导航
+
+| 博主 / 资源 | 核心实战方向 | 典型参考方案 |
+| :--- | :--- | :--- |
+| **雪踏乌云 (@Pluvio9yte)** | 封号防关联、住宅代理、海外手机卡 | • [Clash Verge 简单配置 IP 链式代理教程](https://x.com/Pluvio9yte)<br>• [科学上网住宅 IP 完全指南与多卡保号横评](https://x.com/Pluvio9yte) |
+| **劳伦斯 (@LawrenceW_Zen)** | 官方原生极简订阅、独享住宅配置 | • [超简单！一句提示词搞定专属 VPS + 住宅 IP 配置](https://x.com/LawrenceW_Zen)<br>• [原汁原味的 Claude 官方极简订阅指南](https://x.com/LawrenceW_Zen) |
+| **@gkxspace** | 满血驱动 Claude Code、静态住宅实战 | • [ProxyCheap 静态住宅 IP + 境外卡开通 Claude Max 实操](https://x.com/gkxspace) |
+| **@leo_xiaolei** | 纯美区长效环境、iOS 内购避坑 | • [美版设备 + T-Mobile 实卡 + 礼品卡 56 天零风控经验复盘](https://x.com/leo_xiaolei) |
