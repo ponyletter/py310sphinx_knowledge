@@ -74,4 +74,5 @@ website-deployment-platforms-v1/index
 git-svn-code-hosting-cnb-v1/index
 coze-dify-n8n-v1/index
 figma-intro-basics-zh-v1/index
+python-anaconda-dev-tools-v1/index
 ```
