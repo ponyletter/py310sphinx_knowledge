@@ -14,6 +14,7 @@ courses/wyoming_llc_formation_and_us_fintech/index
 courses/freelance_orders_guide/index
 courses/geek_notes_and_ai_dialogues/index
 courses/course_render_engine_and_dashboard/index
+courses/pte_academic_crash_course/index
 ```
 
 ```{toctree}

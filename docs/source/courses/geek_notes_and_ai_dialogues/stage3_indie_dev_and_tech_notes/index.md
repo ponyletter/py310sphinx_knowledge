@@ -22,6 +22,7 @@
 | **[10 拾光肖像馆 3 小时次日收款](10_case_fish_portrait_mvp_in_3hours)** | Fish 嗡嗡鱼<br>精益产品 MVP | 0 行手写代码、砍掉登录/支付/后台、无感 Session、人工微信客服转账核销 | 3 小时极速上线，次日获得真实付费，跑通敏捷验证飞轮 |
 | **[11 小红书心理测试 1天跑通 MVP](11_case_guoxiaowen_1day_xiaohongshu_ai_psych_test_mvp)** | 郭晓文<br>轻量虚拟商品 | 调研三字诀（看<问<干）、小红书个人买卖闲置免资质挂车、Claude Code 静态交互页 | 1 天跑通，次日首单，3 天出单 49 笔（利润 180~200 元，仅 1 退款） |
 | **[12 AI 原创虚拟产品万字方法论](12_case_luke_ai_original_virtual_products_methodology)** | Luke<br>虚拟资产策展 | 1.2w字长文、NotebookLM 私域扎根、NanoBanana 统一视觉、WPS 在线嵌入 HTML 互动课件 | 摆脱搬运降价内卷，4 大原创航道，Few-shot 标题仿写与 One-shot 框架 |
+| **[13 无头 VPS 改造 XFCE 远程桌面](13_guide_ubuntu_vps_headless_to_xfce_xrdp_remote_desktop)** | 实战运维<br>GUI 环境搭建 | 2C4G 纯命令行改造、XFCE 极轻量桌面、XRDP 协议、Chrome root 沙箱注入与快捷键映射 | 3 分钟免重装平滑升级，彻底解决海外风控人机验证与 Chrome 权限闪退 |
 
 ---
 
@@ -42,6 +43,7 @@
 10_case_fish_portrait_mvp_in_3hours
 11_case_guoxiaowen_1day_xiaohongshu_ai_psych_test_mvp
 12_case_luke_ai_original_virtual_products_methodology
+13_guide_ubuntu_vps_headless_to_xfce_xrdp_remote_desktop
 ```
 
 ```{important}

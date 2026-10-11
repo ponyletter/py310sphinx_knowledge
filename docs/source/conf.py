@@ -53,4 +53,6 @@ html_theme_options = {
     'sticky_navigation': True,
     'includehidden': True,
     'titles_only': False,
+    'prev_next_buttons_location': 'both',
 }
+

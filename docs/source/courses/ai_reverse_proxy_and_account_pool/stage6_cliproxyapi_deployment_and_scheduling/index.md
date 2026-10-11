@@ -19,3 +19,8 @@
 04_full_verification_commands_suite
 05_web_management_dashboard_and_operations
 ```
+
+```{seealso}
+**拓展架构延伸**：关于如何将 CLIProxyAPI (CPA) 接入上层统一模型总网关（FreeLLMAPI）、与 OpenRouter BYOK 免抽成通道、低价开源推理商（DeepInfra / Novita / SiliconFlow）以及全栈 Agent 框架（Mastra / LangGraph / MCP）联合构建多级故障降级与成本压降体系，请参阅极客手记专栏：[【实战对话】FreeLLMAPI 统一大模型总网关架构与 Agent 全栈选型指南](../../geek_notes_and_ai_dialogues/stage2_llm_dialogues_and_prompts/22_case_freellmapi_unified_gateway_cpa_openrouter_and_agent_frameworks.md)。
+```
+
