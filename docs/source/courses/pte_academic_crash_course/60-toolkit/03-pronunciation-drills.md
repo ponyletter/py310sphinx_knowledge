@@ -1,4 +1,8 @@
-# 发音与流利度专项强化操练手册（Pronunciation & Fluency Drills）
+如图 33 所示，十五分钟练习从语速热身、跟读到录音回听；中部句子展示意群停顿与内容词重读。
+
+![发音流利度十五分钟训练表](../images/whiteboard/31-pronunciation-daily-drill.png)
+
+*图 33：口语日练时间表、意群示例及常见发音问题的修复动作。*
 
 :::{admonition} 为什么发音与流利度是全考场提分杠杆率最高的基础训练？
 :class: important

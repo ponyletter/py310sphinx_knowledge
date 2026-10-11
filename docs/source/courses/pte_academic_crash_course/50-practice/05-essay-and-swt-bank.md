@@ -1,4 +1,8 @@
-# 实战真题库：大作文母题、文本概括与听力概括精粹 (Writing & Summary Bank)
+如图 29 所示，先辨题干要求，再为同意与否、优缺点、问题解决等题型安排论证；下方对照 SWT 与 SST 的输出形式。
+
+![写作题干类型与论证提纲](../images/whiteboard/27-writing-bank-prompt-matrix.png)
+
+*图 29：写作练习题的类型矩阵、远程工作提纲与两类摘要区别。*
 
 :::{note} 题库设计机制与实战训练逻辑
 :class: important

@@ -1,4 +1,8 @@
-# 实战真题库：阅读七大题型全真精析集 (Reading Practice Set)
+如图 30 所示，五个空分别由语法、搭配和逻辑关系决定；看答案时请同时核对理由，而不是只记选项。
+
+![阅读五空题答案与依据](../images/whiteboard/28-reading-practice-worked.png)
+
+*图 30：阅读练习的五空例题、逐空依据，以及拖拽与排序的解题顺序。*
 
 :::{note} 题库设计机制与实战训练逻辑
 :class: important

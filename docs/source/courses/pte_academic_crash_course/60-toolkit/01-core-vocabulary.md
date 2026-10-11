@@ -1,4 +1,8 @@
-# 核心高频词汇表（Core Vocabulary）—— 真正决定分数的封闭学术词库
+如图 31 所示，大学行政、研究方法、高风险拼写和固定搭配分开练；下方例句展示如何把词放回句子结构。
+
+![核心词汇拼写与搭配分组](../images/whiteboard/29-core-vocabulary-clusters.png)
+
+*图 31：核心词汇四类分组、拼写提醒与题型使用场景。*
 
 :::{admonition} 为什么这份词汇表篇幅精简？
 :class: important

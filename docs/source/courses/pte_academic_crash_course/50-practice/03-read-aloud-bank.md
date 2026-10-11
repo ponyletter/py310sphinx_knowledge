@@ -1,4 +1,8 @@
-# 实战真题库：朗读文本 15 篇权威特训集 (Read Aloud Bank)
+如图 27 所示，先给句子划意群，再读出自然停顿；图中的单词重音卡和回听清单可用于逐篇练习。
+
+![RA 斜线意群与录音回听](../images/whiteboard/25-ra-bank-phrase-marks.png)
+
+*图 27：RA 原创练习库中的斜线断句、正确重音与十分钟训练循环。*
 
 :::{admonition} 题库设计初衷与实战价值
 :class: important

@@ -1,4 +1,8 @@
-# 实战真题库：复读句子 60 句权威特训集 (Repeat Sentence Bank)
+如图 26 所示，从短句逐渐过渡到长句，用同一句子示范如何切意群、尽快开口、保持原词顺序并回听自查。
+
+![RS 短中长句分块练习](../images/whiteboard/24-rs-bank-levels.png)
+
+*图 26：RS 原创练习句的分级方法与分块复述流程。*
 
 :::{admonition} 题库设计初衷与实战价值
 :class: important

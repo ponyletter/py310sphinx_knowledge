@@ -37,7 +37,11 @@
 
 ## 三步破题黄金法则 (The Three-Step Method)
 
+如图 17 所示，Skara Brae 例题通过首次引入、It、However、These 和 therefore 锁定 B→D→A→C→E 的顺序。
+
 ![段落排序 RO 破题法：首句判定与指代链追踪](../images/whiteboard/10-reorder-chains.png)
+
+*图 17：RO 句卡排序链及相邻关系证据。先确定可靠的相邻对，再排剩余句子。*
 
 ### 第一步：秒杀独立首句（全题最高回报动作）
 

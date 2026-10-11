@@ -1,5 +1,11 @@
 # 02. 官方 22 种题型中英对照全景速查表 (The Complete Item Inventory)
 
+如图 3 所示，题型缩写先按口语与写作、阅读、听力三部分归类，再对应到实际作答动作；遇到陌生缩写可先查这张图。
+
+![PTE 题型缩写与所属部分速查表](../images/whiteboard/14-item-inventory-map.png)
+
+*图 3：题型缩写速查表。表格用于辨认题型与所在部分，具体题量和时间仍以正文表格为准。*
+
 本页面所有数据均引自培生官方《PTE Academic Score Guide — Test Taker》（© Pearson Education Ltd 2025）第 7 节“Scoring Criteria”，并与培生最新官方题型标准完成双向核对。这是公开资料中权威且精准的单题级参数清单，**建议考生在整个备考期间加入书签长期对照参考**。
 
 :::{admonition} 如何解读“供分走向 (Feeds)”栏目

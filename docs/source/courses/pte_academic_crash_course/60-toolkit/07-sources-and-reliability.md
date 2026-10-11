@@ -1,4 +1,8 @@
-# 官方参考源与资料权威度分级（Sources, Timeliness & Reliability）
+如图 37 所示，官方原始资料、课程分析和机构预测处在不同证据层级；核实具体说法时应回到原始出处与日期。
+
+![备考信息证据阶梯](../images/whiteboard/35-source-evidence-ladder.png)
+
+*图 37：备考资料的证据等级、常见说法核实方法和来源检查流程。*
 
 :::{admonition} 为什么本课程必须设立信源说明页面？
 :class: important

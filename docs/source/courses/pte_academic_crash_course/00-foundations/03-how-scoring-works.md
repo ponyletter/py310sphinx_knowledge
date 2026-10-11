@@ -40,7 +40,11 @@ PTE 的总分是基于**项目反应理论 (Item Response Theory, IRT)** 概率�
 
 ## Content 闸门规则 —— 整场考试最致命的给分红线
 
+如图 4 所示，先判断回答是否切题，再看后续语言表现；图中的分支提醒考生用题目里的真实内容作答。
+
 ![Content 闸门评分机制：Content 为 0 则后续流利度与发音彻底清零](../images/whiteboard/02-content-gate.png)
+
+*图 4：内容闸门与后续评分的关系。图中把相关回答、无关回答和各特质评分路径分开，便于核对答题风险。*
 
 对于所有考查 Content（内容度）的口语题目，官方引擎执行严格的**两阶段级联评分机制 (Two-Stage Scoring)**。以下为官方指南以 Describe Image 为例公布的判定逻辑：
 

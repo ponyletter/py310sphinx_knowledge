@@ -32,7 +32,11 @@ graph TD
     Update ==> Strategy ==> Toolkit
 ```
 
+如图 1 所示，先把三个考试部分与交叉供分题型放在同一张图里，再决定后续章节的训练顺序。
+
 ![PTE 考试全景与交叉供分机制](images/whiteboard/01-exam-overview.png)
+
+*图 1：PTE Academic 的三个考试部分及主要交叉供分题型；优先练能同时贡献多个技能分数的题目。*
 
 ---
 

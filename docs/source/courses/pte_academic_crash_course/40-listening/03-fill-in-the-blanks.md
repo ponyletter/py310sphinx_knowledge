@@ -1,4 +1,8 @@
-# 03. 听力键入填空 (Listening: FIB) 极速通关指南 —— A 级听力提分题
+如图 22 所示，音频播放前先预测空格词性，播放时同步输入；漏听一空先跟下一句，结束后再补空并查拼写。
+
+![听力填空预测输入与补漏示例](../images/whiteboard/20-listening-fib-repair.png)
+
+*图 22：听力填空从预测到补漏的完整示例。*
 
 :::{admonition} 题型核心参数一览 (At a Glance)
 :class: tip

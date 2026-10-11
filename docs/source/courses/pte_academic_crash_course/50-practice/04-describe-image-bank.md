@@ -1,4 +1,8 @@
-# 实战真题库：描述图像 12 大全真场景特训集 (Describe Image Bank)
+如图 28 所示，五组真实数值先变成最高、最低、差距和中间组笔记，再组成英语口述；后面的十二个场景都可按此方法练习。
+
+![DI 原创柱状图与口述示例](../images/whiteboard/26-di-bank-chart-examples.png)
+
+*图 28：DI 柱状图数据到 40 秒描述的映射示例。图中数值属于原创练习场景。*
 
 :::{important} 题库设计机制与实战训练逻辑
 :class: important

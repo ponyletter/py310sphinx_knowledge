@@ -1,5 +1,11 @@
 # 05. 简答题 (Answer Short Question, ASQ) 极速通关指南 —— A 级听力送分题
 
+如图 11 所示，先判断提问是定义、职业、类别还是数量，再用最短的词组作答；表中的例题可直接遮住答案自测。
+
+![ASQ 问题类别与短答案示例](../images/whiteboard/17-asq-question-families.png)
+
+*图 11：ASQ 常见问法与最短答案对照。重点练识别关键词后立即作答。*
+
 :::{admonition} 题型核心参数一览 (At a Glance)
 :class: tip
 | 核心指标 | 官方标准参数 |

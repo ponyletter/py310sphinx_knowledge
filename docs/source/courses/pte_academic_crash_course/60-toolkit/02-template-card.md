@@ -1,4 +1,8 @@
-# 全科句式脚手架通用速记卡（Template & Frame Card）—— 一页纸战术框架总览
+如图 32 所示，句架只预留语法位置，主题、数字、观点和关系必须从当前题目取得；可用矩阵快速复习各题的输出结构。
+
+![语法句架与成品套话对照](../images/whiteboard/30-template-vs-frame-card.png)
+
+*图 32：成品套话与安全句架对照，附口语、写作题型的内容填充框架。*
 
 :::{danger} 使用本页内容前，必须牢记 2025 官方评分红线
 培生官方在 2025 官方评分指南中明确指出：**“包含预先背诵或机械记忆内容（Pre-prepared or memorized material）的作答将被归类为无关作答（Irrelevant responses）”**，其内容分（Content）将直接被判 **0 分**。

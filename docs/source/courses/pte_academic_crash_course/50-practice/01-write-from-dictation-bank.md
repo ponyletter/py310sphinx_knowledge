@@ -1,4 +1,8 @@
-# 实战真题库：听写句子 60 句权威特训集 (Write from Dictation Bank)
+如图 25 所示，先按 A、B、C 三档练句长，再用一次播放、骨架速记、逐词比对和拼写复测形成训练闭环。
+
+![WFD 练习库分级与逐词自评](../images/whiteboard/23-wfd-bank-levels.png)
+
+*图 25：WFD 原创练习库的三级训练目标、示例句与自评方法。*
 
 :::{admonition} 题库设计初衷与实战价值
 :class: important

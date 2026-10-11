@@ -1,4 +1,8 @@
-# 04. 标出错误词 (Highlight Incorrect Words, HIW) —— C 级倒扣分排雷指南
+如图 23 所示，当屏幕上的 increased 与音频里的 decreased 不一致时，应点击屏幕词 increased；下方算例说明误点会扣分。
+
+![HIW 屏幕词与音频词对照](../images/whiteboard/21-hiw-negative-marking.png)
+
+*图 23：HIW 的点击对象、正负分规则及谨慎点选流程。*
 
 :::{admonition} 题型核心参数一览 (At a Glance)
 :class: warning
