@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="380" viewBox="0 0 1100 380" role="img" aria-label="实例隔离：共享只读代码，分离登录态、桌面和业务状态">
+<title>实例隔离：共享只读代码，分离登录态、桌面和业务状态</title>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#486079"/></marker></defs>
+<rect width="100%" height="100%" fill="#f7fafc"/>
+<text x="28" y="36" font-size="22" font-family="sans-serif" fill="#142c45">实例隔离：共享只读代码，分离登录态、桌面和业务状态</text>
+<path d="M175,185 L175,242" stroke="#486079" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M550,185 L550,242" stroke="#486079" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M775,135 L703,135" stroke="#486079" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="25" y="85" width="300" height="100" rx="10" fill="white" stroke="#8ba6c1"/>
+<text x="39" y="117" font-family="sans-serif" font-size="17" fill="#173c60">账号 A / 独立用户与显示</text>
+<text x="39" y="144" font-family="sans-serif" font-size="13" fill="#40566b">Chrome profile A + worker A</text>
+<rect x="400" y="85" width="300" height="100" rx="10" fill="white" stroke="#8ba6c1"/>
+<text x="414" y="117" font-family="sans-serif" font-size="17" fill="#173c60">账号 B / 独立用户与显示</text>
+<text x="414" y="144" font-family="sans-serif" font-size="13" fill="#40566b">Chrome profile B + worker B</text>
+<rect x="775" y="85" width="300" height="100" rx="10" fill="white" stroke="#8ba6c1"/>
+<text x="789" y="117" font-family="sans-serif" font-size="17" fill="#173c60">集中控制台（未来设计）</text>
+<text x="789" y="144" font-family="sans-serif" font-size="13" fill="#40566b">健康 / 授权 / 分批发布</text>
+<rect x="25" y="245" width="300" height="100" rx="10" fill="white" stroke="#8ba6c1"/>
+<text x="39" y="277" font-family="sans-serif" font-size="17" fill="#173c60">实例 A 的数据库与数据目录</text>
+<text x="39" y="304" font-family="sans-serif" font-size="13" fill="#40566b">设置、校准、任务与锁独立</text>
+<rect x="400" y="245" width="300" height="100" rx="10" fill="white" stroke="#8ba6c1"/>
+<text x="414" y="277" font-family="sans-serif" font-size="17" fill="#173c60">实例 B 的数据库与数据目录</text>
+<text x="414" y="304" font-family="sans-serif" font-size="13" fill="#40566b">设置、校准、任务与锁独立</text>
+<rect x="775" y="245" width="300" height="100" rx="10" fill="white" stroke="#8ba6c1"/>
+<text x="789" y="277" font-family="sans-serif" font-size="17" fill="#173c60">当前单账号基线</text>
+<text x="789" y="304" font-family="sans-serif" font-size="13" fill="#40566b">多租户功能尚需实现和验收</text>
+</svg>

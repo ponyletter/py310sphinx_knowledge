@@ -1,0 +1,107 @@
+{
+  "repository": "https://github.com/stackoracode/xianyu-visual-monitor",
+  "commit": "f909acb4217231a7839429b532b20a0b4e4441a7",
+  "license": "MIT",
+  "files": [
+    {
+      "source": "src/xianyu_monitor/detection/tracker.py",
+      "local": "_code/detection/tracker.py",
+      "sha256": "b696f9fbb44cc4911d7faabf7b8f56274d94f0a3c0cb79954ef3fa253ebe1291"
+    },
+    {
+      "source": "src/xianyu_monitor/detection/identity.py",
+      "local": "_code/detection/identity.py",
+      "sha256": "96dbe2f7ac472ef79cb372033127a2c38e14678185199c9b2d65fe2219b03834"
+    },
+    {
+      "source": "src/xianyu_monitor/worker/pipeline.py",
+      "local": "_code/worker/pipeline.py",
+      "sha256": "a104f80420e6d376c1843d21b6b533422042565219331dfa763ed68ad75a705a"
+    },
+    {
+      "source": "src/xianyu_monitor/replies/rules.py",
+      "local": "_code/replies/rules.py",
+      "sha256": "d1701f1f25d9aae6e4a2385f6a31dab387258e258a93dc53ca2b208453c7ae8b"
+    },
+    {
+      "source": "src/xianyu_monitor/replies/planner.py",
+      "local": "_code/replies/planner.py",
+      "sha256": "c52a264b1fe2596d7e19b9526cffd2de4ffefcf7c49709958493d3c0752321c3"
+    },
+    {
+      "source": "src/xianyu_monitor/replies/executor.py",
+      "local": "_code/replies/executor.py",
+      "sha256": "84261425832368b8e849052ce5df54f0bd7731d175ab9ca2aac34d5ede5a22d9"
+    },
+    {
+      "source": "src/xianyu_monitor/replies/images.py",
+      "local": "_code/replies/images.py",
+      "sha256": "d983926349950a6a9b462d47bd90762ee3f715b23961c32c30a23f174f801817"
+    },
+    {
+      "source": "src/xianyu_monitor/vision/analyzer.py",
+      "local": "_code/vision/analyzer.py",
+      "sha256": "0260d837d635b08d900733201b5e779e0bff8b0dbac5f39578c9025ae2bfeefc"
+    },
+    {
+      "source": "src/xianyu_monitor/vision/reply_image.py",
+      "local": "_code/vision/reply_image.py",
+      "sha256": "1cbeea10c898f8db097c6dff31ef89d7810f58cdcf29529b72f78880345d741f"
+    },
+    {
+      "source": "src/xianyu_monitor/ocr/base.py",
+      "local": "_code/ocr/base.py",
+      "sha256": "5eaeb31ca00bd1f708d7ed75a0f2889b065ad29b9d401e9872a6ff9f0439ef5c"
+    },
+    {
+      "source": "src/xianyu_monitor/ocr/pool.py",
+      "local": "_code/ocr/pool.py",
+      "sha256": "bab9f417b15f8c381160d9764dea3dbe6ece4ca4b878cf894c352081152f5e2f"
+    },
+    {
+      "source": "src/xianyu_monitor/queueing/jobs.py",
+      "local": "_code/queueing/jobs.py",
+      "sha256": "95dc72292111271e906507e7aec98bfb2423ad3743f9989208359ec5f622e6f6"
+    },
+    {
+      "source": "src/xianyu_monitor/models.py",
+      "local": "_code/models.py",
+      "sha256": "5c4376964f6a87909e2a7ceaa02b3ba12e8d34416dc110b45d1afca5a14cc2a5"
+    },
+    {
+      "source": "src/xianyu_monitor/cli.py",
+      "local": "_code/cli.py",
+      "sha256": "45a2757b2f36224c1cced1ab0e65068c80253324dcd5829ff8d88aa7c3e7528f"
+    },
+    {
+      "source": "src/xianyu_monitor/settings.py",
+      "local": "_code/settings.py",
+      "sha256": "bf7e53bb71aff63e46c77e6841f3ec0a6992e9b3a8381b92d11a165be2ec32bf"
+    },
+    {
+      "source": "src/xianyu_monitor/runtime_settings.py",
+      "local": "_code/runtime_settings.py",
+      "sha256": "950d16533d90057ea067b07cd367ddf9ece02e8b24f667109fe64ff8e5ba08c0"
+    },
+    {
+      "source": "LICENSE",
+      "local": "_code/LICENSE.txt",
+      "sha256": "6fc942ad8008a5f3ef2229b82ea63b106f68c0afc9840445300c83bd38c27a12"
+    },
+    {
+      "source": "deploy/monitor.env.example",
+      "local": "_examples/monitor.env.example",
+      "sha256": "433133a5ad4b2d0f0e70af6fe5fdf89aeec61194c44b0dd3a8425a5181e1ef6a"
+    },
+    {
+      "source": "src/xianyu_monitor/examples/rules.example.json",
+      "local": "_examples/rules.example.json",
+      "sha256": "32f127e86821a804a9dcb5262e0b57e16e168986821a38f291a228718484ba43"
+    },
+    {
+      "source": "src/xianyu_monitor/examples/calibration.example.json",
+      "local": "_examples/calibration.example.json",
+      "sha256": "35ab0861b347b0b6f7406abf0302a41d704a251e3a225f6f177a6cbef7a6a81a"
+    }
+  ]
+}
