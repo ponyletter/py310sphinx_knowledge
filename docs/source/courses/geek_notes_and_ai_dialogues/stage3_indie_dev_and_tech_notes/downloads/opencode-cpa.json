@@ -1,0 +1,37 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "cpa/gpt-6.1-sol",
+  "small_model": "cpa/gemini-3.8-flash-high",
+  "provider": {
+    "cpa": {
+      "name": "CPA OpenAI Compatible",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://cpa.tg-cc755.cn/v1",
+        "apiKey": "{file:~/.config/opencode/cpa-api-key}"
+      },
+      "models": {
+        "gpt-6.1-sol": {
+          "name": "gpt-6.1-sol",
+          "attachment": true,
+          "tool_call": true,
+          "modalities": {"input": ["text", "image"], "output": ["text"]}
+        },
+        "gemini-3.8-flash-high": {
+          "name": "gemini-3.8-flash-high",
+          "attachment": true,
+          "tool_call": true,
+          "modalities": {"input": ["text", "image"], "output": ["text"]}
+        }
+      }
+    }
+  },
+  "attachment": {
+    "image": {
+      "auto_resize": true,
+      "max_width": 1600,
+      "max_height": 1600,
+      "max_base64_bytes": 512000
+    }
+  }
+}

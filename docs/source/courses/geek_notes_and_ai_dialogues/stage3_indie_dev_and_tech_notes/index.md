@@ -23,6 +23,7 @@
 | **[11 小红书心理测试 1天跑通 MVP](11_case_guoxiaowen_1day_xiaohongshu_ai_psych_test_mvp)** | 郭晓文<br>轻量虚拟商品 | 调研三字诀（看<问<干）、小红书个人买卖闲置免资质挂车、Claude Code 静态交互页 | 1 天跑通，次日首单，3 天出单 49 笔（利润 180~200 元，仅 1 退款） |
 | **[12 AI 原创虚拟产品万字方法论](12_case_luke_ai_original_virtual_products_methodology)** | Luke<br>虚拟资产策展 | 1.2w字长文、NotebookLM 私域扎根、NanoBanana 统一视觉、WPS 在线嵌入 HTML 互动课件 | 摆脱搬运降价内卷，4 大原创航道，Few-shot 标题仿写与 One-shot 框架 |
 | **[13 无头 VPS 改造 XFCE 远程桌面](13_guide_ubuntu_vps_headless_to_xfce_xrdp_remote_desktop)** | 实战运维<br>GUI 环境搭建 | 2C4G 纯命令行改造、XFCE 极轻量桌面、XRDP 协议、Chrome root 沙箱注入与快捷键映射 | 3 分钟免重装平滑升级，彻底解决海外风控人机验证与 Chrome 权限闪退 |
+| **[14 OpenCode 接入 CPA：双平台配置与看图排错](14_opencode_cpa_cross_platform_setup_and_vision)** | 本地实操复盘<br>AI 编程工具 | Windows GUI、Windows/Linux CLI、OpenAI 兼容模型、图片输入声明、Nginx 100m 与跨平台测试脚本 | 复现配置与验收链路，区分客户端能力缺失与服务器 413 限制 |
 
 ---
 
@@ -44,6 +45,7 @@
 11_case_guoxiaowen_1day_xiaohongshu_ai_psych_test_mvp
 12_case_luke_ai_original_virtual_products_methodology
 13_guide_ubuntu_vps_headless_to_xfce_xrdp_remote_desktop
+14_opencode_cpa_cross_platform_setup_and_vision
 ```
 
 ```{important}
