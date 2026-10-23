@@ -16,6 +16,8 @@ courses/geek_notes_and_ai_dialogues/index
 courses/course_render_engine_and_dashboard/index
 courses/pte_academic_crash_course/index
 courses/ielts_academic_crash_course/index
+courses/toefl_ibt_crash_course/index
+courses/aws_dva_c02_crash_course/index
 courses/xianyu_visual_monitor_from_zero/index
 ```
 
