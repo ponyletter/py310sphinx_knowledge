@@ -29,8 +29,9 @@ flowchart TD
     S5["阶段五：跨境通信管道：SSH 加密隧道 vs HTTPS<br/>(纯加密隧道/灰橙云取舍/ACME ECC证书/Nginx流式调优)"]
     S6["阶段六：CLIProxyAPI 核心网关部署与动态调度<br/>(容器编排/config.yaml密码机制/Web可视化控制台/排除Free模型/动态调度)"]
     S7["阶段七：桌面客户端、多机 SSH 容灾与故障排查<br/>(ToAPI Proxy/Claude Code与AGY集成/多VPS容灾/故障反推<br/>Cockpit Tools多账号管理/七合一格式转换中枢)"]
+    S8["阶段八：Sub2API 企业级多协议中转网关与多上游聚合实战<br/>(Sub2API容器编排/CPA与OpenRouter套壳/会话粘滞高缓存命中/CF Origin CA/Caddy多业务共存/跨网DB迁移调优)"]
 
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8
 ```
 
 ---
@@ -48,4 +49,5 @@ stage4_linux_infra_and_network/index
 stage5_domain_cloudflare_and_ssl/index
 stage6_cliproxyapi_deployment_and_scheduling/index
 stage7_agy_and_miniapp_integration/index
+stage8_sub2api_gateway_and_cpa_aggregation/index
 ```
