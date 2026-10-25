@@ -32,6 +32,7 @@
 | **2.20** | [【实战指南】Claude Pro / Max 订阅决策、付款两层法、防封风控与被拒分诊冷却全景手册](20_case_claude_pro_max_subscription_anti_ban_and_payment_triage_guide.md) | 选档科学模型 (被迫停工时间算法/Claude Code 消耗量级)、付款两层架构 (发卡行场景准入 vs 卡与环境三维一致)、绑卡被拒分诊表与严格冷却策略 (静置1h/冷却24h/禁连点锁)、降低异常信号哲学与企业分卡隔离治理 | 支付风控工程推演与工单实战 | 选档速查表 + 两层排查图 + 被拒分诊表 + 英文申诉SOP |
 | **2.21** | [【实战对话】DUIX 开源数字人全景落地：官网 Key 与免费积分、Docker 本地部署、踩坑排错与 course-render 课程视频 FFmpeg 圆形画中画无痕合成](21_case_duix_avatar_cli_docker_deployment_and_course_video_synthesis.md) | 硅基智能生态选型 (云端API vs Docker本地推理)、RESTful接口规范 (`/easy/submit` & `/easy/query`)、`moov atom not found` I/O竞态排错与探针校验、音频时间轴错位与 `-shortest` 截断陷阱规避、FFmpeg 圆形羽化遮罩 (`geq/crop/scale/overlay`) 与微课左下角画中画视觉美学 | 开源数字人实战与音视频工程 | 架构时序图 + 排错速查表 + 生产级合成脚本 |
 | **2.22** | [【实战对话】FreeLLMAPI 统一大模型总网关架构：CPA 订阅聚合、OpenRouter 深度比价与 BYOK 免费路由、低价推理商横评与独立 Agent 全栈选型指南](22_case_freellmapi_unified_gateway_cpa_openrouter_and_agent_frameworks.md) | 统一模型网关设计 (Single Source of Truth, 唯一域名与Key)、CPA 订阅凭证隔离 (Codex/Claude Code OAuth)、OpenRouter 5.5% 费率拆解与 BYOK 每月 $25,000 免费路由通道、低价推理商梯队 (DeepInfra/Novita/SiliconFlow/Groq/Cerebras/Cloudflare)、警惕黑灰产私人中转与降级陷阱，以及独立 Agent 框架全景横评 (Vercel AI SDK/Mastra/LangGraph/LlamaIndex/MCP) | 架构推演与独立开发全栈选型 | 四层架构拓扑 + 路由决策流水线 + 价格横评表 + 选型决策树 |
+| **2.23** | [【实战对话】海外 VPS 节点极速搭建与分流排错实战：3X-UI 运维、BBR 加速、Cloudflare CDN 复活甲拯救被阻断 IP、VLESS-WS-TLS 443 改造、移动优选 IP 与 ACL4SSR Clash 智能分流订阅全景指南](23_case_vps_3xui_v2rayn_clash_verge_cloudflare_cdn_and_acl4ssr_routing_guide.md) | 3X-UI 凭证 Bcrypt 哈希解析与重置、移动宽带 IP 阻断排错、Let's Encrypt ECC 自动化签发、Cloudflare CDN 小云朵复活甲、VLESS-WS-TLS 443 改造、移动优选 IP 延迟压降，以及 Subconverter 在线管道与 ACL4SSR / Loyalsoldier 国内分流规则实战 | 大模型实时运维排障与节点重构实录 | 网络拓扑图 + 协议决策树 + 数据库注入脚本 + ACL4SSR 订阅 |
 
 ---
 
@@ -62,6 +63,7 @@
 20_case_claude_pro_max_subscription_anti_ban_and_payment_triage_guide
 21_case_duix_avatar_cli_docker_deployment_and_course_video_synthesis
 22_case_freellmapi_unified_gateway_cpa_openrouter_and_agent_frameworks
+23_case_vps_3xui_v2rayn_clash_verge_cloudflare_cdn_and_acl4ssr_routing_guide
 ```
 
 ```{important}
@@ -78,4 +80,5 @@
 10. **Claude 高阶会员与支付风控**：参考 **Claude Pro / Max 订阅决策、付款两层法与防封全景手册**（[2.20 章节](20_case_claude_pro_max_subscription_anti_ban_and_payment_triage_guide.md)），掌握被迫停工时间选档模型，遵循发卡行准入与三维一致两层法排查，遇拒付严格执行静置 1h/冷却 24h，杜绝短时连续点击撞库。
 11. **微课真人数字人与视频画中画**：参考 **DUIX 开源数字人部署与 course-render 视频合成**（[2.21 章节](21_case_duix_avatar_cli_docker_deployment_and_course_video_synthesis.md)），利用 Docker 离线运行 `duix-avatar-gen-video` 规避云端资费与隐私泄露，通过 PowerShell 状态校验规避 `moov atom not found` 竞态，提取完整课件时间轴音频，并用 FFmpeg 抗锯齿圆形羽化滤镜将讲师头像无痕贴合于微课左下角。
 12. **统一 AI 模型网关与 Agent 架构选型**：参考 **FreeLLMAPI 统一网关、CPA 订阅聚合与 Agent 全栈选型**（[2.22 章节](22_case_freellmapi_unified_gateway_cpa_openrouter_and_agent_frameworks.md)），将 FreeLLMAPI 作为唯一总入口，通过 CPA 榨取订阅额度，利用 OpenRouter BYOK 享受免费路由与终极兜底，搭配 DeepInfra/Novita/SiliconFlow 压降日常推理成本，并在 TypeScript（Mastra/Vercel AI SDK）与 Python（LangGraph/LlamaIndex）中完成 Agent 运行层与模型底座的完全解耦。
+13. **节点自建、阻断自救与智能分流**：参考 **海外 VPS 节点极速搭建、Cloudflare CDN 复活甲与 ACL4SSR Clash 智能分流全景指南**（[2.23 章节](23_case_vps_3xui_v2rayn_clash_verge_cloudflare_cdn_and_acl4ssr_routing_guide.md)），当海外便宜 VPS IP 遭移动宽带阻断时，善用 Cloudflare Anycast 小云朵免费复活，协议坚决绑定 VLESS-WS-TLS 443 端口并搭配移动优选 IP，通过 ACL4SSR 转换管道无缝接入 Clash Verge Rev，彻底实现国内网站零损耗直连与境外业务高速代理。
 ```
