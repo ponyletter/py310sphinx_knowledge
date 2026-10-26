@@ -33,6 +33,7 @@
 | **2.21** | [【实战对话】DUIX 开源数字人全景落地：官网 Key 与免费积分、Docker 本地部署、踩坑排错与 course-render 课程视频 FFmpeg 圆形画中画无痕合成](21_case_duix_avatar_cli_docker_deployment_and_course_video_synthesis.md) | 硅基智能生态选型 (云端API vs Docker本地推理)、RESTful接口规范 (`/easy/submit` & `/easy/query`)、`moov atom not found` I/O竞态排错与探针校验、音频时间轴错位与 `-shortest` 截断陷阱规避、FFmpeg 圆形羽化遮罩 (`geq/crop/scale/overlay`) 与微课左下角画中画视觉美学 | 开源数字人实战与音视频工程 | 架构时序图 + 排错速查表 + 生产级合成脚本 |
 | **2.22** | [【实战对话】FreeLLMAPI 统一大模型总网关架构：CPA 订阅聚合、OpenRouter 深度比价与 BYOK 免费路由、低价推理商横评与独立 Agent 全栈选型指南](22_case_freellmapi_unified_gateway_cpa_openrouter_and_agent_frameworks.md) | 统一模型网关设计 (Single Source of Truth, 唯一域名与Key)、CPA 订阅凭证隔离 (Codex/Claude Code OAuth)、OpenRouter 5.5% 费率拆解与 BYOK 每月 $25,000 免费路由通道、低价推理商梯队 (DeepInfra/Novita/SiliconFlow/Groq/Cerebras/Cloudflare)、警惕黑灰产私人中转与降级陷阱，以及独立 Agent 框架全景横评 (Vercel AI SDK/Mastra/LangGraph/LlamaIndex/MCP) | 架构推演与独立开发全栈选型 | 四层架构拓扑 + 路由决策流水线 + 价格横评表 + 选型决策树 |
 | **2.23** | [【实战对话】海外 VPS 节点极速搭建与分流排错实战：3X-UI 运维、BBR 加速、Cloudflare CDN 复活甲拯救被阻断 IP、VLESS-WS-TLS 443 改造、移动优选 IP 与 ACL4SSR Clash 智能分流订阅全景指南](23_case_vps_3xui_v2rayn_clash_verge_cloudflare_cdn_and_acl4ssr_routing_guide.md) | 3X-UI 凭证 Bcrypt 哈希解析与重置、移动宽带 IP 阻断排错、Let's Encrypt ECC 自动化签发、Cloudflare CDN 小云朵复活甲、VLESS-WS-TLS 443 改造、移动优选 IP 延迟压降，以及 Subconverter 在线管道与 ACL4SSR / Loyalsoldier 国内分流规则实战 | 大模型实时运维排障与节点重构实录 | 网络拓扑图 + 协议决策树 + 数据库注入脚本 + ACL4SSR 订阅 |
+| **2.24** | [【实战对话】多节点 VPS 集群工程实战：GreenCloud 与 ByteVirt 3X-UI 部署、Cloudflare 443 CDN 复活、移动/联通优选 IP 与 ACL4SSR 多节点全景分流聚合](24_case_multi_vps_cluster_greencloud_bytevirt_3xui_cf_cdn_and_clean_ip.md) | RackNerd/GreenCloud/ByteVirt 多节点集群容灾、3X-UI v3.8 与 v3.11 SQLite 底层列结构兼容、标准 443 端口与 Reality 2083 无损迁移、移动优选 IP 与联通优选 IP 定向调度、多节点 Subconverter 聚合与 ACL4SSR 零损耗分流实录 | 多机房网络运维与节点矩阵工程 | 拓扑流向图 + 节点配置矩阵 + 兼容脚本 + Clash 聚合订阅 |
 
 ---
 
@@ -64,6 +65,7 @@
 21_case_duix_avatar_cli_docker_deployment_and_course_video_synthesis
 22_case_freellmapi_unified_gateway_cpa_openrouter_and_agent_frameworks
 23_case_vps_3xui_v2rayn_clash_verge_cloudflare_cdn_and_acl4ssr_routing_guide
+24_case_multi_vps_cluster_greencloud_bytevirt_3xui_cf_cdn_and_clean_ip
 ```
 
 ```{important}
