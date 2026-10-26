@@ -4,8 +4,9 @@
 > **实战机型**：
 > 1. **RackNerd 美西洛杉矶 VPS**（IP: `192.255.232.12`，域名: `racknerd.kesiv.com`）
 > 2. **GreenCloud 日本/美西 VPS**（IP: `216.158.79.128`，域名: `greencloudvps.kesiv.com`，针对山东联通宽带优化）
-> 3. **ByteVirt 亚太/海外 VPS**（IP: `69.8.136.116`，SSH 端口: `4400`，域名: `bytevirt.kesiv.com`，针对中国移动宽带优化）  
-> **核心领域**：多节点科学网络拓扑、3X-UI 面板版本差异（v3.8 vs v3.11）与 SQLite 底层表结构兼容、Cloudflare CDN 标准 443 端口与回源改造、运营商（中国移动 / 中国联通）优选 IP 智能调度、Subconverter 多节点批量聚合与 ACL4SSR 国内分流规则实战。
+> 3. **ByteVirt 亚太/海外 VPS**（IP: `69.8.136.116`，SSH 端口: `4400`，域名: `bytevirt.kesiv.com`，针对中国移动宽带优化）
+> 4. **GreenVPS 高性能双栈 VPS**（IP: `216.158.79.135`，IPv6: `2607:f2d8:401b:12ab::a`，域名: `greenvps.kesiv.com`，原生 IPv4/IPv6 双栈）  
+> **核心领域**：多节点科学网络拓扑、3X-UI 面板版本差异（v3.8 vs v3.11）与 SQLite 底层表结构兼容、Cloudflare CDN 标准 443 端口与回源改造、运营商（中国移动 / 中国联通）优选 IP 智能调度、OnePage / Subconverter 多节点批量聚合与 ACL4SSR 国内分流规则实战。
 
 ---
 
@@ -77,6 +78,7 @@ flowchart TD
 | **RackNerd-US** | `192.255.232.12:22` | `racknerd.kesiv.com` | VLESS-WS-TLS : 443 | 美西基础备用线路 | `https://192.255.232.12:60357/iItrkcZcuFHedxwh2N/` |
 | **GreenCloud-SD** | `216.158.79.128:22` | `greencloudvps.kesiv.com` | VLESS-WS-TLS : 443 | 山东联通骨干直连 | `https://216.158.79.128:60357/iItrkcZcuFHedxwh2N/` |
 | **ByteVirt-MB** | `69.8.136.116:4400` | `bytevirt.kesiv.com` | VLESS-WS-TLS : 443 | 中国移动宽带极速 | `https://69.8.136.116:60357/iItrkcZcuFHedxwh2N/` |
+| **GreenVPS-Dual** | `216.158.79.135:22` | `greenvps.kesiv.com` | VLESS-WS-TLS : 443 | 双栈 IPv4/IPv6 全网加速 | `https://216.158.79.135:60357/iItrkcZcuFHedxwh2N/` |
 
 ---
 
@@ -189,7 +191,30 @@ vless://9c086931-8248-4a52-9f1c-7907ce407373@bytevirt.kesiv.com:443?type=ws&secu
 vless://9c086931-8248-4a52-9f1c-7907ce407373@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=bytevirt.kesiv.com&sni=bytevirt.kesiv.com#ByteVirt-CF-移动优选-443
 ```
 
-### 2. 多节点一键 Clash Verge Rev 聚合订阅链接
+### 2. GreenVPS 节点（IPv4/IPv6 双栈）
+
+```text
+# 节点 1：标准 443 域名接入
+vless://2b9e1a7e-a413-4288-b6d2-db1139212292@greenvps.kesiv.com:443?type=ws&security=tls&path=%2Fws&host=greenvps.kesiv.com&sni=greenvps.kesiv.com#GreenVPS-CF-VLESS-443
+
+# 节点 2：优选 Clean IP 接入（国内运营商加速）
+vless://2b9e1a7e-a413-4288-b6d2-db1139212292@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=greenvps.kesiv.com&sni=greenvps.kesiv.com#GreenVPS-CF-优选-443
+```
+
+### 3. OnePage 在线订阅转换与 API 调用指南
+
+针对轻量化转换场景，除 ACL4SSR 转换前端外，还可使用 **OnePage Sub-Convert** 工具：
+* **网页前端地址**：`https://onepage.czl.net/tools/sub-convert/`
+* **使用方式**：
+  1. 在输入框粘贴节点链接（支持单节点或多节点用 `|` 拼接）；
+  2. 目标选择 `Clash`，高级选项按需勾选 UDP；
+  3. 点击“生成订阅链接”即可一键获取 Clash 配置文件。
+* **直接订阅 URL（后端直出）**：
+  ```text
+  https://onepage.czl.net/api/sub-convert?target=clash&url=vless%3A%2F%2F2b9e1a7e-a413-4288-b6d2-db1139212292%40greenvps.kesiv.com%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dgreenvps.kesiv.com%26sni%3Dgreenvps.kesiv.com%23GreenVPS-CF-VLESS-443%7Cvless%3A%2F%2F2b9e1a7e-a413-4288-b6d2-db1139212292%40162.159.192.1%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dgreenvps.kesiv.com%26sni%3Dgreenvps.kesiv.com%23GreenVPS-CF-%E4%BC%98%E9%80%89-443&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full_NoAuto.ini
+  ```
+
+### 4. 多节点一键 Clash Verge Rev 聚合订阅链接
 
 通过 **Subconverter API** 批量聚合 RackNerd、GreenCloud、ByteVirt 全部优质节点，并挂载 **ACL4SSR_Online_Full_NoAuto** 规则引擎，实现全网智能分流：
 
