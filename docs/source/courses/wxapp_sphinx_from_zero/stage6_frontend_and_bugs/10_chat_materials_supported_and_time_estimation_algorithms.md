@@ -267,7 +267,7 @@ startSmoothProgressBar(estDuration) {
 ### 3.1 真实排错场景
 开发或重启远程服务器时，前端控制台频繁爆出：
 ```text
-GET https://meme.tg-cc755.cn/api/user/profile 502 (Bad Gateway)
+GET https://meme.yourdomain.cn/api/user/profile 502 (Bad Gateway)
 (env: Windows, mp, 2.02.2608060; lib: 3.17.2)
 ```
 

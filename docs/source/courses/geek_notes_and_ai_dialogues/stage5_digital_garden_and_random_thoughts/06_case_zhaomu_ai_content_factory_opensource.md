@@ -3,7 +3,7 @@
 > **案例作者：** 朝暮拾花（坐标广东惠州，教培行业执行校长，连续日更 1092 天）  
 > **生产成果：** 朋友圈日更从“每天苦熬半小时”提速至“两小时跑完 7 篇”；新号文章单篇稳定千观、热点篇破万观；系统迭代 400 余次并全部开源  
 > **原文参考资料：** [生财有术精华实操长文 (ID: 14422115288858152)](https://scys.com/articleDetail/xq_topic/14422115288858152)  
-> **配套开源包资源：** [AI 内容工厂公开版源码包下载](https://chat.tg-cc755.cn/uploads/c4c4b1e2-b3ba-4ed4-872b-e5754368c0e5_AI.zip)  
+> **配套开源包资源：** [AI 内容工厂公开版源码包下载](https://chat.yourdomain.cn/uploads/c4c4b1e2-b3ba-4ed4-872b-e5754368c0e5_AI.zip)  
 > **实战案例索引：** [WHENRESET Codex 实战案例库 · 内容与 IP](https://whenreset.com.cn/codex/index.html)
 
 ---

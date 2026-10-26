@@ -8,7 +8,7 @@
 
 ## 📌 背景与核心痛点排查：从“开箱即用”到“移动宽带阻断与协议自救”
 
-在海外 VPS 采购与科学代理节点搭建过程中，新手与资深开发者常遭遇各种经典网络阻断与协议不兼容故障。本次对话源于一台典型的 **RackNerd 美西洛杉矶 VPS（IP: `192.255.232.12`）** 的搭建运维实战，历经四层典型矛盾：
+在海外 VPS 采购与科学代理节点搭建过程中，新手与资深开发者常遭遇各种经典网络阻断与协议不兼容故障。本次对话源于一台典型的 **RackNerd 美西洛杉矶 VPS（IP: `198.51.100.12`）** 的搭建运维实战，历经四层典型矛盾：
 
 1. **面板凭证遗忘与不可逆哈希**：服务器预装了 3X-UI 面板，因未记录初始密码导致管理入口受阻。经分析，现代面板采用单向 Bcrypt 加密，无法直接反解明文，需要通过命令行工具或 SQLite 底层介入重置；
 2. **移动网络与机房直连被阻断**：国内宽带（特别是中国移动）对海外低价机房（如 Multacom LAX）存在严重的国际出口丢包、QoS 降速以及 TCP 22 端口 / ICMP 针对性阻断，导致家庭宽带直连 SSH 与 Reality 节点均超时无法握手；
@@ -41,14 +41,14 @@ flowchart TD
     end
 
     subgraph CDNLayer["Cloudflare CDN Anycast 中继网 (Orange Cloud)"]
-        CF_DNS["域名解析 (racknerd.kesiv.com)"]
+        CF_DNS["域名解析 (racknerd.yourdomain.com)"]
         CF_BestIP["移动优选节点<br/>(162.159.192.1 / 香港/美西边缘)"]
         CF_Edge["Cloudflare 边缘集群 (Port 443 / HTTPS)"]
         CF_WAF["安全过滤与 TLS 终止 (Let's Encrypt / Full SSL)"]
         CF_WS["WebSocket 流量隧道转发"]
     end
 
-    subgraph VPSLayer["RackNerd VPS 目标节点 (192.255.232.12)"]
+    subgraph VPSLayer["RackNerd VPS 目标节点 (198.51.100.12)"]
         BBR["Linux Kernel BBR 拥塞控制"]
         Xray["Xray-core 26.10.10"]
         XUI["3X-UI 管理面板 (Port 60357 / SQLite)"]
@@ -137,12 +137,12 @@ ss -tulpn | grep -E ':22|:443|:8443|:60357|:2096'
 
 ```bash
 # 利用 acme.sh standalone 模式签发 ECC 证书（占用 80 端口，Cloudflare 会回源请求验证）
-/root/.acme.sh/acme.sh --issue -d racknerd.kesiv.com --standalone --server letsencrypt
+/root/.acme.sh/acme.sh --issue -d racknerd.yourdomain.com --standalone --server letsencrypt
 
 # 将签发证书归档至持久化目录
-mkdir -p /root/cert/racknerd.kesiv.com
-cp /root/.acme.sh/racknerd.kesiv.com_ecc/fullchain.cer /root/cert/racknerd.kesiv.com/fullchain.pem
-cp /root/.acme.sh/racknerd.kesiv.com_ecc/racknerd.kesiv.com.key /root/cert/racknerd.kesiv.com/privkey.pem
+mkdir -p /root/cert/racknerd.yourdomain.com
+cp /root/.acme.sh/racknerd.yourdomain.com_ecc/fullchain.cer /root/cert/racknerd.yourdomain.com/fullchain.pem
+cp /root/.acme.sh/racknerd.yourdomain.com_ecc/racknerd.yourdomain.com.key /root/cert/racknerd.yourdomain.com/privkey.pem
 ```
 
 ### 4. 3X-UI 节点底层热更新脚本
@@ -158,9 +158,9 @@ import time
 conn = sqlite3.connect('/etc/x-ui/x-ui.db')
 c = conn.cursor()
 
-client_uuid = '28eda044-2bd3-431c-b5dd-d1406a131ee7'
-sub_id = 'dgv6y1oz31xs0qk3'
-email = '137771819@qq.com'
+client_uuid = '00000000-0000-0000-0000-000000000001'
+sub_id = 'your_sub_id'
+email = 'user@example.com'
 
 vless_settings = json.dumps({
     "clients": [{
@@ -189,7 +189,7 @@ vless_stream = json.dumps({
     "network": "ws",
     "security": "tls",
     "tlsSettings": {
-        "serverName": "racknerd.kesiv.com",
+        "serverName": "racknerd.yourdomain.com",
         "minVersion": "1.2",
         "maxVersion": "1.3",
         "cipherSuites": "",
@@ -201,8 +201,8 @@ vless_stream = json.dumps({
             "oneTimeLoading": False,
             "usage": "encipherment",
             "buildChain": False,
-            "certificateFile": "/root/cert/racknerd.kesiv.com/fullchain.pem",
-            "keyFile": "/root/cert/racknerd.kesiv.com/privkey.pem"
+            "certificateFile": "/root/cert/racknerd.yourdomain.com/fullchain.pem",
+            "keyFile": "/root/cert/racknerd.yourdomain.com/privkey.pem"
         }],
         "alpn": ["http/1.1"]
     },
@@ -210,7 +210,7 @@ vless_stream = json.dumps({
         "acceptProxyProtocol": False,
         "path": "/ws",
         "headers": {
-            "Host": "racknerd.kesiv.com"
+            "Host": "racknerd.yourdomain.com"
         }
     }
 })
@@ -277,7 +277,7 @@ graph TD
     
     Port443 --> MobileOpt{"移动网络速度较慢?"}
     MobileOpt -- "是" --> BestIP["启用 Cloudflare 移动优选 IP<br/>(162.159.192.1 / cf.090227.xyz)<br/>降低往返延迟至 70~100ms"]
-    MobileOpt -- "否" --> DefaultDomain["直接使用解析域名 (racknerd.kesiv.com)"]
+    MobileOpt -- "否" --> DefaultDomain["直接使用解析域名 (racknerd.yourdomain.com)"]
 ```
 
 ---
@@ -300,15 +300,15 @@ public int aid { get; set; }
 
 ```text
 # 节点 1：标准 443 端口域名直连
-vless://28eda044-2bd3-431c-b5dd-d1406a131ee7@racknerd.kesiv.com:443?type=ws&security=tls&path=%2Fws&host=racknerd.kesiv.com&sni=racknerd.kesiv.com#RackNerd-CF-VLESS-443
+vless://00000000-0000-0000-0000-000000000001@racknerd.yourdomain.com:443?type=ws&security=tls&path=%2Fws&host=racknerd.yourdomain.com&sni=racknerd.yourdomain.com#RackNerd-CF-VLESS-443
 
 # 节点 2：移动优选 IP 版（解决移动宽带直连 Cloudflare 拥塞丢包）
-vless://28eda044-2bd3-431c-b5dd-d1406a131ee7@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=racknerd.kesiv.com&sni=racknerd.kesiv.com#RackNerd-CF-移动优选-443
+vless://00000000-0000-0000-0000-000000000001@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=racknerd.yourdomain.com&sni=racknerd.yourdomain.com#RackNerd-CF-移动优选-443
 ```
 
 > **原理解密（优选 IP 为什么有效？）**：  
-> Cloudflare 的全球 Anycast 广播会将 `racknerd.kesiv.com` 解析到公共边缘池（如 `104.21.x.x`、`172.67.x.x`）。在中国移动网络中，这些 IP 往往绕道美西拥堵网关；  
-> 将连接地址（Address）改为优选 IP（如 `162.159.192.1`），握手阶段直连 Cloudflare 香港/日本节点，而 HTTP 请求头中的 `Host` 和 TLS 握手中的 `SNI` 依然携带 `racknerd.kesiv.com`，Cloudflare 内部专线依然能准确反代到 RackNerd 源站，速度立竿见影。
+> Cloudflare 的全球 Anycast 广播会将 `racknerd.yourdomain.com` 解析到公共边缘池（如 `104.21.x.x`、`172.67.x.x`）。在中国移动网络中，这些 IP 往往绕道美西拥堵网关；  
+> 将连接地址（Address）改为优选 IP（如 `162.159.192.1`），握手阶段直连 Cloudflare 香港/日本节点，而 HTTP 请求头中的 `Host` 和 TLS 握手中的 `SNI` 依然携带 `racknerd.yourdomain.com`，Cloudflare 内部专线依然能准确反代到 RackNerd 源站，速度立竿见影。
 
 ---
 
@@ -331,7 +331,7 @@ vless://28eda044-2bd3-431c-b5dd-d1406a131ee7@162.159.192.1:443?type=ws&security=
 直接在 **Clash Verge Rev** 的「订阅 (Profiles)」界面粘贴并下载：
 
 ```text
-https://api.v1.mk/sub?target=clash&new_name=true&url=vless%3A//28eda044-2bd3-431c-b5dd-d1406a131ee7%40racknerd.kesiv.com%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dracknerd.kesiv.com%26sni%3Dracknerd.kesiv.com%23RackNerd-CF-VLESS-443%7Cvless%3A//28eda044-2bd3-431c-b5dd-d1406a131ee7%40162.159.192.1%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dracknerd.kesiv.com%26sni%3Dracknerd.kesiv.com%23RackNerd-CF-%E7%A7%BB%E5%8A%A8%E4%BC%98%E9%80%89-443&config=https%3A//raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini
+https://api.v1.mk/sub?target=clash&new_name=true&url=vless%3A//00000000-0000-0000-0000-000000000001%40racknerd.yourdomain.com%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dracknerd.yourdomain.com%26sni%3Dracknerd.yourdomain.com%23RackNerd-CF-VLESS-443%7Cvless%3A//00000000-0000-0000-0000-000000000001%40162.159.192.1%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dracknerd.yourdomain.com%26sni%3Dracknerd.yourdomain.com%23RackNerd-CF-%E7%A7%BB%E5%8A%A8%E4%BC%98%E9%80%89-443&config=https%3A//raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini
 ```
 
 ### 3. 国内分流与规则策略分组解析

@@ -25,7 +25,7 @@
 
 在上一轮优化中，我们将前端界面的所有“AI”字眼全部中性化替换为“极速动图工坊”、“动效渲染”，为什么审核员依然精准下发了“涉及深度合成技术”的判定？
 
-通过排查云端生产服务器（`81.69.190.161`）的 SQLite 数据库与 Nginx 访问日志，我们捕获到了审核员测试全过程的真实数据：
+通过排查云端生产服务器（`118.xx.xx.xx`）的 SQLite 数据库与 Nginx 访问日志，我们捕获到了审核员测试全过程的真实数据：
 
 ```sql
 SELECT task_id, openid, preset_key, duration_seconds, frame_count, status, created_at 
@@ -233,7 +233,7 @@ python toggle_audit.py off
 python toggle_audit.py status
 ```
 
-同时支持免登后台 API：`POST https://meme.tg-cc755.cn/api/admin/audit-mode -d '{"audit_mode": false}'`。
+同时支持免登后台 API：`POST https://meme.yourdomain.cn/api/admin/audit-mode -d '{"audit_mode": false}'`。
 
 ---
 

@@ -21,18 +21,18 @@ flowchart TD
         GoogleSSO["Google OAuth 2.0 用户单点登录"]
     end
 
-    subgraph EdgeProxy ["Cloudflare CDN 边缘节点 (*.kesiv.com)"]
+    subgraph EdgeProxy ["Cloudflare CDN 边缘节点 (*.yourdomain.com)"]
         CFWAF["Cloudflare WAF 托管防火墙"]
         CFEdgeSSL["边缘 SSL 自动证书 (TLS 1.3)"]
     end
 
-    subgraph HostServer ["反代 VPS (107.173.10.79 / 2GB RAM)"]
+    subgraph HostServer ["反代 VPS (198.51.100.xx / 2GB RAM)"]
         CaddyMesh["Caddy 反向代理网关 (:443)<br/>(加载 15 年 Origin CA 证书 / 100MB 上限 / 流式零缓冲)"]
         Sub2APIApp["Sub2API Go 核心网关 (:8080)<br/>(轻量单容器运行, 内存仅 ~45MB)"]
         CronBackup["Crontab + pg_dump 自动冷备份任务"]
     end
 
-    subgraph StorageCluster ["外部数据库集群 (139.199.223.40)"]
+    subgraph StorageCluster ["外部数据库集群 (198.51.100.40)"]
         PGDB[("PostgreSQL 18.6<br/>库名: sub2api")]
         RedisCache[("Redis 8.x<br/>会话锁 / RPM 预扣")]
     end

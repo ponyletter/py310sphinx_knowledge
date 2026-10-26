@@ -30,8 +30,8 @@ REDIS_MAXCLIENTS=50000
 
 ### 2. 生产级解耦架构：外部托管与单容器运行
 为了在有限的 VPS 硬件资源下获得最高稳定性，最佳生产架构是将**计算与存储彻底解耦**：
-* **计算端（反代前置 VPS，如 `107.173.10.79`）**：仅运行 `sub2api` 单一二进制容器，剥离本地数据库负载；
-* **存储端（外部数据库服务器，如 `139.199.223.40`）**：独立承载 PostgreSQL 18 与 Redis 8 服务；
+* **计算端（反代前置 VPS，如 `198.51.100.xx`）**：仅运行 `sub2api` 单一二进制容器，剥离本地数据库负载；
+* **存储端（外部数据库服务器，如 `198.51.100.40`）**：独立承载 PostgreSQL 18 与 Redis 8 服务；
 * **内存收益**：Sub2API 单容器运行内存仅消耗 **约 40MB~50MB**，机器负载接近 0%，彻底终结 OOM 风险！
 
 ```{mermaid}
@@ -41,7 +41,7 @@ flowchart LR
         APIClient["API 接入端 (NextChat / Cherry / AGY)"]
     end
 
-    subgraph FrontVPS ["反代 VPS (107.173.10.79 / 2GB RAM)"]
+    subgraph FrontVPS ["反代 VPS (198.51.100.xx / 2GB RAM)"]
         CFProxy["Cloudflare CDN (小云朵)"]
         CaddyProxy["Caddy 反向代理 (:443)"]
         Sub2APIApp["Sub2API 单容器 (:8080)<br/>(Go轻量运行时, 内存仅 ~45MB)"]
@@ -50,7 +50,7 @@ flowchart LR
         CaddyProxy -->|127.0.0.1:8080 (流式零缓冲)| Sub2APIApp
     end
 
-    subgraph StorageServer ["外部数据中心 (139.199.223.40)"]
+    subgraph StorageServer ["外部数据中心 (198.51.100.40)"]
         PGDB[("PostgreSQL 18.6 实例<br/>DB: sub2api / Port: 5432")]
         RedisCache[("Redis 8.x 实例<br/>Port: 6379 (密码认证)")]
     end
@@ -120,12 +120,12 @@ RUN_MODE=standard
 TZ=Asia/Shanghai
 
 # -----------------------------------------------------------------------------
-# 外部数据库连接 (PostgreSQL: 139.199.223.40)
+# 外部数据库连接 (PostgreSQL)
 # -----------------------------------------------------------------------------
-DATABASE_HOST=139.199.223.40
+DATABASE_HOST=198.51.100.40
 DATABASE_PORT=5432
 DATABASE_USER=root
-DATABASE_PASSWORD=rootsugar
+DATABASE_PASSWORD=<YOUR_DATABASE_PASSWORD>
 DATABASE_DBNAME=sub2api
 DATABASE_SSLMODE=disable
 DATABASE_MAX_OPEN_CONNS=50
@@ -134,11 +134,11 @@ DATABASE_CONN_MAX_LIFETIME_MINUTES=30
 DATABASE_CONN_MAX_IDLE_TIME_MINUTES=5
 
 # -----------------------------------------------------------------------------
-# 外部缓存连接 (Redis: 139.199.223.40)
+# 外部缓存连接 (Redis)
 # -----------------------------------------------------------------------------
-REDIS_HOST=139.199.223.40
+REDIS_HOST=198.51.100.40
 REDIS_PORT=6379
-REDIS_PASSWORD=redis_hAhaSr
+REDIS_PASSWORD=<YOUR_REDIS_PASSWORD>
 REDIS_DB=0
 REDIS_POOL_SIZE=512
 REDIS_MIN_IDLE_CONNS=16
@@ -155,8 +155,8 @@ SERVER_H2C_ENABLED=true
 # -----------------------------------------------------------------------------
 # 核心系统密钥 (固定随机 32 字节 Hex，防止容器重启后会话失效)
 # -----------------------------------------------------------------------------
-JWT_SECRET=024d120747b871c1c72ff66a8d4611e31f54aee74570bfe82a0318aa4cbc2998
-TOTP_ENCRYPTION_KEY=72f8913a1c21979d56f1c8c978fbaccbe4d81d1cf621b81a71aabc1da99721fc
+JWT_SECRET=<YOUR_JWT_SECRET_32_BYTES_HEX>
+TOTP_ENCRYPTION_KEY=<YOUR_TOTP_KEY_32_BYTES_HEX>
 JWT_EXPIRE_HOUR=24
 
 # -----------------------------------------------------------------------------
@@ -208,7 +208,7 @@ func (cfg *SetupConfig) migrationTimeout() time.Duration {
 }
 ```
 * 当数据库在本地容器时，300 次 SQL 执行耗时仅需数秒；
-* 但当应用位于美国（`107.173.10.79`）、数据库位于中国广州（`139.199.223.40`）时，**跨太平洋往返网络延迟 (RTT) 约为 200ms**；
+* 但当应用位于美国（`198.51.100.xx`）、数据库位于中国广州（`198.51.100.40`）时，**跨太平洋往返网络延迟 (RTT) 约为 200ms**；
 * 300 次事务与 checksum 往返交互至少消耗 `300 × 0.2s = 60秒` 以上，刚好触顶了默认的 60 秒硬超时门限，导致事务强行熔断！
 * 异常中断后，PostgreSQL 中的 **Advisory Lock（分布式咨询锁）** 未能正常释放，使得下一次重启时在锁等待步骤直接再次超时！
 
@@ -217,8 +217,8 @@ func (cfg *SetupConfig) migrationTimeout() time.Duration {
 2. **强制清理残留的 Advisory Lock 与陈旧连接**：
    在宿主机通过临时容器执行清理 SQL：
    ```bash
-   docker run --rm -e PGPASSWORD=rootsugar postgres:18-alpine psql \
-     -h 139.199.223.40 -U root -d sub2api \
+   docker run --rm -e PGPASSWORD="<YOUR_DATABASE_PASSWORD>" postgres:18-alpine psql \
+     -h <YOUR_DATABASE_HOST> -U root -d sub2api \
      -c "SELECT pg_advisory_unlock_all(); SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = 'sub2api' AND pid <> pg_backend_pid();"
    ```
 3. **重新拉起服务**：`docker compose up -d`，系统将平滑完成全部 298 个迁移文件。
@@ -235,9 +235,9 @@ docker logs sub2api | grep -E "Admin user created|Generated admin" -A 3
 
 启动成功后，控制台将输出如下带有一次性凭据的关键日志：
 ```text
-Admin user created: admin-fc18929c03dc@sub2api.local
-Generated admin email (login username): admin-fc18929c03dc@sub2api.local
-Generated admin password (one-time): be970aa377b470ae30d29d3fc86f909e
+Admin user created: admin-xxxxxx@sub2api.local
+Generated admin email (login username): admin-xxxxxx@sub2api.local
+Generated admin password (one-time): <YOUR_GENERATED_ONE_TIME_PASSWORD>
 IMPORTANT: Save this password! It will not be shown again.
 Auto setup completed successfully!
 ```

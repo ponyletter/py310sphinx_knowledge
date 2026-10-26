@@ -31,7 +31,7 @@
   * **前端被广告插件拦截未弹窗时的备选应急方案**：
     在浏览器直接发起确认请求或通过 curl 携带管理员 Token 显式调用：
     ```bash
-    curl -X POST https://flux.kesiv.com/api/v1/admin/compliance/acknowledge \
+    curl -X POST https://flux.yourdomain.com/api/v1/admin/compliance/acknowledge \
       -H "Authorization: Bearer <ADMIN_JWT_TOKEN>"
     ```
 
@@ -68,7 +68,7 @@
 * **解决与排查指引**：
   登录 Cloudflare 控制台 -> **安全性 (Security)** -> **WAF** -> **自定义规则 (Custom Rules)**，创建一条白名单规则：
   ```text
-  (http.host eq "flux.kesiv.com" and starts_with(http.request.uri.path, "/api/v1/admin/"))
+  (http.host eq "flux.yourdomain.com" and starts_with(http.request.uri.path, "/api/v1/admin/"))
   操作：跳过 (Skip) -> 勾选所有托管规则集
   ```
 
@@ -76,7 +76,7 @@
 
 ## 生产级定时全量备份与容灾脚本
 
-由于我们将数据库解耦部署在独立服务器（`139.199.223.40`），为了防止机房突发灾难、误删库或勒索病毒风险，必须建立本地与远端的自动化增量导出冷备份。
+由于我们将数据库解耦部署在独立服务器（`198.51.100.40`），为了防止机房突发灾难、误删库或勒索病毒风险，必须建立本地与远端的自动化增量导出冷备份。
 
 ### 1. 编写备份脚本：`/root/backup_sub2api.sh`
 创建脚本文件并赋予仅 root 可读写权限：
@@ -93,10 +93,10 @@ DATE=$(date +%Y%m%d_%H%M%S)
 BACKUP_FILE="${BACKUP_DIR}/sub2api_${DATE}.sql.gz"
 
 # 数据库连接参数 (与 .env 严格对齐)
-DB_HOST="139.199.223.40"
+DB_HOST="198.51.100.40"
 DB_PORT="5432"
 DB_USER="root"
-DB_PASS="rootsugar"
+DB_PASS="<YOUR_DATABASE_PASSWORD>"
 DB_NAME="sub2api"
 
 mkdir -p "$BACKUP_DIR"
@@ -130,8 +130,8 @@ chmod 700 /root/backup_sub2api.sh
 当发生极端灾难需要回滚数据时：
 ```bash
 gunzip -c /root/db_backups/sub2api_20261025_xxxxxx.sql.gz | \
-  docker run -i --rm -e PGPASSWORD=rootsugar postgres:18-alpine \
-  psql -h 139.199.223.40 -p 5432 -U root -d sub2api
+  docker run -i --rm -e PGPASSWORD="<YOUR_DATABASE_PASSWORD>" postgres:18-alpine \
+  psql -h 198.51.100.40 -p 5432 -U root -d sub2api
 ```
 
 ---
@@ -150,12 +150,12 @@ systemctl status caddy
 ss -tulpn | grep -E ':80|:443|:8080'
 
 # 3. 校验 SSL 证书有效期（剩余天数）
-openssl x509 -in /etc/ssl/flux.kesiv.com/cert.pem -noout -enddate
+openssl x509 -in /etc/ssl/flux.yourdomain.com/cert.pem -noout -enddate
 
 # 4. 远程测试数据库与 Redis 连通健康度
-docker run --rm -e PGPASSWORD=rootsugar postgres:18-alpine \
-  psql -h 139.199.223.40 -U root -d sub2api -c "SELECT current_database(), now();"
-nc -zv -w 3 139.199.223.40 6379
+docker run --rm -e PGPASSWORD="<YOUR_DATABASE_PASSWORD>" postgres:18-alpine \
+  psql -h 198.51.100.40 -U root -d sub2api -c "SELECT current_database(), now();"
+nc -zv -w 3 198.51.100.40 6379
 
 # 5. 查看实时 API 访问日志与异常状态码
 tail -f /root/02project/13sub2api/data/logs/sub2api.log | grep --line-buffered '"status_code":'

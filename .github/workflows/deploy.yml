@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy-china:
-    name: Deploy to China Server (81.69.190.161)
+    name: Deploy to China Server
     runs-on: ubuntu-latest
     steps:
       - name: SSH and rebuild on China Server
@@ -30,7 +30,7 @@ jobs:
             echo "==== [China Server] Deployment succeeded! ===="
 
   deploy-us:
-    name: Deploy to US Server (204.44.67.184)
+    name: Deploy to US Server
     runs-on: ubuntu-latest
     steps:
       - name: SSH and rebuild on US Server

@@ -7,7 +7,7 @@
       "name": "CPA OpenAI Compatible",
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "https://cpa.tg-cc755.cn/v1",
+        "baseURL": "https://cpa.yourdomain.cn/v1",
         "apiKey": "{file:~/.config/opencode/cpa-api-key}"
       },
       "models": {

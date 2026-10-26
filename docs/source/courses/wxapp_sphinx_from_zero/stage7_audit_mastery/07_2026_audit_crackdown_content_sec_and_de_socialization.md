@@ -206,7 +206,7 @@ flowchart LR
 使用 Python Pillow 生成带有明显警示条与典型测试敏感词的图片卡片（如涉诈高仿办证、虚假金融、违禁品提示卡），在开发与测试环境中验证：
 1. **测试卡标识注入**：在测试卡 EXIF 或图片元数据与图像正中绘制测试字样；
 2. **端到端测试闭环**：通过脚本将测试卡直接 POST 到 `/api/convert/compress-image` 等次级接口，断言 HTTP 响应为 400，返回 JSON 必须严格为 `{"detail": "所发布内容包含违规信息，请修改后重试"}`；
-3. **真实群聊与设备互验**：将生成的测试卡分发至测试协作群（如内网团队群 `https://chat.tg-cc755.cn/group-chat`），在真机小程序与微信开发者工具中实际选择上传，确保前端模态弹窗 100% 弹出且文案规范统一。
+3. **真实群聊与设备互验**：将生成的测试卡分发至测试协作群（如内网团队群 `https://chat.yourdomain.cn/group-chat`），在真机小程序与微信开发者工具中实际选择上传，确保前端模态弹窗 100% 弹出且文案规范统一。
 
 ### 2.6 选图即检与失焦即检：从“提交滞后报错”到“前置即时防御”
 
@@ -434,7 +434,7 @@ flowchart LR
 
 ### 7.1 一键切换命令与自动化生效验证
 
-在生产服务器（`81.69.190.161`）上直接运行切回脚本：
+在生产服务器（`118.xx.xx.xx`）上直接运行切回脚本：
 
 ```bash
 # 一键关闭审核降级模式，恢复全量 16 帧 AI 动图生成
@@ -456,10 +456,10 @@ cd /root/02project/weixinpy310mememiniapp/backend
 ### 7.2 生产环境接口在线自测核验
 
 通过公开 HTTPS 域名验证各核心端点，确保全量就绪：
-1. **模式状态**：`GET https://meme.tg-cc755.cn/api/admin/audit-mode`
+1. **模式状态**：`GET https://meme.yourdomain.cn/api/admin/audit-mode`
    返回：`{"code": 0, "audit_mode": false, "message": "当前处于全量 AI 动图生成模式"}`
-2. **模板丰富度**：`GET https://meme.tg-cc755.cn/api/templates`
+2. **模板丰富度**：`GET https://meme.yourdomain.cn/api/templates`
    返回：完整 AI 动作模板列表（飞吻示爱、疯狂点赞、魔性摇摆、崩溃大哭等）；
-3. **动态时间预估**：`GET https://meme.tg-cc755.cn/api/meme/estimate`
+3. **动态时间预估**：`GET https://meme.yourdomain.cn/api/meme/estimate`
    返回：`{"code": 0, "data": {"estimated_seconds": 91.7}}`（真实根据历史耗时动态计算，给用户最合理的心理预期）。
 

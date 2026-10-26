@@ -96,15 +96,15 @@ flowchart LR
 ### 3. 绑定公开访问自定义域名（Custom Domain）
 
 > [!IMPORTANT] 为什么必须绑定自定义域名？
-> R2 创建完成后默认处于私有保护状态。虽然控制台提供了一个形如 `pub-xxx.r2.dev` 的公开测试子域，但该域名在国内部分网络环境可能存在解析阻断或频次受限。生产环境必须绑定自己在 Cloudflare 托管解析的二级域名（例如 `media.tg-cc755.cn`），从而无缝激活 Cloudflare 全球 Anycast CDN 节点加速。
+> R2 创建完成后默认处于私有保护状态。虽然控制台提供了一个形如 `pub-xxx.r2.dev` 的公开测试子域，但该域名在国内部分网络环境可能存在解析阻断或频次受限。生产环境必须绑定自己在 Cloudflare 托管解析的二级域名（例如 `media.yourdomain.cn`），从而无缝激活 Cloudflare 全球 Anycast CDN 节点加速。
 
 1. 在存储桶列表中，点击进入刚刚创建的 `memo` 存储桶。
 2. 在存储桶顶部导航栏中，切换到 **【设置 (Settings)】** 标签页。
 3. 向下滚动找到 **【公开访问 (Public access)】** 模块，在“自定义域 (Custom Domains)”右侧点击 **【连接域 (Connect Domain)】**。
-4. 在弹出框中输入你要专用于静态媒体分发的二级域名：`media.tg-cc755.cn`（前提是主域名 `tg-cc755.cn` 已经在 Cloudflare 解析托管）。
+4. 在弹出框中输入你要专用于静态媒体分发的二级域名：`media.yourdomain.cn`（前提是主域名 `yourdomain.cn` 已经在 Cloudflare 解析托管）。
 5. 点击 **【继续 (Continue)】** -> Cloudflare 会自动在 DNS 记录中创建一条 CNAME 记录，指向 R2 边缘存储集群。
 6. 点击 **【连接域 (Connect Domain)】** 完成绑定。此时状态会显示为“初始化中”，通常 1~2 分钟内即刷新为绿色的 **【活动 (Active)】**。
-7. 该域名直接对应系统环境变量中的：`R2_PUBLIC_BASE_URL=https://media.tg-cc755.cn`。
+7. 该域名直接对应系统环境变量中的：`R2_PUBLIC_BASE_URL=https://media.yourdomain.cn`。
 
 ### 4. 创建 R2 API 令牌并获取 S3 兼容凭据
 
@@ -148,11 +148,11 @@ https://2b8b32244fb5f932eeaaa106ac264061.r2.cloudflarestorage.com
 
 | Cloudflare 控制台展示字段 | 环境变量 Key | 示例值 | 说明与作用 |
 | :--- | :--- | :--- | :--- |
-| **账户 ID (Account ID)** | `R2_ACCOUNT_ID` | `2b8b32244fb5f932eeaaa106ac264061` | Endpoint URL 中的 32 位十六进制账户哈希 |
-| **默认终结点 (Endpoint URL)** | `R2_ENDPOINT_URL` | `https://2b8b32244fb5f932eeaaa106ac264061.r2.cloudflarestorage.com` | `boto3` S3 客户端通信的专用 REST 接入网关 |
+| **账户 ID (Account ID)** | `R2_ACCOUNT_ID` | `<YOUR_R2_ACCOUNT_ID>` | Endpoint URL 中的 32 位十六进制账户哈希 |
+| **默认终结点 (Endpoint URL)** | `R2_ENDPOINT_URL` | `https://<YOUR_R2_ACCOUNT_ID>.r2.cloudflarestorage.com` | `boto3` S3 客户端通信的专用 REST 接入网关 |
 | **存储桶名称 (Bucket Name)** | `R2_BUCKET_NAME` | `memo` | 步骤 2 中创建的对象存储桶名称 |
 | **位置提示 (Region)** | `R2_REGION` | `auto` | 固定填写 `auto`，由 Cloudflare 自适应寻路 |
-| **自定义公开访问域名** | `R2_PUBLIC_BASE_URL` | `https://media.tg-cc755.cn` | 小程序客户端最终加载图片的 CDN 根域名 |
+| **自定义公开访问域名** | `R2_PUBLIC_BASE_URL` | `https://media.yourdomain.cn` | 小程序客户端最终加载图片的 CDN 根域名 |
 | **访问密钥 ID (Access Key ID)** | `R2_ACCESS_KEY_ID` | `db92229e4b4f94fe301693e3b5b5****` | S3 协议握手公钥身份识别 |
 | **机密访问密钥 (Secret Access Key)** | `R2_SECRET_ACCESS_KEY` | `7cabb6a5efed0ab8d773f9a33ae0b6f1a447411edba9ad1552dea4431b89****` | S3 协议 HMAC-SHA256 签名鉴权私钥 |
 
@@ -165,11 +165,11 @@ https://2b8b32244fb5f932eeaaa106ac264061.r2.cloudflarestorage.com
 # ===================================================================
 # Cloudflare R2 对象存储与全球 CDN 生产配置
 # ===================================================================
-R2_ACCOUNT_ID=2b8b32244fb5f932eeaaa106ac264061
-R2_ENDPOINT_URL=https://2b8b32244fb5f932eeaaa106ac264061.r2.cloudflarestorage.com
+R2_ACCOUNT_ID=<YOUR_R2_ACCOUNT_ID>
+R2_ENDPOINT_URL=https://<YOUR_R2_ACCOUNT_ID>.r2.cloudflarestorage.com
 R2_BUCKET_NAME=memo
 R2_REGION=auto
-R2_PUBLIC_BASE_URL=https://media.tg-cc755.cn
+R2_PUBLIC_BASE_URL=https://media.yourdomain.cn
 R2_ACCESS_KEY_ID=db92229e4b4f94fe301693e3b5b5****
 R2_SECRET_ACCESS_KEY=7cabb6a5efed0ab8d773f9a33ae0b6f1a447411edba9ad1552dea4431b89****
 ```

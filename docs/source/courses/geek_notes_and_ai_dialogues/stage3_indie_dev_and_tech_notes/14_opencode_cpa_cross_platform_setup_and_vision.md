@@ -12,7 +12,7 @@ OpenCode 1 与 OpenCode 2 的命令名都叫 `opencode`，但包名、配置结�
 
 | 输入项 | 本次记录／填写方式 |
 | --- | --- |
-| CPA 基础地址 | `https://cpa.tg-cc755.cn/v1`，已经带 `/v1`，不要再重复追加 |
+| CPA 基础地址 | `https://cpa.yourdomain.cn/v1`，已经带 `/v1`，不要再重复追加 |
 | CPA API Key | 自己的客户端调用密钥；交互输入或存入本地密钥文件，本文不记录真实值 |
 | 供应商 ID | `cpa`，这是自定义名称，不是接口返回的模型名 |
 | 主模型 | `gpt-6.1-sol`，在 OpenCode 中写成 `cpa/gpt-6.1-sol` |
@@ -26,7 +26,7 @@ OpenCode 1 与 OpenCode 2 的命令名都叫 `opencode`，但包名、配置结�
 
 ```text
 OpenCode GUI / CLI
-  → https://cpa.tg-cc755.cn/v1
+  → https://cpa.yourdomain.cn/v1
   → Nginx（整次请求体大小限制）
   → CPA（模型路由与协议转换）
   → 实际上游模型
@@ -179,7 +179,7 @@ chmod 600 "$HOME/.config/opencode/cpa-api-key"
       "name": "CPA OpenAI Compatible",
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "https://cpa.tg-cc755.cn/v1",
+        "baseURL": "https://cpa.yourdomain.cn/v1",
         "apiKey": "{file:~/.config/opencode/cpa-api-key}"
       },
       "models": {
@@ -396,7 +396,7 @@ Nginx 的 `client_max_body_size` 默认是 `1m`，限制整个请求体。它不
 ```nginx
 server {
     # 此处仅示意；保留现有 listen、SSL、location、proxy_pass 等配置
-    server_name cpa.tg-cc755.cn;
+    server_name cpa.yourdomain.cn;
     client_max_body_size 100m;
 }
 ```
@@ -428,7 +428,7 @@ docker exec <nginx容器名> nginx -s reload
 在 CPA 服务器本机，用同一图片、同一请求分别测试公网域名与 CPA 本机监听端口。假设 CPA 实际监听 `127.0.0.1:8317`，按真实部署端口替换：
 
 ```bash
-python3 cpa_probe.py vision --model gemini-3.8-flash-high --image ./test.png --base-url https://cpa.tg-cc755.cn/v1
+python3 cpa_probe.py vision --model gemini-3.8-flash-high --image ./test.png --base-url https://cpa.yourdomain.cn/v1
 python3 cpa_probe.py vision --model gemini-3.8-flash-high --image ./test.png --base-url http://127.0.0.1:8317/v1
 ```
 

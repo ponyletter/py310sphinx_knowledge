@@ -22,7 +22,7 @@ tcp   LISTEN   0   4096   *:443   *:*   users:(("caddy",pid=787,fd=8))
 ```caddy
 import /etc/caddy/sites/*.conf
 ```
-正在为 `web3xui.tg-cc755.cn` 等域名提供 X-UI 订阅分发与 WebSocket / gRPC 节点转发。
+正在为 `web3xui.yourdomain.com` 等域名提供 X-UI 订阅分发与 WebSocket / gRPC 节点转发。
 
 > [!WARNING]
 > **切忌盲目安装 Nginx 覆盖 80/443**：
@@ -42,15 +42,15 @@ import /etc/caddy/sites/*.conf
 
 许多开发者在使用 Cloudflare CDN（开启黄色小云朵）时，试图使用 Let's Encrypt 或 Certbot 自动化申请免费证书，极易遭遇以下惨痛痛点：
 
-* **HTTP-01 验证频繁失败**：Certbot 访问 `http://flux.kesiv.com/.well-known/acme-challenge/...` 时，容易被 Cloudflare 的 WAF 规则、防爬虫质询、自动 HTTPS 301 重定向或边缘缓存拦截，导致证书申请卡死；
+* **HTTP-01 验证频繁失败**：Certbot 访问 `http://flux.yourdomain.com/.well-known/acme-challenge/...` 时，容易被 Cloudflare 的 WAF 规则、防爬虫质询、自动 HTTPS 301 重定向或边缘缓存拦截，导致证书申请卡死；
 * **SSL 重定向循环死循环（301 ERR_TOO_MANY_REDIRECTS）**：当 Cloudflare 开启“Flexible”模式，而源站又开启强制 HTTPS 时，流量在边缘与源站之间陷入无限重定向。
 
 ### 生产级最佳实践：Cloudflare Origin CA Certificate
 直接在 Cloudflare 控制台签发长达 **15 年有效期** 的源服务器证书：
-1. 打开 **Cloudflare 控制台** -> 选择域名（如 `kesiv.com`）-> **SSL/TLS** -> **Origin Server (源服务器)**；
+1. 打开 **Cloudflare 控制台** -> 选择域名（如 `yourdomain.com`）-> **SSL/TLS** -> **Origin Server (源服务器)**；
 2. 点击 **Create Certificate (创建证书)**：
    * 密钥类型选择 **RSA (2048)**；
-   * 主机名列表填写通配符与根域名：`*.kesiv.com` 与 `kesiv.com`；
+   * 主机名列表填写通配符与根域名：`*.yourdomain.com` 与 `yourdomain.com`；
    * 有效期选择 **15 年**。
 3. 生成并下载：
    * **PEM 证书**：包含从 `-----BEGIN CERTIFICATE-----` 到 `-----END CERTIFICATE-----` 的公钥证书链；
@@ -60,17 +60,17 @@ import /etc/caddy/sites/*.conf
 ### 宿主机证书安全落盘与权限加固
 在 VPS 上创建专属目录，将证书与私钥写入：
 ```bash
-mkdir -p /etc/ssl/flux.kesiv.com && chmod 700 /etc/ssl/flux.kesiv.com
-# 写入证书至 /etc/ssl/flux.kesiv.com/cert.pem
-# 写入私钥至 /etc/ssl/flux.kesiv.com/key.pem
+mkdir -p /etc/ssl/flux.yourdomain.com && chmod 700 /etc/ssl/flux.yourdomain.com
+# 写入证书至 /etc/ssl/flux.yourdomain.com/cert.pem
+# 写入私钥至 /etc/ssl/flux.yourdomain.com/key.pem
 
 # 严格锁定私钥权限，仅 root 可读写
-chmod 600 /etc/ssl/flux.kesiv.com/key.pem /etc/ssl/flux.kesiv.com/cert.pem
+chmod 600 /etc/ssl/flux.yourdomain.com/key.pem /etc/ssl/flux.yourdomain.com/cert.pem
 ```
 
 通过 OpenSSL 校验落盘证书的合法性：
 ```bash
-openssl x509 -in /etc/ssl/flux.kesiv.com/cert.pem -noout -subject -dates
+openssl x509 -in /etc/ssl/flux.yourdomain.com/cert.pem -noout -subject -dates
 ```
 输出验证通过：
 ```text
@@ -83,12 +83,12 @@ notAfter=Oct 21 08:33:00 2041 GMT
 
 ## Caddy 生产级配置文件实战
 
-在 `/etc/caddy/sites/flux.kesiv.com.conf` 中创建完整站点反代配置：
+在 `/etc/caddy/sites/flux.yourdomain.com.conf` 中创建完整站点反代配置：
 
 ```caddy
-flux.kesiv.com {
+flux.yourdomain.com {
     # 绑定刚部署的 Cloudflare 15 年 Origin 证书
-    tls /etc/ssl/flux.kesiv.com/cert.pem /etc/ssl/flux.kesiv.com/key.pem
+    tls /etc/ssl/flux.yourdomain.com/cert.pem /etc/ssl/flux.yourdomain.com/key.pem
 
     # 严格匹配 Cloudflare 免费版计划的单请求 100MB 上限
     request_body {
@@ -133,7 +133,7 @@ systemctl status caddy
 ### 1. 本地通过 SNI 校验反代闭环
 因为 Caddy 基于 TLS Server Name Indication (SNI) 分发虚拟主机，直接 curl 本地 IP 会失败，需要使用 `--resolve` 强行指定解析：
 ```bash
-curl -k -sSL -I --resolve flux.kesiv.com:443:127.0.0.1 https://flux.kesiv.com/
+curl -k -sSL -I --resolve flux.yourdomain.com:443:127.0.0.1 https://flux.yourdomain.com/
 ```
 预期输出：
 ```http
@@ -146,7 +146,7 @@ x-frame-options: DENY
 ### 2. 公网通过 Cloudflare CDN 链路验证
 从任意公网客户端或终端发起请求：
 ```bash
-curl -sSL -I https://flux.kesiv.com/
+curl -sSL -I https://flux.yourdomain.com/
 ```
 预期输出包含标准的 Cloudflare 边缘特征与内部 Caddy 标识：
 ```http

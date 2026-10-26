@@ -2,10 +2,10 @@
 
 > **沉淀人**：极客探索团队  
 > **实战机型**：
-> 1. **RackNerd 美西洛杉矶 VPS**（IP: `192.255.232.12`，域名: `racknerd.kesiv.com`）
-> 2. **GreenCloud 日本/美西 VPS**（IP: `216.158.79.128`，域名: `greencloudvps.kesiv.com`，针对山东联通宽带优化）
-> 3. **ByteVirt 亚太/海外 VPS**（IP: `69.8.136.116`，SSH 端口: `4400`，域名: `bytevirt.kesiv.com`，针对中国移动宽带优化）
-> 4. **GreenVPS 高性能双栈 VPS**（IP: `216.158.79.135`，IPv6: `2607:f2d8:401b:12ab::a`，域名: `greenvps.kesiv.com`，原生 IPv4/IPv6 双栈）  
+> 1. **RackNerd 美西洛杉矶 VPS**（IP: `198.51.100.12`，域名: `racknerd.yourdomain.com`）
+> 2. **GreenCloud 日本/美西 VPS**（IP: `198.51.100.128`，域名: `greencloudvps.yourdomain.com`，针对山东联通宽带优化）
+> 3. **ByteVirt 亚太/海外 VPS**（IP: `198.51.100.116`，SSH 端口: `4400`，域名: `bytevirt.yourdomain.com`，针对中国移动宽带优化）
+> 4. **GreenVPS 高性能双栈 VPS**（IP: `198.51.100.135`，IPv6: `2001:db8:401b:12ab::a`，域名: `greenvps.yourdomain.com`，原生 IPv4/IPv6 双栈）  
 > **核心领域**：多节点科学网络拓扑、3X-UI 面板版本差异（v3.8 vs v3.11）与 SQLite 底层表结构兼容、Cloudflare CDN 标准 443 端口与回源改造、运营商（中国移动 / 中国联通）优选 IP 智能调度、OnePage / Subconverter 多节点批量聚合与 ACL4SSR 国内分流规则实战。
 
 ---
@@ -13,8 +13,8 @@
 ## 📌 背景与多节点架构演进：从单点救援到运营商多路容灾
 
 在完成了单台 RackNerd VPS 的 CDN 复活与分流调优后，为了保障高可用性与跨境多线路冗余，集群进一步接入了两台核心机器：
-1. **GreenCloud 节点（`216.158.79.128`）**：针对山东联通（China Unicom）网络优化；
-2. **ByteVirt 节点（`69.8.136.116`，SSH 4400）**：针对中国移动（China Mobile）网络出口丢包与 QoS 进行针对性 Anycast 优选加速。
+1. **GreenCloud 节点（`198.51.100.128`）**：针对山东联通（China Unicom）网络优化；
+2. **ByteVirt 节点（`198.51.100.116`，SSH 4400）**：针对中国移动（China Mobile）网络出口丢包与 QoS 进行针对性 Anycast 优选加速。
 
 当海外服务器的裸 IP 受到国内不同运营商的针对性丢包或封锁时，传统的“换 IP”策略不仅成本高昂，且无法根本解决运营商出境路由劣化的难题。通过将所有机器接入 **Cloudflare CDN（开启小云朵 Orange Cloud）**，配合标准 **443 端口 VLESS-WS-TLS** 协议与 **运营商本地优选 IP**，我们实现了：
 * **零换 IP 成本**：所有受阻 IP 均获得 Anycast“复活甲”；
@@ -75,10 +75,10 @@ flowchart TD
 
 | 节点名称 | 原始 IP / SSH 端口 | 解析域名 (CF Proxy 开启) | 协议与端口 | 运营商优化目标 | 3X-UI 面板入口 (Direct IP) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RackNerd-US** | `192.255.232.12:22` | `racknerd.kesiv.com` | VLESS-WS-TLS : 443 | 美西基础备用线路 | `https://192.255.232.12:60357/iItrkcZcuFHedxwh2N/` |
-| **GreenCloud-SD** | `216.158.79.128:22` | `greencloudvps.kesiv.com` | VLESS-WS-TLS : 443 | 山东联通骨干直连 | `https://216.158.79.128:60357/iItrkcZcuFHedxwh2N/` |
-| **ByteVirt-MB** | `69.8.136.116:4400` | `bytevirt.kesiv.com` | VLESS-WS-TLS : 443 | 中国移动宽带极速 | `https://69.8.136.116:60357/iItrkcZcuFHedxwh2N/` |
-| **GreenVPS-Dual** | `216.158.79.135:22` | `greenvps.kesiv.com` | VLESS-WS-TLS : 443 | 双栈 IPv4/IPv6 全网加速 | `https://216.158.79.135:60357/iItrkcZcuFHedxwh2N/` |
+| **RackNerd-US** | `198.51.100.12:22` | `racknerd.yourdomain.com` | VLESS-WS-TLS : 443 | 美西基础备用线路 | `https://198.51.100.12:60357/<YOUR_SECRET_PATH>/` |
+| **GreenCloud-SD** | `198.51.100.128:22` | `greencloudvps.yourdomain.com` | VLESS-WS-TLS : 443 | 山东联通骨干直连 | `https://198.51.100.128:60357/<YOUR_SECRET_PATH>/` |
+| **ByteVirt-MB** | `198.51.100.116:4400` | `bytevirt.yourdomain.com` | VLESS-WS-TLS : 443 | 中国移动宽带极速 | `https://198.51.100.116:60357/<YOUR_SECRET_PATH>/` |
+| **GreenVPS-Dual** | `198.51.100.135:22` | `greenvps.yourdomain.com` | VLESS-WS-TLS : 443 | 双栈 IPv4/IPv6 全网加速 | `https://198.51.100.135:60357/<YOUR_SECRET_PATH>/` |
 
 ---
 
@@ -112,15 +112,15 @@ c = conn.cursor()
 # 1. 开启面板订阅与证书挂载
 c.execute("INSERT OR REPLACE INTO settings (key, value) VALUES ('subEnable', 'true')")
 c.execute("INSERT OR REPLACE INTO settings (key, value) VALUES ('subClashEnable', 'true')")
-c.execute("INSERT OR REPLACE INTO settings (key, value) VALUES ('webCertFile', '/root/cert/bytevirt.kesiv.com/fullchain.pem')")
-c.execute("INSERT OR REPLACE INTO settings (key, value) VALUES ('webKeyFile', '/root/cert/bytevirt.kesiv.com/privkey.pem')")
+c.execute("INSERT OR REPLACE INTO settings (key, value) VALUES ('webCertFile', '/root/cert/bytevirt.yourdomain.com/fullchain.pem')")
+c.execute("INSERT OR REPLACE INTO settings (key, value) VALUES ('webKeyFile', '/root/cert/bytevirt.yourdomain.com/privkey.pem')")
 
 # 2. 将既有 Reality 节点移至 2083，释放 443 端口给 CF CDN
 c.execute("UPDATE inbounds SET port = 2083, tag = 'in-2083-tcp', remark = 'ByteVirt-Direct-Reality' WHERE id = 1")
 
-client_uuid = "9c086931-8248-4a52-9f1c-7907ce407373"
-sub_id = "r1i8hzt09rjbfx6g"
-email = "2eyqrgyt5i"
+client_uuid = "00000000-0000-0000-0000-000000000002"
+sub_id = "your_sub_id"
+email = "user@example.com"
 now_ms = int(time.time() * 1000)
 
 vless_settings = json.dumps({
@@ -140,10 +140,10 @@ vless_stream = json.dumps({
     "network": "ws",
     "security": "tls",
     "tlsSettings": {
-        "serverName": "bytevirt.kesiv.com",
+        "serverName": "bytevirt.yourdomain.com",
         "certificates": [{
-            "certificateFile": "/root/cert/bytevirt.kesiv.com/fullchain.pem",
-            "keyFile": "/root/cert/bytevirt.kesiv.com/privkey.pem"
+            "certificateFile": "/root/cert/bytevirt.yourdomain.com/fullchain.pem",
+            "keyFile": "/root/cert/bytevirt.yourdomain.com/privkey.pem"
         }],
         "alpn": ["http/1.1"]
     },
@@ -151,7 +151,7 @@ vless_stream = json.dumps({
         "acceptProxyProtocol": False,
         "path": "/ws",
         "headers": {
-            "Host": "bytevirt.kesiv.com"
+            "Host": "bytevirt.yourdomain.com"
         }
     }
 })
@@ -185,20 +185,20 @@ conn.close()
 
 ```text
 # 节点 1：标准 443 域名接入
-vless://9c086931-8248-4a52-9f1c-7907ce407373@bytevirt.kesiv.com:443?type=ws&security=tls&path=%2Fws&host=bytevirt.kesiv.com&sni=bytevirt.kesiv.com#ByteVirt-CF-VLESS-443
+vless://00000000-0000-0000-0000-000000000002@bytevirt.yourdomain.com:443?type=ws&security=tls&path=%2Fws&host=bytevirt.yourdomain.com&sni=bytevirt.yourdomain.com#ByteVirt-CF-VLESS-443
 
 # 节点 2：中国移动优选 Clean IP 接入（推荐移动宽带使用）
-vless://9c086931-8248-4a52-9f1c-7907ce407373@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=bytevirt.kesiv.com&sni=bytevirt.kesiv.com#ByteVirt-CF-移动优选-443
+vless://00000000-0000-0000-0000-000000000002@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=bytevirt.yourdomain.com&sni=bytevirt.yourdomain.com#ByteVirt-CF-移动优选-443
 ```
 
 ### 2. GreenVPS 节点（IPv4/IPv6 双栈）
 
 ```text
 # 节点 1：标准 443 域名接入
-vless://2b9e1a7e-a413-4288-b6d2-db1139212292@greenvps.kesiv.com:443?type=ws&security=tls&path=%2Fws&host=greenvps.kesiv.com&sni=greenvps.kesiv.com#GreenVPS-CF-VLESS-443
+vless://00000000-0000-0000-0000-000000000003@greenvps.yourdomain.com:443?type=ws&security=tls&path=%2Fws&host=greenvps.yourdomain.com&sni=greenvps.yourdomain.com#GreenVPS-CF-VLESS-443
 
 # 节点 2：优选 Clean IP 接入（国内运营商加速）
-vless://2b9e1a7e-a413-4288-b6d2-db1139212292@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=greenvps.kesiv.com&sni=greenvps.kesiv.com#GreenVPS-CF-优选-443
+vless://00000000-0000-0000-0000-000000000003@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=greenvps.yourdomain.com&sni=greenvps.yourdomain.com#GreenVPS-CF-优选-443
 ```
 
 ### 3. OnePage 在线订阅转换与 API 调用指南
@@ -211,7 +211,7 @@ vless://2b9e1a7e-a413-4288-b6d2-db1139212292@162.159.192.1:443?type=ws&security=
   3. 点击“生成订阅链接”即可一键获取 Clash 配置文件。
 * **直接订阅 URL（后端直出）**：
   ```text
-  https://onepage.czl.net/api/sub-convert?target=clash&url=vless%3A%2F%2F2b9e1a7e-a413-4288-b6d2-db1139212292%40greenvps.kesiv.com%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dgreenvps.kesiv.com%26sni%3Dgreenvps.kesiv.com%23GreenVPS-CF-VLESS-443%7Cvless%3A%2F%2F2b9e1a7e-a413-4288-b6d2-db1139212292%40162.159.192.1%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dgreenvps.kesiv.com%26sni%3Dgreenvps.kesiv.com%23GreenVPS-CF-%E4%BC%98%E9%80%89-443&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full_NoAuto.ini
+  https://onepage.czl.net/api/sub-convert?target=clash&url=vless%3A%2F%2F00000000-0000-0000-0000-000000000003%40greenvps.yourdomain.com%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dgreenvps.yourdomain.com%26sni%3Dgreenvps.yourdomain.com%23GreenVPS-CF-VLESS-443%7Cvless%3A%2F%2F00000000-0000-0000-0000-000000000003%40162.159.192.1%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dgreenvps.yourdomain.com%26sni%3Dgreenvps.yourdomain.com%23GreenVPS-CF-%E4%BC%98%E9%80%89-443&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full_NoAuto.ini
   ```
 
 ### 4. 多节点一键 Clash Verge Rev 聚合订阅链接
@@ -219,7 +219,7 @@ vless://2b9e1a7e-a413-4288-b6d2-db1139212292@162.159.192.1:443?type=ws&security=
 通过 **Subconverter API** 批量聚合 RackNerd、GreenCloud、ByteVirt 全部优质节点，并挂载 **ACL4SSR_Online_Full_NoAuto** 规则引擎，实现全网智能分流：
 
 ```text
-https://api.v1.mk/sub?target=clash&new_name=true&url=vless%3A%2F%2F9c086931-8248-4a52-9f1c-7907ce407373%40bytevirt.kesiv.com%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dbytevirt.kesiv.com%26sni%3Dbytevirt.kesiv.com%23ByteVirt-CF-VLESS-443%7Cvless%3A%2F%2F9c086931-8248-4a52-9f1c-7907ce407373%40162.159.192.1%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dbytevirt.kesiv.com%26sni%3Dbytevirt.kesiv.com%23ByteVirt-CF-%25E7%25A7%25BB%25E5%258A%25A8%25E4%25BC%2598%25E9%2580%2589-443&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full_NoAuto.ini
+https://api.v1.mk/sub?target=clash&new_name=true&url=vless%3A%2F%2F00000000-0000-0000-0000-000000000002%40bytevirt.yourdomain.com%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dbytevirt.yourdomain.com%26sni%3Dbytevirt.yourdomain.com%23ByteVirt-CF-VLESS-443%7Cvless%3A%2F%2F00000000-0000-0000-0000-000000000002%40162.159.192.1%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dbytevirt.yourdomain.com%26sni%3Dbytevirt.yourdomain.com%23ByteVirt-CF-%25E7%25A7%25BB%25E5%258A%25A8%25E4%25BC%2598%25E9%2580%2589-443&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full_NoAuto.ini
 ```
 
 ---

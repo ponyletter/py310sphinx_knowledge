@@ -19,7 +19,7 @@ import urllib.request
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=["models", "text", "vision", "generate"])
-    parser.add_argument("--base-url", default="https://cpa.tg-cc755.cn/v1")
+    parser.add_argument("--base-url", default="https://cpa.yourdomain.cn/v1")
     parser.add_argument("--key-file", type=Path,
                         default=Path.home() / ".config/opencode/cpa-api-key")
     parser.add_argument("--model", default="gpt-6.1-sol")

@@ -41,15 +41,15 @@
 
 ```bash
 # 查询 API 域名的权威 A 记录
-dig +short apiwx.tg-cc755.cn
-# 输出：124.xx.xx.xx (直接返回腾讯云国内机房公网 IP)
+dig +short api.yourdomain.cn
+# 输出：124.xx.xx.xx (直接返回国内机房公网 IP)
 
 # 检查 HTTP 响应头
-curl -Iv https://apiwx.tg-cc755.cn/health
+curl -Iv https://api.yourdomain.cn/health
 ```
 
 **诊断结论**：
-响应头中没有出现 `cf-ray` 或 `server: cloudflare`，说明该接口域名直接解析到国内腾讯云节点，**彻底排除了 Cloudflare CDN 代理拦截的嫌疑**。
+响应头中没有出现 `cf-ray` 或 `server: cloudflare`，说明该接口域名直接解析到国内机房节点，**彻底排除了 Cloudflare CDN 代理拦截的嫌疑**。
 
 ### 2. 微信小程序与 Cloudflare 核心避坑红线
 
@@ -80,7 +80,7 @@ client_max_body_size 20M;
 ```nginx
 # 生产环境终极调优配置
 server {
-    server_name apiwx.tg-cc755.cn meme.tg-cc755.cn;
+    server_name api.yourdomain.cn meme.yourdomain.cn;
     
     # 1. 允许上传最大 100MB 长视频
     client_max_body_size 100M;
