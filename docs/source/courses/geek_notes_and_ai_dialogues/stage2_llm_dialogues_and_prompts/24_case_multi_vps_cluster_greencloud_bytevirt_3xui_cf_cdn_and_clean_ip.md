@@ -6,6 +6,7 @@
 > 2. **GreenCloud 日本/美西 VPS**（IP: `198.51.100.128`，域名: `greencloudvps.yourdomain.com`，针对山东联通宽带优化）
 > 3. **ByteVirt 亚太/海外 VPS**（IP: `198.51.100.116`，SSH 端口: `4400`，域名: `bytevirt.yourdomain.com`，针对中国移动宽带优化）
 > 4. **GreenVPS 高性能双栈 VPS**（IP: `198.51.100.135`，IPv6: `2001:db8:401b:12ab::a`，域名: `greenvps.yourdomain.com`，原生 IPv4/IPv6 双栈）  
+> 5. **BandwagonHost 日本大阪 VPS**（IP: `45.78.52.136`，IPv6: `2607:8700:3100:3842::2`，域名: `bandwagonhost.yourdomain.com`，日本大阪机房 / 联通极速直连）  
 > **核心领域**：多节点科学网络拓扑、3X-UI 面板版本差异（v3.8 vs v3.11）与 SQLite 底层表结构兼容、Cloudflare CDN 标准 443 端口与回源改造、运营商（中国移动 / 中国联通）优选 IP 智能调度、OnePage / Subconverter 多节点批量聚合与 ACL4SSR 国内分流规则实战。
 
 ---
@@ -229,7 +230,17 @@ vless://your_uuid@bytevirt.yourdomain.com:443?type=ws&security=tls&path=%2Fws&ho
      vless://your_uuid@104.16.160.1:443?type=ws&security=tls&path=%2Fws&host=greenvps.yourdomain.com&sni=greenvps.yourdomain.com#GreenVPS-CF-联通优选1-443
      ```
 
-### 3. OnePage 在线订阅转换与 API 调用指南
+### 3. BandwagonHost 日本大阪节点（联通极速低延迟 & 双域名 SAN 证书）
+
+针对中国联通（如福建漳州联通 `175.43.247.27`）的网络特性，BandwagonHost 日本大阪（`45.78.52.136`）具备直连低延迟的天然地理优势：
+* **物理延迟优势**：日本大阪到中国联通 AS4837 骨干网仅约 40-60ms，远优于欧美节点；
+* **双域名 SAN 证书**：针对用户提供的 IPv4 域名（`bandwagonhost.kesiv.com`）与 IPv6 专属域名（`jttpdvw6rwj7ipv6.kesiv.com`），采用 `acme.sh` 签发 Multi-Domain ECC 证书，解决 IPv6 回源触发 Cloudflare 526 SSL 握手报错；
+* **三协议共存配置**：
+  1. **Hysteria 2 直连（UDP 38443）**：配合 Salamander 混淆，解决晚高峰联通国际出口丢包；
+  2. **VLESS-Reality 直连（TCP 24433）**：伪装 Mozilla 官方域名，直连超低延迟；
+  3. **Cloudflare 联通优选 Clean IP（TCP 443）**：Anycast CDN 智能调度，提供全天候抗封锁复活甲。
+
+### 4. OnePage 在线订阅转换与 API 调用指南
 
 针对轻量化转换场景，除 ACL4SSR 转换前端外，还可使用 **OnePage Sub-Convert** 工具：
 * **网页前端地址**：`https://onepage.czl.net/tools/sub-convert/`
