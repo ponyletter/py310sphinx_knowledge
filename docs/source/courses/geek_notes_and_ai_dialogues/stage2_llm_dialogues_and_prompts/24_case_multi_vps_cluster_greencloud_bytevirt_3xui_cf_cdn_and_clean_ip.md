@@ -191,15 +191,32 @@ vless://00000000-0000-0000-0000-000000000002@bytevirt.yourdomain.com:443?type=ws
 vless://00000000-0000-0000-0000-000000000002@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=bytevirt.yourdomain.com&sni=bytevirt.yourdomain.com#ByteVirt-CF-移动优选-443
 ```
 
-### 2. GreenVPS 节点（IPv4/IPv6 双栈）
+### 2. GreenVPS 节点（中国联通优化 & 三大协议共存架构）
 
-```text
-# 节点 1：标准 443 域名接入
-vless://00000000-0000-0000-0000-000000000003@greenvps.yourdomain.com:443?type=ws&security=tls&path=%2Fws&host=greenvps.yourdomain.com&sni=greenvps.yourdomain.com#GreenVPS-CF-VLESS-443
+为了彻底解决北方联通（如山东联通 AS4837）晚高峰 TCP 拥塞丢包、以及家庭宽带对境外 443 端口阻断超时的问题，GreenVPS（`216.158.79.135`）实现了 **三大协议多端口共存架构**：
 
-# 节点 2：优选 Clean IP 接入（国内运营商加速）
-vless://00000000-0000-0000-0000-000000000003@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=greenvps.yourdomain.com&sni=greenvps.yourdomain.com#GreenVPS-CF-优选-443
-```
+1. **Hysteria 2（UDP 38443，晚高峰首选）**：
+   * 基于 QUIC 与 BBR 拥塞控制，无视 TCP 队头阻塞，在 30% 丢包环境下依然跑满宽带；
+   * 采用 Salamander 混淆，避开运营商 UDP QoS 审查；
+   * 链接：
+     ```text
+     hysteria2://your_password@216.158.79.135:38443/?insecure=0&sni=greenvps.yourdomain.com&obfs=salamander&obfs-password=your_obfs_pass#GreenVPS-直连Hy2-晚高峰推荐
+     ```
+
+2. **VLESS-Reality（TCP 24433，低延迟直连）**：
+   * 采用高端口 `24433`，规避运营商对境外 443 端口的直接阻断；
+   * 借壳伪装，联通直连仅 188ms；
+   * 链接：
+     ```text
+     vless://your_uuid@216.158.79.135:24433?encryption=none&flow=xtls-rprx-vision&security=reality&sni=addons.mozilla.org&fp=chrome&pbk=your_pbk&sid=your_sid&type=tcp#GreenVPS-直连Reality-低延迟
+     ```
+
+3. **Cloudflare CDN 联通专属优选 IP（104.16.160.1 : 443）**：
+   * 针对联通出口优选的 Anycast IP，替代移动优选 IP，延迟更低、全平台抗封；
+   * 链接：
+     ```text
+     vless://your_uuid@104.16.160.1:443?type=ws&security=tls&path=%2Fws&host=greenvps.yourdomain.com&sni=greenvps.yourdomain.com#GreenVPS-CF-联通优选1-443
+     ```
 
 ### 3. OnePage 在线订阅转换与 API 调用指南
 
