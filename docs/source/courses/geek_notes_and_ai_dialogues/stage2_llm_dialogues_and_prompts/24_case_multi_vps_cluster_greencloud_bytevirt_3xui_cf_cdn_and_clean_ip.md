@@ -181,14 +181,25 @@ conn.close()
 
 ## ⚡ 客户端连接凭证与订阅
 
-### 1. ByteVirt 节点（中国移动优选）
+### 1. ByteVirt 节点（中国移动极速 & 三大协议共存架构）
+
+针对中国移动（AS56041）国际出口特性，ByteVirt（`69.8.136.116`）现已全面落地三大协议共存：
+1. **Hysteria 2（UDP 38443）**：针对移动宽带 UDP QoS 特性，开启 Salamander 混淆，晚高峰抗丢包首选；
+2. **VLESS-Reality（TCP 2083）**：借壳 Sony 官网证书，极低直连握手延迟；
+3. **Cloudflare 移动专属 Anycast（162.159.192.1 : 443）**：移动骨干网优选 IP。
 
 ```text
-# 节点 1：标准 443 域名接入
-vless://00000000-0000-0000-0000-000000000002@bytevirt.yourdomain.com:443?type=ws&security=tls&path=%2Fws&host=bytevirt.yourdomain.com&sni=bytevirt.yourdomain.com#ByteVirt-CF-VLESS-443
+# 节点 1：Hysteria 2 直连（移动晚高峰首选，UDP 38443）
+hysteria2://your_password@69.8.136.116:38443/?insecure=0&sni=bytevirt.yourdomain.com&obfs=salamander&obfs-password=your_obfs_pass#ByteVirt-直连Hy2-晚高峰推荐
 
-# 节点 2：中国移动优选 Clean IP 接入（推荐移动宽带使用）
-vless://00000000-0000-0000-0000-000000000002@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=bytevirt.yourdomain.com&sni=bytevirt.yourdomain.com#ByteVirt-CF-移动优选-443
+# 节点 2：VLESS-Reality 直连（TCP 2083，极低延迟）
+vless://your_uuid@69.8.136.116:2083?encryption=none&flow=xtls-rprx-vision&security=reality&sni=www.sony.co.uk&fp=chrome&pbk=your_pbk&sid=your_sid&type=tcp#ByteVirt-直连Reality-低延迟
+
+# 节点 3：移动专属优选 Clean IP 接入（端口 443）
+vless://your_uuid@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=bytevirt.yourdomain.com&sni=bytevirt.yourdomain.com#ByteVirt-CF-移动优选1-443
+
+# 节点 4：标准 443 域名接入（Cloudflare CDN 全平台抗封）
+vless://your_uuid@bytevirt.yourdomain.com:443?type=ws&security=tls&path=%2Fws&host=bytevirt.yourdomain.com&sni=bytevirt.yourdomain.com#ByteVirt-CF-VLESS-443
 ```
 
 ### 2. GreenVPS 节点（中国联通优化 & 三大协议共存架构）
