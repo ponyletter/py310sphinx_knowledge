@@ -261,10 +261,20 @@ vless://your_uuid@bytevirt.yourdomain.com:443?type=ws&security=tls&path=%2Fws&ho
 https://api.v1.mk/sub?target=clash&new_name=true&url=vless%3A%2F%2F00000000-0000-0000-0000-000000000002%40bytevirt.yourdomain.com%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dbytevirt.yourdomain.com%26sni%3Dbytevirt.yourdomain.com%23ByteVirt-CF-VLESS-443%7Cvless%3A%2F%2F00000000-0000-0000-0000-000000000002%40162.159.192.1%3A443%3Ftype%3Dws%26security%3Dtls%26path%3D%252Fws%26host%3Dbytevirt.yourdomain.com%26sni%3Dbytevirt.yourdomain.com%23ByteVirt-CF-%25E7%25A7%25BB%25E5%258A%25A8%25E4%25BC%2598%25E9%2580%2589-443&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full_NoAuto.ini
 ```
 
+### 5. 开源通用 Skill 产物：`vps-deploy-skill`（多模型全兼容）
+
+为了将上述全套工程化实践沉淀为可复用的 AI Agent 资产，已将全自动部署引擎打包为开源 **Skill 仓库**：
+* **GitHub 仓库地址**：[https://github.com/arifulcrypto/vps-deploy-skill](https://github.com/arifulcrypto/vps-deploy-skill)
+* **核心兼容能力**：
+  * **国际化 i18n**：以英文（`en`）为主，并提供完整的中文（`zh-CN`）Skill 说明与 README。
+  * **跨大模型平台**：全面适配 OpenAI GPTs（Custom Instructions & Actions）、Anthropic Claude（System Prompt & Skills）、Google Gemini / Antigravity（`SKILL.md` 自动发现机制）。
+  * **零配置直出**：输入目标主机 IP、密码、可选域名与本地宽带运营商，全自动完成环境清理、BBR 加速、Let's Encrypt ECC 证书签发、3X-UI 部署、SQLite 协议注入、二维码图片生成、以及 OnePage 订阅转换与离线 Clash 归档。
+
 ---
 
 ## 🔗 参考资料与工具
 
+* **VPS Deployer Skill 开源仓库**：[https://github.com/arifulcrypto/vps-deploy-skill](https://github.com/arifulcrypto/vps-deploy-skill)
 * **ACL4SSR 在线订阅转换平台**：[https://acl4ssr-sub.github.io/](https://acl4ssr-sub.github.io/)
 * **OnePage 极简订阅转换**：[https://onepage.czl.net/tools/sub-convert/](https://onepage.czl.net/tools/sub-convert/)
 * **Loyalsoldier 规则集**：[https://github.com/Loyalsoldier/clash-rule](https://github.com/Loyalsoldier/clash-rule)
