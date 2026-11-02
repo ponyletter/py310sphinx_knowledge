@@ -104,6 +104,47 @@ sudo ufw enable
 
 ---
 
+## 四、 实操救急：VPS IP 是否真被封锁？100% 精准诊断与零成本救活 SOP
+
+在运维 VPS 时，很多新手一看到 SSH 连不上或节点报红，第一反应就是：“糟了，IP 被墙了，赶紧花 $8~$15 美元联系搬瓦工等商家换 IP”。**在 90% 的情况下，这是巨大的误判与冤枉钱！**
+
+### 1. 30 秒自查三步法（铁证判断是否真被封）
+
+```mermaid
+flowchart TD
+    Start["SSH 无法连接 / 节点报红"] --> Step1["第一步：本地终端执行 ping IP"]
+    Step1 -->|能够收到 ICMP Reply (丢包率正常)| Alive["铁证：公网 IP 绝对没有被阻断！<br/>(GFW 封 IP 必走黑洞丢弃所有 ICMP)"]
+    Step1 -->|100% 丢包超时| Dead["IP 疑似被墙 或 机器已关机"]
+    
+    Alive --> Step2["第二步：测试 TCP 端口连通性<br/>(nc -zv -w 3 IP PORT 或 tcping)"]
+    Step2 -->|Connection refused| DeadService["仅为目标进程 (sshd/xray) 崩溃或未启动<br/>网络完全畅通！"]
+    Step2 -->|Connection timed out| BlockPort["仅当前单一端口被阻断<br/>(只需改端口，无需换 IP！)"]
+```
+
+### 2. 厂商后台 Web Shell 零成本救活指南
+
+只要 Ping 正常，绝不需要花一分钱换 IP！通过云服务商提供的后台网页控制台（如搬瓦工 KiWiVM Basic Shell / GreenCloud VNC / DMIT 控制台）即可一键救活：
+
+```bash
+# 1. 登录控制台后，检查 SSHD 守护进程是否存活
+ps aux | grep sshd
+ss -tulpn | grep 22
+
+# 2. 如果服务死掉，直接拉起
+systemctl restart sshd
+
+# 3. 如果确系 22 端口被运营商阻断，直接修改为高位备用端口（如 2222）
+sed -i 's/^#*Port 22/Port 2222/' /etc/ssh/sshd_config
+grep "^Port" /etc/ssh/sshd_config
+
+# 4. 放行新端口防火墙并重载 SSHD
+ufw allow 2222/tcp || iptables -I INPUT -p tcp --dport 2222 -j ACCEPT
+systemctl restart sshd
+```
+修改完成后，在本地使用 `ssh -p 2222 root@198.51.100.150` 瞬间秒连恢复！
+
+---
+
 ## 🔗 参考资料
 
 * **Cloudflare Origin Rules 官方文档**：[Configure Origin Rules](https://developers.cloudflare.com/rules/origin-rules/features/)

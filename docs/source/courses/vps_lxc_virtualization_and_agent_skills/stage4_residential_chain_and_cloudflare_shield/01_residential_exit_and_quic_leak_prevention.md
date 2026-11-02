@@ -187,6 +187,48 @@ curl -s "https://scamalytics.com/ip/198.51.100.96" | grep -A 2 -B 2 -i "fraud sc
 
 ---
 
+## 七、 架构算力卸载：为什么严禁在 256MB 软路由上硬跑复杂分流？
+
+在真实工程排查中，大量用户尝试在小米 AX3000T、红米 AX6000 等家用或轻量软路由（内存仅 256MB 或 512MB）上，通过 PassWall 或 OpenClash 直接运行双重中转、住宅分流与庞大的 GeoIP 规则库：
+
+```mermaid
+flowchart TD
+    subgraph Bad["传统错误做法：软路由硬抗所有计算（频发崩溃）"]
+        R1["256MB 弱鸡路由器 (AX3000T)"] -->|启动 Xray 加载上万条规则| OOM["物理内存被挤爆 (OOM-Kill)<br/>进程被杀 -> 路由全局断网"]
+    end
+
+    subgraph Good["工业级算力卸载：复杂逻辑上移至 VPS 容器 c2"]
+        R2["软路由 / 客户端仅保留单条前置直连<br/>(内存常驻 < 20MB)"] -->|高速隧道| VPS["VPS 容器 c2 (198.51.100.150)"]
+        VPS -->|服务端内网链式分流| ISP["住宅出口 -> 目标平台"]
+    end
+```
+
+* **Xray 的 Go 运行时虚拟内存黑洞**：Xray 采用 Go 编写，启动时向内核申请超过 1GB 虚拟内存，加载规则时瞬时常驻内存逼近 150MB+；这在 256MB（扣除系统仅剩 180MB）的路由器上直接触发 Linux 内核 **`Out of memory: Killed process (xray)`**；
+* **解法：算力彻底上移**：
+  * **路由器端降维减重**：软路由或电脑端只配置一条极简的 VLESS-REALITY 直连到 VPS，不加载任何复杂外挂，内存占用低于 20MB；
+  * **VPS 容器承接链式中继**：复杂的 SOCKS5 住宅转发、证书校验、QUIC 黑洞阻断全部交由 VPS 容器 `c2`（分配 768MB 独立内存与 Swap 兜底）处理，彻底终结路由器死机崩溃！
+
+---
+
+## 八、 TikTok 跨境防环境穿帮与“0 播放”的 4 大网络底层配置
+
+运营海外 TikTok、亚马逊或 PayPal 时，遭遇“零播放”或刚注册就封号，绝大多数源自底层的网络环境穿帮。必须严格落实以下四项网络硬件级对齐：
+
+1. **域名解析完全走远端（Socks5h / Fake-IP）**：
+   客户端或软路由严禁使用本地运营商 DNS 解析海外域名。测试命令必须使用带 `h` 的 `socks5h://`，确保解析由远端机房执行，严防 DNS 污染与 DNS 泄露归属地；
+2. **路由器/防火墙层级强制 DROP UDP 443（QUIC）**：
+   在 OpenWrt 防火墙自定义规则注入：
+   ```bash
+   iptables -I FORWARD -p udp --dport 443 -j DROP
+   ```
+   严禁手机 App 通过 QUIC 旁路绕过代理；
+3. **NTP 时区物理级强一致对齐**：
+   若住宅 IP 经 `ipinfo.io` 查询位于 `America/Los_Angeles`（太平洋时区 UTC-8），运营用手机/电脑以及软路由的系统时区与 NTP 授时服务器必须同步设置为美西时区，严禁设备本地处于北京时间（UTC+8）访问；
+4. **屏蔽 WebRTC 本地内网泄露**：
+   浏览器端开启 WebRTC 防泄露插件，或在无头浏览器中配置 `disable-webrtc`，防止网页 JavaScript 通过 STUN 协议获取客户端的真实内网私有 IP（如 `192.168.1.x`）。
+
+---
+
 ## 🔗 参考资料
 
 * **IETF RFC 9000 (QUIC: A UDP-Based Multiplexed and Secure Transport)**：[RFC 9000 Specification](https://www.rfc-editor.org/rfc/rfc9000.html)

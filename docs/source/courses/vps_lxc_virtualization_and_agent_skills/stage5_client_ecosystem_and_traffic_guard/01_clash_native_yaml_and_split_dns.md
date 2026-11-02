@@ -93,6 +93,36 @@ proxy-groups:
 
 ---
 
+## 四、 软路由 PassWall / OpenClash 降维接入与 Go 内存锁死保活
+
+如果需要在 OpenWrt / iStoreOS（如小米 AX3000T、高通 IPQ50xx 等 256MB~512MB 内存设备）上通过 PassWall 导入该节点，必须进行“防爆降维”，否则极易触发内核 OOM 崩溃：
+
+### 1. 路由器假死紧急救活命令
+当路由器因 Xray 内存爆仓导致 LuCI 网页打不开且全局断网时，在 SSH 终端执行以下救命指令，网页与网络瞬间恢复：
+```bash
+/etc/init.d/passwall stop
+/etc/init.d/firewall restart
+```
+
+### 2. 注入 Go 运行时内存限制（`GOMEMLIMIT=60MiB`）
+Xray 作为 Go 程序，在弱硬件上启动极易申请超过 1GB 的虚拟地址空间。通过在服务脚本中锁定 Go 的垃圾回收边界，强制其常驻内存压在 60MB 以内：
+```bash
+# 修改 PassWall procd 启动脚本，强制限制 Xray 内存上限
+sed -i '/procd_set_param command/i \	procd_set_param env GOMEMLIMIT=60MiB' /etc/init.d/passwall
+/etc/init.d/passwall restart
+```
+
+### 3. 停用冗余无用服务
+在路由器后台停用与纯代理无关的后台组件，释放约 30MB 宝贵 RAM：
+```bash
+# 停用 NFC、微型代理及多余后台探针
+/etc/init.d/nfc stop && /etc/init.d/nfc disable 2>/dev/null || true
+/etc/init.d/microsocks stop && /etc/init.d/microsocks disable 2>/dev/null || true
+/etc/init.d/ubihealthd stop && /etc/init.d/ubihealthd disable 2>/dev/null || true
+```
+
+---
+
 ## 🔗 参考资料
 
 * **Mihomo (Clash.Meta) 官方配置标准文档**：[Mihomo Configuration Specification](https://wiki.metacubex.one/config/)
