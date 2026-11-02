@@ -37,6 +37,7 @@
 | **2.25** | [【实战对话】从 Clash Verge 订阅死局到单机 4 容器黄金拓扑：跨模型 Agent 协同、流量守卫与本地规则生成全景复盘](25_case_lxc_virtualization_and_agent_mesh_evolution.md) | 在线转换工具内核滞后排查、后量子 ML-KEM-768 握手攻克、按量计费住宅流量防偷跑、Cloudflare 优选 IP 端口陷阱、容器 BBR 开机自愈、机型与系统推荐基准，以及 Linux 可复用命令速查 | 跨大模型长程协同与工程排错实录 | 痛点问答卡片 + 故障映射表 + 选购基准 + 一键命令字典 |
 | **2.26** | [【实战对话】特惠海外 VPS 论坛淘金、机房线路横评与双 ISP 静态住宅真假鉴别 6 步法](26_case_vps_procurement_forum_trading_and_isp_scamalytics_guide.md) | 奥格登 Ogden UT 内陆 vs 美西沿海访问优先级、AMD 9950X 跑分实测、美区 TikTok 坚决避开家宽 NAT 原理、前置中转与落地代理拓扑、四大论坛（NodeSeek/LINUX DO/LET）二手收机溢价鉴别、Socks5 验货 6 步法与 Scamalytics 欺诈分提取 | 大模型深度采购与风控推演实录 | 机房优先级表 + 论坛收机指南 + 验货 6 步法 + uv 工具链 |
 | **2.27** | [【实战对话】软路由 PassWall 内存爆仓 OOM 救活、VPS 假被封真断连排错与 ImmortalWrt 出海部署实录](27_case_openwrt_passwall_oom_fix_vps_gfw_diagnosis_sop.md) | 小米 AX3000T (256MB) 路由 Xray 内存爆仓 OOM 秒级救活命令、GOMEMLIMIT=60MiB 锁死调优、冗余组件精简、搬瓦工 VPS 假性被墙排错 SOP（ICMP 正常铁证未被墙，免密改 SSH 端口救活）、ImmortalWrt vs iStoreOS 出海选型与官方源清单 | 软路由排障与网络防穿帮实录 | OOM 救活命令 + GOMEMLIMIT 脚本 + 假被墙排错 SOP + 固件选型表 |
+| **2.28** | [【实战对话】iOS / 跨端客户端分流异化排查：Streisand 与 Shadowrocket 逆向规则解构、国内大厂（闲鱼/抖音）DNS 漂移与卡顿根治、域名嗅探与 Split DNS 全景落地](28_case_ios_streisand_shadowrocket_clash_split_routing_and_app_lag_diagnosis.md) | Streisand / Shadowrocket 逆向解构（Apple bplist00 解密）、粗粒度规则导致国内大厂 App（闲鱼/抖音）跨洋走美西 CDN 延迟暴涨与异地风控死因、HTTPDNS 纯 IP 直连逃逸排错、域名嗅探（TLS/QUIC Sniffing）精准命中、Happy Eyeballs IPv6 双栈黑洞根治，以及跨端 Split DNS 统一治理 | 移动端网络分流排障与协议逆向实录 | 逆向解码脚本 + 致死链路图 + 四步根治 SOP + 日志验证命令 |
 
 ---
 
@@ -72,6 +73,7 @@
 25_case_lxc_virtualization_and_agent_mesh_evolution
 26_case_vps_procurement_forum_trading_and_isp_scamalytics_guide
 27_case_openwrt_passwall_oom_fix_vps_gfw_diagnosis_sop
+28_case_ios_streisand_shadowrocket_clash_split_routing_and_app_lag_diagnosis
 ```
 
 ```{important}
@@ -92,4 +94,5 @@
 14. **容器化多开、后量子握手与本地规则生成**：参考 **从 Clash Verge 订阅死局到单机 4 容器黄金拓扑**（[2.25 章节](25_case_lxc_virtualization_and_agent_mesh_evolution.md)），彻底抛弃易出故障的第三方在线转换，采用自研本地 Python 引擎生成原生 YAML，实施按量住宅节点隔离与 Split DNS，配合开机自检与阶梯流量守卫，实现单机高密度稳定运行；系统化工程学习请移步专栏 **《现代 VPS 极客运维：LXC 容器虚拟化、AI Agent Skill 与全协议流编排实战》**。
 15. **机房线路选型、论坛二手淘金与住宅验货**：参考 **特惠海外 VPS 论坛淘金、机房线路横评与双 ISP 静态住宅真假鉴别 6 步法**（[2.26 章节](26_case_vps_procurement_forum_trading_and_isp_scamalytics_guide.md)），弄清美西内陆（奥格登 Ogden WebNX）与沿海海缆机房的直连优先级，掌握 NodeSeek/LINUX DO 溢价辨析与二手过户红线，严禁在 TikTok 运营中使用动态家宽 NAT，并使用标准化 `curl` 6 步测试命令一键提取 IPinfo 时区、TCP 握手延迟、TikTok `ttwid` Cookie 与 Scamalytics 欺诈分。
 16. **软路由内存防爆、假性被墙救活与出海选型**：参考 **软路由 PassWall 内存爆仓 OOM 救活、VPS 假被封真断连排错与 ImmortalWrt 出海部署实录**（[2.27 章节](27_case_openwrt_passwall_oom_fix_vps_gfw_diagnosis_sop.md)），掌握小米 AX3000T (256MB) 路由因 Xray 爆内存触发 OOM 的秒级救活命令（`/etc/init.d/passwall stop && /etc/init.d/firewall restart`），通过注入 `GOMEMLIMIT=60MiB` 与停用冗余组件彻底防爆内存；遇 VPS 断连坚决执行 ICMP Ping 验证（Ping 通铁证未被墙），通过厂商 Web Shell 零成本改端口救活；出海业务首选 ImmortalWrt 固件以确保网络栈与驱动完整性。
+17. **iOS 移动端分流异常、大厂 App 卡顿与协议逆向**：参考 **iOS / 跨端客户端分流异化排查：Streisand 与 Shadowrocket 逆向规则解构、国内大厂（闲鱼/抖音）DNS 漂移与卡顿根治、域名嗅探与 Split DNS 全景落地**（[2.28 章节](28_case_ios_streisand_shadowrocket_clash_split_routing_and_app_lag_diagnosis.md)），利用 Python 逆向解密 `streisand://` 的 Apple bplist 路由，剖析海外 DNS 导致国内 CDN（阿里/字节）跨国 Anycast 调度漂移与 HTTPDNS 逃逸死因，通过配置本地阿里权威 DNS（`223.5.5.5`）与海外 DoH 的 Split DNS 架构、开启 TLS/QUIC 域名嗅探（Traffic Sniffing）以及关闭移动端 IPv6 避免 Happy Eyeballs 超时，彻底消灭闲鱼与抖音的白屏转圈与异地风控。
 ```

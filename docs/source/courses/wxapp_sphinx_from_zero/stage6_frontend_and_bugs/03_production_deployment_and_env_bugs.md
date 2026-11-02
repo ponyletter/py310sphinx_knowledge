@@ -15,7 +15,7 @@ uvicorn backend.app.main:app --host 0.0.0.0 --port 8280 --workers 2
 ```
 控制台随即疯狂刷出报错：
 ```log
-INFO: 111.55.102.154:0 - "POST /api/auth/login HTTP/1.1" 500 Internal Server Error
+INFO: 198.51.100.154:0 - "POST /api/auth/login HTTP/1.1" 500 Internal Server Error
 ```
 同时，手机端进入小程序首页，原本应该展示的两个精品专栏完全消失，页面空空如也。
 

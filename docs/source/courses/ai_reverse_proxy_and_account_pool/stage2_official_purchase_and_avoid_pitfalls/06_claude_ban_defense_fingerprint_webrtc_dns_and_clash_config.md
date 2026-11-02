@@ -116,7 +116,7 @@ Anthropic 前端页面部署了极其严密的指纹收集脚本，**如果网�
 ### 1. 核心自查网站（必须达标）
 * **WebRTC 穿透检测**：[https://browserleaks.com/webrtc](https://browserleaks.com/webrtc)
 * **DNS 泄漏检测**：[https://www.dnsleaktest.com/](https://www.dnsleaktest.com/)
-* **真实案例警示**：某开发者使用美区代理，但 WebRTC 页面实测直接暴露：`WebRTC: 223.153.95.48 China Changsha`；DNS 测试检测出一长串国内电信 IP `14.215.166.121`，导致账号注册当天即被拦截。
+* **真实案例警示**：某开发者使用美区代理，但 WebRTC 页面实测直接暴露：`WebRTC: 203.0.113.48 China ISP`；DNS 测试检测出一长串国内运营商 IP `198.51.100.121`，导致账号注册当天即被拦截。
 
 ---
 
@@ -179,7 +179,7 @@ WebRTC 协议通过 STUN 服务器探查物理链路，会直接无视 HTTP 代�
 
 ### 5. 彻底解决 DNS 泄漏（阻止国内运营商解析）
 
-若你的出网 IP 是美国，但 DNS 泄露测试出现 `14.215.166.121`（国内电信/联通），Anthropic 瞬间即可识别代理环境。
+若你的出网 IP 是美国，但 DNS 泄露测试出现 `198.51.100.121`（国内运营商），Anthropic 瞬间即可识别代理环境。
 
 * **方案一：Chrome 开启安全 DNS（DoH 协议加密）**：
   1. 打开 Chrome 设置：`chrome://settings/security`；

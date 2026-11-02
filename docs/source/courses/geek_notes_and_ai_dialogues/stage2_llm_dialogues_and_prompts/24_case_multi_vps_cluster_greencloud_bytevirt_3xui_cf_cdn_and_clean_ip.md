@@ -6,7 +6,7 @@
 > 2. **GreenCloud 日本/美西 VPS**（IP: `198.51.100.128`，域名: `greencloudvps.yourdomain.com`，针对山东联通宽带优化）
 > 3. **ByteVirt 亚太/海外 VPS**（IP: `198.51.100.116`，SSH 端口: `4400`，域名: `bytevirt.yourdomain.com`，针对中国移动宽带优化）
 > 4. **GreenVPS 高性能双栈 VPS**（IP: `198.51.100.135`，IPv6: `2001:db8:401b:12ab::a`，域名: `greenvps.yourdomain.com`，原生 IPv4/IPv6 双栈）  
-> 5. **BandwagonHost 日本大阪 VPS**（IP: `45.78.52.136`，IPv6: `2607:8700:3100:3842::2`，域名: `bandwagonhost.yourdomain.com`，日本大阪机房 / 联通极速直连）  
+> 5. **BandwagonHost 日本大阪 VPS**（IP: `198.51.100.136`，IPv6: `2001:db8:8700:3100::2`，域名: `bandwagonhost.yourdomain.com`，日本大阪机房 / 联通极速直连）  
 > **核心领域**：多节点科学网络拓扑、3X-UI 面板版本差异（v3.8 vs v3.11）与 SQLite 底层表结构兼容、Cloudflare CDN 标准 443 端口与回源改造、运营商（中国移动 / 中国联通）优选 IP 智能调度、OnePage / Subconverter 多节点批量聚合与 ACL4SSR 国内分流规则实战。
 
 ---
@@ -184,17 +184,17 @@ conn.close()
 
 ### 1. ByteVirt 节点（中国移动极速 & 三大协议共存架构）
 
-针对中国移动（AS56041）国际出口特性，ByteVirt（`69.8.136.116`）现已全面落地三大协议共存：
+针对中国移动（AS56041）国际出口特性，ByteVirt（`198.51.100.116`）现已全面落地三大协议共存：
 1. **Hysteria 2（UDP 38443）**：针对移动宽带 UDP QoS 特性，开启 Salamander 混淆，晚高峰抗丢包首选；
 2. **VLESS-Reality（TCP 2083）**：借壳 Sony 官网证书，极低直连握手延迟；
 3. **Cloudflare 移动专属 Anycast（162.159.192.1 : 443）**：移动骨干网优选 IP。
 
 ```text
 # 节点 1：Hysteria 2 直连（移动晚高峰首选，UDP 38443）
-hysteria2://your_password@69.8.136.116:38443/?insecure=0&sni=bytevirt.yourdomain.com&obfs=salamander&obfs-password=your_obfs_pass#ByteVirt-直连Hy2-晚高峰推荐
+hysteria2://your_password@198.51.100.116:38443/?insecure=0&sni=bytevirt.yourdomain.com&obfs=salamander&obfs-password=your_obfs_pass#ByteVirt-直连Hy2-晚高峰推荐
 
 # 节点 2：VLESS-Reality 直连（TCP 2083，极低延迟）
-vless://your_uuid@69.8.136.116:2083?encryption=none&flow=xtls-rprx-vision&security=reality&sni=www.sony.co.uk&fp=chrome&pbk=your_pbk&sid=your_sid&type=tcp#ByteVirt-直连Reality-低延迟
+vless://your_uuid@198.51.100.116:2083?encryption=none&flow=xtls-rprx-vision&security=reality&sni=www.sony.co.uk&fp=chrome&pbk=your_pbk&sid=your_sid&type=tcp#ByteVirt-直连Reality-低延迟
 
 # 节点 3：移动专属优选 Clean IP 接入（端口 443）
 vless://your_uuid@162.159.192.1:443?type=ws&security=tls&path=%2Fws&host=bytevirt.yourdomain.com&sni=bytevirt.yourdomain.com#ByteVirt-CF-移动优选1-443
@@ -205,14 +205,14 @@ vless://your_uuid@bytevirt.yourdomain.com:443?type=ws&security=tls&path=%2Fws&ho
 
 ### 2. GreenVPS 节点（中国联通优化 & 三大协议共存架构）
 
-为了彻底解决北方联通（如山东联通 AS4837）晚高峰 TCP 拥塞丢包、以及家庭宽带对境外 443 端口阻断超时的问题，GreenVPS（`216.158.79.135`）实现了 **三大协议多端口共存架构**：
+为了彻底解决北方联通（如山东联通 AS4837）晚高峰 TCP 拥塞丢包、以及家庭宽带对境外 443 端口阻断超时的问题，GreenVPS（`198.51.100.135`）实现了 **三大协议多端口共存架构**：
 
 1. **Hysteria 2（UDP 38443，晚高峰首选）**：
    * 基于 QUIC 与 BBR 拥塞控制，无视 TCP 队头阻塞，在 30% 丢包环境下依然跑满宽带；
    * 采用 Salamander 混淆，避开运营商 UDP QoS 审查；
    * 链接：
      ```text
-     hysteria2://your_password@216.158.79.135:38443/?insecure=0&sni=greenvps.yourdomain.com&obfs=salamander&obfs-password=your_obfs_pass#GreenVPS-直连Hy2-晚高峰推荐
+     hysteria2://your_password@198.51.100.135:38443/?insecure=0&sni=greenvps.yourdomain.com&obfs=salamander&obfs-password=your_obfs_pass#GreenVPS-直连Hy2-晚高峰推荐
      ```
 
 2. **VLESS-Reality（TCP 24433，低延迟直连）**：
@@ -220,7 +220,7 @@ vless://your_uuid@bytevirt.yourdomain.com:443?type=ws&security=tls&path=%2Fws&ho
    * 借壳伪装，联通直连仅 188ms；
    * 链接：
      ```text
-     vless://your_uuid@216.158.79.135:24433?encryption=none&flow=xtls-rprx-vision&security=reality&sni=addons.mozilla.org&fp=chrome&pbk=your_pbk&sid=your_sid&type=tcp#GreenVPS-直连Reality-低延迟
+     vless://your_uuid@198.51.100.135:24433?encryption=none&flow=xtls-rprx-vision&security=reality&sni=addons.mozilla.org&fp=chrome&pbk=your_pbk&sid=your_sid&type=tcp#GreenVPS-直连Reality-低延迟
      ```
 
 3. **Cloudflare CDN 联通专属优选 IP（104.16.160.1 : 443）**：
@@ -232,9 +232,9 @@ vless://your_uuid@bytevirt.yourdomain.com:443?type=ws&security=tls&path=%2Fws&ho
 
 ### 3. BandwagonHost 日本大阪节点（联通极速低延迟 & 双域名 SAN 证书）
 
-针对中国联通（如福建漳州联通 `175.43.247.27`）的网络特性，BandwagonHost 日本大阪（`45.78.52.136`）具备直连低延迟的天然地理优势：
+针对中国联通（如福建漳州联通 `203.0.113.27`）的网络特性，BandwagonHost 日本大阪（`198.51.100.136`）具备直连低延迟的天然地理优势：
 * **物理延迟优势**：日本大阪到中国联通 AS4837 骨干网仅约 40-60ms，远优于欧美节点；
-* **双域名 SAN 证书**：针对用户提供的 IPv4 域名（`bandwagonhost.kesiv.com`）与 IPv6 专属域名（`jttpdvw6rwj7ipv6.kesiv.com`），采用 `acme.sh` 签发 Multi-Domain ECC 证书，解决 IPv6 回源触发 Cloudflare 526 SSL 握手报错；
+* **双域名 SAN 证书**：针对提供的 IPv4 域名（`bandwagonhost.yourdomain.com`）与 IPv6 专属域名（`ipv6.yourdomain.com`），采用 `acme.sh` 签发 Multi-Domain ECC 证书，解决 IPv6 回源触发 Cloudflare 526 SSL 握手报错；
 * **三协议共存配置**：
   1. **Hysteria 2 直连（UDP 38443）**：配合 Salamander 混淆，解决晚高峰联通国际出口丢包；
   2. **VLESS-Reality 直连（TCP 24433）**：伪装 Mozilla 官方域名，直连超低延迟；
