@@ -35,6 +35,7 @@
 | **2.23** | [【实战对话】海外 VPS 节点极速搭建与分流排错实战：3X-UI 运维、BBR 加速、Cloudflare CDN 复活甲拯救被阻断 IP、VLESS-WS-TLS 443 改造、移动优选 IP 与 ACL4SSR Clash 智能分流订阅全景指南](23_case_vps_3xui_v2rayn_clash_verge_cloudflare_cdn_and_acl4ssr_routing_guide.md) | 3X-UI 凭证 Bcrypt 哈希解析与重置、移动宽带 IP 阻断排错、Let's Encrypt ECC 自动化签发、Cloudflare CDN 小云朵复活甲、VLESS-WS-TLS 443 改造、移动优选 IP 延迟压降，以及 Subconverter 在线管道与 ACL4SSR / Loyalsoldier 国内分流规则实战 | 大模型实时运维排障与节点重构实录 | 网络拓扑图 + 协议决策树 + 数据库注入脚本 + ACL4SSR 订阅 |
 | **2.24** | [【实战对话】多节点 VPS 集群工程实战：GreenCloud 与 ByteVirt 3X-UI 部署、Cloudflare 443 CDN 复活、移动/联通优选 IP 与 ACL4SSR 多节点全景分流聚合](24_case_multi_vps_cluster_greencloud_bytevirt_3xui_cf_cdn_and_clean_ip.md) | RackNerd/GreenCloud/ByteVirt 多节点集群容灾、3X-UI v3.8 与 v3.11 SQLite 底层列结构兼容、标准 443 端口与 Reality 2083 无损迁移、移动优选 IP 与联通优选 IP 定向调度、多节点 Subconverter 聚合与 ACL4SSR 零损耗分流实录 | 多机房网络运维与节点矩阵工程 | 拓扑流向图 + 节点配置矩阵 + 兼容脚本 + Clash 聚合订阅 |
 | **2.25** | [【实战对话】从 Clash Verge 订阅死局到单机 4 容器黄金拓扑：跨模型 Agent 协同、流量守卫与本地规则生成全景复盘](25_case_lxc_virtualization_and_agent_mesh_evolution.md) | 在线转换工具内核滞后排查、后量子 ML-KEM-768 握手攻克、按量计费住宅流量防偷跑、Cloudflare 优选 IP 端口陷阱、容器 BBR 开机自愈、机型与系统推荐基准，以及 Linux 可复用命令速查 | 跨大模型长程协同与工程排错实录 | 痛点问答卡片 + 故障映射表 + 选购基准 + 一键命令字典 |
+| **2.26** | [【实战对话】特惠海外 VPS 论坛淘金、机房线路横评与双 ISP 静态住宅真假鉴别 6 步法](26_case_vps_procurement_forum_trading_and_isp_scamalytics_guide.md) | 奥格登 Ogden UT 内陆 vs 美西沿海访问优先级、AMD 9950X 跑分实测、美区 TikTok 坚决避开家宽 NAT 原理、前置中转与落地代理拓扑、四大论坛（NodeSeek/LINUX DO/LET）二手收机溢价鉴别、Socks5 验货 6 步法与 Scamalytics 欺诈分提取 | 大模型深度采购与风控推演实录 | 机房优先级表 + 论坛收机指南 + 验货 6 步法 + uv 工具链 |
 
 ---
 
@@ -68,6 +69,7 @@
 23_case_vps_3xui_v2rayn_clash_verge_cloudflare_cdn_and_acl4ssr_routing_guide
 24_case_multi_vps_cluster_greencloud_bytevirt_3xui_cf_cdn_and_clean_ip
 25_case_lxc_virtualization_and_agent_mesh_evolution
+26_case_vps_procurement_forum_trading_and_isp_scamalytics_guide
 ```
 
 ```{important}
@@ -86,4 +88,5 @@
 12. **统一 AI 模型网关与 Agent 架构选型**：参考 **FreeLLMAPI 统一网关、CPA 订阅聚合与 Agent 全栈选型**（[2.22 章节](22_case_freellmapi_unified_gateway_cpa_openrouter_and_agent_frameworks.md)），将 FreeLLMAPI 作为唯一总入口，通过 CPA 榨取订阅额度，利用 OpenRouter BYOK 享受免费路由与终极兜底，搭配 DeepInfra/Novita/SiliconFlow 压降日常推理成本，并在 TypeScript（Mastra/Vercel AI SDK）与 Python（LangGraph/LlamaIndex）中完成 Agent 运行层与模型底座的完全解耦。
 13. **节点自建、阻断自救与智能分流**：参考 **海外 VPS 节点极速搭建、Cloudflare CDN 复活甲与 ACL4SSR Clash 智能分流全景指南**（[2.23 章节](23_case_vps_3xui_v2rayn_clash_verge_cloudflare_cdn_and_acl4ssr_routing_guide.md)），当海外便宜 VPS IP 遭移动宽带阻断时，善用 Cloudflare Anycast 小云朵免费复活，协议坚决绑定 VLESS-WS-TLS 443 端口并搭配移动优选 IP，通过 ACL4SSR 转换管道无缝接入 Clash Verge Rev，彻底实现国内网站零损耗直连与境外业务高速代理。
 14. **容器化多开、后量子握手与本地规则生成**：参考 **从 Clash Verge 订阅死局到单机 4 容器黄金拓扑**（[2.25 章节](25_case_lxc_virtualization_and_agent_mesh_evolution.md)），彻底抛弃易出故障的第三方在线转换，采用自研本地 Python 引擎生成原生 YAML，实施按量住宅节点隔离与 Split DNS，配合开机自检与阶梯流量守卫，实现单机高密度稳定运行；系统化工程学习请移步专栏 **《现代 VPS 极客运维：LXC 容器虚拟化、AI Agent Skill 与全协议流编排实战》**。
+15. **机房线路选型、论坛二手淘金与住宅验货**：参考 **特惠海外 VPS 论坛淘金、机房线路横评与双 ISP 静态住宅真假鉴别 6 步法**（[2.26 章节](26_case_vps_procurement_forum_trading_and_isp_scamalytics_guide.md)），弄清美西内陆（奥格登 Ogden WebNX）与沿海海缆机房的直连优先级，掌握 NodeSeek/LINUX DO 溢价辨析与二手过户红线，严禁在 TikTok 运营中使用动态家宽 NAT，并使用标准化 `curl` 6 步测试命令一键提取 IPinfo 时区、TCP 握手延迟、TikTok `ttwid` Cookie 与 Scamalytics 欺诈分。
 ```
