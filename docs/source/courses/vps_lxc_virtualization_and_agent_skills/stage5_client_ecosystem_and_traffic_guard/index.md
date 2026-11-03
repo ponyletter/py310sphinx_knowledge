@@ -42,4 +42,5 @@ flowchart TD
 
 01_clash_native_yaml_and_split_dns
 02_systemd_boot_check_and_traffic_guard
+03_cross_border_network_error_triage_and_gfw_latency_troubleshooting_sop
 ```

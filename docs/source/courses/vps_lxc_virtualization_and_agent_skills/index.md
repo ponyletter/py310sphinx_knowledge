@@ -45,6 +45,7 @@ flowchart TD
 | **防封抗风控链式代理管道** | 阶段四 | 跑通“日本/美国前置中转 + 纯净住宅 ISP 出口”网络链路，全面阻断 QUIC 泄漏，配置 Cloudflare Origin Rules。 |
 | **生产级本地 Clash / Mihomo 规则订阅** | 阶段五 | 脱离第三方在线转换，本地直出具备 Split DNS、住宅 IP 测速隔离、国内直连/境外分流的商业级 YAML 配置文件。 |
 | **双重可靠性守护套件** | 阶段五 | 安装 `boot_check` systemd 开机自愈服务与 `traffic_guard` 基于 vnStat 的 80%/90%/98% 阶梯流控守护。 |
+| **跨境网络故障初判金字塔与 GFW 阻断救活 SOP** | 阶段五 | 建立客户报错自省、母机 VNC 终端直救、GFW 阻断三型与中转住宅 400ms 延迟物理真相矩阵。 |
 | **两套多大模型全兼容 Skill 源码与 CI 流程** | 阶段六 | 掌握在 Claude Code、AGY、GPTs 中调用自定义运维 Skill 的机制，建立真实容器端到端 CI 回归测试门禁。 |
 
 ---

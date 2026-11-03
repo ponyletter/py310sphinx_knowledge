@@ -84,7 +84,8 @@ var splitQuery = function(query) {
                 '双重代理', '动态路由', '多网卡', '网桥', 'PassWall', 'ImmortalWrt', 'OpenWrt',
                 '3X-UI', 'Mihomo', 'Clash Verge', 'Streisand', 'Shadowrocket', 'Sing-box',
                 'V2Ray', 'Xray', 'Trojan', 'Hysteria', 'VLESS', 'VMess', 'Reality', 'WireGuard',
-                'Tailscale', 'BGP', 'LXC', 'LXD', 'KVM', 'Proxmox', 'PVE', 'Docker', 'SOP'
+                'Tailscale', 'BGP', 'LXC', 'LXD', 'KVM', 'Proxmox', 'PVE', 'Docker', 'SOP',
+                '排障金字塔', '延迟真相', '端口封锁', '协议指纹', 'ITDog', 'ping.pe', 'noVNC'
             ]
             for w in domain_words:
                 jieba.add_word(w)

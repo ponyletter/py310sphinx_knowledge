@@ -74,6 +74,7 @@
 26_case_vps_procurement_forum_trading_and_isp_scamalytics_guide
 27_case_openwrt_passwall_oom_fix_vps_gfw_diagnosis_sop
 28_case_ios_streisand_shadowrocket_clash_split_routing_and_app_lag_diagnosis
+29_case_customer_network_error_vless_gfw_blocking_types_and_residential_latency_diagnosis
 ```
 
 ```{important}
@@ -95,4 +96,5 @@
 15. **机房线路选型、论坛二手淘金与住宅验货**：参考 **特惠海外 VPS 论坛淘金、机房线路横评与双 ISP 静态住宅真假鉴别 6 步法**（[2.26 章节](26_case_vps_procurement_forum_trading_and_isp_scamalytics_guide.md)），弄清美西内陆（奥格登 Ogden WebNX）与沿海海缆机房的直连优先级，掌握 NodeSeek/LINUX DO 溢价辨析与二手过户红线，严禁在 TikTok 运营中使用动态家宽 NAT，并使用标准化 `curl` 6 步测试命令一键提取 IPinfo 时区、TCP 握手延迟、TikTok `ttwid` Cookie 与 Scamalytics 欺诈分。
 16. **软路由内存防爆、假性被墙救活与出海选型**：参考 **软路由 PassWall 内存爆仓 OOM 救活、VPS 假被封真断连排错与 ImmortalWrt 出海部署实录**（[2.27 章节](27_case_openwrt_passwall_oom_fix_vps_gfw_diagnosis_sop.md)），掌握小米 AX3000T (256MB) 路由因 Xray 爆内存触发 OOM 的秒级救活命令（`/etc/init.d/passwall stop && /etc/init.d/firewall restart`），通过注入 `GOMEMLIMIT=60MiB` 与停用冗余组件彻底防爆内存；遇 VPS 断连坚决执行 ICMP Ping 验证（Ping 通铁证未被墙），通过厂商 Web Shell 零成本改端口救活；出海业务首选 ImmortalWrt 固件以确保网络栈与驱动完整性。
 17. **iOS 移动端分流异常、大厂 App 卡顿与协议逆向**：参考 **iOS / 跨端客户端分流异化排查：Streisand 与 Shadowrocket 逆向规则解构、国内大厂（闲鱼/抖音）DNS 漂移与卡顿根治、域名嗅探与 Split DNS 全景落地**（[2.28 章节](28_case_ios_streisand_shadowrocket_clash_split_routing_and_app_lag_diagnosis.md)），利用 Python 逆向解密 `streisand://` 的 Apple bplist 路由，剖析海外 DNS 导致国内 CDN（阿里/字节）跨国 Anycast 调度漂移与 HTTPDNS 逃逸死因，通过配置本地阿里权威 DNS（`223.5.5.5`）与海外 DoH 的 Split DNS 架构、开启 TLS/QUIC 域名嗅探（Traffic Sniffing）以及关闭移动端 IPv6 避免 Happy Eyeballs 超时，彻底消灭闲鱼与抖音的白屏转圈与异地风控。
+18. **客户报错初判、GFW 阻断三型与中转住宅 400ms 延迟真相**：参考 **客户网络 Error 初判排障金字塔：从设备自省、VPS 厂商宕机、GFW 三类阻断多维探测到中转住宅 400ms 延迟真相实录**（[2.29 章节](29_case_customer_network_error_vless_gfw_blocking_types_and_residential_latency_diagnosis.md)），掌握客户反馈“网络 Error”时的秒回安抚与 3 步自省话术，利用厂商 noVNC 网页终端直救母机，通过 `tcp.ping.pe` 与 `itdog.cn` 精准判定端口封锁、DPI 指纹重置或 IP 全局拉黑并针对性处置，用海底光纤物理极限与中转住宅五段耗时模型彻底破解“400ms 延迟过高”的认知误区，破除全局测速灾难，并通过 1GB Swap 与 `GOMEMLIMIT=180MiB` 彻底根治低配小内存 VPS 突发 OOM 崩溃。
 ```
