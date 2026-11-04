@@ -27,34 +27,39 @@ flowchart LR
 
 ---
 
-## 二、 后量子密码（ML-KEM-768）握手踩坑实录（PR #14 核心复盘）
+## 二、 客户端兼容性、后量子密码陷阱与 universal 握手实录
 
-### 1. 现象复现：为什么 Clash Verge 导入节点后无法连接？
+### 1. 现象复现：为什么追加后量子参数反而导致全网客户端报 `-1`？
 
-在测试日本 IIJ（`198.51.100.150`）或软银（`203.0.113.186`）的 VLESS-REALITY 节点时，用户常常反馈：
-> “使用手机 Streisand 能够连上，但在电脑端使用 Clash Verge Rev 时，节点延迟显示 Timeout 或握手失败，日志报错：`handshake error: remote error: tls: handshake failure`。”
+在早期方案中，曾尝试针对部分高版本 Mihomo 追加 `support-x25519mlkem768=true` 并将 3X-UI 入站的 `minClientVer` 设为 `1.8.0`。然而在多环境真实测试中，引发了严重的客户端连锁崩溃：
+* **v2rayN 普遍报 `-1` / 握手失败**：主流 Windows v2rayN（搭载标准 Xray-core 1.8.x）无法兼容非标准查询参数或后量子密码握手协商，测试直接报 `-1` 超时；
+* **在线订阅转换接口全线崩溃**：将带 `support-x25519mlkem768=true` 的节点链接提交给标准订阅转换 API（如 onepage、v1.mk）时，解析引擎因无法识别非标参数直接报错或生成断链；
+* **3X-UI `minClientVer` 静默拒连**：当客户端未严格在 TLS Client Hello 中上报版本头，服务端直接静默将合法请求丢弃或回落至伪装网站！
 
-### 2. 根因深度剖析
+### 2. 根因剖析与工业级解决方案
 
-随着现代密码学向抗量子计算演进，**Xray-core 服务端与 Go 1.23+ 默认启用了混合后量子密钥交换机制（X25519 + ML-KEM-768）**。
-* **Mihomo / Clash 内核兼容性门槛**：客户端必须运行在 `minClientVer: 1.8.0` 或更高版本；
-* **显式协商参数缺失**：如果 VLESS 节点的分享链接中未携带后量子协商指令，客户端在发起 TLS Client Hello 时将无法匹配服务端的 Cipher Suites，导致 TLS 握手在首个包即被阻断！
+真正的跨平台高可用网络，核心在于**向下兼容与标准收敛**，而非盲目启用破坏兼容性的实验性特性：
 
-### 3. 工业级解决方案
+1. **入站版本解除硬编码 (`minClientVer: ""`)**：
+   在 3X-UI SQLite 数据库的入站 `stream_settings.realitySettings` 中，将 `minClientVer` 清空为 `""`，允许所有标准客户端版本自由握手。
+2. **剔除实验性参数，回归标准 X25519**：
+   从所有 VLESS 分享链接和 Clash 配置中彻底剥离 `support-x25519mlkem768`，采用全球事实标准的通用 X25519 椭圆曲线交换。这样无论 v2rayN、Mihomo / Clash Verge Rev、Sing-box、Shadowrocket 还是在线转换器均能 100% 顺畅解析。
+3. **锁定稳定黄金内核版本 (`v26.6.27`)**：
+   Xray-core 自 `v26.7.11` 起修改了 REALITY 的 AEAD 握手校验，导致部分客户端触发 `REALITY authentication failed`。锁定 `v26.6.27` 既能支持 3X-UI 最新入站特性，又能保持全平台最佳握手兼容。
 
-在生成的 VLESS 分享链接中，必须强制追加 `support-x25519mlkem768=true` 参数：
+标准、全客户端通用的 VLESS-REALITY 分享链接规范：
 
 ```text
-vless://00000000-0000-0000-0000-000000000001@198.51.100.150:24433?encryption=none&flow=xtls-rprx-vision&security=reality&sni=addons.mozilla.org&fp=chrome&pbk=YOUR_PUBLIC_KEY&sid=0123456789abcdef&type=tcp&headerType=none&support-x25519mlkem768=true#Japan-IIJ-REALITY-Direct
+vless://00000000-0000-0000-0000-000000000001@198.51.100.150:20159?encryption=none&flow=xtls-rprx-vision&security=reality&sni=addons.mozilla.org&fp=chrome&pbk=YOUR_PUBLIC_KEY&sid=0123456789abcdef&type=tcp#Japan-REALITY-Direct
 ```
 
-对应到 Clash / Mihomo 的 YAML 节点配置：
+对应全平台兼容的 Clash / Mihomo YAML 节点配置：
 
 ```yaml
-- name: "Japan-IIJ-REALITY-Direct"
+- name: "Japan-REALITY-Direct"
   type: vless
   server: 198.51.100.150
-  port: 24433
+  port: 20159
   uuid: 00000000-0000-0000-0000-000000000001
   network: tcp
   udp: true

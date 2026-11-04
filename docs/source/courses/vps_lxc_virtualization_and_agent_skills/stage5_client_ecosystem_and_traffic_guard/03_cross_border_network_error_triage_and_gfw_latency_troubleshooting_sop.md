@@ -308,3 +308,5 @@ ip -s link show eth0
 | **中转+住宅落地测试延迟 380ms 嫌太慢** | 跨洋光纤与住宅二次转发正常物理耗时 | [https://ip.net.coffee/link/](https://ip.net.coffee/link/) | 纠正错误认知；严防全局测速；验证美国本土目标延迟 |
 | **开了代理后闲鱼、抖音、国内网银大卡顿** | 客户端误开全局代理（Global Mode） | 检查分流规则与 DNS 调度 | 严格切换为 **Rule（规则）分流** 与 **Split DNS** |
 | **VPS 运行数小时后代理进程无故神秘消失** | 128MB/256MB 内存耗尽触发 OOM Killer | `dmesg -T \| grep -i oom` | 创建 1GB Swap 文件；添加 `GOMEMLIMIT=180MiB` |
+| **白天飞快但晚高峰 Hysteria 2 报 -1 / 断流** | 国际出口（CMI）跨洋 UDP 严重 QoS 丢包 | `tcpdump -i any udp port <P> -nn -v` | 切换 **Cloudflare CDN 443** 边缘终结，或采用 **日本高速直连中继 + Realm 转发** |
+| **客户端导入节点全网报 -1 / 订阅转换报错** | VLESS URI 携带非标后量子参数或版本拦截 | 检查 URI 是否含 `support-x25519mlkem768` | 剥离非标参数，回归通用 X25519；3X-UI 入站清空 `minClientVer: ""` |

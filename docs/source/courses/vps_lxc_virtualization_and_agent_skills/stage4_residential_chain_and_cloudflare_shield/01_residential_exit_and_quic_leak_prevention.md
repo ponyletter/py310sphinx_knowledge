@@ -229,6 +229,67 @@ flowchart TD
 
 ---
 
+## 九、 Realm L4 四层极速转发构建“地理临近高速中继 + 美国原生 ISP 落地”穿透架构
+
+除了在 VPS 容器内通过 Xray 链式对接 SOCKS5 住宅代理外，针对已持有独立外部原生住宅/ISP VPS（如美国 Cogent/AT&T 原生机房）但直连晚高峰跨洋丢包率居高不下的场景，**基于 Rust 编写的高性能 Realm 四层端口转发**提供了零损耗、全透明的极速穿透架构：
+
+```mermaid
+flowchart LR
+    Client["客户端<br/>(国内三网)"] -->|~60ms 低延迟直连| Relay["日本高速直连中继<br/>(LXD c2 容器 Realm L4)"]
+    Relay -->|TCP/UDP 原始包流式转发| US_ISP["美国原生 ISP 落地 VPS<br/>(192.0.2.210:24446)"]
+    US_ISP --> Web["目标外贸 / TikTok 平台<br/>(纯净美国家庭宽带出口)"]
+```
+
+### 1. 为什么选择 Realm 四层转发而非应用层反代？
+1. **端到端安全不可破解**：Realm 运行在传输层（L4），采用 Linux `splice` 系统调用直接在内核管道中搬运原始 TCP/UDP 数据包。客户端发起的 TLS/REALITY 握手直接与美国落地机进行端到端协商，中继节点无法亦无需解密流量，杜绝任何证书与中间人风险。
+2. **零 CPU 与极轻内存底噪**：Rust 编写的 Realm 常驻物理内存仅约 **2MB - 4MB**，CPU 消耗趋近于 0，单核即可承载数千并发并发流。
+3. **同时支持 TCP 与 UDP**：通过显式配置 `use_udp = true`，使 Hysteria 2、QUIC 与 DNS 转发同享极速低延迟穿透。
+
+### 2. 生产级 Realm 快速落地方案
+
+在具备良好回国直连线路的日本 VPS（c2 容器内部）部署：
+
+```bash
+# 1. 下载并安装官方跨平台构建产物
+mkdir -p /opt/realm /etc/realm
+curl -fL -o /tmp/realm.tar.gz "https://github.com/zhboner/realm/releases/download/v2.9.6/realm-$(uname -m)-unknown-linux-musl.tar.gz"
+tar -zxvf /tmp/realm.tar.gz -C /opt/realm/ && chmod +x /opt/realm/realm
+ln -sf /opt/realm/realm /usr/local/bin/realm
+
+# 2. 严密编写配置 (TOML 规范：必须使用双引号包裹 IP 端口字符串)
+cat <<'EOF' > /etc/realm/config.toml
+[network]
+no_tcp = false
+use_udp = true
+
+[[endpoints]]
+listen = "0.0.0.0:10021"
+remote = "192.0.2.210:24446"
+EOF
+
+# 3. 注册并拉起 systemd 守护进程
+cat <<'EOF' > /etc/systemd/system/realm.service
+[Unit]
+Description=Realm Layer 4 Port Forwarder
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/realm -c /etc/realm/config.toml
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload && systemctl enable --now realm
+```
+
+### 3. 客户端节点改写与容灾双轨准则
+* **节点链接改写**：将原美国 ISP 节点的服务器地址与端口替换为日本中继节点的 IP 与监听端口（如 `203.0.113.186:10021`），所有 UUID、PBK、SNI、Flow 参数原封不动保留。
+* **双轨容灾准则**：在输出给用户的订阅与 Clash 配置中，**必须同时提供中继节点与原始直连备用节点**。若中继服务器因维护短暂离线，客户端可通过 Clash 自动故障转移（Fallback）瞬间切回直连，保证出海业务永不中断。
+
+---
+
 ## 🔗 参考资料
 
 * **IETF RFC 9000 (QUIC: A UDP-Based Multiplexed and Secure Transport)**：[RFC 9000 Specification](https://www.rfc-editor.org/rfc/rfc9000.html)

@@ -111,6 +111,33 @@ sudo sysctl --system
 
 ---
 
+## 五、 Ubuntu 24.04 LTS systemd Socket 激活机制与 SSH 端口修改避坑
+
+在 Ubuntu 24.04 LTS（Noble Numbat）中，OpenSSH 默认切换为基于 systemd 的套接字激活（Socket Activation）机制：
+
+* **传统机制 vs 新机制**：在过去，修改 `/etc/ssh/sshd_config` 中的 `Port` 后，运行 `systemctl restart ssh` 即可切换端口。但在 Ubuntu 24.04 中，系统默认由 `ssh.socket` 监听在 22 端口，当有连接到达时才按需拉起 `ssh.service`。
+* **致命陷阱**：如果仅编辑了配置文件或 drop-in 文件（`/etc/ssh/sshd_config.d/`）并重启 `ssh` 服务，`ssh.socket` 仍然会强行占用 22 端口，不仅新端口可能未生效，重启后还会重新跌落回 22 端口！
+
+### 生产级切换与持久化方案
+
+必须彻底关闭并注销 `ssh.socket`，将控制权完全交回给常驻独立的 `ssh.service`：
+
+```bash
+# 1. 禁用并立即停止套接字激活单元
+systemctl disable --now ssh.socket
+
+# 2. 启用常驻独立的 ssh 服务单元并平滑拉起
+systemctl enable --now ssh.service
+systemctl restart ssh
+
+# 3. 验证新端口监听状态，确认 22 端口已释放
+ss -tlnp | grep ssh
+```
+
+此操作能确保自定义 SSH 高位端口（如 `39822`）在宿主机及 LXC 容器重启后均 100% 稳定驻留，绝不回退。
+
+---
+
 ## 🔗 参考资料
 
 * **Google BBR 官方设计论文**：[BBR: Congestion-Based Congestion Control](https://queue.acm.org/detail.cfm?id=3022184)
