@@ -20,6 +20,7 @@ courses/toefl_ibt_crash_course/index
 courses/aws_dva_c02_crash_course/index
 courses/xianyu_visual_monitor_from_zero/index
 courses/vps_lxc_virtualization_and_agent_skills/index
+courses/virtual_goods_marketplace_from_zero/index
 ```
 
 ```{toctree}
